@@ -1,0 +1,40 @@
+HALLUCINATION GUARD - cross-check this before EVERY prompt and EVERY code change
+===========================================================================
+
+PRE-FLIGHT (do these, in order, every time)
+1. Read Memory.md. What is already done? Which files already exist?
+2. Read the phases.md step you are on. Do ONLY that step.
+3. Check rules.md AVOID list. Would your change break it?
+4. Check architecture.md. Do file names, paths, endpoints match EXACTLY?
+5. Before creating a file: does it already exist? If yes, EDIT it, do not recreate.
+6. Before importing a library: is it in architecture.md? If not, STOP and ask.
+7. After finishing: run it, report the real output, update Memory.md.
+
+STOP AND ASK THE USER IF
+- A file, dataset column, model name, or API you need is not confirmed to exist
+- You want to add a dependency, rename a file, or change the schema/endpoints
+- A command fails twice with the same error (do not keep retrying the same fix)
+- You are about to repeat work Memory.md says is done
+
+NEVER
+- Invent accuracy/F1/dataset sizes/training times. Print them from real runs only
+- Claim a test passed without running it
+- Say "done" for something that is a stub. Mark stubs as TODO
+- Guess library function names or arguments. Check installed version / docs / --help
+- Use an external LLM API
+- Silently change the plan. Propose the change and wait
+
+KNOWN TRAP LIST (verify, do not trust memory)
+- CUAD format: the Hugging Face / Atticus release is SQuAD-style (question + context + answer spans). Inspect the real files (print keys, a sample row) BEFORE writing data_prep.py.
+- CUAD category names: confirm the exact strings in the data. Do not assume spelling (for example "Cap On Liability" vs "Cap on Liability").
+- Model IDs: confirm they load: `nlpaueb/legal-bert-base-uncased`, `sentence-transformers/all-MiniLM-L6-v2`. If a load fails, report it; do not silently swap models.
+- Class imbalance: "No Clause" will dominate. Handle with downsampling + class weights, and report macro-F1 not just accuracy.
+- Data leakage: split by CONTRACT. Same contract in train and test = invalid results.
+- Legal-BERT max length is 512 tokens; we use 256. Long clauses get truncated; mention it in README.
+- Torch in Docker: use CPU build for the backend image (smaller). Do not assume GPU.
+- Antigravity may create extra files (summaries, walkthroughs). Keep them out of the repo root unless asked.
+- Risk levels are a HEURISTIC table we defined, not legal truth. README must say so.
+- Scanned PDFs have no extractable text. Return a clear error; do not pretend OCR exists.
+
+WHEN WRITING METRICS / RESUME LINES
+- Use real numbers from ml/artifacts/metrics.json only. Otherwise write [TBD].
