@@ -148,5 +148,81 @@
         }
       }
     }
+  },
+  "legal_bert": {
+    "test": {
+      "accuracy": 0.7642,
+      "macro_f1": 0.7277,
+      "macro_precision": 0.725,
+      "macro_recall": 0.7465,
+      "per_class": {
+        "Anti-Assignment": {
+          "precision": 0.8902,
+          "recall": 0.8022,
+          "f1": 0.8439,
+          "support": 91.0
+        },
+        "Audit Rights": {
+          "precision": 0.9067,
+          "recall": 0.7556,
+          "f1": 0.8242,
+          "support": 90.0
+        },
+        "Cap on Liability": {
+          "precision": 0.6341,
+          "recall": 0.8125,
+          "f1": 0.7123,
+          "support": 64.0
+        },
+        "Change of Control": {
+          "precision": 0.5517,
+          "recall": 0.6154,
+          "f1": 0.5818,
+          "support": 26.0
+        },
+        "Exclusivity": {
+          "precision": 0.7164,
+          "recall": 0.7742,
+          "f1": 0.7442,
+          "support": 62.0
+        },
+        "IP Ownership Assignment": {
+          "precision": 0.7907,
+          "recall": 0.8947,
+          "f1": 0.8395,
+          "support": 38.0
+        },
+        "Liquidated Damages": {
+          "precision": 0.6471,
+          "recall": 0.6471,
+          "f1": 0.6471,
+          "support": 17.0
+        },
+        "No Clause": {
+          "precision": 0.8389,
+          "recall": 0.7576,
+          "f1": 0.7962,
+          "support": 165.0
+        },
+        "Non-Compete": {
+          "precision": 0.5526,
+          "recall": 0.75,
+          "f1": 0.6364,
+          "support": 28.0
+        },
+        "Termination for Convenience": {
+          "precision": 0.6571,
+          "recall": 0.8846,
+          "f1": 0.7541,
+          "support": 26.0
+        },
+        "Uncapped Liability": {
+          "precision": 0.7895,
+          "recall": 0.5172,
+          "f1": 0.625,
+          "support": 29.0
+        }
+      }
+    }
   }
 }

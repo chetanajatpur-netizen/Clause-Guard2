@@ -1,0 +1,28 @@
+{
+  "label2id": {
+    "Anti-Assignment": 0,
+    "Audit Rights": 1,
+    "Cap on Liability": 2,
+    "Change of Control": 3,
+    "Exclusivity": 4,
+    "IP Ownership Assignment": 5,
+    "Liquidated Damages": 6,
+    "No Clause": 7,
+    "Non-Compete": 8,
+    "Termination for Convenience": 9,
+    "Uncapped Liability": 10
+  },
+  "id2label": {
+    "0": "Anti-Assignment",
+    "1": "Audit Rights",
+    "2": "Cap on Liability",
+    "3": "Change of Control",
+    "4": "Exclusivity",
+    "5": "IP Ownership Assignment",
+    "6": "Liquidated Damages",
+    "7": "No Clause",
+    "8": "Non-Compete",
+    "9": "Termination for Convenience",
+    "10": "Uncapped Liability"
+  }
+}

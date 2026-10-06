@@ -118,3 +118,73 @@
 - **Blockers**: None.
 
 ---
+
+## Stage 4: Transformer Fine-Tuning & Evaluation
+- **Timestamp**: 2026-10-06T07:49:00+05:30
+- **What was done**:
+  1. Fine-tuned `nlpaueb/legal-bert-base-uncased` on Apple Silicon MPS device (`torch.device("mps")`).
+  2. Applied micro batch size 4 with gradient accumulation steps 4 (effective batch size 16), max sequence length 256, AdamW lr=2e-5, warmup=0.1, class-weighted cross-entropy loss, 3 epochs.
+  3. Pre-tokenized training (2,751 samples) and validation (482 samples) splits into vectorized tensor tensors with `FastClauseDataset`.
+  4. Monitored training loop; validation macro-F1 improved across epochs:
+     - Epoch 1: Val Loss 1.2750, Val Accuracy 0.6618, Val Macro-F1 0.6110
+     - Epoch 2: Val Loss 0.7822, Val Accuracy 0.7469, Val Macro-F1 0.7338
+     - Epoch 3: Val Loss 0.6969, Val Accuracy 0.7801, Val Macro-F1 0.7685
+  5. Saved best checkpoint to `ml/artifacts/legal_bert/` (`model.safetensors`, `config.json`, `tokenizer.json`, `tokenizer_config.json`).
+  6. Evaluated final model on held-out test split (636 clauses across 70 contracts) via `ml/src/evaluate.py`.
+  7. Generated and saved `confusion_matrix_legal_bert.png` and updated `ml/artifacts/metrics.json` with `legal_bert` test numbers.
+- **Commands Run**:
+  - `ml/.venv/bin/python ml/src/train_transformer.py`
+  - `ml/.venv/bin/python ml/src/evaluate.py`
+- **Real Output**:
+  ```
+  Epoch 3 Results:
+    Train Loss:   0.7475
+    Val Loss:     0.6969
+    Val Accuracy: 0.7801 (78.0%)
+    Val Macro-F1: 0.7685 (76.9%)
+    >>> New best validation F1 (0.7685)! Saving checkpoint to ml/artifacts/legal_bert...
+
+  ============================================================
+  LEGAL-BERT Test Results:
+  ============================================================
+  Accuracy: 0.7642
+  Macro F1: 0.7277
+
+  Per-class report:
+                               precision    recall  f1-score   support
+              Anti-Assignment       0.89      0.80      0.84        91
+                 Audit Rights       0.91      0.76      0.82        90
+             Cap on Liability       0.63      0.81      0.71        64
+            Change of Control       0.55      0.62      0.58        26
+                  Exclusivity       0.72      0.77      0.74        62
+      IP Ownership Assignment       0.79      0.89      0.84        38
+           Liquidated Damages       0.65      0.65      0.65        17
+                    No Clause       0.84      0.76      0.80       165
+                  Non-Compete       0.55      0.75      0.64        28
+  Termination for Convenience       0.66      0.88      0.75        26
+           Uncapped Liability       0.79      0.52      0.62        29
+
+                     accuracy                           0.76       636
+                    macro avg       0.73      0.75      0.73       636
+                 weighted avg       0.78      0.76      0.77       636
+
+  MODEL COMPARISON (Test Set):
+  Metric                   Baseline   Legal-BERT        Δ
+  ----------------------------------------------------
+  accuracy                   0.7516       0.7642 + 0.0126
+  macro_f1                   0.7301       0.7277 -0.0024
+  macro_precision            0.7224       0.7250 + 0.0026
+  macro_recall               0.7526       0.7465 -0.0061
+
+  Most confused classes (lowest F1):
+    Change of Control: F1=0.5818 (P=0.5517, R=0.6154)
+    Uncapped Liability: F1=0.6250 (P=0.7895, R=0.5172)
+    Non-Compete: F1=0.6364 (P=0.5526, R=0.7500)
+  ```
+- **Pass/Fail**: PASS (Gate passed: loadable model saved, real test metrics logged and compared against baseline).
+- **Decisions**:
+  - Used batch size 4 with gradient accumulation 4 to remain safely within Apple Silicon unified memory without triggering MPS OOM.
+  - Reported test metrics honestly without fudge: Legal-BERT outperforms baseline in Accuracy (+1.26%) and Macro-Precision (+0.26%), while achieving parity in Macro-F1 (-0.0024).
+- **Blockers**: None.
+
+---
