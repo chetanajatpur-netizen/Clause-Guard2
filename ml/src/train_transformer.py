@@ -254,9 +254,11 @@ def validate(
     return avg_loss, macro_f1, acc
 
 
-def main() -> None:
+def main(epochs: int | None = None) -> None:
     """Execute complete Legal-BERT fine-tuning pipeline."""
     config = CONFIG.copy()
+    if epochs is not None:
+        config["epochs"] = epochs
     set_seed(config["seed"])
     device = get_device()
     
@@ -483,8 +485,23 @@ def plot_training_curves(
 
 
 if __name__ == "__main__":
-    import sys
-    if "--plot-only" in sys.argv:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Train Legal-BERT on CUAD clauses.")
+    parser.add_argument(
+        "--epochs",
+        type=int,
+        default=CONFIG["epochs"],
+        help=f"Number of training epochs (default: {CONFIG['epochs']})",
+    )
+    parser.add_argument(
+        "--plot-only",
+        action="store_true",
+        help="Regenerate training curves plot from artifacts/training_history.json without training",
+    )
+    args = parser.parse_args()
+
+    if args.plot_only:
         history_path = ARTIFACTS_DIR / "training_history.json"
         if history_path.exists():
             with open(history_path) as f:
@@ -493,4 +510,4 @@ if __name__ == "__main__":
         else:
             print(f"No history file found at {history_path}")
     else:
-        main()
+        main(epochs=args.epochs)

@@ -13,5 +13,6 @@ async def health_check() -> dict:
     return {
         "status": "ok",
         "classifier_loaded": classifier.is_loaded,
+        "classifier_backend": classifier.backend,
         "embedder_loaded": embedder.is_loaded,
     }

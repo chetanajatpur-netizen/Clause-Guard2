@@ -1,0 +1,21 @@
+HIGH-RISK STRATEGIC VENDOR AGREEMENT
+
+1. Engagement Overview. Client engages Vendor to supply mission-critical custom enterprise systems subject to the stringent covenants herein.
+
+2. Global Exclusivity Covenant. Vendor agrees that during the term of this Agreement, Vendor shall operate on an exclusive basis solely for Client and shall not provide technical, consulting, or software development services to any other enterprise worldwide.
+
+3. Restrictive Non-Competition. For thirty-six (36) months following the termination of this Agreement, Vendor and its affiliates shall not directly or indirectly compete with Client, participate in, or render services to any entity in Client's line of business.
+
+4. Uncapped Unlimited Liability. Vendor shall indemnify Client against all claims, and Vendor's total aggregate liability arising out of this Agreement shall be uncapped and not subject to any maximum monetary limitation or liability cap of any kind.
+
+5. Liquidated Damages Penalty. If Vendor fails to complete any scheduled deliverable on time, Vendor shall pay Client liquidated damages equal to ten thousand dollars ($10,000) per calendar day of delay, which the parties agree is reasonable liquidated damages.
+
+6. Unilateral Termination for Convenience. Client may terminate this Agreement at any time for convenience and without cause upon twelve (12) hours written notice to Vendor, without liability for unperformed milestones.
+
+7. Complete IP Ownership Assignment. Vendor irrevocably assigns and transfers to Client all worldwide right, title, and intellectual property interest in all software, documentation, inventions, and work product developed during this engagement.
+
+8. Absolute Prohibition on Assignment. Vendor shall not assign, sublicense, or delegate this Agreement or any duties hereunder without Client's express written approval, and any unauthorized assignment shall be void.
+
+9. Unrestricted Audit Rights. Client and its agents may inspect and audit Vendor's source code repositories, corporate accounts, time logs, and facilities at any time upon twenty-four (24) hours notice.
+
+10. Change of Control. Any Change of Control of Vendor, including any merger, acquisition, or sale of ten percent (10%) or more of voting securities, grants Client the immediate right to terminate this Agreement.

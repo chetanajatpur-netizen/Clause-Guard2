@@ -52,3 +52,29 @@ class TestSegmenter:
         for chunk in chunks:
             # Allow some overflow since we split at sentence boundaries
             assert len(chunk) <= 400
+
+
+class TestClassifier:
+    """Tests for classifier backends."""
+
+    def test_baseline_classifier_inference(self) -> None:
+        """Test loading and inference with baseline (TF-IDF + LogReg) backend."""
+        from app.services.classifier import ClauseClassifier
+        clf = ClauseClassifier()
+        clf.load(backend="baseline", baseline_model_path="ml/artifacts/baseline_model.joblib")
+        assert clf.is_loaded
+        assert clf.backend == "baseline"
+
+        results = clf.predict(["Neither party may assign this agreement without prior written consent."])
+        assert len(results) == 1
+        assert "label" in results[0]
+        assert "confidence" in results[0]
+        assert results[0]["label"] == "Anti-Assignment"
+        assert 0.0 <= results[0]["confidence"] <= 1.0
+
+    def test_classifier_empty_input(self) -> None:
+        """Test classifier with empty list."""
+        from app.services.classifier import ClauseClassifier
+        clf = ClauseClassifier()
+        clf.load(backend="baseline", baseline_model_path="ml/artifacts/baseline_model.joblib")
+        assert clf.predict([]) == []

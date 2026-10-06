@@ -1,0 +1,21 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+1. Purpose. The parties wish to explore a potential business relationship and may disclose confidential information to each other in connection with such discussions.
+
+2. Confidential Information. Confidential Information refers to non-public technical, commercial, financial, and product information disclosed by either party to the other.
+
+3. Non-Disclosure Obligations. Each receiving party agrees to hold the disclosing party's confidential information in strict confidence and use at least reasonable care to prevent unauthorized disclosure.
+
+4. Exclusions. Confidential Information does not include information that is publicly known through no breach, already known to recipient, or independently developed without reference to the disclosure.
+
+5. Permitted Use. The recipient shall use confidential information solely to evaluate and negotiate the potential commercial transaction between the parties.
+
+6. Term. This Agreement and confidentiality obligations hereunder shall remain in effect for three (3) years from the Effective Date.
+
+7. Non-Competition. During the term of this Agreement and for a period of twelve (12) months following disclosure, recipient shall not design, develop, market, or sell any competitive software product that directly competes with discloser's proprietary platform.
+
+8. Assignment. Neither party may assign, transfer, or delegate this Agreement or any rights or duties hereunder without the prior written consent of the other party.
+
+9. Governing Law. This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, excluding its conflict of law principles.
+
+10. Dispute Resolution. Any dispute or claim arising out of or relating to this Agreement shall be submitted to binding arbitration in Wilmington, Delaware.

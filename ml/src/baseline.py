@@ -3,6 +3,7 @@
 Provides a simple baseline to compare against the fine-tuned Legal-BERT.
 """
 import json
+import joblib
 from pathlib import Path
 
 import matplotlib
@@ -23,6 +24,7 @@ SEED = 42
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
+BASELINE_MODEL_PATH = ARTIFACTS_DIR / "baseline_model.joblib"
 
 
 def load_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -182,6 +184,17 @@ def save_metrics(val_metrics: dict, test_metrics: dict) -> None:
     print(f"Saved metrics to {metrics_path}")
 
 
+def save_model(vectorizer: TfidfVectorizer, clf: LogisticRegression) -> None:
+    """Save fitted TF-IDF vectorizer and classifier to disk."""
+    data = {
+        "vectorizer": vectorizer,
+        "classifier": clf,
+        "classes": list(clf.classes_),
+    }
+    joblib.dump(data, BASELINE_MODEL_PATH)
+    print(f"Saved baseline model to {BASELINE_MODEL_PATH}")
+
+
 def main() -> None:
     """Run the baseline pipeline."""
     ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -191,6 +204,9 @@ def main() -> None:
     
     # Train
     vectorizer, clf = train_baseline(train_df)
+    
+    # Save model
+    save_model(vectorizer, clf)
     
     # Evaluate
     val_metrics = evaluate(vectorizer, clf, val_df, "Validation")

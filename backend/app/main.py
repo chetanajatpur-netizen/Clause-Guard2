@@ -28,10 +28,12 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Load ML models
     try:
         classifier.load(
+            backend=settings.classifier_backend,
             model_path=settings.model_path,
             label_map_path=settings.label_map_path,
+            baseline_model_path=settings.baseline_model_path,
         )
-        logger.info("Classifier model loaded.")
+        logger.info("Classifier model loaded (%s backend).", settings.classifier_backend)
     except Exception as e:
         logger.error("Failed to load classifier: %s", e)
     

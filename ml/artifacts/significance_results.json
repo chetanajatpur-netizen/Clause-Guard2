@@ -1,5 +1,6 @@
 {
-  "paired_bootstrap": {
+  "clause_bootstrap": {
+    "resampling_unit": "clause",
     "n_samples": 636,
     "n_bootstraps": 1000,
     "seed": 42,
@@ -43,6 +44,55 @@
         "ci_lower": -0.0397,
         "ci_upper": 0.0391,
         "p_value_two_sided": 0.93
+      }
+    }
+  },
+  "cluster_bootstrap": {
+    "resampling_unit": "contract_cluster",
+    "n_clusters": 70,
+    "n_samples": 636,
+    "n_bootstraps": 1000,
+    "seed": 42,
+    "accuracy": {
+      "baseline": {
+        "point_estimate": 0.7516,
+        "mean": 0.7528,
+        "ci_lower": 0.7044,
+        "ci_upper": 0.7987
+      },
+      "legal_bert": {
+        "point_estimate": 0.7642,
+        "mean": 0.765,
+        "ci_lower": 0.7184,
+        "ci_upper": 0.8108
+      },
+      "delta": {
+        "point_estimate": 0.0126,
+        "mean": 0.0122,
+        "ci_lower": -0.0243,
+        "ci_upper": 0.0485,
+        "p_value_two_sided": 0.55
+      }
+    },
+    "macro_f1": {
+      "baseline": {
+        "point_estimate": 0.7301,
+        "mean": 0.7274,
+        "ci_lower": 0.6844,
+        "ci_upper": 0.7721
+      },
+      "legal_bert": {
+        "point_estimate": 0.7277,
+        "mean": 0.7249,
+        "ci_lower": 0.6739,
+        "ci_upper": 0.7707
+      },
+      "delta": {
+        "point_estimate": -0.0024,
+        "mean": -0.0025,
+        "ci_lower": -0.0446,
+        "ci_upper": 0.0375,
+        "p_value_two_sided": 0.898
       }
     }
   },

@@ -83,5 +83,17 @@ Model is mildly under-converged (training loss and val loss still declining stea
 - [2026-10-06 08:04] Stage 8 Documentation DONE: README.md, RESUME_DRAFT.md, MORNING_REPORT.md complete, git tag v0.1.0 created.
 - [2026-10-06 09:02] Bugfix DONE: Fixed root cause where relative paths in Settings (model_path, metrics_path, label_map_path) failed when backend was started from backend/ directory. Standardized API error responses into {"error": {"code": ..., "message": ...}} across StarletteHTTPException, RequestValidationError, and generic exceptions. Updated frontend client.js to extract error message cleanly and avoid "Request failed: 500". Added 5 pytest regression tests (24/24 passing). Verified live curl analysis on DOC-01_freelance_agreement.txt.
 - [2026-10-06 20:10] Training Diagnostics & Significance DONE: Added per-epoch gradient norm (mean/max via clip_grad_norm_), LR, and loss/F1 logging to train_transformer.py. Generated ml/artifacts/training_curves.png. Implemented ml/src/significance.py with paired bootstrap (1000 resamples, seed 42) and McNemar's test, reporting real CIs and p-values. Diagnosed mild under-convergence / early stopping at 3 epochs without overfitting. All 24 backend tests passing.
+- [2026-10-06 21:55] Cluster Bootstrap, Backend Switch, & Testkit Scoring DONE:
+  - Added `--epochs` CLI argument to `ml/src/train_transformer.py` (defaulting to CONFIG).
+  - Implemented contract cluster bootstrap in `ml/src/significance.py` (1000 resamples, seed 42) over 70 unique test contracts:
+    - Cluster Accuracy CIs: Baseline [0.7044, 0.7987], Legal-BERT [0.7184, 0.8108], Δ [-0.0243, 0.0485] (mean +0.0125).
+    - Cluster Macro-F1 CIs: Baseline [0.6844, 0.7721], Legal-BERT [0.6739, 0.7707], Δ [-0.0446, 0.0375] (mean -0.0033).
+  - Saved `ml/artifacts/baseline_model.joblib` via updated `ml/src/baseline.py` (was not previously saved on disk).
+  - Implemented backend config switch `CLASSIFIER_BACKEND=legal_bert|baseline` in `backend/app/config.py`, `ClauseClassifier`, and `health.py`.
+  - Built `clauseguard-testkit` suite with contracts DOC-01 through DOC-07 (including DOC-06 benign and DOC-07 high-risk), ground truth annotations, and `score.py`.
+  - Evaluated both backends on testkit:
+    - Baseline: Accuracy 0.8625, Macro-F1 0.7532, Det P 0.8718, Det R 1.0000, DOC-06 False Alarms: 0, DOC-07 Flags: 9 (High-Risk: 3), Easy: 0.9189, Medium: 0.7143, Hard: 0.9091.
+    - Legal-BERT: Accuracy 0.8250, Macro-F1 0.7418, Det P 0.7907, Det R 1.0000, DOC-06 False Alarms: 1, DOC-07 Flags: 9 (High-Risk: 3), Easy: 0.8919, Medium: 0.6190, Hard: 0.9091.
+  - All 26/26 backend pytest tests passing. Generated reports in `clauseguard-testkit/results/`.
 
 

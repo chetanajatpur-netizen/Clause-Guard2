@@ -1,0 +1,21 @@
+MASTER SERVICES AND VENDOR FRAMEWORK AGREEMENT
+
+1. Master Agreement Framework. This Master Services Agreement establishes the general contractual terms governing all Statements of Work and Purchase Orders executed between Customer and Vendor.
+
+2. Service Level Commitments and Liquidated Damages. If Vendor fails to meet the guaranteed monthly system uptime of 99.9%, Vendor shall pay Customer liquidated damages calculated at five percent (5%) of the monthly recurring service fee for each day of deficient performance, which the parties agree constitutes a genuine pre-estimate of damages.
+
+3. Right to Audit and Regulatory Inspection. Customer and its designated regulatory auditors shall have the right, upon seventy-two (72) hours notice, to audit Vendor's data centers, financial records, and operational procedures to confirm compliance with regulatory industry standards.
+
+4. Termination for Convenience. Customer reserves the right to terminate this Master Agreement and any active Statement of Work for convenience and without penalty upon thirty (30) days advance written notice to Vendor.
+
+5. Restrictive Covenants and Non-Competition. Vendor agrees that during the term of this Agreement and for twelve (12) months following termination, Vendor shall not provide competing cloud-hosted logistics software solutions to any of Customer's named enterprise competitors in North America.
+
+6. Uncapped Liability for Breach. Notwithstanding any contrary provision in this Agreement, Vendor's indemnity obligations, liability for breach of data privacy obligations, and liability for intentional misconduct shall be unlimited and shall not be subject to any financial cap or liability limitation.
+
+7. Cap on Ordinary Commercial Liability. Subject to the uncapped liability exceptions, the aggregate liability of either party arising out of routine operational disputes shall be strictly capped at the total fees paid under the relevant Statement of Work during the preceding twelve months.
+
+8. Anti-Assignment. Vendor shall not assign, novate, or transfer this Agreement or any associated purchase orders without Customer's prior written consent, and any attempted assignment in violation of this section shall be null and void.
+
+9. Change of Control. In the event of a Change of Control of Vendor, whether through stock purchase, statutory merger, or sale of substantial assets, Customer may terminate this Agreement immediately upon written notice without incurring any termination fee.
+
+10. Severability and Interpretation. If any provision of this Agreement is held to be invalid or unenforceable, such provision shall be severed and the remaining provisions shall remain in full force and effect.

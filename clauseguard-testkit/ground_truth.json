@@ -1,0 +1,126 @@
+{
+  "DOC-01_freelance_agreement.txt": {
+    "difficulty": "Easy",
+    "contract_type": "Freelance Software Development Agreement",
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "Exclusivity",
+      "Non-Compete",
+      "IP Ownership Assignment",
+      "Termination for Convenience",
+      "Uncapped Liability",
+      "Liquidated Damages",
+      "Anti-Assignment",
+      "Audit Rights",
+      "No Clause",
+      "No Clause",
+      "No Clause"
+    ]
+  },
+  "DOC-02_mutual_nda.txt": {
+    "difficulty": "Easy",
+    "contract_type": "Mutual Non-Disclosure Agreement",
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "Non-Compete",
+      "Anti-Assignment",
+      "No Clause",
+      "No Clause"
+    ]
+  },
+  "DOC-03_saas_agreement.txt": {
+    "difficulty": "Medium",
+    "contract_type": "Enterprise SaaS Subscription Agreement",
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "Cap on Liability",
+      "Termination for Convenience",
+      "Audit Rights",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause"
+    ]
+  },
+  "DOC-04_consulting_agreement.txt": {
+    "difficulty": "Medium",
+    "contract_type": "Professional Consulting Services Agreement",
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "Exclusivity",
+      "IP Ownership Assignment",
+      "Change of Control",
+      "Anti-Assignment",
+      "No Clause",
+      "No Clause",
+      "No Clause"
+    ]
+  },
+  "DOC-05_vendor_msa.txt": {
+    "difficulty": "Hard",
+    "contract_type": "Master Services & Vendor Framework Agreement",
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "Liquidated Damages",
+      "Audit Rights",
+      "Termination for Convenience",
+      "Non-Compete",
+      "Uncapped Liability",
+      "Cap on Liability",
+      "Anti-Assignment",
+      "Change of Control",
+      "No Clause"
+    ]
+  },
+  "DOC-06_benign_terms.txt": {
+    "difficulty": "Easy",
+    "contract_type": "Standard Benign Terms of Service",
+    "is_benign": true,
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause",
+      "No Clause"
+    ]
+  },
+  "DOC-07_high_risk_contract.txt": {
+    "difficulty": "Hard",
+    "contract_type": "High-Risk Strategic Vendor Agreement",
+    "is_high_risk": true,
+    "labels": [
+      "No Clause",
+      "No Clause",
+      "Exclusivity",
+      "Non-Compete",
+      "Uncapped Liability",
+      "Liquidated Damages",
+      "Termination for Convenience",
+      "IP Ownership Assignment",
+      "Anti-Assignment",
+      "Audit Rights",
+      "Change of Control"
+    ]
+  }
+}

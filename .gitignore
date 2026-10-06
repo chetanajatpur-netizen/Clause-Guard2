@@ -20,6 +20,7 @@ ml/data/
 ml/artifacts/*.pt
 ml/artifacts/*.bin
 ml/artifacts/*.safetensors
+ml/artifacts/*.joblib
 ml/artifacts/legal_bert/
 ml/artifacts/sbert/
 

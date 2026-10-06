@@ -1,0 +1,21 @@
+ENTERPRISE SAAS SUBSCRIPTION AGREEMENT
+
+1. Subscription Services. Provider will make the hosted software platform available to Customer pursuant to this Agreement and applicable Order Forms during the Subscription Term.
+
+2. Access Rights and Restrictions. Customer is granted a non-exclusive, non-transferable right to access and use the platform solely for internal business operations.
+
+3. Fees and Invoicing. Customer shall pay all subscription fees specified in Order Forms within thirty (30) days from the invoice date. All fees are non-refundable except as expressly stated.
+
+4. Limitation of Liability. Except for gross negligence or willful misconduct, each party's total aggregate liability arising out of or related to this Agreement shall be capped at and not exceed the total fees paid by Customer in the twelve (12) months preceding the claim.
+
+5. Termination for Convenience. Customer may terminate this Subscription Agreement at any time for convenience and without cause by providing forty-five (45) days prior written notice to Provider.
+
+6. Audit of Usage. Provider or its authorized independent auditor may, upon thirty (30) days advance written notice and during normal business hours, audit Customer's usage metrics to confirm compliance with agreed user seat limitations.
+
+7. Proprietary Rights. Provider retains all intellectual property rights, title, and ownership in the SaaS platform and all software updates. No transfer of intellectual property rights is intended or implied.
+
+8. Data Protection. Provider shall maintain reasonable administrative, physical, and technical safeguards for protection of the security, confidentiality, and integrity of Customer Data.
+
+9. Warranty Disclaimer. Except as expressly provided herein, the services and documentation are provided on an as-is basis without warranties of any kind.
+
+10. Force Majeure. Neither party shall be liable for any failure or delay in performance caused by circumstances beyond its reasonable control, including natural disasters and internet outages.

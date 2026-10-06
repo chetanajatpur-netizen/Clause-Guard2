@@ -11,25 +11,65 @@ logger = logging.getLogger(__name__)
 
 
 class ClauseClassifier:
-    """Singleton classifier using fine-tuned Legal-BERT.
+    """Singleton classifier using fine-tuned Legal-BERT or TF-IDF+LogReg baseline.
     
     Loaded once at app startup via FastAPI lifespan.
     """
 
     def __init__(self) -> None:
+        self.backend: str = "legal_bert"
         self.model: AutoModelForSequenceClassification | None = None
         self.tokenizer: AutoTokenizer | None = None
         self.id2label: dict[int, str] = {}
         self.device: torch.device = torch.device("cpu")
+        self.vectorizer: Any = None
+        self.clf: Any = None
+        self.classes: list[str] = []
         self._loaded = False
 
-    def load(self, model_path: str, label_map_path: str) -> None:
-        """Load model, tokenizer, and label map from disk.
+    def load(
+        self,
+        model_path: str = "ml/artifacts/legal_bert",
+        label_map_path: str = "ml/artifacts/label_map.json",
+        backend: str = "legal_bert",
+        baseline_model_path: str = "ml/artifacts/baseline_model.joblib",
+    ) -> None:
+        """Load model, tokenizer, and label map from disk, or baseline model.
         
         Args:
-            model_path: Path to saved model directory.
+            model_path: Path to saved Legal-BERT model directory.
             label_map_path: Path to label_map.json.
+            backend: Classifier backend ('legal_bert' or 'baseline').
+            baseline_model_path: Path to baseline_model.joblib.
         """
+        self.backend = backend.lower()
+        if self.backend == "baseline":
+            self._load_baseline(baseline_model_path)
+        else:
+            self._load_legal_bert(model_path, label_map_path)
+
+    def _load_baseline(self, baseline_model_path: str) -> None:
+        import joblib
+
+        bm_path = Path(baseline_model_path)
+        if not bm_path.exists():
+            candidate = Path(__file__).resolve().parent.parent.parent.parent / baseline_model_path
+            if candidate.exists():
+                bm_path = candidate
+
+        bm_path_str = str(bm_path.resolve()) if bm_path.exists() else baseline_model_path
+        logger.info("Loading baseline classifier from %s", bm_path_str)
+        if not Path(bm_path_str).exists():
+            raise FileNotFoundError(f"Baseline model not found at {bm_path_str}")
+
+        data = joblib.load(bm_path_str)
+        self.vectorizer = data["vectorizer"]
+        self.clf = data["classifier"]
+        self.classes = list(data.get("classes", self.clf.classes_))
+        self._loaded = True
+        logger.info("Baseline classifier loaded: %d classes", len(self.classes))
+
+    def _load_legal_bert(self, model_path: str, label_map_path: str) -> None:
         # Resolve path relative to project root if not found in CWD
         m_path = Path(model_path)
         if not m_path.exists():
@@ -59,7 +99,6 @@ class ClauseClassifier:
             label_data = json.load(f)
         self.id2label = {int(k): v for k, v in label_data["id2label"].items()}
 
-        
         self._loaded = True
         logger.info(
             "Classifier loaded: %d labels, device=%s",
@@ -91,6 +130,33 @@ class ClauseClassifier:
         if not self._loaded:
             raise RuntimeError("Model not loaded. Call load() first.")
         
+        if not texts:
+            return []
+
+        if self.backend == "baseline":
+            return self._predict_baseline(texts)
+        else:
+            return self._predict_legal_bert(texts, max_len=max_len, batch_size=batch_size)
+
+    def _predict_baseline(self, texts: list[str]) -> list[dict[str, Any]]:
+        X = self.vectorizer.transform(texts)
+        probs = self.clf.predict_proba(X)
+        results: list[dict[str, Any]] = []
+        for p in probs:
+            pred_idx = int(p.argmax())
+            results.append({
+                "label": self.classes[pred_idx],
+                "confidence": round(float(p[pred_idx]), 4),
+            })
+        logger.info("Classified %d clauses with baseline", len(results))
+        return results
+
+    def _predict_legal_bert(
+        self,
+        texts: list[str],
+        max_len: int = 256,
+        batch_size: int = 16,
+    ) -> list[dict[str, Any]]:
         results: list[dict[str, Any]] = []
         
         for i in range(0, len(texts), batch_size):
@@ -115,7 +181,7 @@ class ClauseClassifier:
                     "confidence": round(conf, 4),
                 })
         
-        logger.info("Classified %d clauses", len(results))
+        logger.info("Classified %d clauses with legal_bert", len(results))
         return results
 
     @staticmethod

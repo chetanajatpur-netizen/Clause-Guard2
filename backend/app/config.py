@@ -21,7 +21,9 @@ class Settings(BaseSettings):
     """App settings loaded from environment variables."""
 
     database_url: str = "sqlite:///./clauseguard.db"
+    classifier_backend: str = "legal_bert"
     model_path: str = "ml/artifacts/legal_bert"
+    baseline_model_path: str = "ml/artifacts/baseline_model.joblib"
     sbert_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     max_file_size_mb: int = 10
     log_level: str = "INFO"
@@ -38,6 +40,7 @@ class Settings(BaseSettings):
     def model_post_init(self, __context: object) -> None:
         """Resolve artifact paths to absolute locations if needed."""
         self.model_path = _resolve_path(self.model_path)
+        self.baseline_model_path = _resolve_path(self.baseline_model_path)
         self.metrics_path = _resolve_path(self.metrics_path)
         self.label_map_path = _resolve_path(self.label_map_path)
 
