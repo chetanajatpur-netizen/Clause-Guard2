@@ -78,6 +78,10 @@ class ModelNotLoadedError(ClauseGuardError):
         )
 
 
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+
 def register_exception_handlers(app: FastAPI) -> None:
     """Register custom exception handlers with FastAPI app."""
 
@@ -91,17 +95,52 @@ def register_exception_handlers(app: FastAPI) -> None:
             content={"error": {"code": exc.code, "message": exc.message}},
         )
 
+    @app.exception_handler(StarletteHTTPException)
+    async def http_exception_handler(
+        request: Request, exc: StarletteHTTPException
+    ) -> JSONResponse:
+        code_map = {
+            400: "BAD_REQUEST",
+            401: "UNAUTHORIZED",
+            403: "FORBIDDEN",
+            404: "NOT_FOUND",
+            405: "METHOD_NOT_ALLOWED",
+            413: "FILE_TOO_LARGE",
+            422: "UNPROCESSABLE_ENTITY",
+            500: "INTERNAL_ERROR",
+            502: "BAD_GATEWAY",
+            503: "SERVICE_UNAVAILABLE",
+        }
+        code = code_map.get(exc.status_code, f"HTTP_{exc.status_code}")
+        detail_msg = exc.detail if isinstance(exc.detail, str) else str(exc.detail)
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"error": {"code": code, "message": detail_msg}},
+        )
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_exception_handler(
+        request: Request, exc: RequestValidationError
+    ) -> JSONResponse:
+        errors = exc.errors()
+        msg = errors[0].get("msg", "Validation error") if errors else "Validation error"
+        return JSONResponse(
+            status_code=422,
+            content={"error": {"code": "VALIDATION_ERROR", "message": msg}},
+        )
+
     @app.exception_handler(Exception)
     async def generic_error_handler(
         request: Request, exc: Exception
     ) -> JSONResponse:
-        logger.exception("Unhandled exception")
+        logger.exception("Unhandled exception: %s", exc)
         return JSONResponse(
             status_code=500,
             content={
                 "error": {
                     "code": "INTERNAL_ERROR",
-                    "message": "An unexpected error occurred",
+                    "message": str(exc) if str(exc) else "An unexpected error occurred",
                 }
             },
         )
+

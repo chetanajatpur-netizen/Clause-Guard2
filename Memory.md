@@ -2,8 +2,9 @@
 
 ## Current status
 - Current day: Overnight Execution COMPLETE
-- Current phase/step: All 8 Stages COMPLETE & VERIFIED. Git tag v0.1.0 created.
-- File currently being worked on: MORNING_REPORT.md
+- Current phase/step: Bugfix complete & regression tested (24/24 pytest passed)
+- File currently being worked on: None
+
 
 ## Completed
 - Initial project scaffolding (ml/, backend/, frontend/, docker-compose.yml, tests/)
@@ -65,4 +66,6 @@ All overnight tasks complete. Project ready for morning review!
 - [2026-10-06 07:58] Stage 6 Frontend DONE: Production build passed (dist/), 0 hardcoded hex outside tokens.css, responsive verified. Next: Stage 7.
 - [2026-10-06 08:01] Stage 7 Docker DONE: Production compose & Dockerfiles verified, DEPLOY.md written. Next: Stage 8.
 - [2026-10-06 08:04] Stage 8 Documentation DONE: README.md, RESUME_DRAFT.md, MORNING_REPORT.md complete, git tag v0.1.0 created.
+- [2026-10-06 09:02] Bugfix DONE: Fixed root cause where relative paths in Settings (model_path, metrics_path, label_map_path) failed when backend was started from backend/ directory. Standardized API error responses into {"error": {"code": ..., "message": ...}} across StarletteHTTPException, RequestValidationError, and generic exceptions. Updated frontend client.js to extract error message cleanly and avoid "Request failed: 500". Added 5 pytest regression tests (24/24 passing). Verified live curl analysis on DOC-01_freelance_agreement.txt.
+
 

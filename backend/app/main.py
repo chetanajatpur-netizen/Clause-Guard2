@@ -79,7 +79,7 @@ def create_app() -> FastAPI:
     
     from pathlib import Path
     from fastapi.staticfiles import StaticFiles
-    artifacts_path = Path("ml/artifacts")
+    artifacts_path = Path(settings.metrics_path).parent
     if artifacts_path.exists():
         app.mount("/api/v1/static", StaticFiles(directory=str(artifacts_path)), name="static")
     

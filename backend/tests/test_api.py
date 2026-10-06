@@ -263,3 +263,72 @@ def test_history_and_deletion_lifecycle(client: TestClient) -> None:
     # Verify 404 after deletion
     after_del = client.get(f"/api/v1/documents/{doc_id}")
     assert after_del.status_code == 404
+
+
+def test_regression_config_paths_resolved() -> None:
+    """Regression test: verify artifact and model paths resolve to real files."""
+    from app.config import settings
+    assert Path(settings.model_path).exists(), f"model_path not found: {settings.model_path}"
+    assert Path(settings.label_map_path).exists(), f"label_map_path not found: {settings.label_map_path}"
+    assert Path(settings.metrics_path).exists(), f"metrics_path not found: {settings.metrics_path}"
+
+
+def test_regression_model_not_loaded_envelope(client: TestClient) -> None:
+    """Regression test: verify model not loaded returns structured 503 JSON envelope."""
+    was_loaded = classifier._loaded
+    try:
+        classifier._loaded = False
+        nda_path = FIXTURES_DIR / "nda_sample.txt"
+        with open(nda_path, "rb") as f:
+            resp = client.post(
+                "/api/v1/analyze",
+                files={"file": ("nda_sample.txt", f, "text/plain")},
+            )
+        assert resp.status_code == 503
+        data = resp.json()
+        assert "error" in data
+        assert data["error"]["code"] == "MODEL_NOT_LOADED"
+        assert "message" in data["error"]
+        assert "ML model is not loaded" in data["error"]["message"]
+    finally:
+        classifier._loaded = was_loaded
+
+
+def test_regression_http_error_structured_envelope(client: TestClient) -> None:
+    """Regression test: verify 404 and HTTP exceptions return structured error envelope."""
+    resp = client.get("/api/v1/nonexistent_endpoint")
+    assert resp.status_code == 404
+    data = resp.json()
+    assert "error" in data
+    assert data["error"]["code"] == "NOT_FOUND"
+    assert "message" in data["error"]
+
+
+def test_regression_validation_error_structured_envelope(client: TestClient) -> None:
+    """Regression test: verify Pydantic validation errors return structured 422 envelope."""
+    resp = client.post("/api/v1/search", json={})
+    assert resp.status_code == 422
+    data = resp.json()
+    assert "error" in data
+    assert data["error"]["code"] == "VALIDATION_ERROR"
+    assert "message" in data["error"]
+
+
+def test_regression_analyze_freelance_agreement_txt(client: TestClient) -> None:
+    """Regression test: verify DOC-01 freelance agreement upload succeeds end-to-end."""
+    contract_path = Path(__file__).resolve().parent.parent.parent / "clauseguard-testkit" / "contracts" / "DOC-01_freelance_agreement.txt"
+    assert contract_path.exists(), f"Test contract missing at {contract_path}"
+
+    with open(contract_path, "rb") as f:
+        resp = client.post(
+            "/api/v1/analyze",
+            files={"file": ("DOC-01_freelance_agreement.txt", f, "text/plain")},
+        )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "document_id" in data
+    assert data["filename"] == "DOC-01_freelance_agreement.txt"
+    assert len(data["clauses"]) > 0
+    assert data["risk_summary"]["overall_risk"] in ("High", "Medium", "Low")
+    assert data["risk_summary"]["total_clauses"] == len(data["clauses"])
+

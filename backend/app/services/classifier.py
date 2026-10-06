@@ -30,18 +30,35 @@ class ClauseClassifier:
             model_path: Path to saved model directory.
             label_map_path: Path to label_map.json.
         """
-        logger.info("Loading classifier model from %s", model_path)
+        # Resolve path relative to project root if not found in CWD
+        m_path = Path(model_path)
+        if not m_path.exists():
+            candidate = Path(__file__).resolve().parent.parent.parent.parent / model_path
+            if candidate.exists():
+                m_path = candidate
+        
+        lm_path = Path(label_map_path)
+        if not lm_path.exists():
+            candidate = Path(__file__).resolve().parent.parent.parent.parent / label_map_path
+            if candidate.exists():
+                lm_path = candidate
+
+        model_path_str = str(m_path.resolve()) if m_path.exists() else model_path
+        label_map_str = str(lm_path.resolve()) if lm_path.exists() else label_map_path
+
+        logger.info("Loading classifier model from %s", model_path_str)
         
         self.device = self._get_device()
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_path_str)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_path_str)
         self.model.to(self.device)
         self.model.eval()
         
         # Load label map
-        with open(label_map_path) as f:
+        with open(label_map_str) as f:
             label_data = json.load(f)
         self.id2label = {int(k): v for k, v in label_data["id2label"].items()}
+
         
         self._loaded = True
         logger.info(

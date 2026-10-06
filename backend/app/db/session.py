@@ -27,6 +27,8 @@ def get_db() -> Session:
 
 def create_tables() -> None:
     """Create all database tables."""
+    import app.db.models  # noqa: F401
     logger.info("Creating database tables...")
     Base.metadata.create_all(bind=engine)
     logger.info("Database tables created.")
+

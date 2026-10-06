@@ -10,9 +10,27 @@ async function request(url, options = {}) {
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
-    throw new Error(error?.error?.message || `Request failed: ${response.status}`);
+    let errorMsg = null;
+    try {
+      const data = await response.json();
+      errorMsg = data?.error?.message || (typeof data?.detail === 'string' ? data.detail : null) || data?.message;
+    } catch {
+      // Non-JSON response (e.g. proxy failure, HTML error page)
+    }
+
+    if (!errorMsg) {
+      if (response.status === 500) {
+        errorMsg = 'Internal server error (500). Please check backend logs.';
+      } else if (response.status === 503) {
+        errorMsg = 'Service unavailable (503). ML model or backend is not ready.';
+      } else {
+        errorMsg = `Server returned status ${response.status}`;
+      }
+    }
+
+    throw new Error(errorMsg);
   }
+
 
   return response.json();
 }
