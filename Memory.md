@@ -2,8 +2,8 @@
 
 ## Current status
 - Current day: Overnight Execution
-- Current phase/step: Stage 4 complete, proceeding to Stage 5 (Backend verification)
-- File currently being worked on: backend/app/main.py
+- Current phase/step: Stage 6 complete, proceeding to Stage 7 (Docker + Deploy-Ready)
+- File currently being worked on: docker-compose.yml
 
 ## Completed
 - Initial project scaffolding (ml/, backend/, frontend/, docker-compose.yml, tests/)
@@ -11,6 +11,8 @@
 - Stage 2 Real Data: Obtained CUAD_v1.json (510 contracts), parsed and segmented text, labeled with exact span offsets, downsampled No Clause, split by contract (70/15/15) with seed 42 into train (2751), val (482), test (636). Saved train/val/test CSVs, dataset_stats.json, and EDA plots.
 - Stage 3 Baseline: TF-IDF + Logistic Regression evaluated on real CUAD split. Validation Macro-F1: 0.7894, Test Macro-F1: 0.7301, Test Accuracy: 0.7516. Saved confusion_matrix_baseline.png and metrics.json.
 - Stage 4 Transformer: Fine-tuned nlpaueb/legal-bert-base-uncased on Apple Silicon MPS (3 epochs, lr=2e-5, micro-batch 4 with grad accum 4). Val Macro-F1 improved from 0.6110 to 0.7685. Test Accuracy: 0.7642 (+1.26% over baseline), Test Macro-F1: 0.7277, Test Macro-Precision: 0.7250 (+0.26%). Saved best model checkpoint to ml/artifacts/legal_bert/, metrics.json, confusion_matrix_legal_bert.png.
+- Stage 5 Backend Verification: Verified all API endpoints (/health, /analyze, /search, /documents, /documents/{id}, DELETE, /insights), tested text & PDF fixtures, all 19 pytest tests passing.
+- Stage 6 Frontend Verification: Verified Vite production build (dist/), confirmed 0 hardcoded hex colors outside tokens.css, verified responsive layouts (375px to 1280px), empty/loading/error states, and Insights metrics/plots rendering.
 
 ## Files that exist (keep this list accurate - agent must read before creating anything)
 - PRD.md, architecture.md, rules.md, phases.md, design.md, Memory.md, hallucination.txt, antigravity_prompts.md, OVERNIGHT_LOG.md
@@ -38,6 +40,7 @@
 - Split: Contract-level 70/15/15 (seed 42, zero contract overlap)
 - Tooling: uv for Python 3.11 venv management; Node.js v20 for Vite build
 - Transformer Training: Micro-batch size 4 with gradient accumulation 4 to fit within M2 memory footprint (~2.5GB peak)
+- API/DB: String(36) for UUIDs across SQLite & PostgreSQL; `/api/v1/static` mount for confusion matrix charts
 
 ## Real metrics (fill ONLY from real runs)
 - Baseline accuracy (test): 0.7516
@@ -50,8 +53,10 @@
 (none)
 
 ## Next step
-Stage 5: Backend Verification (Verify live API endpoints, run full test suite with httpx, test contract analysis end-to-end).
+Stage 7: Docker + Deploy-Ready (Dockerfiles, docker-compose clean boot verification, production env configs, DEPLOY.md).
 
 ## Update template (agent must append after each task)
 - [2026-10-06 07:19] Stage 3 Baseline DONE: Trained TF-IDF + LogisticRegression baseline. Test macro-F1: 0.7301, test accuracy: 0.7516. Next: Stage 4.
 - [2026-10-06 07:49] Stage 4 Transformer DONE: Fine-tuned Legal-BERT on MPS. Test accuracy: 0.7642 (+1.26%), Test macro-F1: 0.7277, Test macro-precision: 0.7250 (+0.26%). Next: Stage 5.
+- [2026-10-06 07:53] Stage 5 Backend DONE: All endpoints verified with live calls, 19/19 pytest tests passed. Next: Stage 6.
+- [2026-10-06 07:58] Stage 6 Frontend DONE: Production build passed (dist/), 0 hardcoded hex outside tokens.css, responsive verified. Next: Stage 7.
