@@ -38,3 +38,40 @@
 - **Blockers**: None.
 
 ---
+
+## Stage 2 - Real Data
+- **Timestamp**: 2026-10-06T07:18:45+05:30
+- **What was done**:
+  1. Obtained `CUAD_v1.json` directly from Hugging Face dataset repository `theatticusproject/cuad` (file size: 40,128,638 bytes) into `ml/data/raw/CUAD_v1/CUAD_v1.json`.
+  2. Inspected dataset structure: Verified 510 contracts in SQuAD-like QA format with 41 unique clause category questions.
+  3. Reconciled category strings: Confirmed exact matching for all 10 target categories (`Non-Compete`, `Exclusivity`, `Termination For Convenience`, `Anti-Assignment`, `Uncapped Liability`, `Cap On Liability`, `Liquidated Damages`, `Audit Rights`, `Change Of Control`, `Ip Ownership Assignment`).
+  4. Rewrote and executed `ml/src/data_prep.py`:
+     - Extracted character-exact answer spans for all target categories.
+     - Segmented contracts into paragraph-level clauses using heading/section patterns.
+     - Assigned ground-truth labels based on span character overlap (>15 char overlap), assigning remainder to `No Clause`.
+     - Downsampled `No Clause` from 63,357 to 891 segments (3x average positive class size of 297).
+     - Split BY CONTRACT (70/15/15) with random seed 42 (zero contract overlap verified across splits).
+     - Produced `train.csv` (2,751 samples across 323 contracts), `val.csv` (482 samples across 69 contracts), and `test.csv` (636 samples across 70 contracts).
+     - Generated and saved `class_distribution.png`, `text_length_histogram.png`, and `dataset_stats.json` to `ml/artifacts/`.
+- **Commands Run**:
+  - `ml/.venv/bin/python ml/src/data_prep.py`
+- **Real Output**:
+  ```
+  Loading CUAD from ml/data/raw/CUAD_v1/CUAD_v1.json...
+  Loaded 510 contracts from CUAD.
+  Total extracted segments: 66335
+  Downsampling 'No Clause' from 63357 to 891 (avg other=297)
+  Split by contract (462 contracts total):
+    Train: 2751 samples (323 contracts)
+    Val:   482 samples (69 contracts)
+    Test:  636 samples (70 contracts)
+  Unique classes in train: 11 / 11
+  Saved processed datasets to ml/data/processed/
+  ```
+- **Pass/Fail**: PASS (Gate passed: train/val/test CSVs exist with all 11 labels present).
+- **Decisions**:
+  - Used exact character boundary overlap matching for accurate annotation assignment.
+  - Used contract title as unit of splitting to ensure strict contract-level isolation and prevent data leakage.
+- **Blockers**: None.
+
+---

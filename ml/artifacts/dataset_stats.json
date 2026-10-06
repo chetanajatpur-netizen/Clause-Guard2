@@ -1,0 +1,47 @@
+{
+  "source": "theatticusproject/cuad (CUAD_v1.json)",
+  "total_contracts": 510,
+  "total_segments_after_downsampling": 3869,
+  "train_samples": 2751,
+  "val_samples": 482,
+  "test_samples": 636,
+  "class_counts_train": {
+    "No Clause": 612,
+    "Audit Rights": 356,
+    "Cap on Liability": 336,
+    "Anti-Assignment": 332,
+    "Exclusivity": 265,
+    "IP Ownership Assignment": 180,
+    "Non-Compete": 171,
+    "Change of Control": 164,
+    "Termination for Convenience": 158,
+    "Uncapped Liability": 104,
+    "Liquidated Damages": 73
+  },
+  "class_counts_val": {
+    "No Clause": 114,
+    "Anti-Assignment": 64,
+    "Cap on Liability": 60,
+    "Audit Rights": 47,
+    "Exclusivity": 40,
+    "Non-Compete": 39,
+    "IP Ownership Assignment": 35,
+    "Termination for Convenience": 31,
+    "Change of Control": 25,
+    "Uncapped Liability": 19,
+    "Liquidated Damages": 8
+  },
+  "class_counts_test": {
+    "No Clause": 165,
+    "Anti-Assignment": 91,
+    "Audit Rights": 90,
+    "Cap on Liability": 64,
+    "Exclusivity": 62,
+    "IP Ownership Assignment": 38,
+    "Uncapped Liability": 29,
+    "Non-Compete": 28,
+    "Termination for Convenience": 26,
+    "Change of Control": 26,
+    "Liquidated Damages": 17
+  }
+}
