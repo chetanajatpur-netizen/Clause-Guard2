@@ -63,7 +63,6 @@ def train_baseline(
         random_state=SEED,
         C=1.0,
         solver="lbfgs",
-        multi_class="multinomial",
     )
     clf.fit(X_train, y_train)
     

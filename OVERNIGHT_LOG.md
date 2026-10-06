@@ -75,3 +75,46 @@
 - **Blockers**: None.
 
 ---
+
+## Stage 3 - Baseline
+- **Timestamp**: 2026-10-06T07:19:35+05:30
+- **What was done**:
+  1. Audited and fixed `ml/src/baseline.py` (removed deprecated `multi_class="multinomial"` parameter for modern scikit-learn compatibility).
+  2. Trained TF-IDF (1-2 n-grams, sublinear TF, 50,000 features) + Logistic Regression (balanced class weights, L-BFGS, seed 42) on `train.csv`.
+  3. Evaluated on `val.csv` and `test.csv`.
+  4. Generated and saved `confusion_matrix_baseline.png` and updated `ml/artifacts/metrics.json` with real baseline metrics.
+- **Commands Run**:
+  - `ml/.venv/bin/python ml/src/baseline.py`
+- **Real Output**:
+  ```
+  Training TF-IDF + LogReg baseline...
+  Vocabulary size: 50000
+  Classes: ['Anti-Assignment', 'Audit Rights', 'Cap on Liability', 'Change of Control', 'Exclusivity', 'IP Ownership Assignment', 'Liquidated Damages', 'No Clause', 'Non-Compete', 'Termination for Convenience', 'Uncapped Liability']
+
+  BASELINE Results on Validation:
+  Accuracy: 0.7801 | Macro F1: 0.7894
+
+  BASELINE Results on Test:
+  Accuracy: 0.7516 | Macro F1: 0.7301
+  Per-class F1:
+    Anti-Assignment: 0.8523
+    Audit Rights: 0.7857
+    Cap on Liability: 0.7746
+    Change of Control: 0.5833
+    Exclusivity: 0.7407
+    IP Ownership Assignment: 0.7529
+    Liquidated Damages: 0.7273
+    No Clause: 0.7303
+    Non-Compete: 0.6349
+    Termination for Convenience: 0.7692
+    Uncapped Liability: 0.6792
+
+  Saved confusion matrix to ml/artifacts/confusion_matrix_baseline.png
+  Saved metrics to ml/artifacts/metrics.json
+  ```
+- **Pass/Fail**: PASS (Gate passed: metrics.json populated with verified real baseline evaluation numbers).
+- **Decisions**:
+  - Removed deprecated `multi_class="multinomial"` keyword in LogisticRegression to support scikit-learn 1.9+.
+- **Blockers**: None.
+
+---
