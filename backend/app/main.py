@@ -1,0 +1,82 @@
+"""FastAPI application entry point."""
+import logging
+from contextlib import asynccontextmanager
+from typing import AsyncGenerator
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.config import settings
+from app.core.exceptions import register_exception_handlers
+from app.db.session import create_tables
+from app.logging_config import setup_logging
+from app.services.classifier import classifier
+from app.services.embedder import embedder
+
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    """Application lifespan: load models on startup."""
+    setup_logging()
+    logger.info("Starting ClauseGuard backend...")
+    
+    # Create database tables
+    create_tables()
+    
+    # Load ML models
+    try:
+        classifier.load(
+            model_path=settings.model_path,
+            label_map_path=settings.label_map_path,
+        )
+        logger.info("Classifier model loaded.")
+    except Exception as e:
+        logger.error("Failed to load classifier: %s", e)
+    
+    try:
+        embedder.load(model_name=settings.sbert_model)
+        logger.info("Embedder model loaded.")
+    except Exception as e:
+        logger.error("Failed to load embedder: %s", e)
+    
+    logger.info("ClauseGuard backend ready.")
+    yield
+    logger.info("Shutting down ClauseGuard backend.")
+
+
+def create_app() -> FastAPI:
+    """Create and configure the FastAPI application."""
+    app = FastAPI(
+        title="ClauseGuard API",
+        description="AI-powered contract risk analyzer. Not legal advice.",
+        version="1.0.0",
+        lifespan=lifespan,
+    )
+    
+    # CORS
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    
+    # Exception handlers
+    register_exception_handlers(app)
+    
+    # Routers
+    from app.routers import analyze, health, history, insights, search
+    
+    app.include_router(health.router, prefix="/api/v1", tags=["Health"])
+    app.include_router(analyze.router, prefix="/api/v1", tags=["Analysis"])
+    app.include_router(search.router, prefix="/api/v1", tags=["Search"])
+    app.include_router(history.router, prefix="/api/v1", tags=["History"])
+    app.include_router(insights.router, prefix="/api/v1", tags=["Insights"])
+    
+    return app
+
+
+app = create_app()
