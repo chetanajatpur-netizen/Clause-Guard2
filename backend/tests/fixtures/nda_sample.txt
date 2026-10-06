@@ -1,0 +1,24 @@
+MUTUAL NON-DISCLOSURE AND CONFIDENTIALITY AGREEMENT
+
+This Mutual Non-Disclosure Agreement ("Agreement") is made and entered into as of October 6, 2026, by and between Alpha Solutions Inc. ("Company") and Bravo Technologies LLC ("Recipient").
+
+1. CONFIDENTIAL INFORMATION
+For purposes of this Agreement, "Confidential Information" shall include all proprietary information, software code, customer data, and trade secrets disclosed by either party to the other party, whether orally or in writing.
+
+2. NON-COMPETE RESTRICTIONS
+During the term of this Agreement and for a period of twenty-four (24) months following the termination of this Agreement for any reason, Recipient shall not directly or indirectly engage in, manage, operate, join, control, or participate in any business enterprise or commercial venture that competes directly with the Company in the contract analysis or legal tech sector within North America or Europe.
+
+3. UNCAPPED LIABILITY FOR BREACH OF CONFIDENTIALITY
+Notwithstanding any other provision of this Agreement, the liability of the Recipient for damages, losses, claims, or expenses resulting from any unauthorized disclosure or willful breach of the confidentiality obligations hereunder shall be uncapped and shall not be subject to any financial limitation, liability ceiling, or damage restriction whatsoever.
+
+4. ANTI-ASSIGNMENT
+Neither party may assign, delegate, or transfer this Agreement, or any of its rights, benefits, or obligations hereunder, whether voluntarily, involuntarily, or by operation of law, without the prior written consent of the other party. Any attempted assignment, subcontracting, or delegation in violation of this Section shall be null, void, and of no force or effect.
+
+5. AUDIT RIGHTS
+The Company shall have the right, upon five (5) business days prior written notice, to examine, inspect, and audit Recipient's books, electronic systems, source code repositories, and security records during normal business hours to verify full compliance with the terms and security obligations of this Agreement.
+
+6. TERMINATION FOR CONVENIENCE
+Either party may terminate this Agreement at any time, with or without cause, for any reason or convenience, upon providing thirty (30) days prior written notice of termination to the other party.
+
+7. GOVERNING LAW AND SEVERABILITY
+This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without giving effect to any principles of conflicts of law.

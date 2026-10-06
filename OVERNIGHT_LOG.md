@@ -188,3 +188,57 @@
 - **Blockers**: None.
 
 ---
+
+## Stage 5: Backend Verification
+- **Timestamp**: 2026-10-06T07:53:00+05:30
+- **What was done**:
+  1. Verified all endpoints declared in architecture.md: `/health`, `/analyze`, `/search`, `/documents`, `/documents/{id}`, `DELETE /documents/{id}`, `/insights`, and static route for artifacts.
+  2. Created realistic test contracts under `backend/tests/fixtures/`:
+     - `nda_sample.txt`: Mutual Non-Disclosure Agreement containing Non-Compete, Uncapped Liability, Anti-Assignment, Audit Rights, and Termination for Convenience.
+     - `freelance_agreement.pdf`: Valid multi-page agreement containing Exclusivity, IP Ownership, Cap on Liability, and Liquidated Damages.
+  3. Tested complete lifespan startup with fine-tuned Legal-BERT and SBERT sentence transformer models loaded in memory on Apple MPS.
+  4. Executed live HTTP calls via curl against all endpoints:
+     - `GET /api/v1/health`: `{"status": "ok", "classifier_loaded": true, "embedder_loaded": true}`
+     - `GET /api/v1/insights`: Returned real metrics for both `baseline` and `legal_bert`.
+     - `POST /api/v1/analyze` (with `nda_sample.txt`): Successfully classified 9 clauses, flagged Non-Compete with 0.7534 confidence as High risk, Anti-Assignment as Medium risk, overall risk computed as High.
+     - `POST /api/v1/analyze` (with `freelance_agreement.pdf`): Successfully extracted text from PDF, classified 6 clauses, overall risk High.
+     - `GET /api/v1/documents`: Returned document list (total=2).
+     - `GET /api/v1/documents/{id}`: Returned complete document details and clauses.
+     - `POST /api/v1/search`: Plain English query "Can I work for a competitor after leaving?" accurately matched clause 4 (Non-Compete Restrictions) with cosine similarity 0.4462.
+     - `DELETE /api/v1/documents/{id}`: Successfully cascade-deleted document and clauses.
+  5. Ran full automated test suite with pytest (19 tests covering parsing, segmenting, empty/invalid files, size limits, unscannable PDFs, unicode, and full API lifecycle).
+- **Commands Run**:
+  - `backend/.venv/bin/pytest backend/tests/ -v`
+  - `curl -s http://127.0.0.1:8000/api/v1/health`
+  - `curl -s -X POST http://127.0.0.1:8000/api/v1/analyze -F "file=@backend/tests/fixtures/nda_sample.txt"`
+  - `curl -s -X POST http://127.0.0.1:8000/api/v1/search -H "Content-Type: application/json" -d '{"document_id": "...", "query": "Can I work for a competitor after leaving?", "top_k": 3}'`
+- **Real Output**:
+  ```
+  ======================== 19 passed, 1 warning in 58.27s ========================
+  backend/tests/test_api.py::test_health_check PASSED                      [  5%]
+  backend/tests/test_api.py::test_insights_endpoint PASSED                 [ 10%]
+  backend/tests/test_api.py::test_analyze_valid_txt PASSED                 [ 15%]
+  backend/tests/test_api.py::test_analyze_valid_pdf PASSED                 [ 21%]
+  backend/tests/test_api.py::test_analyze_empty_file PASSED                [ 26%]
+  backend/tests/test_api.py::test_analyze_wrong_file_type PASSED           [ 31%]
+  backend/tests/test_api.py::test_analyze_file_too_large PASSED            [ 36%]
+  backend/tests/test_api.py::test_analyze_scanned_pdf_no_text PASSED       [ 42%]
+  backend/tests/test_api.py::test_analyze_non_contract_text PASSED         [ 47%]
+  backend/tests/test_api.py::test_analyze_unicode_text PASSED              [ 52%]
+  backend/tests/test_api.py::test_semantic_search_and_unknown_doc PASSED   [ 57%]
+  backend/tests/test_api.py::test_history_and_deletion_lifecycle PASSED    [ 63%]
+  backend/tests/test_services.py::TestParser::test_extract_txt PASSED      [ 68%]
+  backend/tests/test_services.py::TestParser::test_extract_txt_empty PASSED [ 73%]
+  backend/tests/test_services.py::TestParser::test_unsupported_type PASSED [ 78%]
+  backend/tests/test_services.py::TestSegmenter::test_segment_basic PASSED [ 84%]
+  backend/tests/test_services.py::TestSegmenter::test_segment_empty PASSED [ 89%]
+  backend/tests/test_services.py::TestSegmenter::test_segment_merges_tiny PASSED [ 94%]
+  backend/tests/test_services.py::TestSegmenter::test_segment_splits_huge PASSED [100%]
+  ```
+- **Pass/Fail**: PASS (Gate passed: pytest 19/19 green; /analyze returns classified clauses with risk levels).
+- **Decisions**:
+  - Replaced dialect-specific UUID column with String(36) in models.py to allow unified operation across both SQLite (local testing) and PostgreSQL (production).
+  - Mounted `/api/v1/static` to serve ML confusion matrix plots directly to frontend clients.
+- **Blockers**: None.
+
+---

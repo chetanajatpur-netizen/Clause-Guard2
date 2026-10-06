@@ -10,8 +10,8 @@ from sqlalchemy import (
     LargeBinary,
     String,
     Text,
+    Uuid,
 )
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.db.session import Base
 
@@ -21,7 +21,7 @@ class Document(Base):
 
     __tablename__ = "documents"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     filename = Column(String(255), nullable=False)
     file_type = Column(String(10), nullable=False)
     char_count = Column(Integer, nullable=False)
@@ -38,7 +38,7 @@ class Clause(Base):
     __tablename__ = "clauses"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    document_id = Column(UUID(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
+    document_id = Column(String(36), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
     position = Column(Integer, nullable=False)
     text = Column(Text, nullable=False)
     label = Column(String(50), nullable=False)
@@ -55,7 +55,7 @@ class SearchQuery(Base):
     __tablename__ = "search_queries"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    document_id = Column(UUID(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
+    document_id = Column(String(36), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
     query = Column(Text, nullable=False)
     top_result_clause_id = Column(Integer, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

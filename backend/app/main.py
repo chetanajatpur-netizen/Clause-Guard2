@@ -76,6 +76,12 @@ def create_app() -> FastAPI:
     app.include_router(history.router, prefix="/api/v1", tags=["History"])
     app.include_router(insights.router, prefix="/api/v1", tags=["Insights"])
     
+    from pathlib import Path
+    from fastapi.staticfiles import StaticFiles
+    artifacts_path = Path("ml/artifacts")
+    if artifacts_path.exists():
+        app.mount("/api/v1/static", StaticFiles(directory=str(artifacts_path)), name="static")
+    
     return app
 
 

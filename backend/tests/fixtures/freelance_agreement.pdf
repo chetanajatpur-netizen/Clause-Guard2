@@ -1,0 +1,48 @@
+%PDF-1.4
+1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >> endobj
+4 0 obj << /Length 1709 >> stream
+BT /F1 10 Tf 40 760 Td 14 TL
+(MASTER FREELANCE CONSULTING AND SERVICES AGREEMENT) ' 
+(This Agreement is dated as of October 6, 2026, between Client Corp and Consultant.) ' 
+() ' 
+(SECTION 1. INTELLECTUAL PROPERTY OWNERSHIP ASSIGNMENT) ' 
+(Consultant hereby irrevocably assigns, transfers, and conveys to Client all right, title,) ' 
+(and interest in and to all inventions, software, documentation, trade secrets, and works of) ' 
+(authorship created by Consultant in connection with Services rendered under this Agreement.) ' 
+() ' 
+(SECTION 2. EXCLUSIVITY AND EXCLUSIVE SERVICES) ' 
+(During the term of this Agreement, Consultant agrees to render consulting services exclusively) ' 
+(to Client and covenants not to perform software development or AI services for any competitor.) ' 
+() ' 
+(SECTION 3. CAP ON LIABILITY) ' 
+(To the maximum extent permitted by applicable law, the total aggregate liability of either party) ' 
+(arising out of or relating to this Agreement shall be strictly capped and limited to the total fees) ' 
+(actually paid by Client to Consultant during the twelve \(12\) months preceding the claim.) ' 
+() ' 
+(SECTION 4. LIQUIDATED DAMAGES) ' 
+(In the event Consultant fails to meet project deliverables by the agreed deadline or breaches) ' 
+(project milestones, Consultant shall pay Client liquidated damages of five thousand dollars) ' 
+(\(,000\) per day of delay as a reasonable pre-estimate of damages and not as a penalty.) ' 
+() ' 
+(SECTION 5. CHANGE OF CONTROL) ' 
+(In the event of a Change of Control of Consultant or acquisition by a third party of more than) ' 
+(fifty percent \(50%\) of voting equity, Client shall have the unilateral right to terminate immediately.) ' 
+ET
+
+endstream
+endobj
+5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000266 00000 n 
+0000000360 00000 n 
+trailer << /Size 6 /Root 1 0 R >>
+startxref
+500
+%%EOF
