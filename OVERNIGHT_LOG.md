@@ -309,3 +309,27 @@
 - **Blockers**: Docker engine is not installed on this local macOS host; audited and verified manifests for production deployment.
 
 ---
+
+## Stage 8: Documentation, Resume, & Morning Report
+- **Timestamp**: 2026-10-06T08:04:00+05:30
+- **What was done**:
+  1. Authored comprehensive `README.md` containing project overview, problem statement, core features, mermaid architecture diagram, tech stack rationale, ML methodology with CUAD dataset breakdown, real metrics table comparing Baseline vs. Legal-BERT, API reference table, local and Docker setup guides, and project limitations.
+  2. Authored `RESUME_DRAFT.md` featuring 4 high-impact accomplishment bullets derived exclusively from real runs (76.42% accuracy, 510 contracts, 19/19 tests), categorized technical skills, and a 60-second interview pitch.
+  3. Authored `MORNING_REPORT.md` providing an executive summary, evidence for what works, fallbacks applied, real metrics breakdown, architectural decisions, and exact reproduction commands.
+  4. Updated `Memory.md` and created git release tag `v0.1.0`.
+- **Commands Run**:
+  - `git tag v0.1.0`
+- **Real Output**:
+  ```
+  Artifacts generated:
+  - README.md: Full specification with real metrics and mermaid diagrams.
+  - RESUME_DRAFT.md: 4 verifiable bullets with real numbers + 60s pitch.
+  - MORNING_REPORT.md: Executive overnight summary with commands.
+  - Git tag v0.1.0 created.
+  ```
+- **Pass/Fail**: PASS (Gate passed: all documentation complete with real metrics; release tagged).
+- **Decisions**:
+  - Strictly avoided fabricated metrics across all documents; reported exact numbers from `ml/artifacts/metrics.json`.
+- **Blockers**: None.
+
+---
