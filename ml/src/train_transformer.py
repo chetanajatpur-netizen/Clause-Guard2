@@ -13,6 +13,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 import torch
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader, Dataset
 from transformers import (
     AutoModelForSequenceClassification,
@@ -166,12 +169,13 @@ def train_one_epoch(
     device: torch.device,
     epoch: int,
     grad_accum_steps: int = 4,
-) -> float:
-    """Train for one epoch with gradient accumulation and regular memory clearing."""
+) -> tuple[float, float, float, float]:
+    """Train for one epoch with gradient accumulation, logging grad norms and LR."""
     model.train()
     total_loss = 0.0
     num_batches = len(loader)
     optimizer.zero_grad()
+    grad_norms: list[float] = []
     
     for batch_idx, batch in enumerate(loader):
         input_ids = batch["input_ids"].to(device)
@@ -187,7 +191,9 @@ def train_one_epoch(
         total_loss += loss.item()
         
         if (batch_idx + 1) % grad_accum_steps == 0 or (batch_idx + 1) == num_batches:
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+            norm_val = float(grad_norm.item() if hasattr(grad_norm, "item") else grad_norm)
+            grad_norms.append(norm_val)
             optimizer.step()
             scheduler.step()
             optimizer.zero_grad()
@@ -202,7 +208,12 @@ def train_one_epoch(
             
     if device.type == "mps":
         torch.mps.empty_cache()
-    return total_loss / num_batches
+    
+    avg_loss = total_loss / num_batches
+    mean_grad_norm = float(np.mean(grad_norms)) if grad_norms else 0.0
+    max_grad_norm = float(np.max(grad_norms)) if grad_norms else 0.0
+    current_lr = float(scheduler.get_last_lr()[0])
+    return avg_loss, mean_grad_norm, max_grad_norm, current_lr
 
 
 def validate(
@@ -318,7 +329,7 @@ def main() -> None:
         print(f"Epoch {epoch + 1}/{config['epochs']}", flush=True)
         print(f"{'='*60}", flush=True)
         
-        train_loss = train_one_epoch(
+        train_loss, mean_grad_norm, max_grad_norm, current_lr = train_one_epoch(
             model,
             train_loader,
             optimizer,
@@ -331,10 +342,13 @@ def main() -> None:
         val_loss, val_f1, val_acc = validate(model, val_loader, criterion, device)
         
         print(f"\nEpoch {epoch+1} Results:", flush=True)
-        print(f"  Train Loss:   {train_loss:.4f}", flush=True)
-        print(f"  Val Loss:     {val_loss:.4f}", flush=True)
-        print(f"  Val Accuracy: {val_acc:.4f} ({val_acc*100:.1f}%)", flush=True)
-        print(f"  Val Macro-F1: {val_f1:.4f} ({val_f1*100:.1f}%)", flush=True)
+        print(f"  Train Loss:     {train_loss:.4f}", flush=True)
+        print(f"  Val Loss:       {val_loss:.4f}", flush=True)
+        print(f"  Val Accuracy:   {val_acc:.4f} ({val_acc*100:.1f}%)", flush=True)
+        print(f"  Val Macro-F1:   {val_f1:.4f} ({val_f1*100:.1f}%)", flush=True)
+        print(f"  Mean Grad Norm: {mean_grad_norm:.4f}", flush=True)
+        print(f"  Max Grad Norm:  {max_grad_norm:.4f}", flush=True)
+        print(f"  Current LR:     {current_lr:.6e}", flush=True)
         
         history.append({
             "epoch": epoch + 1,
@@ -342,6 +356,9 @@ def main() -> None:
             "val_loss": round(val_loss, 4),
             "val_accuracy": round(val_acc, 4),
             "val_macro_f1": round(val_f1, 4),
+            "mean_grad_norm": round(mean_grad_norm, 4),
+            "max_grad_norm": round(max_grad_norm, 4),
+            "lr": current_lr,
         })
         
         if val_f1 > best_f1:
@@ -358,6 +375,9 @@ def main() -> None:
             f,
             indent=2,
         )
+    print(f"Saved training history to {ARTIFACTS_DIR / 'training_history.json'}", flush=True)
+
+    plot_training_curves(history, ARTIFACTS_DIR / "training_curves.png")
         
     print(f"\n{'='*60}", flush=True)
     print("LEGAL-BERT FINE-TUNING FINISHED", flush=True)
@@ -366,5 +386,111 @@ def main() -> None:
     print(f"{'='*60}", flush=True)
 
 
+def plot_training_curves(
+    history: list[dict[str, Any]],
+    output_path: Path = ARTIFACTS_DIR / "training_curves.png",
+) -> None:
+    """Plot training and validation loss, metrics, gradient norm, and LR curves."""
+    if not history:
+        print("No history data to plot.", flush=True)
+        return
+
+    epochs = [h["epoch"] for h in history]
+    train_loss = [h.get("train_loss") for h in history]
+    val_loss = [h.get("val_loss") for h in history]
+    val_macro_f1 = [h.get("val_macro_f1") for h in history]
+    val_acc = [h.get("val_accuracy") for h in history]
+
+    has_grad = any(h.get("mean_grad_norm") is not None for h in history)
+    has_lr = any(h.get("lr") is not None for h in history)
+
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    fig.suptitle("Legal-BERT Fine-Tuning Diagnostics", fontsize=16, fontweight="bold")
+
+    # 1. Loss curves
+    ax_loss = axes[0, 0]
+    ax_loss.plot(epochs, train_loss, marker="o", color="#4F46E5", label="Train Loss", linewidth=2)
+    ax_loss.plot(epochs, val_loss, marker="s", color="#DC2626", label="Val Loss", linewidth=2)
+    ax_loss.set_title("Training & Validation Loss", fontsize=13, fontweight="bold")
+    ax_loss.set_xlabel("Epoch", fontsize=11)
+    ax_loss.set_ylabel("Cross-Entropy Loss", fontsize=11)
+    ax_loss.set_xticks(epochs)
+    ax_loss.grid(True, linestyle="--", alpha=0.5)
+    ax_loss.legend(loc="upper right")
+
+    # 2. Validation Metrics
+    ax_metric = axes[0, 1]
+    ax_metric.plot(epochs, [f * 100 for f in val_macro_f1], marker="o", color="#059669", label="Val Macro-F1 (%)", linewidth=2)
+    if any(a is not None for a in val_acc):
+        ax_metric.plot(epochs, [a * 100 for a in val_acc], marker="^", color="#2563EB", label="Val Accuracy (%)", linewidth=2)
+    ax_metric.set_title("Validation Performance", fontsize=13, fontweight="bold")
+    ax_metric.set_xlabel("Epoch", fontsize=11)
+    ax_metric.set_ylabel("Score (%)", fontsize=11)
+    ax_metric.set_xticks(epochs)
+    ax_metric.grid(True, linestyle="--", alpha=0.5)
+    ax_metric.legend(loc="lower right")
+
+    # 3. Gradient Norms (or Generalization Gap)
+    ax_grad = axes[1, 0]
+    if has_grad:
+        mean_norms = [h.get("mean_grad_norm", 0) for h in history]
+        max_norms = [h.get("max_grad_norm", 0) for h in history]
+        ax_grad.plot(epochs, mean_norms, marker="o", color="#7C3AED", label="Mean Grad Norm", linewidth=2)
+        ax_grad.plot(epochs, max_norms, marker="x", color="#D97706", label="Max Grad Norm", linewidth=2, linestyle="--")
+        ax_grad.axhline(y=1.0, color="#EF4444", linestyle=":", label="Clip Threshold (1.0)")
+        ax_grad.set_title("Gradient Norms (clip_grad_norm_=1.0)", fontsize=13, fontweight="bold")
+        ax_grad.set_ylabel("Norm Value", fontsize=11)
+    else:
+        gap = [vl - tl for vl, tl in zip(val_loss, train_loss)]
+        ax_grad.bar(epochs, gap, color="#6366F1", alpha=0.7, width=0.4, label="Val Loss - Train Loss")
+        ax_grad.axhline(0, color="gray", linestyle="--")
+        ax_grad.set_title("Generalization Gap (Val Loss - Train Loss)", fontsize=13, fontweight="bold")
+        ax_grad.set_ylabel("Loss Difference", fontsize=11)
+    ax_grad.set_xlabel("Epoch", fontsize=11)
+    ax_grad.set_xticks(epochs)
+    ax_grad.grid(True, linestyle="--", alpha=0.5)
+    ax_grad.legend(loc="best")
+
+    # 4. Learning Rate Schedule
+    ax_lr = axes[1, 1]
+    if has_lr:
+        lrs = [h.get("lr", 0) for h in history]
+        ax_lr.plot(epochs, lrs, marker="o", color="#0891B2", label="Learning Rate", linewidth=2)
+        ax_lr.ticklabel_format(style="sci", scilimits=(0, 0), axis="y")
+    else:
+        ax_lr.text(
+            0.5,
+            0.5,
+            "LR Schedule: Linear Warmup (10%) + Linear Decay\nPeak LR: 2e-5",
+            ha="center",
+            va="center",
+            transform=ax_lr.transAxes,
+            fontsize=11,
+        )
+    ax_lr.set_title("Learning Rate Schedule", fontsize=13, fontweight="bold")
+    ax_lr.set_xlabel("Epoch", fontsize=11)
+    ax_lr.set_ylabel("Learning Rate", fontsize=11)
+    ax_lr.set_xticks(epochs)
+    ax_lr.grid(True, linestyle="--", alpha=0.5)
+    if has_lr:
+        ax_lr.legend(loc="best")
+
+    plt.tight_layout()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    print(f"Saved training curves plot to {output_path}", flush=True)
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--plot-only" in sys.argv:
+        history_path = ARTIFACTS_DIR / "training_history.json"
+        if history_path.exists():
+            with open(history_path) as f:
+                data = json.load(f)
+            plot_training_curves(data.get("history", []))
+        else:
+            print(f"No history file found at {history_path}")
+    else:
+        main()

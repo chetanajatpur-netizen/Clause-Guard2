@@ -17,21 +17,30 @@
       "train_loss": 2.0993,
       "val_loss": 1.275,
       "val_accuracy": 0.6618,
-      "val_macro_f1": 0.611
+      "val_macro_f1": 0.611,
+      "mean_grad_norm": null,
+      "max_grad_norm": null,
+      "lr": 1.48e-05
     },
     {
       "epoch": 2,
       "train_loss": 1.0604,
       "val_loss": 0.7822,
       "val_accuracy": 0.7469,
-      "val_macro_f1": 0.7338
+      "val_macro_f1": 0.7338,
+      "mean_grad_norm": null,
+      "max_grad_norm": null,
+      "lr": 7.4e-06
     },
     {
       "epoch": 3,
       "train_loss": 0.7475,
       "val_loss": 0.6969,
       "val_accuracy": 0.7801,
-      "val_macro_f1": 0.7685
+      "val_macro_f1": 0.7685,
+      "mean_grad_norm": null,
+      "max_grad_norm": null,
+      "lr": 0.0
     }
   ],
   "best_val_f1": 0.7685

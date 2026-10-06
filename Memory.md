@@ -19,11 +19,11 @@
 
 ## Files that exist (keep this list accurate - agent must read before creating anything)
 - PRD.md, architecture.md, rules.md, phases.md, design.md, Memory.md, hallucination.txt, antigravity_prompts.md, OVERNIGHT_LOG.md, DEPLOY.md, README.md, RESUME_DRAFT.md, MORNING_REPORT.md
-- ml/requirements.txt, ml/notebooks/train_colab.ipynb, ml/src/__init__.py, ml/src/risk_map.py, ml/src/data_prep.py, ml/src/baseline.py, ml/src/train_transformer.py, ml/src/evaluate.py
+- ml/requirements.txt, ml/notebooks/train_colab.ipynb, ml/src/__init__.py, ml/src/risk_map.py, ml/src/data_prep.py, ml/src/baseline.py, ml/src/train_transformer.py, ml/src/evaluate.py, ml/src/significance.py
 - docs/screenshots/ (analyze.png, results.png, search.png, history.png, insights.png)
 
 - ml/artifacts/class_distribution.png, ml/artifacts/text_length_histogram.png, ml/artifacts/dataset_stats.json
-- ml/artifacts/confusion_matrix_baseline.png, ml/artifacts/confusion_matrix_legal_bert.png, ml/artifacts/metrics.json, ml/artifacts/label_map.json, ml/artifacts/training_history.json
+- ml/artifacts/confusion_matrix_baseline.png, ml/artifacts/confusion_matrix_legal_bert.png, ml/artifacts/metrics.json, ml/artifacts/label_map.json, ml/artifacts/training_history.json, ml/artifacts/training_curves.png, ml/artifacts/significance_results.json, ml/artifacts/test_predictions.json
 - ml/artifacts/legal_bert/ (model.safetensors, config.json, tokenizer.json, tokenizer_config.json)
 - ml/data/processed/train.csv, ml/data/processed/val.csv, ml/data/processed/test.csv
 - backend/Dockerfile, backend/requirements.txt, backend/app/__init__.py, backend/app/config.py, backend/app/logging_config.py
@@ -54,12 +54,25 @@
 - Legal-BERT accuracy (test): 0.7642
 - Legal-BERT macro-F1 (test): 0.7277
 - Legal-BERT macro-precision (test): 0.7250
+- Paired Bootstrap Test (1000 resamples, seed 42):
+  - Baseline Test Accuracy 95% CI: [0.7170, 0.7862] (mean: 0.7523)
+  - Legal-BERT Test Accuracy 95% CI: [0.7311, 0.7987] (mean: 0.7650)
+  - Δ Accuracy 95% CI: [-0.0157, 0.0425] (mean: +0.0127, two-sided p = 0.4360)
+  - Baseline Test Macro-F1 95% CI: [0.6873, 0.7647] (mean: 0.7281)
+  - Legal-BERT Test Macro-F1 95% CI: [0.6852, 0.7659] (mean: 0.7261)
+  - Δ Macro-F1 95% CI: [-0.0397, 0.0391] (mean: -0.0020, two-sided p = 0.9300)
+- McNemar's Test:
+  - Contingency: n00=436 (both correct), b=42 (baseline only), c=50 (Legal-BERT only), n11=108 (both incorrect)
+  - Chi-squared (continuity corrected): 0.5326 (p = 0.4655)
+  - Chi-squared (raw): 0.6957 (p = 0.4042)
+  - Exact binomial p-value: 0.4657
+  - Conclusion: Not statistically significant at α = 0.05. Legal-BERT matches the strong baseline over 3 fine-tuning epochs.
 
 ## Known issues / blockers
 (none)
 
 ## Next step
-All overnight tasks complete. Project ready for morning review!
+Model is mildly under-converged (training loss and val loss still declining steadily without overfitting). Run 1-2 additional epochs in Colab (4-5 epochs total) if higher separation is required.
 
 ## Update template (agent must append after each task)
 - [2026-10-06 07:19] Stage 3 Baseline DONE: Trained TF-IDF + LogisticRegression baseline. Test macro-F1: 0.7301, test accuracy: 0.7516. Next: Stage 4.
@@ -69,5 +82,6 @@ All overnight tasks complete. Project ready for morning review!
 - [2026-10-06 08:01] Stage 7 Docker DONE: Production compose & Dockerfiles verified, DEPLOY.md written. Next: Stage 8.
 - [2026-10-06 08:04] Stage 8 Documentation DONE: README.md, RESUME_DRAFT.md, MORNING_REPORT.md complete, git tag v0.1.0 created.
 - [2026-10-06 09:02] Bugfix DONE: Fixed root cause where relative paths in Settings (model_path, metrics_path, label_map_path) failed when backend was started from backend/ directory. Standardized API error responses into {"error": {"code": ..., "message": ...}} across StarletteHTTPException, RequestValidationError, and generic exceptions. Updated frontend client.js to extract error message cleanly and avoid "Request failed: 500". Added 5 pytest regression tests (24/24 passing). Verified live curl analysis on DOC-01_freelance_agreement.txt.
+- [2026-10-06 20:10] Training Diagnostics & Significance DONE: Added per-epoch gradient norm (mean/max via clip_grad_norm_), LR, and loss/F1 logging to train_transformer.py. Generated ml/artifacts/training_curves.png. Implemented ml/src/significance.py with paired bootstrap (1000 resamples, seed 42) and McNemar's test, reporting real CIs and p-values. Diagnosed mild under-convergence / early stopping at 3 epochs without overfitting. All 24 backend tests passing.
 
 

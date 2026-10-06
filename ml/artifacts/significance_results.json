@@ -1,0 +1,65 @@
+{
+  "paired_bootstrap": {
+    "n_samples": 636,
+    "n_bootstraps": 1000,
+    "seed": 42,
+    "accuracy": {
+      "baseline": {
+        "point_estimate": 0.7516,
+        "mean": 0.7523,
+        "ci_lower": 0.717,
+        "ci_upper": 0.7862
+      },
+      "legal_bert": {
+        "point_estimate": 0.7642,
+        "mean": 0.765,
+        "ci_lower": 0.7311,
+        "ci_upper": 0.7987
+      },
+      "delta": {
+        "point_estimate": 0.0126,
+        "mean": 0.0127,
+        "ci_lower": -0.0157,
+        "ci_upper": 0.0425,
+        "p_value_two_sided": 0.436
+      }
+    },
+    "macro_f1": {
+      "baseline": {
+        "point_estimate": 0.7301,
+        "mean": 0.7281,
+        "ci_lower": 0.6873,
+        "ci_upper": 0.7647
+      },
+      "legal_bert": {
+        "point_estimate": 0.7277,
+        "mean": 0.7261,
+        "ci_lower": 0.6852,
+        "ci_upper": 0.7659
+      },
+      "delta": {
+        "point_estimate": -0.0024,
+        "mean": -0.002,
+        "ci_lower": -0.0397,
+        "ci_upper": 0.0391,
+        "p_value_two_sided": 0.93
+      }
+    }
+  },
+  "mcnemar_test": {
+    "contingency_table": {
+      "both_correct_n00": 436,
+      "baseline_only_b_n01": 42,
+      "legal_bert_only_c_n10": 50,
+      "both_incorrect_n11": 108,
+      "total_samples": 636,
+      "discordant_pairs": 92
+    },
+    "chi2_continuity_corrected": 0.5326,
+    "p_value_corrected": 0.4655,
+    "chi2_raw": 0.6957,
+    "p_value_raw": 0.4042,
+    "exact_binomial_p_value": 0.4657,
+    "statistically_significant_alpha_0_05": false
+  }
+}
