@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     metrics_path: str = "ml/artifacts/metrics.json"
     label_map_path: str = "ml/artifacts/label_map.json"
+    cors_origins: str = "*"
 
     model_config = {
         "env_file": ".env",

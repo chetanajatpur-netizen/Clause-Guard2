@@ -3,10 +3,11 @@ version: '3.8'
 services:
   db:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: clauseguard
-      POSTGRES_USER: clauseguard
-      POSTGRES_PASSWORD: clauseguard
+      POSTGRES_DB: ${POSTGRES_DB:-clauseguard}
+      POSTGRES_USER: ${POSTGRES_USER:-clauseguard}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-clauseguard}
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -18,27 +19,43 @@ services:
       retries: 5
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://clauseguard:clauseguard@db:5432/clauseguard
-      MODEL_PATH: /app/model
+      DATABASE_URL: ${DATABASE_URL:-postgresql://clauseguard:clauseguard@db:5432/clauseguard}
+      MODEL_PATH: /app/model_artifacts/legal_bert
+      LABEL_MAP_PATH: /app/model_artifacts/label_map.json
+      METRICS_PATH: /app/model_artifacts/metrics.json
       SBERT_MODEL: sentence-transformers/all-MiniLM-L6-v2
       MAX_FILE_SIZE_MB: 10
-      LOG_LEVEL: INFO
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
     volumes:
       - ./ml/artifacts:/app/model_artifacts:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - "3000:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
 volumes:
   pgdata:

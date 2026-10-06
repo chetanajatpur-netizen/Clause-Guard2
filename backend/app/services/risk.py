@@ -6,9 +6,11 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# Import risk map from ML module
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "ml" / "src"))
-from risk_map import RISK_MAP, get_overall_risk, get_risk_level
+try:
+    from app.core.risk_map import RISK_MAP, get_overall_risk, get_risk_level
+except ImportError:
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "ml" / "src"))
+    from risk_map import RISK_MAP, get_overall_risk, get_risk_level
 
 
 def compute_clause_risk(label: str) -> Optional[str]:
