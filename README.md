@@ -24,7 +24,20 @@ Individuals, freelancers, and small business operators frequently sign standard 
 
 ---
 
-## 3. Architecture & System Flow
+## 3. UI Screenshots & Walkthrough
+
+| Analyze View | Results & Risk Badges | Semantic Search |
+|---|---|---|
+| ![Analyze Upload](docs/screenshots/analyze.png) | ![Risk Analysis Results](docs/screenshots/results.png) | ![Semantic Search](docs/screenshots/search.png) |
+
+| Document History | Model Insights Dashboard |
+|---|---|
+| ![Document History](docs/screenshots/history.png) | ![Model Insights](docs/screenshots/insights.png) |
+
+---
+
+## 4. Architecture & System Flow
+
 
 ```mermaid
 flowchart TD

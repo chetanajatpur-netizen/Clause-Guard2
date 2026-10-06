@@ -19,7 +19,9 @@
 
 ## Files that exist (keep this list accurate - agent must read before creating anything)
 - PRD.md, architecture.md, rules.md, phases.md, design.md, Memory.md, hallucination.txt, antigravity_prompts.md, OVERNIGHT_LOG.md, DEPLOY.md, README.md, RESUME_DRAFT.md, MORNING_REPORT.md
-- ml/requirements.txt, ml/src/__init__.py, ml/src/risk_map.py, ml/src/data_prep.py, ml/src/baseline.py, ml/src/train_transformer.py, ml/src/evaluate.py
+- ml/requirements.txt, ml/notebooks/train_colab.ipynb, ml/src/__init__.py, ml/src/risk_map.py, ml/src/data_prep.py, ml/src/baseline.py, ml/src/train_transformer.py, ml/src/evaluate.py
+- docs/screenshots/ (analyze.png, results.png, search.png, history.png, insights.png)
+
 - ml/artifacts/class_distribution.png, ml/artifacts/text_length_histogram.png, ml/artifacts/dataset_stats.json
 - ml/artifacts/confusion_matrix_baseline.png, ml/artifacts/confusion_matrix_legal_bert.png, ml/artifacts/metrics.json, ml/artifacts/label_map.json, ml/artifacts/training_history.json
 - ml/artifacts/legal_bert/ (model.safetensors, config.json, tokenizer.json, tokenizer_config.json)
