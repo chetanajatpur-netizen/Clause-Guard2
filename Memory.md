@@ -102,11 +102,11 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Updated UploadBox.jsx: 220px tall drop zone, 24px clear font, restricted to PDF/DOCX/TXT only, "Max 10 MB" displayed, light grey hover (--bg-hover), and red error border with clear alert text.
   - Updated ErrorBanner.jsx to use .error-banner class from global.css with accessible retry button.
   - Generated and uploaded test fixtures DOC-01_freelance_agreement.pdf (15 clauses, Overall High risk, 200 OK) and DOC-05_saas_msa.docx (12 clauses, Overall High risk, 200 OK) with real outputs and zero 500 errors.
-- [2026-10-07 14:05] AI Context Explanations DONE:
-  - Static Knowledge Base: Created `frontend/src/data/clause_explanations.json` containing human-written explanations for all 10 clause categories + "No Clause". Each entry includes plain-English summary, why it matters, realistic scenarios, red flags (with ⚠️ icons), actionable negotiation tips (with ✓ icons), and educational legal disclaimer. Zero external LLM APIs called.
-  - Explanations Component: Built `frontend/src/components/ClauseExplanation.jsx` with collapsible view, accessible focus ring, 44px touch targets, and mobile responsiveness (< 768px). Returns null for "No Clause" to maintain uncluttered UI for standard boilerplate.
-  - Card & Layout Integration: Updated `frontend/src/components/ClauseCard.jsx` to render AI context explanations for identified clauses, allowing both card-level click toggle and dedicated button toggle with text expansion isolation (`e.stopPropagation()`).
-  - Styling & Design System: Created `frontend/src/styles/clause-explanation.css` and updated `frontend/src/styles/tokens.css` with the complete requested palette variables, full dark mode and high-contrast support, and 0 hardcoded hex colors.
-  - Verification: Ran live contract upload verification against `DOC-01_freelance_agreement.txt` and `DOC-07_high_risk_contract.txt` with 100% clause mapping accuracy. Passed Vite production build (`dist/` 0 errors) and all 30/30 pytest backend tests.
+- [2026-10-07 18:28] AI Context Explanations & Accessible Design Overhaul DONE:
+  - Static Knowledge Base: Synchronized `frontend/src/data/clause_explanations.json` with user specification schema (`clauses` dictionary) covering all 10 clause categories + "No Clause". Each entry includes summary, why_risky ("Why This Matters"), real_example ("Real Example"), red_flags (🚩), and what_to_negotiate (💡 How to Negotiate). Zero external LLM APIs called.
+  - Explanations Component: Implemented `frontend/src/components/ClauseExplanation.jsx` with collapsible view, toggle arrow indicators (▶ / ▼), accessible focus ring, 44px touch targets, and mobile responsiveness (< 768px). Supports both standalone and card-controlled toggle states.
+  - Card & Layout Integration: Connected `frontend/src/components/ClauseCard.jsx` to render AI context explanations for analyzed clauses with propagation-safe expansion.
+  - Design Overhaul: Updated `frontend/src/styles/tokens.css`, `frontend/src/styles/clause-explanation.css`, and `frontend/src/styles/global.css` with the complete White/Grey/Black accessible design tokens, container layouts, risk badges, skip links, error banners, and loading spinner.
+  - Verification: Live upload test on `DOC-01_freelance_agreement.txt` verified 100% clause mapping accuracy. Vite build succeeded (0 errors), and all 30/30 backend pytest tests passed.
 
 
