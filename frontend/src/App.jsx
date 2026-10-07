@@ -3,6 +3,7 @@ import Analyze from './pages/Analyze'
 import History from './pages/History'
 import Insights from './pages/Insights'
 import './styles/global.css'
+import './styles/clause-explanation.css'
 
 function App() {
   return (

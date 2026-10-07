@@ -1,0 +1,191 @@
+{
+  "Non-Compete": {
+    "title": "Non-Competition Covenant",
+    "risk_level": "High",
+    "summary": "Restricts your legal ability to work with competing businesses, accept clients in the same industry, or launch your own venture for a specified period after this contract ends.",
+    "why_it_matters": "Broad non-compete clauses can freeze your earning ability in your primary domain of expertise. While some jurisdictions restrict their enforcement, defending against a lawsuit or cease-and-desist letter is costly and can scare away prospective clients or employers.",
+    "real_world_example": "A freelance developer created an e-commerce checkout flow for a retail client under a 24-month nationwide non-compete. When an unrelated fashion brand offered them a new contract, the first client threatened litigation, forcing the developer to turn down $60,000 in work.",
+    "red_flags": [
+      "Broad geographic restrictions such as 'worldwide' or 'nationwide' scope",
+      "Restricted period exceeding 6 to 12 months after agreement termination",
+      "Vague definitions of 'competitor' covering entire industry sectors or adjacent markets",
+      "No compensation or retainer paid to you during the post-termination restricted period"
+    ],
+    "negotiation_tips": [
+      "Limit restrictions strictly to named direct competitors agreed upon in an exhibit",
+      "Shorten duration to 3 to 6 months maximum and restrict territory to the client's core metropolitan market",
+      "Add an explicit carve-out permitting general software consulting and unrelated tech stacks",
+      "Require the client to pay garden-leave compensation (e.g., 50% of monthly average fee) during any restriction"
+    ]
+  },
+  "Exclusivity": {
+    "title": "Exclusivity Commitment",
+    "risk_level": "High",
+    "summary": "Binds you to work exclusively for this client or bars you from providing similar services to any other company in the sector during the contract term.",
+    "why_it_matters": "Exclusivity prevents you from diversifying your revenue stream and building a sustainable business. Unless the client guarantees 100% full-time billing with guaranteed minimum commitments, exclusivity forces you into employee-level dependence without employee benefits.",
+    "real_world_example": "A boutique agency agreed to provide exclusive mobile development for a fintech startup. When the startup hit funding delays and paused sprint orders, the agency was legally prohibited from taking on two eager banking clients for four months.",
+    "red_flags": [
+      "Exclusivity without guaranteed minimum monthly billing or retainer payments",
+      "Unilateral exclusivity where you are bound but the client can hire competing vendors freely",
+      "Exclusivity that survives project milestones or continues after active task orders pause"
+    ],
+    "negotiation_tips": [
+      "Require a guaranteed minimum monthly retainer to justify exclusive commitment",
+      "Make exclusivity project-specific rather than company-wide or industry-wide",
+      "Add an automatic release clause if the client does not issue billable work for 14 consecutive days"
+    ]
+  },
+  "Uncapped Liability": {
+    "title": "Uncapped / Unlimited Liability",
+    "risk_level": "High",
+    "summary": "Exposes you to unlimited financial damages with zero dollar ceiling or limitation if a dispute, breach, or third-party indemnity claim arises.",
+    "why_it_matters": "A single claim for data corruption, downtime, or intellectual property dispute could exceed your entire net worth or annual revenue. Without a liability cap, a routine commercial disagreement can lead to catastrophic financial ruin.",
+    "real_world_example": "A cloud engineer performed a database migration for a $15,000 fee with no liability cap. When a cloud outage caused three hours of lost transactions, the client sued the engineer for $350,000 in lost profits and consequential damages.",
+    "red_flags": [
+      "Explicit language stating liability 'shall not be subject to any limit, threshold, or cap'",
+      "Asymmetrical liability where the client's liability is capped at fees paid but yours is uncapped",
+      "Broad indemnification obligations extending to indirect, punitive, or consequential damages"
+    ],
+    "negotiation_tips": [
+      "Cap aggregate liability to the total fees paid under the contract in the preceding 12 months (or 1x-2x contract value)",
+      "Expressly exclude indirect, consequential, special, and punitive damages for both parties",
+      "Restrict uncapped liability strictly to willful criminal misconduct, intentional fraud, or gross negligence"
+    ]
+  },
+  "Liquidated Damages": {
+    "title": "Liquidated Damages Penalty",
+    "risk_level": "High",
+    "summary": "Pre-determines automatic, fixed financial penalties that you must pay for missed deadlines or milestone delays, regardless of actual financial loss.",
+    "why_it_matters": "Daily or weekly compounding penalties accumulate rapidly when project schedules slip due to factors outside your control, such as delayed client feedback, missing API credentials, or third-party outages.",
+    "real_world_example": "A contractor agreed to $500/day liquidated damages for delivery delays. When the client's legal team took 20 days to approve necessary third-party API licenses, the client still withheld $10,000 from the final project payout.",
+    "red_flags": [
+      "Compounding daily or weekly penalties without a cumulative ceiling cap",
+      "Penalties triggered by delays caused by client inaction, scope changes, or third parties",
+      "Penalty amounts disproportionately high relative to the overall milestone payout"
+    ],
+    "negotiation_tips": [
+      "Cap cumulative liquidated damages to a maximum percentage (e.g., 5% to 10% of milestone fee)",
+      "Include explicit tolling: deadlines automatically extend day-for-day if delays result from client dependency",
+      "Replace punitive liquidated damages with standard acceptance periods and milestone sign-offs"
+    ]
+  },
+  "Termination for Convenience": {
+    "title": "Termination for Convenience",
+    "risk_level": "Medium",
+    "summary": "Grants the client the unilateral right to terminate the contract at any time without having to prove any breach, cause, or justification.",
+    "why_it_matters": "The client can cancel abruptly after you have turned away other lucrative contracts or made unrecoverable investments in staffing and tools, leaving you with sudden lost income unless advance notice and kill fees are secured.",
+    "real_world_example": "A consulting firm staffed three engineers on a 6-month digital transformation. Three weeks in, the client invoked a 24-hour convenience termination due to an internal reorg, leaving the firm with unscheduled payroll overhead.",
+    "red_flags": [
+      "Short notice periods such as 24 hours or immediate effect without cause",
+      "One-sided termination right where the client can exit without cause but you cannot",
+      "No obligation for the client to pay for work in progress, milestones started, or sunk expenses"
+    ],
+    "negotiation_tips": [
+      "Require at least 30 to 45 days advance written notice for termination without cause",
+      "Ensure prompt payment for all hours worked and deliverables completed up to the termination date",
+      "Incorporate an early-termination fee or kill fee to cover unrecoverable costs and ramp-down time"
+    ]
+  },
+  "Anti-Assignment": {
+    "title": "Anti-Assignment & Subcontracting Ban",
+    "risk_level": "Medium",
+    "summary": "Prohibits you from assigning your contractual rights, subcontracting tasks to trusted specialists, or transferring the agreement during an acquisition.",
+    "why_it_matters": "Rigid anti-assignment clauses can prevent you from using specialized contractors, utilizing invoice financing/factoring, or completing a merger or sale of your business without client approval.",
+    "real_world_example": "A founder wanted to bring in a specialized penetration tester for a security review. The client claimed breach of contract under the anti-assignment clause because the work was delegated to an outside specialist.",
+    "red_flags": [
+      "Total ban on subcontracting or delegation without prior written consent",
+      "Clause states that an assignment by operation of law (such as a merger or sale) voids the agreement",
+      "Asymmetrical clause where client can freely assign the contract to affiliates but you cannot"
+    ],
+    "negotiation_tips": [
+      "Add that client consent shall 'not be unreasonably withheld, conditioned, or delayed'",
+      "Carve out permitted assignments in connection with a corporate merger, acquisition, or sale of substantial assets",
+      "Explicitly allow engagement of pre-vetted independent subcontractors working under your supervision"
+    ]
+  },
+  "Change of Control": {
+    "title": "Change of Control Trigger",
+    "risk_level": "Medium",
+    "summary": "Grants the client the right to terminate the agreement or demand renegotiation if your company undergoes an ownership, board, or equity change.",
+    "why_it_matters": "Change of control clauses create significant friction and uncertainty during fundraising, equity sales, or acquisition negotiations by giving customers a contractual right to terminate contracts.",
+    "real_world_example": "A growing software agency closed a Series A funding round that shifted 35% of voting control. A key enterprise customer used their change of control clause to threaten cancellation unless given a 25% price discount.",
+    "red_flags": [
+      "Triggered by minor equity shifts (e.g., transfer of 10% to 20% of voting shares)",
+      "Immediate termination without any notice or transition period",
+      "Unilateral application where client ownership changes carry no reciprocal termination rights"
+    ],
+    "negotiation_tips": [
+      "Narrow the definition to true majority control transfers (>50%) to direct competitors only",
+      "Require at least 60 days advance written notice before any termination can take effect",
+      "Exclude standard angel/venture capital equity financing rounds from triggering the clause"
+    ]
+  },
+  "IP Ownership Assignment": {
+    "title": "Broad Intellectual Property Assignment",
+    "risk_level": "Medium",
+    "summary": "Assigns ownership of created code, inventions, and works to the client, sometimes inadvertently sweeping in your pre-existing tools and libraries.",
+    "why_it_matters": "If not carefully drafted, an IP assignment clause can transfer rights to your reusable frameworks, internal toolkits, and software libraries, preventing you from using your own foundations on future client work.",
+    "real_world_example": "A developer used their personal starter boilerplate to deliver an MVP. Because the contract assigned all IP 'used or conceived in connection with the project', the client claimed exclusive ownership over the developer's boilerplate.",
+    "red_flags": [
+      "Assignment of all inventions 'whether or not related to the project scope'",
+      "Failure to explicitly carve out vendor Pre-Existing Intellectual Property and tools",
+      "IP transfer occurs immediately upon creation rather than upon receipt of full payment"
+    ],
+    "negotiation_tips": [
+      "Condition IP assignment strictly upon receipt of full and final payment for the deliverable",
+      "Explicitly carve out Pre-Existing IP, internal libraries, and general knowledge, retaining your ownership",
+      "Grant the client a perpetual, non-exclusive license to use background IP as embedded in the deliverables"
+    ]
+  },
+  "Cap on Liability": {
+    "title": "Limitation of Liability (Capped)",
+    "risk_level": "Low",
+    "summary": "Establishes a defined financial maximum on damages that either party can recover in the event of an ordinary commercial breach or dispute.",
+    "why_it_matters": "A mutual cap on liability is standard commercial practice and provides essential legal predictability by ensuring neither party faces unbounded exposure for routine disputes.",
+    "real_world_example": "When a minor system bug caused temporary reporting delays, the client's $200,000 claim was legally bounded by the agreed liability cap equal to the $25,000 fee paid under the statement of work.",
+    "red_flags": [
+      "One-sided cap protecting only the client while leaving vendor exposure higher",
+      "Unreasonably low ceiling that prevents you from recovering unpaid milestone fees",
+      "Key exceptions omitted from the cap (such as intellectual property infringement or confidentiality)"
+    ],
+    "negotiation_tips": [
+      "Ensure the limitation of liability is strictly bilateral and mutual for both parties",
+      "Confirm that overdue fees and payment obligations are expressly excluded from the liability cap",
+      "Set the cap at a standard, commercially reasonable amount (e.g., 12 months of fees paid)"
+    ]
+  },
+  "Audit Rights": {
+    "title": "Audit & Records Inspection",
+    "risk_level": "Low",
+    "summary": "Permits the client or their appointed auditor to inspect your financial records, source code, systems, or facilities to confirm compliance.",
+    "why_it_matters": "While audit rights are common in enterprise and regulated agreements, overly broad terms can disrupt daily operations, incur excessive staff time, and compromise proprietary data of other clients.",
+    "real_world_example": "A client demanded an on-site audit with 24 hours notice, asking to inspect developers' personal machines and internal accounting software, causing major operational disruption.",
+    "red_flags": [
+      "Audits permitted on short notice (e.g., under 10 business days) or without notice",
+      "Unlimited audit frequency without reasonable annual caps",
+      "Requirement that you bear the costs of the audit even when no discrepancy is found",
+      "Overbroad inspection scope extending to confidential source code, trade secrets, or unrelated client records"
+    ],
+    "negotiation_tips": [
+      "Limit audits to once per calendar year upon at least 15 business days prior written notice",
+      "Conduct audits solely during normal business hours without disrupting active operations",
+      "Require the client to pay all audit costs unless an audit uncovers an underpayment exceeding 5%",
+      "Expressly exclude proprietary trade secrets, salary records, and other customers' confidential data"
+    ]
+  },
+  "No Clause": {
+    "title": "Standard Provision / No Risky Clause",
+    "risk_level": "None",
+    "summary": "Standard contractual boilerplate or operational term that does not match any of the primary risk categories.",
+    "why_it_matters": "General clauses such as governing law, severability, notices, and recitals are standard components of commercial contracts that typically do not present atypical liability hazards when drafted neutrally.",
+    "real_world_example": "A standard severability clause stating that if any single provision is ruled invalid, the remaining terms of the contract remain enforceable.",
+    "red_flags": [
+      "Onerous restrictions or liabilities buried inside general boilerplate or definitions sections",
+      "Inconvenient governing law or dispute venue located in a distant jurisdiction"
+    ],
+    "negotiation_tips": [
+      "Ensure governing law and jurisdiction are set to a mutually accessible and neutral venue",
+      "Confirm that notices can be effectively delivered via modern email rather than registered mail only"
+    ]
+  }
+}
