@@ -1,10 +1,13 @@
-/* Reset */
+/* Accessible Global Stylesheet */
+
+/* Universal Box-Sizing & Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Base Body Styling */
 body {
   font-family: var(--font-body);
   background-color: var(--bg);
@@ -12,107 +15,159 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Accessibility: Clear Blue Focus Visible Outlines across interactive elements */
+*:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Touch-Friendly Interactive Targets (minimum 44px) */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.btn,
+a.nav-link {
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Layout */
 .app-layout {
   display: flex;
   min-height: 100vh;
+  background-color: var(--bg);
 }
 
 .sidebar {
-  width: 240px;
+  width: 250px;
   background: var(--surface);
   border-right: 1px solid var(--border);
-  padding: 24px 16px;
+  padding: var(--space-lg) var(--space-md);
   position: fixed;
   height: 100vh;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .sidebar-brand {
-  padding-bottom: 24px;
+  padding-bottom: var(--space-lg);
   border-bottom: 1px solid var(--border);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-lg);
 }
 
 .brand-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text);
   font-family: var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 .brand-subtitle {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
   font-weight: 500;
+  margin-top: var(--space-2xs);
 }
 
 .nav-links {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .nav-link {
-  display: block;
-  padding: 10px 16px;
+  padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-sm);
-  color: var(--text-muted);
+  color: var(--text);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
-  margin-bottom: 4px;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  border: 1px solid transparent;
 }
 
 .nav-link:hover {
-  background: var(--bg);
+  background: var(--bg-hover);
   color: var(--text);
 }
 
 .nav-link.active {
   background: var(--primary);
-  color: white;
+  color: var(--primary-contrast);
 }
 
 .main-content {
-  margin-left: 240px;
+  margin-left: 250px;
   flex: 1;
-  padding: 32px;
+  padding: var(--space-xl);
   max-width: 1100px;
 }
 
-/* Typography */
-h1 { font-size: 32px; font-weight: 700; font-family: var(--font-heading); }
-h2 { font-size: 24px; font-weight: 600; font-family: var(--font-heading); }
-h3 { font-size: 18px; font-weight: 600; font-family: var(--font-heading); }
+/* Accessible Typography Hierarchy */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: var(--space-md);
+}
 
-/* Cards */
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: var(--space-xs);
+}
+
+p {
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Accessible Cards */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: var(--space-lg);
   box-shadow: var(--shadow);
 }
 
-/* Buttons */
+/* Accessible Buttons */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   padding: 10px 20px;
   border-radius: var(--radius-sm);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
-  border: none;
-  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  gap: var(--space-xs);
+  transition: background-color 0.15s ease, transform 0.05s ease;
 }
 
 .btn-primary {
   background: var(--primary);
-  color: white;
+  color: var(--primary-contrast);
 }
 
 .btn-primary:hover {
@@ -121,24 +176,75 @@ h3 { font-size: 18px; font-weight: 600; font-family: var(--font-heading); }
 
 .btn-danger {
   background: var(--risk-high);
-  color: white;
+  color: var(--text-inverse);
+  border-color: var(--risk-high-border);
 }
 
 .btn-danger:hover {
-  opacity: 0.9;
+  opacity: 0.92;
+}
+
+/* Error Banner Class for ErrorBanner.jsx */
+.error-banner {
+  background-color: var(--risk-high-bg);
+  border: 2px solid var(--risk-high-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.error-banner-text {
+  color: var(--risk-high);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Upload Box Styles */
+.upload-box {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  cursor: pointer;
+  background: var(--surface);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-box:hover {
+  background-color: var(--bg-hover);
+}
+
+.upload-box--active {
+  border-color: var(--border-focus);
+  background-color: var(--bg-hover);
+}
+
+.upload-box--error {
+  border-color: var(--risk-high-border);
+  background-color: var(--risk-high-bg);
 }
 
 /* Disclaimer footer */
 .disclaimer {
   text-align: center;
-  padding: 24px;
+  padding: var(--space-lg);
   color: var(--text-muted);
-  font-size: 13px;
-  margin-top: 48px;
+  font-size: 14px;
+  margin-top: var(--space-2xl);
   border-top: 1px solid var(--border);
 }
 
-/* Responsive */
+/* Responsive Layout */
 @media (max-width: 768px) {
   .sidebar {
     position: static;
@@ -148,8 +254,8 @@ h3 { font-size: 18px; font-weight: 600; font-family: var(--font-heading); }
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    padding: 12px 16px;
-    gap: 16px;
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-md);
   }
 
   .sidebar-brand {
@@ -163,8 +269,8 @@ h3 { font-size: 18px; font-weight: 600; font-family: var(--font-heading); }
   }
 
   .nav-links {
-    display: flex;
-    gap: 4px;
+    flex-direction: row;
+    gap: var(--space-xs);
   }
 
   .app-layout {
@@ -173,6 +279,6 @@ h3 { font-size: 18px; font-weight: 600; font-family: var(--font-heading); }
 
   .main-content {
     margin-left: 0;
-    padding: 16px;
+    padding: var(--space-md);
   }
 }

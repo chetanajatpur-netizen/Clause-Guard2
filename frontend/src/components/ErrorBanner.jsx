@@ -1,28 +1,21 @@
 function ErrorBanner({ message, onRetry }) {
+  if (!message) return null
+
   return (
-    <div style={{
-      background: 'var(--risk-high-bg)',
-      border: '1px solid var(--risk-high)',
-      borderRadius: 'var(--radius-sm)',
-      padding: '16px 20px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: '12px',
-      marginBottom: '16px',
-    }}>
-      <p style={{ color: 'var(--risk-high)', fontSize: '14px', fontWeight: 500 }}>
-        ❌ {message}
+    <div className="error-banner" role="alert">
+      <p className="error-banner-text">
+        <span aria-hidden="true" style={{ marginRight: 'var(--space-xs)' }}>❌</span>
+        {message}
       </p>
       {onRetry && (
         <button
           onClick={onRetry}
-          className="btn"
+          className="btn btn-danger"
           style={{
-            background: 'var(--risk-high)',
-            color: 'white',
-            padding: '6px 14px',
-            fontSize: '13px',
+            padding: 'var(--space-xs) var(--space-md)',
+            fontSize: '14px',
+            minHeight: 'var(--touch-target-min)',
+            cursor: 'pointer',
           }}
         >
           Retry

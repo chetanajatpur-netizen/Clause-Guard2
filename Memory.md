@@ -95,5 +95,11 @@ Model is mildly under-converged (training loss and val loss still declining stea
     - Baseline: Accuracy 0.8625, Macro-F1 0.7532, Det P 0.8718, Det R 1.0000, DOC-06 False Alarms: 0, DOC-07 Flags: 9 (High-Risk: 3), Easy: 0.9189, Medium: 0.7143, Hard: 0.9091.
     - Legal-BERT: Accuracy 0.8250, Macro-F1 0.7418, Det P 0.7907, Det R 1.0000, DOC-06 False Alarms: 1, DOC-07 Flags: 9 (High-Risk: 3), Easy: 0.8919, Medium: 0.6190, Hard: 0.9091.
   - All 26/26 backend pytest tests passing. Generated reports in `clauseguard-testkit/results/`.
+- [2026-10-07 08:12] Accessible UI Refactor & E2E File Testing DONE:
+  - Diagnosed pre-flight curl analysis on DOC-01_freelance_agreement.txt: confirmed 200 OK (no 500 error). Added regression tests for structured error envelopes on 503 (MODEL_NOT_LOADED) and 500 (INTERNAL_ERROR), plus PDF and DOCX uploads (30/30 pytest passed).
+  - CSS Refactor: Replaced tokens.css and global.css with accessible high-contrast design system (WCAG AAA compliant, white/grey/black palette, 44px touch targets, blue focus rings, generous spacing, dark mode and high contrast media queries). 0 hardcoded hex colors outside tokens.css.
+  - Updated UploadBox.jsx: 220px tall drop zone, 24px clear font, restricted to PDF/DOCX/TXT only, "Max 10 MB" displayed, light grey hover (--bg-hover), and red error border with clear alert text.
+  - Updated ErrorBanner.jsx to use .error-banner class from global.css with accessible retry button.
+  - Generated and uploaded test fixtures DOC-01_freelance_agreement.pdf (15 clauses, Overall High risk, 200 OK) and DOC-05_saas_msa.docx (12 clauses, Overall High risk, 200 OK) with real outputs and zero 500 errors.
 
 

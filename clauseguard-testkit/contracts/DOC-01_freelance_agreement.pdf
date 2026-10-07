@@ -1,0 +1,64 @@
+%PDF-1.4
+1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >> endobj
+4 0 obj << /Length 3661 >> stream
+BT /F1 10 Tf 40 760 Td 13 TL
+(FREELANCE SOFTWARE DEVELOPMENT) ' 
+(AGREEMENT) ' 
+() ' 
+(1. Parties. This Freelance Services Agreement \(the ?Agreement?\) is made on 1 March 2026) ' 
+(between Northwind Retail Pvt. Ltd., a company incorporated in India \(?Client?\), and Arjun Mehta, an) ' 
+(independent software developer \(?Contractor?\).) ' 
+(2. Scope of Services. Contractor shall design, develop and deliver the Client's mobile ordering) ' 
+(application in accordance with the specification attached as Schedule A, in three milestones over a) ' 
+(period of six months.) ' 
+(3. Fees and Payment. Client shall pay Contractor a fixed fee of INR 600,000, payable in three equal) ' 
+(instalments within forty-five days of invoice following acceptance of each milestone.) ' 
+(4. Exclusive Engagement. During the Term, Contractor shall work exclusively for Client and shall) ' 
+(not provide software development or consulting services of any kind to any other person or entity) ' 
+(without Client's prior written approval.) ' 
+(5. Non-Competition. For a period of twenty-four \(24\) months after the termination of this Agreement,) ' 
+(Contractor shall not, anywhere in India, directly or indirectly engage in, be employed by, or provide) ' 
+(services to any business that competes with Client's retail technology products.) ' 
+(6. Ownership of Work Product. All work product, inventions, code and materials created by) ' 
+(Contractor during the Term, whether or not related to the Services and whether or not created using) ' 
+(Client's resources, shall be the sole and exclusive property of Client, and Contractor hereby) ' 
+(irrevocably assigns to Client all right, title and interest therein.) ' 
+(7. Termination. Client may terminate this Agreement at any time, for any reason or for no reason,) ' 
+(by giving Contractor twenty-four \(24\) hours' written notice. Contractor may not terminate this) ' 
+(Agreement before completion of all milestones without Client's written consent.) ' 
+(8. Liability. Contractor shall be liable for, and shall indemnify Client against, all losses, damages,) ' 
+(costs and expenses of any kind arising out of the Services, and Contractor's liability under this) ' 
+(Agreement shall not be subject to any limit or cap.) ' 
+(9. Delay Damages. If Contractor fails to deliver any milestone by its due date, Contractor shall pay) ' 
+(Client liquidated damages equal to two percent \(2%\) of the total fee for each day of delay, which the) ' 
+(parties agree is a genuine pre-estimate of Client's loss.) ' 
+(10. Assignment. Contractor shall not assign, transfer, delegate or subcontract any of its rights or) ' 
+(obligations under this Agreement without the prior written consent of Client. Client may assign this) ' 
+(Agreement to any third party at its discretion.) ' 
+(11. Inspection of Records. Client and its representatives may, upon reasonable notice and at any) ' 
+(time during the Term and for two years thereafter, inspect and audit Contractor's books, records,) ' 
+(time logs and source code repositories relating to the Services.) ' 
+(12. Confidentiality. Contractor shall keep confidential all non-public information of Client disclosed) ' 
+(in connection with this Agreement and shall use it solely to perform the Services.) ' 
+(13. Governing Law. This Agreement shall be governed by the laws of India, and the courts of) ' 
+(Bengaluru shall have exclusive jurisdiction over any dispute arising from it.) ' 
+(14. Entire Agreement. This Agreement constitutes the entire agreement between the parties and) ' 
+(supersedes all prior discussions, representations and understandings relating to its subject matter.) ' 
+() ' 
+ET
+
+endstream
+endobj
+5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+trailer << /Size 6 /Root 1 0 R >>
+startxref
+500
+%%EOF

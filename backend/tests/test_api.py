@@ -332,3 +332,80 @@ def test_regression_analyze_freelance_agreement_txt(client: TestClient) -> None:
     assert data["risk_summary"]["overall_risk"] in ("High", "Medium", "Low")
     assert data["risk_summary"]["total_clauses"] == len(data["clauses"])
 
+
+def test_regression_model_not_loaded_returns_structured_503(client: TestClient) -> None:
+    """Regression test: verify ModelNotLoadedError returns 503 with structured envelope."""
+    original_state = classifier._loaded
+    try:
+        classifier._loaded = False
+        resp = client.post(
+            "/api/v1/analyze",
+            files={"file": ("test.txt", b"A standard test contract clause.", "text/plain")},
+        )
+        assert resp.status_code == 503
+        data = resp.json()
+        assert "error" in data
+        assert data["error"]["code"] == "MODEL_NOT_LOADED"
+        assert "not loaded" in data["error"]["message"].lower()
+    finally:
+        classifier._loaded = original_state
+
+
+def test_regression_generic_error_returns_structured_500(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Regression test: verify unexpected exceptions return 500 with structured envelope."""
+    import app.routers.analyze as analyze_mod
+    from app.main import app
+
+    def broken_segment(text: str) -> list[str]:
+        raise RuntimeError("Simulated internal parser crash")
+    monkeypatch.setattr(analyze_mod, "segment_text", broken_segment)
+
+    with TestClient(app, raise_server_exceptions=False) as c:
+        resp = c.post(
+            "/api/v1/analyze",
+            files={"file": ("test.txt", b"Any contract text here.", "text/plain")},
+        )
+    assert resp.status_code == 500
+    data = resp.json()
+    assert "error" in data
+    assert data["error"]["code"] == "INTERNAL_ERROR"
+    assert "Simulated internal parser crash" in data["error"]["message"]
+
+
+def test_regression_analyze_freelance_agreement_pdf(client: TestClient) -> None:
+    """Regression test: verify DOC-01 freelance agreement PDF upload succeeds end-to-end."""
+    contract_path = Path(__file__).resolve().parent.parent.parent / "clauseguard-testkit" / "contracts" / "DOC-01_freelance_agreement.pdf"
+    assert contract_path.exists(), f"Test contract missing at {contract_path}"
+
+    with open(contract_path, "rb") as f:
+        resp = client.post(
+            "/api/v1/analyze",
+            files={"file": ("DOC-01_freelance_agreement.pdf", f, "application/pdf")},
+        )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "document_id" in data
+    assert data["filename"] == "DOC-01_freelance_agreement.pdf"
+    assert len(data["clauses"]) > 0
+    assert data["risk_summary"]["overall_risk"] in ("High", "Medium", "Low")
+
+
+def test_regression_analyze_saas_msa_docx(client: TestClient) -> None:
+    """Regression test: verify DOC-05 SaaS MSA DOCX upload succeeds end-to-end."""
+    contract_path = Path(__file__).resolve().parent.parent.parent / "clauseguard-testkit" / "contracts" / "DOC-05_saas_msa.docx"
+    assert contract_path.exists(), f"Test contract missing at {contract_path}"
+
+    with open(contract_path, "rb") as f:
+        resp = client.post(
+            "/api/v1/analyze",
+            files={"file": ("DOC-05_saas_msa.docx", f, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")},
+        )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "document_id" in data
+    assert data["filename"] == "DOC-05_saas_msa.docx"
+    assert len(data["clauses"]) > 0
+    assert data["risk_summary"]["overall_risk"] in ("High", "Medium", "Low")
+
+
+
