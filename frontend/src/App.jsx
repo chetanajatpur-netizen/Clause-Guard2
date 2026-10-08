@@ -8,11 +8,12 @@ import './styles/clause-explanation.css'
 
 function App() {
   const location = useLocation()
-  const isLanding = location.pathname === '/landing'
+  const isLanding = location.pathname === '/' || location.pathname === '/landing'
 
   if (isLanding) {
     return (
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/landing" element={<Landing />} />
       </Routes>
     )
@@ -22,17 +23,19 @@ function App() {
     <div className="app-layout">
       <nav className="sidebar">
         <div className="sidebar-brand">
-          <h1 className="brand-title">ClauseGuard</h1>
-          <p className="brand-subtitle">Contract Risk Analyzer</p>
+          <NavLink to="/" style={{ textDecoration: 'none' }}>
+            <h1 className="brand-title">ClauseGuard</h1>
+            <p className="brand-subtitle">Contract Risk Analyzer</p>
+          </NavLink>
         </div>
         <ul className="nav-links">
           <li>
-            <NavLink to="/landing" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              ✨ Landing Page
+            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} end>
+              ✨ Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/analyze" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               📄 Analyze
             </NavLink>
           </li>
@@ -50,10 +53,11 @@ function App() {
       </nav>
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<Analyze />} />
+          <Route path="/analyze" element={<Analyze />} />
           <Route path="/history" element={<History />} />
           <Route path="/history/:id" element={<Analyze />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/landing" element={<Landing />} />
         </Routes>
         <footer className="disclaimer">

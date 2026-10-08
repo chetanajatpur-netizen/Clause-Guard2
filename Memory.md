@@ -118,5 +118,10 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - WCAG 2.1 AA Compliance: Strict ≥4.5:1 text contrast, 4px colored keyboard focus rings, touch targets ≥44x44px, `<label>` and `aria-describedby` associations, and error states pairing red outline + icon + text message.
   - Components Included: Color palette swatches, typography scale table, 4 button variants (Primary, Secondary, Outline, Ghost) + accessible icon-only button, interactive form inputs (default, error, checkbox), and content cards with imagery, severity tags, and engine metadata.
   - Verification: Vite build passed in 4.94s with 0 errors.
+- [2026-10-08 18:30] Make Landing Page Main Root Route (/) Without Redirection DONE:
+  - Root Route (/): Configured `frontend/src/App.jsx` so that the modern landing page is served directly at `/` (and `/landing`) with zero HTTP or client-side redirects.
+  - Workspace Route (/analyze): Relocated contract analyzer to `/analyze` with full sidebar navigation, preserving `/history`, `/insights`, and `/history/:id`.
+  - Navigation: Updated all Landing page CTAs and hero actions to launch directly into `/analyze`, and updated the sidebar brand logo and Home button to link back to `/`.
+  - Verification: `npm run build` completed with 0 errors. Verified `curl -I http://localhost:3000/` returns `200 OK` directly without redirects, and backend `/api/v1/health` is fully operational.
 
 

@@ -41,7 +41,7 @@ export default function Landing() {
           </ul>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Link to="/" className="landing-btn landing-btn-primary">
+            <Link to="/analyze" className="landing-btn landing-btn-primary">
               Launch App →
             </Link>
           </div>
@@ -66,7 +66,7 @@ export default function Landing() {
           </p>
 
           <div className="landing-hero-actions">
-            <Link to="/" className="landing-btn landing-btn-primary" aria-label="Upload and analyze a contract">
+            <Link to="/analyze" className="landing-btn landing-btn-primary" aria-label="Upload and analyze a contract">
               Analyze a Contract Free
             </Link>
             <a href="#design-system" className="landing-btn landing-btn-outline" aria-label="Explore the accessible design system">
@@ -78,7 +78,7 @@ export default function Landing() {
           </div>
 
           {/* Key Metric Cards */}
-          <div className="landing-stats-grid" aria-label="Key Performance Metrics">
+          <div id="features" className="landing-stats-grid" aria-label="Key Performance Metrics">
             <div className="landing-stat-card">
               <div className="landing-stat-num">510+</div>
               <div className="landing-stat-label">CUAD Real Contracts Trained</div>
@@ -440,7 +440,7 @@ export default function Landing() {
             and read human-written negotiation fallbacks.
           </p>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/" className="landing-btn landing-btn-primary">
+            <Link to="/analyze" className="landing-btn landing-btn-primary">
               Upload Your First Contract Free
             </Link>
             <Link to="/insights" className="landing-btn landing-btn-outline">
