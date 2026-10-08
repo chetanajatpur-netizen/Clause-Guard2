@@ -1,4 +1,4 @@
-/* global.css - Modern 3D Glassmorphism & Neon Dark Theme */
+/* global.css - Modern Minimalist Accessible White Design System (WCAG 2.1 AA) */
 
 * {
   box-sizing: border-box;
@@ -8,42 +8,16 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: var(--bg-primary);
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(0, 217, 255, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(255, 0, 110, 0.06) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(10, 14, 39, 1) 0%, rgba(7, 10, 30, 1) 100%);
-  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-family);
   font-size: var(--text-base);
   line-height: var(--line-height-normal);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
-/* Float Keyframe Animation */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(0, 217, 255, 0.35);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(0, 217, 255, 0.65);
-  }
-}
-
-/* Heading Sizes & Futuristic Typography */
+/* Heading Typography */
 h1 {
   font-size: var(--text-3xl);
   font-weight: 700;
@@ -80,12 +54,12 @@ p {
 a {
   color: var(--link-color);
   text-decoration: none;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 
 a:hover {
   color: var(--primary-hover);
-  text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
+  text-decoration: underline;
 }
 
 a:focus-visible {
@@ -94,12 +68,12 @@ a:focus-visible {
   border-radius: var(--radius-sm);
 }
 
-/* Buttons - Bright Cyan Neon with Dark Contrast */
+/* Buttons - 44px min-height with Electric Blue Accent */
 button, [role="button"], .btn {
   padding: 10px 22px;
   font-size: var(--text-base);
   font-weight: 600;
-  border: 1px solid var(--accent-primary);
+  border: 1px solid transparent;
   border-radius: var(--radius-md);
   cursor: pointer;
   background-color: var(--primary-button);
@@ -111,13 +85,12 @@ button, [role="button"], .btn {
   justify-content: center;
   gap: var(--space-xs);
   transition: all var(--transition-normal);
-  box-shadow: 0 4px 14px rgba(0, 217, 255, 0.25);
+  box-shadow: var(--shadow-sm);
 }
 
 button:hover, [role="button"]:hover, .btn:hover {
   background-color: var(--primary-button-hover);
-  box-shadow: var(--glow-cyan);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 button:active, [role="button"]:active, .btn:active {
@@ -130,38 +103,34 @@ button:focus-visible, .btn:focus-visible {
 }
 
 button:disabled, .btn:disabled {
-  opacity: 0.45;
+  opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
 }
 
-/* Glassmorphism Cards */
+/* Cards - Crisp White with subtle Slate Border & Soft Shadow */
 .card {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   margin-bottom: var(--space-md);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
 }
 
 .card:hover {
-  border-color: var(--glass-border-hover);
-  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 217, 255, 0.15);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
 }
 
-/* Input Fields - Dark Glass Inputs */
+/* Input Fields */
 input, textarea, select {
   padding: var(--space-md);
   font-size: var(--text-base);
-  background-color: rgba(17, 24, 50, 0.6);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-medium);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   color: var(--text-primary);
@@ -172,131 +141,29 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: var(--glow-cyan);
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  border-color: var(--border-focus);
 }
 
-input::placeholder, textarea::placeholder {
-  color: var(--text-muted);
-}
-
-/* Main Layout */
-.app-layout {
-  display: flex;
-  min-height: 100vh;
-}
-
+/* Container */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: var(--space-lg);
 }
 
-/* Glassmorphic Sidebar */
-.sidebar {
-  background: rgba(10, 14, 39, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-right: 1px solid var(--glass-border);
-  padding: var(--space-xl) var(--space-md);
-  width: 250px;
-  min-width: 250px;
-  position: fixed;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 20;
-}
-
-.sidebar-brand {
-  padding-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--glass-border);
-  margin-bottom: var(--space-lg);
-}
-
-.brand-title {
-  font-size: 26px;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.02em;
-}
-
-.brand-subtitle {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin-top: var(--space-2xs);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.nav-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.nav-link, .sidebar-item {
-  display: block;
-  padding: 12px 18px;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 15px;
-  font-weight: 500;
-  transition: all var(--transition-normal);
-  border: 1px solid transparent;
-}
-
-.nav-link:hover, .sidebar-item:hover {
-  background-color: var(--bg-hover);
-  color: var(--accent-primary);
-  border-color: rgba(0, 217, 255, 0.2);
-  transform: translateX(4px);
-}
-
-.nav-link.active {
-  background: linear-gradient(90deg, rgba(0, 217, 255, 0.15) 0%, rgba(17, 24, 50, 0.4) 100%);
-  color: var(--accent-primary);
-  font-weight: 700;
-  border-left: 3px solid var(--accent-primary);
-  border-color: rgba(0, 217, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.15);
-}
-
-.main-content {
-  margin-left: 250px;
-  flex: 1;
-  padding: var(--space-xl);
-  max-width: 1100px;
-}
-
-/* Typography Helpers */
-.text-muted {
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-}
-
-.text-secondary {
-  color: var(--text-secondary);
-}
-
-/* Glowing Risk Badges */
+/* Badges */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: all var(--transition-fast);
 }
 
@@ -304,21 +171,18 @@ input::placeholder, textarea::placeholder {
   background-color: var(--risk-high-bg);
   color: var(--risk-high);
   border: 1px solid var(--risk-high-border);
-  box-shadow: var(--glow-high);
 }
 
 .badge-medium {
   background-color: var(--risk-medium-bg);
   color: var(--risk-medium);
   border: 1px solid var(--risk-medium-border);
-  box-shadow: var(--glow-medium);
 }
 
 .badge-low {
   background-color: var(--risk-low-bg);
   color: var(--risk-low);
   border: 1px solid var(--risk-low-border);
-  box-shadow: var(--glow-low);
 }
 
 .badge-none {
@@ -332,8 +196,8 @@ input::placeholder, textarea::placeholder {
   position: absolute;
   top: -50px;
   left: 0;
-  background: var(--accent-primary);
-  color: var(--bg-primary);
+  background: var(--primary);
+  color: #ffffff;
   padding: var(--space-md);
   text-decoration: none;
   font-weight: 700;
@@ -347,13 +211,10 @@ input::placeholder, textarea::placeholder {
   outline: var(--focus-outline);
 }
 
-/* Error Banner with Neon Crimson Glow */
+/* Error Banner */
 .error-banner {
   background-color: var(--risk-high-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--risk-high-border);
-  box-shadow: var(--glow-high);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   margin-bottom: var(--space-lg);
@@ -364,23 +225,20 @@ input::placeholder, textarea::placeholder {
 
 .error-banner button {
   background-color: var(--risk-high);
-  color: var(--text-light);
+  color: #ffffff;
   border-color: var(--risk-high);
-  box-shadow: var(--glow-high);
   margin-top: var(--space-md);
 }
 
-/* 3D Upload Box */
+/* Upload Box */
 .upload-box {
-  border: 2px dashed var(--glass-border);
+  border: 2px dashed var(--border-strong);
   border-radius: var(--radius-lg);
   padding: var(--space-2xl) var(--space-lg);
   text-align: center;
   cursor: pointer;
-  background-color: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
   min-height: 220px;
   display: flex;
@@ -390,33 +248,29 @@ input::placeholder, textarea::placeholder {
 }
 
 .upload-box:hover {
-  border-color: var(--accent-primary);
-  background-color: var(--glass-bg-hover);
-  box-shadow: var(--glow-cyan);
-  transform: translateY(-2px);
+  border-color: var(--primary);
+  background-color: var(--bg-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .upload-box--active {
-  border-color: var(--accent-primary);
-  background-color: rgba(0, 217, 255, 0.12);
-  box-shadow: var(--glow-cyan);
+  border-color: var(--primary);
+  background-color: #eff6ff;
 }
 
 .upload-box--error {
   border-color: var(--risk-high);
   background-color: var(--risk-high-bg);
-  box-shadow: var(--glow-high);
 }
 
-/* Loading Spinner - Neon Cyan Dual Ring */
+/* Loading Spinner */
 .spinner {
-  border: 3px solid rgba(0, 217, 255, 0.15);
-  border-top: 3px solid var(--accent-primary);
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid var(--primary);
   border-radius: 50%;
   width: 44px;
   height: 44px;
   animation: spin 1s linear infinite;
-  box-shadow: var(--glow-cyan);
 }
 
 @keyframes spin {
@@ -428,69 +282,7 @@ input::placeholder, textarea::placeholder {
 .disclaimer {
   margin-top: var(--space-2xl);
   padding-top: var(--space-md);
-  border-top: 1px solid var(--glass-border);
+  border-top: 1px solid var(--border);
   font-size: var(--text-xs);
   color: var(--text-muted);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .app-layout {
-    flex-direction: column;
-  }
-
-  .container {
-    padding: var(--space-md);
-  }
-
-  .sidebar {
-    width: 100%;
-    position: static;
-    height: auto;
-    min-width: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--glass-border);
-    display: flex;
-    flex-direction: column;
-    padding: var(--space-md);
-  }
-
-  .sidebar-brand {
-    margin-bottom: var(--space-sm);
-    padding-bottom: var(--space-sm);
-  }
-
-  .nav-links {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: var(--space-sm);
-  }
-
-  .nav-link, .sidebar-item {
-    white-space: nowrap;
-    padding: var(--space-sm) var(--space-md);
-    margin-bottom: 0;
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: var(--space-md);
-  }
-}
-
-/* Print Styles */
-@media print {
-  body {
-    background-color: white;
-    color: black;
-  }
-
-  .sidebar, .skip-link {
-    display: none;
-  }
-
-  a {
-    color: black;
-    text-decoration: underline;
-  }
 }

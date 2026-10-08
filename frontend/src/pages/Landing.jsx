@@ -1,14 +1,58 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import UploadBox from '../components/UploadBox'
+import Loader from '../components/Loader'
+import ErrorBanner from '../components/ErrorBanner'
+import ClauseCard from '../components/ClauseCard'
+import RiskBadge from '../components/RiskBadge'
+import SearchBar from '../components/SearchBar'
+import { analyzeContract, searchDocument } from '../api/client'
 import '../styles/landing.css'
 
 export default function Landing() {
+  // Form component demo state
   const [testEmail, setTestEmail] = useState('')
   const [contractTitle, setContractTitle] = useState('')
   const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [emailTouched, setEmailTouched] = useState(false)
 
+  // Contract analysis live state
+  const [result, setResult] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [searchResults, setSearchResults] = useState(null)
+  const [searchLoading, setSearchLoading] = useState(false)
+
   const isEmailError = emailTouched && (!testEmail || !testEmail.includes('@'))
+
+  const handleUpload = async (file) => {
+    setLoading(true)
+    setError(null)
+    setResult(null)
+    setSearchResults(null)
+    try {
+      const data = await analyzeContract(file)
+      setResult(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSearch = async (query) => {
+    if (!result) return
+    setSearchLoading(true)
+    try {
+      const data = await searchDocument(result.document_id, query)
+      setSearchResults(data.results)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setSearchLoading(false)
+    }
+  }
+
+  const displayClauses = searchResults || (result ? result.clauses : [])
 
   return (
     <div className="landing-container">
@@ -20,14 +64,17 @@ export default function Landing() {
       {/* Semantic Header & Nav */}
       <header className="landing-header" role="banner">
         <nav className="landing-nav-inner" aria-label="Main Navigation">
-          <Link to="/" className="landing-brand" aria-label="ClauseGuard Home">
+          <a href="#main-content" className="landing-brand" aria-label="ClauseGuard Home">
             <span className="landing-logo-icon" aria-hidden="true">⚖️</span>
             <span className="landing-brand-text">ClauseGuard</span>
-          </Link>
+          </a>
 
           <ul className="landing-nav-links">
             <li>
               <a href="#features" className="landing-nav-link">Features</a>
+            </li>
+            <li>
+              <a href="#analyzer" className="landing-nav-link">Live Auditor</a>
             </li>
             <li>
               <a href="#cards" className="landing-nav-link">Analyzed Clauses</a>
@@ -41,9 +88,9 @@ export default function Landing() {
           </ul>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Link to="/analyze" className="landing-btn landing-btn-primary">
-              Launch App →
-            </Link>
+            <a href="#analyzer" className="landing-btn landing-btn-primary">
+              Audit Contract ↓
+            </a>
           </div>
         </nav>
       </header>
@@ -66,15 +113,15 @@ export default function Landing() {
           </p>
 
           <div className="landing-hero-actions">
-            <Link to="/analyze" className="landing-btn landing-btn-primary" aria-label="Upload and analyze a contract">
+            <a href="#analyzer" className="landing-btn landing-btn-primary" aria-label="Scroll to live contract analyzer">
               Analyze a Contract Free
-            </Link>
+            </a>
             <a href="#design-system" className="landing-btn landing-btn-outline" aria-label="Explore the accessible design system">
               Explore Design System
             </a>
-            <Link to="/history" className="landing-btn landing-btn-ghost" aria-label="View recent contract analysis history">
-              Recent Audits
-            </Link>
+            <a href="#cards" className="landing-btn landing-btn-ghost" aria-label="View common clause hazards">
+              Common Hazards
+            </a>
           </div>
 
           {/* Key Metric Cards */}
@@ -98,8 +145,113 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* Section: Live Contract Risk Auditor (Embedded directly on this page) */}
+        <section id="analyzer" aria-labelledby="analyzer-heading" style={{ marginBottom: '64px', scrollMarginTop: '80px' }}>
+          <div className="landing-section-header">
+            <span className="landing-card-tag tag-primary" style={{ marginBottom: '12px', display: 'inline-block' }}>
+              ⚡ Live Scanner
+            </span>
+            <h2 id="analyzer-heading" className="landing-section-title">
+              Contract Risk Auditor
+            </h2>
+            <p className="landing-section-subtitle">
+              Drop any commercial agreement below to detect high-risk clauses, calculate risk scores, and review fallback negotiation suggestions.
+            </p>
+          </div>
+
+          <div className="landing-showcase-box" style={{ padding: '32px' }}>
+            {/* Upload Area */}
+            <UploadBox onUpload={handleUpload} loading={loading} />
+
+            {error && (
+              <ErrorBanner message={error} onRetry={() => setError(null)} />
+            )}
+
+            {loading && <Loader />}
+
+            {result && !loading && (
+              <div style={{ marginTop: '24px' }}>
+                {/* Result Summary Bar */}
+                <div style={{
+                  background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '12px',
+                  padding: '20px 24px',
+                  marginBottom: '24px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: '16px'
+                }}>
+                  <div>
+                    <h3 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 4px 0', color: '#0f172a' }}>
+                      {result.filename}
+                    </h3>
+                    <p style={{ margin: 0, fontSize: '14px', color: '#64748b' }}>
+                      {result.char_count?.toLocaleString()} characters • {result.risk_summary?.total_clauses} clauses extracted
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <RiskBadge level={result.risk_summary?.overall_risk} />
+                    <div style={{ display: 'flex', gap: '8px', fontSize: '13px', fontWeight: 600 }}>
+                      <span style={{ color: '#dc2626', background: '#fef2f2', padding: '4px 8px', borderRadius: '6px' }}>
+                        ● {result.risk_summary?.high_count} High
+                      </span>
+                      <span style={{ color: '#d97706', background: '#fffbeb', padding: '4px 8px', borderRadius: '6px' }}>
+                        ● {result.risk_summary?.medium_count} Med
+                      </span>
+                      <span style={{ color: '#16a34a', background: '#f0fdf4', padding: '4px 8px', borderRadius: '6px' }}>
+                        ● {result.risk_summary?.low_count} Low
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Search Bar */}
+                <SearchBar onSearch={handleSearch} loading={searchLoading} />
+                {searchResults && (
+                  <p style={{ fontSize: '14px', color: '#64748b', margin: '8px 0 16px 0' }}>
+                    Found {searchResults.length} matching clause(s)
+                    <button
+                      type="button"
+                      onClick={() => setSearchResults(null)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#2563eb',
+                        cursor: 'pointer',
+                        marginLeft: '12px',
+                        fontWeight: 600,
+                        textDecoration: 'underline'
+                      }}
+                    >
+                      Clear search
+                    </button>
+                  </p>
+                )}
+
+                {/* Clause List with AI Context Explanations */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
+                  {displayClauses.map((clause, idx) => (
+                    <ClauseCard
+                      key={clause.id || clause.clause_id || idx}
+                      clause={{
+                        ...clause,
+                        id: clause.id || clause.clause_id,
+                        risk_level: clause.risk_level,
+                        confidence: clause.confidence || clause.similarity || 0,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* Section: Content Cards with Imagery, Tags, and Author Metadata */}
-        <section id="cards" aria-labelledby="cards-section-heading">
+        <section id="cards" aria-labelledby="cards-section-heading" style={{ scrollMarginTop: '80px' }}>
           <div className="landing-section-header">
             <h2 id="cards-section-heading" className="landing-section-title">
               Common High-Hazard Clauses We Detect
@@ -185,7 +337,7 @@ export default function Landing() {
         </section>
 
         {/* Section: Design System Showcase */}
-        <section id="design-system" aria-labelledby="design-system-heading">
+        <section id="design-system" aria-labelledby="design-system-heading" style={{ scrollMarginTop: '80px' }}>
           <div className="landing-section-header">
             <h2 id="design-system-heading" className="landing-section-title">
               ClauseGuard Accessible Design System (WCAG 2.1 AA)
@@ -348,71 +500,70 @@ export default function Landing() {
             </div>
 
             {/* 4. Accessible Form Inputs (Default, Error State, Checkbox) */}
-            <div id="forms">
+            <div id="forms" style={{ scrollMarginTop: '80px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 16px 0' }}>
-                4. Accessible Form Inputs (Explicit Labels, Helper Text &amp; Non-Color Error States)
+                4. Accessible Form Inputs (Explicit Labels, aria-describedby, Error Indicators)
               </h3>
 
-              <div className="form-showcase-grid">
-                {/* Default Input with Helper Text */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                {/* Default Input with Label and Helper */}
                 <div className="form-group">
                   <label htmlFor="contract-title-input" className="form-label">
-                    Contract Reference Title <span aria-hidden="true">*</span>
+                    Contract Title / Reference
                   </label>
                   <input
                     id="contract-title-input"
                     type="text"
-                    className="form-input"
-                    placeholder="e.g. Master Services Agreement (2026)"
+                    className="landing-input"
+                    placeholder="e.g. Master Services Agreement 2026-Q4"
                     value={contractTitle}
                     onChange={(e) => setContractTitle(e.target.value)}
-                    aria-describedby="contract-title-helper"
-                    required
+                    aria-describedby="title-helper-text"
                   />
-                  <span id="contract-title-helper" className="form-helper-text">
-                    Used to label your report and document history entry.
+                  <span id="title-helper-text" className="form-helper-text">
+                    Human-readable label used for contract classification history.
                   </span>
                 </div>
 
-                {/* Error State Input: Red outline + Icon + Text message */}
+                {/* Error State Input pairing Red Border + Icon + Text Message */}
                 <div className="form-group">
-                  <label htmlFor="auditor-email-input" className="form-label">
-                    Auditor Email Address <span aria-hidden="true">*</span>
+                  <label htmlFor="contact-email-input" className="form-label">
+                    Client Notification Email Address
                   </label>
                   <input
-                    id="auditor-email-input"
+                    id="contact-email-input"
                     type="email"
-                    className={`form-input ${isEmailError ? 'form-input-error' : ''}`}
-                    placeholder="contractor@example.com"
+                    className={`landing-input ${isEmailError ? 'input-error' : ''}`}
+                    placeholder="legal-counsel@company.org"
                     value={testEmail}
+                    onBlur={() => setEmailTouched(true)}
                     onChange={(e) => {
                       setTestEmail(e.target.value)
-                      setEmailTouched(true)
+                      if (!emailTouched) setEmailTouched(true)
                     }}
-                    onBlur={() => setEmailTouched(true)}
+                    aria-describedby={isEmailError ? 'email-error-desc' : 'email-helper-desc'}
                     aria-invalid={isEmailError ? 'true' : 'false'}
-                    aria-describedby={isEmailError ? 'email-error-msg' : 'email-helper'}
-                    required
                   />
-                  {isEmailError ? (
-                    <span id="email-error-msg" className="form-error-message" role="alert">
-                      <span aria-hidden="true">⚠️</span> Please enter a valid corporate or professional email.
+                  {!isEmailError && (
+                    <span id="email-helper-desc" className="form-helper-text">
+                      Audit reports and risk warnings will be dispatched to this address.
                     </span>
-                  ) : (
-                    <span id="email-helper" className="form-helper-text">
-                      We will notify this address once Legal-BERT analysis completes.
-                    </span>
+                  )}
+                  {isEmailError && (
+                    <div id="email-error-desc" className="form-error-msg" role="alert">
+                      <span aria-hidden="true">⚠️</span>
+                      <span>Please enter a valid business email address containing an '@' symbol.</span>
+                    </div>
                   )}
                 </div>
 
-                {/* Accessible Checkbox */}
+                {/* Accessible Checkbox with Linked Label */}
                 <div className="form-group">
-                  <span className="form-label">Legal Acknowledgment</span>
-                  <div className="checkbox-group">
+                  <div className="checkbox-wrap">
                     <input
                       id="terms-checkbox"
                       type="checkbox"
-                      className="checkbox-input"
+                      className="landing-checkbox"
                       checked={agreedToTerms}
                       onChange={(e) => setAgreedToTerms(e.target.checked)}
                       aria-describedby="terms-helper"
@@ -436,16 +587,16 @@ export default function Landing() {
             Ready to Audit Your Commercial Agreements?
           </h2>
           <p className="landing-cta-subtitle">
-            Drag and drop any PDF, DOCX, or TXT file to inspect risk ratings, extract individual clauses, 
+            Drag and drop any PDF, DOCX, or TXT file into the auditor above to inspect risk ratings, extract individual clauses, 
             and read human-written negotiation fallbacks.
           </p>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/analyze" className="landing-btn landing-btn-primary">
-              Upload Your First Contract Free
-            </Link>
-            <Link to="/insights" className="landing-btn landing-btn-outline">
-              View Legal-BERT Model Benchmark
-            </Link>
+            <a href="#analyzer" className="landing-btn landing-btn-primary">
+              Upload Your Contract Free
+            </a>
+            <a href="#design-system" className="landing-btn landing-btn-outline">
+              Explore Design System
+            </a>
           </div>
         </section>
       </main>

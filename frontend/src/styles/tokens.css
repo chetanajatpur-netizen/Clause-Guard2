@@ -1,90 +1,90 @@
-/* tokens.css - 3D Modern Wiemer-Inspired Dark Theme with Glassmorphism & Neon Accents */
+/* tokens.css - Modern Minimalist WCAG 2.1 AA Compliant White/Slate Design System */
 
 :root {
   /* Core Backgrounds */
-  --bg-primary: #0A0E27;           /* Very dark navy page background */
-  --bg-secondary: #111832;         /* Slightly lighter navy for cards / surfaces */
-  --bg-hover: rgba(0, 217, 255, 0.08); /* Hover state subtle cyan wash */
-  --bg-dark: #070A1E;              /* Deepest obsidian navy */
+  --bg-primary: #f1f5f9;           /* Soft Slate page background */
+  --bg-secondary: #ffffff;         /* Pure White for cards / surfaces */
+  --bg-hover: #e2e8f0;             /* Hover state slate wash */
+  --bg-dark: #0f172a;              /* Deep charcoal */
 
-  /* Glassmorphism Surface Defaults */
-  --glass-bg: rgba(17, 24, 50, 0.72);
-  --glass-bg-hover: rgba(22, 32, 66, 0.85);
-  --glass-border: rgba(0, 217, 255, 0.16);
-  --glass-border-hover: rgba(0, 217, 255, 0.45);
-  --glass-blur: blur(10px);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  /* Glassmorphism / Surface Defaults */
+  --glass-bg: #ffffff;
+  --glass-bg-hover: #f8fafc;
+  --glass-border: #e2e8f0;
+  --glass-border-hover: #cbd5e1;
+  --glass-blur: none;
+  --glass-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
 
-  /* Neon Accents */
-  --accent-primary: #00D9FF;       /* Bright Cyan */
-  --accent-secondary: #FF006E;     /* Hot Pink */
-  --accent-tertiary: #00FF41;      /* Neon Green */
+  /* Accents */
+  --accent-primary: #2563eb;       /* Electric Blue */
+  --accent-secondary: #0f172a;     /* Deep Charcoal */
+  --accent-tertiary: #16a34a;      /* Accessible Emerald */
 
-  /* Neon Glow Effects */
-  --glow-cyan: 0 0 15px rgba(0, 217, 255, 0.5), 0 0 30px rgba(0, 217, 255, 0.2);
-  --glow-pink: 0 0 15px rgba(255, 0, 110, 0.5), 0 0 30px rgba(255, 0, 110, 0.2);
-  --glow-green: 0 0 15px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2);
+  /* Subtle Focus Rings & Glows */
+  --glow-cyan: 0 0 0 4px rgba(37, 99, 235, 0.25);
+  --glow-pink: 0 0 0 4px rgba(220, 38, 38, 0.25);
+  --glow-green: 0 0 0 4px rgba(22, 163, 74, 0.25);
 
-  /* Risk Status Colors & Glows */
-  --risk-high: #FF1744;            /* Neon Red / Pink */
-  --risk-high-bg: rgba(255, 23, 68, 0.16);
-  --risk-high-border: #FF1744;
-  --glow-high: 0 0 14px rgba(255, 23, 68, 0.55), 0 0 28px rgba(255, 23, 68, 0.25);
+  /* Risk Status Colors & Accents */
+  --risk-high: #dc2626;            /* High Risk Crimson */
+  --risk-high-bg: #fef2f2;
+  --risk-high-border: #fca5a5;
+  --glow-high: 0 1px 2px 0 rgba(220, 38, 38, 0.1);
 
-  --risk-medium: #FF6F00;          /* Neon Amber / Orange */
-  --risk-medium-bg: rgba(255, 111, 0, 0.16);
-  --risk-medium-border: #FF6F00;
-  --glow-medium: 0 0 14px rgba(255, 111, 0, 0.55), 0 0 28px rgba(255, 111, 0, 0.25);
+  --risk-medium: #d97706;          /* Medium Risk Amber */
+  --risk-medium-bg: #fffbeb;
+  --risk-medium-border: #fcd34d;
+  --glow-medium: 0 1px 2px 0 rgba(217, 119, 6, 0.1);
 
-  --risk-low: #00E676;             /* Neon Bright Emerald */
-  --risk-low-bg: rgba(0, 230, 118, 0.16);
-  --risk-low-border: #00E676;
-  --glow-low: 0 0 14px rgba(0, 230, 118, 0.55), 0 0 28px rgba(0, 230, 118, 0.25);
+  --risk-low: #16a34a;             /* Low Risk Emerald */
+  --risk-low-bg: #f0fdf4;
+  --risk-low-border: #86efac;
+  --glow-low: 0 1px 2px 0 rgba(22, 163, 74, 0.1);
 
-  --risk-none: #94A3B8;            /* Slate grey */
-  --risk-none-bg: rgba(148, 163, 184, 0.12);
-  --risk-none-border: rgba(148, 163, 184, 0.25);
+  --risk-none: #64748b;            /* Neutral Slate */
+  --risk-none-bg: #f8fafc;
+  --risk-none-border: #e2e8f0;
 
   /* Typography Colors */
-  --text-primary: #F0F4FF;         /* Crisp near-white with blue tint */
-  --text-secondary: #94A3B8;       /* Cool slate grey */
-  --text-muted: #64748B;           /* Darker slate grey */
-  --text-light: #F0F4FF;
+  --text-primary: #0f172a;         /* Deep Charcoal */
+  --text-secondary: #475569;       /* Slate-600 (contrast > 5.8:1) */
+  --text-muted: #64748b;           /* Slate-500 (contrast > 4.6:1) */
+  --text-light: #0f172a;
   --text: var(--text-primary);
-  --text-inverse: #0A0E27;
+  --text-inverse: #ffffff;
 
   /* Semantic Aliases for Compatibility */
   --bg: var(--bg-primary);
-  --bg-subtle: var(--bg-secondary);
-  --surface: var(--glass-bg);
-  --surface-raised: var(--bg-secondary);
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(0, 217, 255, 0.2);
-  --border-dark: rgba(0, 217, 255, 0.45);
-  --border: var(--glass-border);
-  --border-strong: var(--glass-border-hover);
-  --border-focus: var(--accent-primary);
+  --bg-subtle: var(--bg-primary);
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-dark: #94a3b8;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: #2563eb;
 
   /* Interactive Controls */
-  --primary: var(--accent-primary);
-  --primary-hover: #33E1FF;
-  --primary-contrast: #0A0E27;
-  --primary-button: var(--accent-primary);
-  --primary-button-hover: #33E1FF;
-  --primary-button-text: #0A0E27;
-  --link-color: var(--accent-primary);
-  --link-hover: var(--accent-secondary);
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-contrast: #ffffff;
+  --primary-button: #2563eb;
+  --primary-button-hover: #1d4ed8;
+  --primary-button-text: #ffffff;
+  --link-color: #2563eb;
+  --link-hover: #1d4ed8;
 
   /* Chips */
-  --neutral-chip: rgba(255, 255, 255, 0.08);
-  --neutral-chip-border: rgba(255, 255, 255, 0.16);
-  --neutral-chip-text: #F0F4FF;
+  --neutral-chip: #f1f5f9;
+  --neutral-chip-border: #e2e8f0;
+  --neutral-chip-text: #0f172a;
 
   /* Accessibility & Focus */
   --touch-target-min: 44px;
-  --focus-outline: 2px solid var(--accent-primary);
+  --focus-outline: 4px solid rgba(37, 99, 235, 0.35);
   --focus-outline-offset: 2px;
-  --focus-ring: 2px solid var(--accent-primary);
+  --focus-ring: 4px solid rgba(37, 99, 235, 0.35);
   --focus-offset: 2px;
 
   /* Typography Fonts */
@@ -112,9 +112,9 @@
   --text-3xl: 32px;
 
   /* Line Heights */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.6;
 
   /* Easing Curves */
   --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -129,18 +129,18 @@
   --transition-spring: 600ms var(--ease-spring);
 
   /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
   --radius: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
   --radius-pill: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-  --shadow: var(--shadow-md);
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow: var(--shadow-sm);
 }
 
 /* Reduced Motion Preference */
