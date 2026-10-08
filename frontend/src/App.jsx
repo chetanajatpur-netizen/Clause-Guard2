@@ -1,11 +1,23 @@
-import { Routes, Route, NavLink } from 'react-router-dom'
+import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import Analyze from './pages/Analyze'
 import History from './pages/History'
 import Insights from './pages/Insights'
+import Landing from './pages/Landing'
 import './styles/global.css'
 import './styles/clause-explanation.css'
 
 function App() {
+  const location = useLocation()
+  const isLanding = location.pathname === '/landing'
+
+  if (isLanding) {
+    return (
+      <Routes>
+        <Route path="/landing" element={<Landing />} />
+      </Routes>
+    )
+  }
+
   return (
     <div className="app-layout">
       <nav className="sidebar">
@@ -14,6 +26,11 @@ function App() {
           <p className="brand-subtitle">Contract Risk Analyzer</p>
         </div>
         <ul className="nav-links">
+          <li>
+            <NavLink to="/landing" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              ✨ Landing Page
+            </NavLink>
+          </li>
           <li>
             <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               📄 Analyze
@@ -37,6 +54,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/history/:id" element={<Analyze />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
         <footer className="disclaimer">
           ⚠️ ClauseGuard is an educational tool and not legal advice.

@@ -36,8 +36,8 @@
 - frontend/src/main.jsx, frontend/src/App.jsx, frontend/src/api/client.js
 - frontend/src/components/UploadBox.jsx, frontend/src/components/ClauseCard.jsx, frontend/src/components/ClauseExplanation.jsx, frontend/src/components/RiskBadge.jsx, frontend/src/components/SearchBar.jsx, frontend/src/components/Loader.jsx, frontend/src/components/ErrorBanner.jsx
 - frontend/src/data/clause_explanations.json
-- frontend/src/pages/Analyze.jsx, frontend/src/pages/History.jsx, frontend/src/pages/Insights.jsx
-- frontend/src/styles/tokens.css, frontend/src/styles/global.css, frontend/src/styles/clause-explanation.css
+- frontend/src/pages/Analyze.jsx, frontend/src/pages/History.jsx, frontend/src/pages/Insights.jsx, frontend/src/pages/Landing.jsx
+- frontend/src/styles/tokens.css, frontend/src/styles/global.css, frontend/src/styles/clause-explanation.css, frontend/src/styles/landing.css
 
 ## Decisions made
 - Dataset: Real CUAD_v1.json (The Atticus Project, 510 contracts)
@@ -112,5 +112,11 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Tokens: Updated `frontend/src/styles/tokens.css` with dark navy background (`#0A0E27`), secondary navy (`#111832`), bright cyan accent (`#00D9FF`), hot pink accent (`#FF006E`), neon green (`#00FF41`), and high/medium/low risk neon colors with glowing box shadows (`--glow-cyan`, `--glow-pink`, `--glow-high`, `--glow-medium`, `--glow-low`).
   - Glassmorphism & Animations: Updated `frontend/src/styles/global.css` with frosted glass styling (`backdrop-filter: blur(10px)`), float keyframes animation (`@keyframes float`), smooth transition easings (`--ease-spring`, `--ease-bounce`, `--ease-in-out-smooth`), neon cyan interactive buttons, and glowing risk badges in `frontend/src/components/RiskBadge.jsx`.
   - Verification: Confirmed 0 hardcoded hex colors outside `tokens.css`. Vite production build passed with 0 errors. Verified default dark theme rendering.
+- [2026-10-08 17:40] Modern Landing Page & WCAG 2.1 AA Design System Screen DONE:
+  - Landing Screen: Created `frontend/src/pages/Landing.jsx` and `frontend/src/styles/landing.css` accessible at `/landing` (and linked via sidebar navigation).
+  - Design Specifications: Implemented Inter font, Deep Charcoal (`#0f172a`), Electric Blue (`#2563eb`), Soft Slate (`#f1f5f9`), and subtle border-slate-200 outlines with `shadow-sm` → `shadow-md` on hover.
+  - WCAG 2.1 AA Compliance: Strict ≥4.5:1 text contrast, 4px colored keyboard focus rings, touch targets ≥44x44px, `<label>` and `aria-describedby` associations, and error states pairing red outline + icon + text message.
+  - Components Included: Color palette swatches, typography scale table, 4 button variants (Primary, Secondary, Outline, Ghost) + accessible icon-only button, interactive form inputs (default, error, checkbox), and content cards with imagery, severity tags, and engine metadata.
+  - Verification: Vite build passed in 4.94s with 0 errors.
 
 
