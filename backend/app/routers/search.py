@@ -10,6 +10,7 @@ from app.db.models import Clause, Document, SearchQuery
 from app.db.session import get_db
 from app.schemas.search import SearchRequest, SearchResponse, SearchResultItem
 from app.services.embedder import embedder
+from app.services.risk import compute_enhanced_clause_risk
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -66,13 +67,22 @@ async def semantic_search(
         clause = clauses[idx]
         if top_clause_id is None:
             top_clause_id = clause.id
+        enhanced = compute_enhanced_clause_risk(
+            label=clause.label,
+            confidence=clause.confidence,
+            clause_text=clause.text,
+        )
         results.append(SearchResultItem(
             clause_id=clause.id,
             position=clause.position,
             text=clause.text,
             label=clause.label,
-            risk_level=clause.risk_level,
+            risk_level=clause.risk_level or enhanced["risk_level"],
             similarity=sr["similarity"],
+            risk_score=enhanced["risk_score"],
+            risk_score_normalized=enhanced["risk_score_normalized"],
+            uncertainty=enhanced["uncertainty"],
+            uncertainty_level=enhanced["uncertainty_level"],
         ))
     
     # Log search query

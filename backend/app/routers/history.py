@@ -13,7 +13,7 @@ from app.schemas.documents import (
     DocumentListItem,
     DocumentListResponse,
 )
-from app.services.risk import compute_document_risk
+from app.services.risk import compute_document_risk, compute_enhanced_clause_risk
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -64,17 +64,27 @@ async def get_document(
         "low_count": 0, "none_count": 0, "total_clauses": 0,
     }
     
-    clause_responses = [
-        ClauseResponse(
-            id=c.id,
-            position=c.position,
-            text=c.text,
+    clause_responses = []
+    for c in clauses:
+        enhanced = compute_enhanced_clause_risk(
             label=c.label,
             confidence=c.confidence,
-            risk_level=c.risk_level,
+            clause_text=c.text,
         )
-        for c in clauses
-    ]
+        clause_responses.append(
+            ClauseResponse(
+                id=c.id,
+                position=c.position,
+                text=c.text,
+                label=c.label,
+                confidence=c.confidence,
+                risk_level=c.risk_level or enhanced["risk_level"],
+                risk_score=enhanced["risk_score"],
+                risk_score_normalized=enhanced["risk_score_normalized"],
+                uncertainty=enhanced["uncertainty"],
+                uncertainty_level=enhanced["uncertainty_level"],
+            )
+        )
     
     return DocumentDetailResponse(
         id=str(doc.id),

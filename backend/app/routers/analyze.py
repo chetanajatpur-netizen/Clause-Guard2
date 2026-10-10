@@ -19,7 +19,7 @@ from app.schemas.analysis import AnalysisResponse, ClauseResponse, RiskSummary
 from app.services.classifier import classifier
 from app.services.embedder import embedder
 from app.services.parser import extract_text
-from app.services.risk import compute_clause_risk, compute_document_risk
+from app.services.risk import compute_clause_risk, compute_document_risk, compute_enhanced_clause_risk
 from app.services.segmenter import segment_text
 
 logger = logging.getLogger(__name__)
@@ -84,12 +84,18 @@ async def analyze_contract(
     )
     db.add(doc)
     db.flush()
-    
+
     clause_responses: list[ClauseResponse] = []
     for i, (chunk, pred) in enumerate(zip(chunks, predictions)):
-        risk = compute_clause_risk(pred["label"])
+        # Compute enhanced risk score
+        enhanced_risk = compute_enhanced_clause_risk(
+            label=pred["label"],
+            confidence=pred["confidence"],
+            clause_text=chunk
+        )
+        risk = enhanced_risk["risk_level"]
         emb_bytes = embeddings[i].tobytes()
-        
+
         clause = Clause(
             document_id=doc.id,
             position=i,
@@ -101,7 +107,7 @@ async def analyze_contract(
         )
         db.add(clause)
         db.flush()
-        
+
         clause_responses.append(ClauseResponse(
             id=clause.id,
             position=i,
@@ -109,6 +115,10 @@ async def analyze_contract(
             label=pred["label"],
             confidence=pred["confidence"],
             risk_level=risk,
+            risk_score=enhanced_risk["risk_score"],
+            risk_score_normalized=enhanced_risk["risk_score_normalized"],
+            uncertainty=enhanced_risk["uncertainty"],
+            uncertainty_level=enhanced_risk["uncertainty_level"],
         ))
     
     db.commit()

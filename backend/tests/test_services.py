@@ -78,3 +78,100 @@ class TestClassifier:
         clf = ClauseClassifier()
         clf.load(backend="baseline", baseline_model_path="ml/artifacts/baseline_model.joblib")
         assert clf.predict([]) == []
+
+
+class TestEnhancedRiskScoring:
+    """Tests for enhanced numerical risk scoring and uncertainty quantification."""
+
+    def test_high_risk_clause_scoring(self) -> None:
+        """Test high-risk clauses receive high numerical score (80-95/100)."""
+        from app.services.risk import compute_enhanced_clause_risk
+        clause_text = "Contractor unconditionally waives all claims and shall indemnify client with unlimited liability."
+        result = compute_enhanced_clause_risk("Uncapped Liability", confidence=0.95, clause_text=clause_text)
+
+        assert result["risk_level"] == "High"
+        assert 80 <= result["risk_score"] <= 100
+        assert 0.0 <= result["risk_score_normalized"] <= 1.0
+        assert result["uncertainty_level"] in ("Low", "Medium")
+
+    def test_no_clause_scoring(self) -> None:
+        """Test No Clause gets score 0 and low uncertainty."""
+        from app.services.risk import compute_enhanced_clause_risk
+        result = compute_enhanced_clause_risk("No Clause", confidence=0.99, clause_text="This agreement is dated Jan 1.")
+
+        assert result["risk_level"] is None
+        assert result["risk_score"] == 0
+        assert result["risk_score_normalized"] == 0.0
+        assert result["uncertainty"] == 0.1
+        assert result["uncertainty_level"] == "Low"
+
+    def test_linguistic_amplifiers_increase_risk(self) -> None:
+        """Test risk amplifiers like 'unlimited' or 'irreversible' increase risk score."""
+        from app.services.risk import compute_enhanced_clause_risk
+        neutral_text = "The contractor agrees to the standard terms and conditions governing the assignment."
+        amplified_text = "The contractor unconditionally and with unlimited, irreversible liability shall indemnify and hold harmless."
+
+        base_res = compute_enhanced_clause_risk("Termination for Convenience", confidence=0.8, clause_text=neutral_text)
+        amp_res = compute_enhanced_clause_risk("Termination for Convenience", confidence=0.8, clause_text=amplified_text)
+
+        assert amp_res["components"]["linguistic_adjustment"] > base_res["components"]["linguistic_adjustment"]
+        assert amp_res["risk_score"] >= base_res["risk_score"]
+
+    def test_linguistic_reducers_decrease_risk(self) -> None:
+        """Test risk reducers like 'reasonable' or 'mutual' decrease risk score."""
+        from app.services.risk import compute_enhanced_clause_risk
+        neutral_text = "The agreement outlines specific provisions concerning assignment of developer patents."
+        reduced_text = "Both parties agree to reasonable, mutual terms provided that each party may negotiate with cap."
+
+        base_res = compute_enhanced_clause_risk("IP Ownership Assignment", confidence=0.8, clause_text=neutral_text)
+        red_res = compute_enhanced_clause_risk("IP Ownership Assignment", confidence=0.8, clause_text=reduced_text)
+
+        assert red_res["components"]["linguistic_adjustment"] < base_res["components"]["linguistic_adjustment"]
+        assert red_res["risk_score"] <= base_res["risk_score"]
+
+    def test_uncertainty_quantification(self) -> None:
+        """Test uncertainty varies by classifier confidence and text length."""
+        from app.services.risk import compute_enhanced_clause_risk
+        # High confidence -> lower uncertainty
+        high_conf = compute_enhanced_clause_risk("Non-Compete", confidence=0.95, clause_text="Employee shall not work for any competitor.")
+        # Low confidence -> higher uncertainty
+        low_conf = compute_enhanced_clause_risk("Non-Compete", confidence=0.35, clause_text="Employee shall not work for any competitor.")
+
+        assert low_conf["uncertainty"] > high_conf["uncertainty"]
+
+        # Very short text -> higher text length uncertainty
+        short_text_res = compute_enhanced_clause_risk("Non-Compete", confidence=0.9, clause_text="No competition.")
+        normal_text_res = compute_enhanced_clause_risk(
+            "Non-Compete",
+            confidence=0.9,
+            clause_text="Employee covenants that for a period of twelve months following termination, employee shall not engage in competitive business."
+        )
+        assert short_text_res["components"]["length_uncertainty"] >= normal_text_res["components"]["length_uncertainty"]
+
+    def test_conservative_pull_toward_middle(self) -> None:
+        """Test that high uncertainty adjusts normalized score toward medium risk (0.5)."""
+        from app.services.risk import compute_enhanced_clause_risk
+        # At confidence 0.3, uncertainty is high (> 0.1), which triggers pull towards 0.5
+        result = compute_enhanced_clause_risk("Non-Compete", confidence=0.3, clause_text="Short clause")
+        comp = result["components"]
+        assert comp["uncertainty"] > 0.1
+        # The final score should be between raw/normalized and 0.5
+        assert 0.0 <= result["risk_score_normalized"] <= 1.0
+
+    def test_lru_caching(self) -> None:
+        """Test that _compute_enhanced_clause_risk_cached utilizes LRU cache."""
+        from app.services.risk import _compute_enhanced_clause_risk_cached, compute_enhanced_clause_risk
+        _compute_enhanced_clause_risk_cached.cache_clear()
+
+        info_before = _compute_enhanced_clause_risk_cached.cache_info()
+        assert info_before.hits == 0
+
+        # First call -> cache miss
+        compute_enhanced_clause_risk("Audit Rights", 0.85, "Audits shall occur annually during business hours.")
+        info_1 = _compute_enhanced_clause_risk_cached.cache_info()
+        assert info_1.misses >= 1
+
+        # Identical second call -> cache hit
+        compute_enhanced_clause_risk("Audit Rights", 0.85, "Audits shall occur annually during business hours.")
+        info_2 = _compute_enhanced_clause_risk_cached.cache_info()
+        assert info_2.hits >= 1

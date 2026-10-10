@@ -62,16 +62,61 @@ export default function ClauseCard({ clause }) {
           </span>
           <RiskBadge level={clause.risk_level} />
         </div>
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '13px',
-            color: 'var(--text-muted)',
-            fontWeight: 500,
-          }}
-        >
-          {(clause.confidence * 100).toFixed(1)}% confidence
-        </span>
+        <div style={{ display: 'flex', gap: 'var(--space-xs)', alignItems: 'center', flexWrap: 'wrap' }}>
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '13px',
+              color: 'var(--text-muted)',
+              fontWeight: 500,
+            }}
+          >
+            {(clause.confidence * 100).toFixed(1)}% confidence
+          </span>
+          {clause.risk_score !== null && clause.risk_score !== undefined && (
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                fontWeight: 700,
+                color: clause.risk_level === 'High' ? 'var(--risk-high)' : clause.risk_level === 'Medium' ? 'var(--risk-medium)' : clause.risk_level === 'Low' ? 'var(--risk-low)' : 'var(--text-muted)',
+                backgroundColor: clause.risk_level === 'High' ? 'var(--risk-high-bg)' : clause.risk_level === 'Medium' ? 'var(--risk-medium-bg)' : clause.risk_level === 'Low' ? 'var(--risk-low-bg)' : 'var(--neutral-chip)',
+                padding: '3px 8px',
+                borderRadius: 'var(--radius-sm)',
+                border: `1px solid ${clause.risk_level === 'High' ? 'var(--risk-high-border)' : clause.risk_level === 'Medium' ? 'var(--risk-medium-border)' : clause.risk_level === 'Low' ? 'var(--risk-low-border)' : 'var(--border)'}`,
+              }}
+            >
+              Risk: {clause.risk_score}/100
+            </span>
+          )}
+          {clause.uncertainty !== null && clause.uncertainty !== undefined && (() => {
+            const level = clause.uncertainty_level || (clause.uncertainty > 0.5 ? 'High' : clause.uncertainty > 0.2 ? 'Medium' : 'Low')
+            const color = level === 'High' ? 'var(--risk-high)' : level === 'Medium' ? 'var(--risk-medium)' : 'var(--risk-low)'
+            const bg = level === 'High' ? 'var(--risk-high-bg)' : level === 'Medium' ? 'var(--risk-medium-bg)' : 'var(--risk-low-bg)'
+            const border = level === 'High' ? 'var(--risk-high-border)' : level === 'Medium' ? 'var(--risk-medium-border)' : 'var(--risk-low-border)'
+            return (
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  color: color,
+                  backgroundColor: bg,
+                  padding: '3px 8px',
+                  borderRadius: 'var(--radius-sm)',
+                  border: `1px solid ${border}`,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
+                title={`Uncertainty Level: ${level}`}
+              >
+                <span style={{ fontSize: '8px' }} aria-hidden="true">●</span>
+                Uncertainty: {(clause.uncertainty * 100).toFixed(0)}%
+              </span>
+            )
+          })()}
+        </div>
       </div>
 
       {/* Clause Contract Text */}

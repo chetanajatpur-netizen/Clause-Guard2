@@ -118,11 +118,13 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - WCAG 2.1 AA Compliance: Strict ≥4.5:1 text contrast, 4px colored keyboard focus rings, touch targets ≥44x44px, `<label>` and `aria-describedby` associations, and error states pairing red outline + icon + text message.
   - Components Included: Color palette swatches, typography scale table, 4 button variants (Primary, Secondary, Outline, Ghost) + accessible icon-only button, interactive form inputs (default, error, checkbox), and content cards with imagery, severity tags, and engine metadata.
   - Verification: Vite build passed in 4.94s with 0 errors.
-- [2026-10-08 18:55] Pure Redesigned White Interface (Zero Next-Window Redirects) DONE:
-  - Exclusive Redesigned Frontend: Updated `frontend/src/App.jsx` to render `<Landing />` directly for all application requests, completely removing the legacy dark sidebar app layout.
-  - White Design Tokens Unified: Replaced `frontend/src/styles/tokens.css` and `frontend/src/styles/global.css` with the crisp Soft Slate (`#f1f5f9`), Crisp White (`#ffffff`), Deep Charcoal (`#0f172a`), and Electric Blue (`#2563eb`) accessible tokens. Removed dark navy gradients.
-  - Embedded Live Auditor: Integrated the real-time Contract Risk Auditor directly into `Landing.jsx` at `#analyzer`, including `UploadBox` (PDF/DOCX/TXT), `RiskBadge`, `SearchBar`, and `ClauseCard` with AI Context Explanations.
-  - Zero Redirects: All navigation buttons and hero CTAs now use in-page smooth scrolling to local landmarks (`#analyzer`, `#cards`, `#design-system`, `#forms`). No navigation to other windows or external routes.
-  - Verification: Production build passed (`npm run build`), `curl http://localhost:3000/` returns `200 OK`, live contract upload tested successfully with `DOC-01_freelance_agreement.txt`.
+- [2026-10-10 21:20] Enhanced Risk Scoring & Uncertainty Quantification DONE:
+  - Enhanced Scoring Algorithm: Implemented numerical risk scoring (0-100) and normalized scores (0.0-1.0) in `app.services.risk.py` combining base clause risk weights, classifier confidence, and linguistic text analysis (amplifiers like 'unlimited', 'irreversible' vs reducers like 'reasonable', 'mutual').
+  - Uncertainty Modeling: Implemented multi-factor uncertainty quantification considering classifier confidence (1-conf), decision boundary distance (near 0.4 and 0.7 thresholds), and text length heuristics, with conservative score adjustments toward middle on high uncertainty.
+  - Performance & Caching: Added `@lru_cache(maxsize=1024)` on `_compute_enhanced_clause_risk_cached` for instantaneous repeat analyses.
+  - API Schema & Router Integration: Extended `ClauseResponse` and `SearchResultItem` with optional fields (`risk_score`, `risk_score_normalized`, `uncertainty`, `uncertainty_level`) across analyze, history, and search routers.
+  - Frontend Display: Enhanced `ClauseCard.jsx` to render color-coded numerical risk score badges and uncertainty indicators (Low: green, Medium: amber, High: red).
+  - Verification: All 37 backend pytest tests passing (including 7 new unit tests for risk scoring, linguistic factors, boundary uncertainty, and caching), Vite build passing with 0 errors, live servers verified running on port 3000 and port 8000.
+
 
 

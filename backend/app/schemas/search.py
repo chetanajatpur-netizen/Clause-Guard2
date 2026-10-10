@@ -17,6 +17,10 @@ class SearchResultItem(BaseModel):
     label: str
     risk_level: str | None
     similarity: float
+    risk_score: int | None = None
+    risk_score_normalized: float | None = None
+    uncertainty: float | None = None
+    uncertainty_level: str | None = None
 
 
 class SearchResponse(BaseModel):
