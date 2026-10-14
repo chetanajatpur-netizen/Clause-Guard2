@@ -1,154 +1,225 @@
-/* tokens.css - Modern Minimalist WCAG 2.1 AA Compliant White/Slate Design System */
+/* tokens.css - Precision Legal Canvas Design System Tokens */
 
 :root {
-  /* Core Backgrounds */
-  --bg-primary: #f1f5f9;           /* Soft Slate page background */
-  --bg-secondary: #ffffff;         /* Pure White for cards / surfaces */
-  --bg-hover: #e2e8f0;             /* Hover state slate wash */
-  --bg-dark: #0f172a;              /* Deep charcoal */
+  /* Precision Legal Canvas Palette */
+  --surface: #f8f9ff;
+  --surface-dim: #cbdbf5;
+  --surface-bright: #f8f9ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #eff4ff;
+  --surface-container: #e5eeff;
+  --surface-container-high: #dce9ff;
+  --surface-container-highest: #d3e4fe;
+  --on-surface: #0b1c30;
+  --on-surface-variant: #464555;
+  --inverse-surface: #213145;
+  --inverse-on-surface: #eaf1ff;
+  --outline: #777587;
+  --outline-variant: #c7c4d8;
+  --surface-tint: #4d44e3;
 
-  /* Glassmorphism / Surface Defaults */
-  --glass-bg: #ffffff;
-  --glass-bg-hover: #f8fafc;
-  --glass-border: #e2e8f0;
-  --glass-border-hover: #cbd5e1;
-  --glass-blur: none;
-  --glass-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
+  --primary: #3525cd;
+  --on-primary: #ffffff;
+  --primary-container: #4f46e5;
+  --on-primary-container: #dad7ff;
+  --inverse-primary: #c3c0ff;
 
-  /* Accents */
-  --accent-primary: #2563eb;       /* Electric Blue */
-  --accent-secondary: #0f172a;     /* Deep Charcoal */
-  --accent-tertiary: #16a34a;      /* Accessible Emerald */
+  --secondary: #565e74;
+  --on-secondary: #ffffff;
+  --secondary-container: #dae2fd;
+  --on-secondary-container: #5c647a;
 
-  /* Subtle Focus Rings & Glows */
-  --glow-cyan: 0 0 0 4px rgba(37, 99, 235, 0.25);
-  --glow-pink: 0 0 0 4px rgba(220, 38, 38, 0.25);
-  --glow-green: 0 0 0 4px rgba(22, 163, 74, 0.25);
+  --tertiary: #004598;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #005cc6;
+  --on-tertiary-container: #cedbff;
 
-  /* Risk Status Colors & Accents */
-  --risk-high: #dc2626;            /* High Risk Crimson */
-  --risk-high-bg: #fef2f2;
-  --risk-high-border: #fca5a5;
-  --glow-high: 0 1px 2px 0 rgba(220, 38, 38, 0.1);
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
 
-  --risk-medium: #d97706;          /* Medium Risk Amber */
-  --risk-medium-bg: #fffbeb;
-  --risk-medium-border: #fcd34d;
-  --glow-medium: 0 1px 2px 0 rgba(217, 119, 6, 0.1);
+  --primary-fixed: #e2dfff;
+  --primary-fixed-dim: #c3c0ff;
+  --on-primary-fixed: #0f0069;
+  --on-primary-fixed-variant: #3323cc;
 
-  --risk-low: #16a34a;             /* Low Risk Emerald */
-  --risk-low-bg: #f0fdf4;
-  --risk-low-border: #86efac;
-  --glow-low: 0 1px 2px 0 rgba(22, 163, 74, 0.1);
+  --secondary-fixed: #dae2fd;
+  --secondary-fixed-dim: #bec6e0;
+  --on-secondary-fixed: #131b2e;
+  --on-secondary-fixed-variant: #3f465c;
 
-  --risk-none: #64748b;            /* Neutral Slate */
-  --risk-none-bg: #f8fafc;
-  --risk-none-border: #e2e8f0;
+  --tertiary-fixed: #d8e2ff;
+  --tertiary-fixed-dim: #adc6ff;
+  --on-tertiary-fixed: #001a42;
+  --on-tertiary-fixed-variant: #004395;
 
-  /* Typography Colors */
-  --text-primary: #0f172a;         /* Deep Charcoal */
-  --text-secondary: #475569;       /* Slate-600 (contrast > 5.8:1) */
-  --text-muted: #64748b;           /* Slate-500 (contrast > 4.6:1) */
-  --text-light: #0f172a;
+  --background: #f8f9ff;
+  --on-background: #0b1c30;
+  --surface-variant: #d3e4fe;
+
+  /* Canvas & Surface Architecture (Brand Guide) */
+  --canvas-pure: #ffffff;
+  --surface-subtle-1: #f8fafc;
+  --surface-subtle-2: #f1f5f9;
+  --border-delicate: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  --divider-subtle: #f1f5f9;
+
+  /* Text & Foreground Tiers */
+  --text-primary: #0f172a;
+  --text-body: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
   --text: var(--text-primary);
-  --text-inverse: #ffffff;
+  --text-light: var(--on-primary);
 
-  /* Semantic Aliases for Compatibility */
-  --bg: var(--bg-primary);
-  --bg-subtle: var(--bg-primary);
-  --surface: #ffffff;
-  --surface-raised: #ffffff;
-  --border-light: #e2e8f0;
-  --border-medium: #cbd5e1;
-  --border-dark: #94a3b8;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-focus: #2563eb;
+  /* Risk & Semantic Tints */
+  --risk-critical-bg: #fff1f2;
+  --risk-critical-border: #fecdd3;
+  --risk-critical-text: #9f1239;
+  --risk-critical-accent: #e11d48;
 
-  /* Interactive Controls */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-contrast: #ffffff;
-  --primary-button: #2563eb;
-  --primary-button-hover: #1d4ed8;
+  --risk-moderate-bg: #fffbeb;
+  --risk-moderate-border: #fef3c7;
+  --risk-moderate-text: #92400e;
+  --risk-moderate-accent: #d97706;
+
+  --risk-clean-bg: #f0fdf4;
+  --risk-clean-border: #dcfce7;
+  --risk-clean-text: #166534;
+  --risk-clean-accent: #16a34a;
+
+  /* Redline & Diff Annotations */
+  --diff-inserted-bg: #ecfdf5;
+  --diff-inserted-text: #065f46;
+  --diff-deleted-bg: #fff1f2;
+  --diff-deleted-text: #991b1b;
+
+  /* Mappings to Legacy Tokens for 100% Component Compatibility */
+  --bg-primary: var(--surface);
+  --bg-secondary: var(--canvas-pure);
+  --bg-hover: var(--surface-subtle-1);
+  --bg: var(--background);
+  --border: var(--border-delicate);
+  --border-strong: var(--border-subtle);
+  --border-focus: var(--primary-container);
+
+  --primary-button: #0f172a;
+  --primary-button-hover: #1e293b;
   --primary-button-text: #ffffff;
-  --link-color: #2563eb;
-  --link-hover: #1d4ed8;
+  --accent-interactive: #4f46e5;
+  --accent-interactive-hover: #4338ca;
+  --link-color: #3525cd;
+  --link-hover: #4f46e5;
 
-  /* Chips */
-  --neutral-chip: #f1f5f9;
-  --neutral-chip-border: #e2e8f0;
-  --neutral-chip-text: #0f172a;
+  --risk-high: var(--risk-critical-text);
+  --risk-high-bg: var(--risk-critical-bg);
+  --risk-high-border: var(--risk-critical-border);
+  --risk-medium: var(--risk-moderate-text);
+  --risk-medium-bg: var(--risk-moderate-bg);
+  --risk-medium-border: var(--risk-moderate-border);
+  --risk-low: var(--risk-clean-text);
+  --risk-low-bg: var(--risk-clean-bg);
+  --risk-low-border: var(--risk-clean-border);
+  --risk-none: var(--text-muted);
+  --risk-none-bg: var(--surface-subtle-1);
+  --risk-none-border: var(--border-delicate);
 
-  /* Accessibility & Focus */
-  --touch-target-min: 44px;
-  --focus-outline: 4px solid rgba(37, 99, 235, 0.35);
-  --focus-outline-offset: 2px;
-  --focus-ring: 4px solid rgba(37, 99, 235, 0.35);
-  --focus-offset: 2px;
-
-  /* Typography Fonts */
-  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Typography Specifications */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 
-  /* Spacing */
-  --space-2xs: 4px;
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
+  --type-display-lg-size: 32px;
+  --type-display-lg-weight: 600;
+  --type-display-lg-line-height: 40px;
+  --type-display-lg-letter-spacing: -0.02em;
 
-  /* Typography Scale */
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-base: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
+  --type-headline-lg-size: 24px;
+  --type-headline-lg-weight: 600;
+  --type-headline-lg-line-height: 32px;
+  --type-headline-lg-letter-spacing: -0.015em;
 
-  /* Line Heights */
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.6;
-  --line-height-relaxed: 1.6;
+  --type-headline-sm-size: 18px;
+  --type-headline-sm-weight: 600;
+  --type-headline-sm-line-height: 26px;
+  --type-headline-sm-letter-spacing: -0.01em;
 
-  /* Easing Curves */
-  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out-smooth: cubic-bezier(0, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --type-title-md-size: 15px;
+  --type-title-md-weight: 600;
+  --type-title-md-line-height: 22px;
+  --type-title-md-letter-spacing: -0.005em;
 
-  /* Transition Timings */
-  --transition-fast: 150ms var(--ease-out-smooth);
-  --transition-normal: 300ms var(--ease-in-out-smooth);
-  --transition-slow: 500ms var(--ease-in-out-smooth);
-  --transition-spring: 600ms var(--ease-spring);
+  --type-body-lg-size: 15px;
+  --type-body-lg-weight: 400;
+  --type-body-lg-line-height: 24px;
+  --type-body-lg-letter-spacing: 0em;
 
-  /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-pill: 9999px;
+  --type-body-md-size: 13px;
+  --type-body-md-weight: 400;
+  --type-body-md-line-height: 20px;
+  --type-body-md-letter-spacing: 0em;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
-  --shadow: var(--shadow-sm);
-}
+  --type-body-sm-size: 12px;
+  --type-body-sm-weight: 400;
+  --type-body-sm-line-height: 18px;
+  --type-body-sm-letter-spacing: 0.01em;
 
-/* Reduced Motion Preference */
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --transition-fast: 0ms !important;
-    --transition-normal: 0ms !important;
-    --transition-slow: 0ms !important;
-    --transition-spring: 0ms !important;
-  }
+  --type-code-md-size: 13px;
+  --type-code-md-weight: 400;
+  --type-code-md-line-height: 22px;
+  --type-code-md-letter-spacing: -0.01em;
+
+  --type-code-sm-size: 11px;
+  --type-code-sm-weight: 500;
+  --type-code-sm-line-height: 16px;
+  --type-code-sm-letter-spacing: 0em;
+
+  --type-label-sm-size: 11px;
+  --type-label-sm-weight: 500;
+  --type-label-sm-line-height: 14px;
+  --type-label-sm-letter-spacing: 0.04em;
+
+  /* Rounded Radii (Tight, Controlled Architectural Precision) */
+  --rounded-sm: 0.125rem;   /* 2px */
+  --rounded-default: 0.25rem; /* 4px - Badges, Pills, Inline Code */
+  --rounded-md: 0.375rem;   /* 6px - Buttons, Inputs, Selects */
+  --rounded-lg: 0.5rem;     /* 8px - Panels, Cards, Modal Dialogs */
+  --rounded-xl: 0.75rem;    /* 12px */
+  --rounded-full: 9999px;
+
+  --radius-sm: var(--rounded-default);
+  --radius: var(--rounded-md);
+  --radius-md: var(--rounded-md);
+  --radius-lg: var(--rounded-lg);
+  --radius-xl: var(--rounded-xl);
+  --radius-pill: var(--rounded-full);
+
+  /* Spacing (4px baseline rhythm) */
+  --gutter: 1rem;            /* 16px */
+  --gutter-desktop: 1.5rem;  /* 24px */
+  --margin: 1rem;            /* 16px */
+  --margin-desktop: 2rem;    /* 32px */
+  --space-xs: 0.25rem;       /* 4px */
+  --space-sm: 0.5rem;        /* 8px */
+  --space-md: 0.75rem;       /* 12px */
+  --space-lg: 1rem;          /* 16px */
+  --space-xl: 1.5rem;        /* 24px */
+  --space-2xl: 2rem;         /* 32px */
+
+  /* Elevation Tiers (Restrained low-contrast depth) */
+  --elevation-0: none;
+  --elevation-1: 0 0 0 0 transparent;
+  --elevation-2: 0 4px 12px -2px rgba(15, 23, 42, 0.04), 0 2px 4px -1px rgba(15, 23, 42, 0.02);
+  --elevation-3: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+  --shadow-sm: var(--elevation-1);
+  --shadow-md: var(--elevation-2);
+  --shadow-lg: var(--elevation-3);
+
+  /* Focus & Accessibility */
+  --touch-target-min: 44px;
+  --focus-ring: 0 0 0 1px #4f46e5;
+  --focus-outline: 2px solid #4f46e5;
+  --focus-outline-offset: 1px;
 }

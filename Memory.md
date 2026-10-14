@@ -125,6 +125,17 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - API Schema & Router Integration: Extended `ClauseResponse` and `SearchResultItem` with optional fields (`risk_score`, `risk_score_normalized`, `uncertainty`, `uncertainty_level`) across analyze, history, and search routers.
   - Frontend Display: Enhanced `ClauseCard.jsx` to render color-coded numerical risk score badges and uncertainty indicators (Low: green, Medium: amber, High: red).
   - Verification: All 37 backend pytest tests passing (including 7 new unit tests for risk scoring, linguistic factors, boundary uncertainty, and caching), Vite build passing with 0 errors, live servers verified running on port 3000 and port 8000.
+- [2026-10-14 23:00] Precision Legal Canvas Design System DONE:
+  - Tokens & System Colors: Rewrote `frontend/src/styles/tokens.css` with the full Precision Legal Canvas tokens: M3 palette (`surface: #f8f9ff`, `surface-dim: #cbdbf5`, container lowest to highest `#ffffff` to `#d3e4fe`, `on-surface: #0b1c30`, `primary: #3525cd`, `primary-container: #4f46e5`, `secondary: #565e74`, `tertiary: #004598`, `error: #ba1a1a`, fixed variants), risk & semantic tints (Critical `#fff1f2` / `#9f1239`, Moderate `#fffbeb` / `#92400e`, Approved `#f0fdf4` / `#166534`), and diff tokens (`diff-inserted: #ecfdf5` / `#065f46`, `diff-deleted: #fff1f2` / `#991b1b`).
+  - Typography & Technical Letterforms: Implemented open technical letterforms (`font-feature-settings: "cv02", "cv03", "cv04", "cv11"`) for Inter, tabular numerals (`tnum`) across all numerics and statistics, and full typography scale (`display-lg`, `headline-lg`, `headline-sm`, `title-md`, `body-lg`, `body-md`, `body-sm`, `code-md`, `code-sm`, `label-sm`).
+  - Components & Action Hierarchy:
+    - Buttons: Primary solid `#0f172a`, Secondary crisp white `#ffffff` with `#e2e8f0` border, Accent Interactive `#4f46e5`, Destructive soft crimson `#fff1f2`.
+    - RiskBadges: 11px uppercase `JetBrains Mono`, padding 2px 6px, 4px radius, with semantic glyphs (`●` for Critical/Moderate, `✓` for Approved).
+    - SearchBar: 13px font size, 8px 12px padding, resting `#ffffff` with 1px `#e2e8f0` border, active focus `box-shadow: 0 0 0 1px #4f46e5`, and inline `⌘K` badge.
+    - ClauseCard: Pure white canvas, 1px `#e2e8f0` stroke, 8px radius (`rounded-lg`), 3px solid left border matching severity (`#e11d48`, `#d97706`, `#16a34a`), and raw legal contract text rendered in `code-md` (`JetBrains Mono`, 13px/22px).
+    - Redlines & Diffs: Live contract term redline preview with inserted baseline stroke and deleted strikethrough.
+    - Accessible Forms: 16px × 16px checkbox with 4px radius and `#0f172a` check, 13px inputs with explicit label, helper, and error states.
+  - Verification: Production Vite build compiled cleanly in 4.69s. All 37/37 backend pytest tests passed (100%).
 
 
 

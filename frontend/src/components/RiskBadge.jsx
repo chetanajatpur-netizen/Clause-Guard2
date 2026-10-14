@@ -1,3 +1,5 @@
+import React from 'react'
+
 function RiskBadge({ level }) {
   if (!level) {
     return (
@@ -9,22 +11,28 @@ function RiskBadge({ level }) {
 
   const badgeConfig = {
     High: {
-      className: 'badge badge-high',
-      border: 'var(--risk-high-border)',
-      glow: 'var(--glow-high)',
-      label: 'High Risk',
+      className: 'badge badge-critical',
+      glyph: '●',
+      label: 'Critical Risk',
+      border: 'var(--risk-critical-border)',
+      bg: 'var(--risk-critical-bg)',
+      color: 'var(--risk-critical-text)',
     },
     Medium: {
-      className: 'badge badge-medium',
-      border: 'var(--risk-medium-border)',
-      glow: 'var(--glow-medium)',
-      label: 'Medium Risk',
+      className: 'badge badge-moderate',
+      glyph: '●',
+      label: 'Moderate Risk',
+      border: 'var(--risk-moderate-border)',
+      bg: 'var(--risk-moderate-bg)',
+      color: 'var(--risk-moderate-text)',
     },
     Low: {
-      className: 'badge badge-low',
-      border: 'var(--risk-low-border)',
-      glow: 'var(--glow-low)',
-      label: 'Low Risk',
+      className: 'badge badge-compliant',
+      glyph: '✓',
+      label: 'Approved',
+      border: 'var(--risk-clean-border)',
+      bg: 'var(--risk-clean-bg)',
+      color: 'var(--risk-clean-text)',
     },
   }
 
@@ -34,11 +42,13 @@ function RiskBadge({ level }) {
     <span
       className={`risk-badge ${config.className}`}
       style={{
-        boxShadow: config.glow,
+        backgroundColor: config.bg,
         border: `1px solid ${config.border}`,
+        color: config.color,
       }}
     >
-      {config.label}
+      <span aria-hidden="true" style={{ fontSize: '9px', lineHeight: 1 }}>{config.glyph}</span>
+      <span>{config.label}</span>
     </span>
   )
 }
