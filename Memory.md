@@ -147,6 +147,12 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Interactive Features: Ambient mouse-following spotlight, 3D tilt cards on mousemove, rotating radar scanner beam with toggle control, floating HUD overlay inspection pills, auto-remediation batch action with score animation (72 -> 48), KPI cards, active audit pipeline stream with category filters (All Contracts, Critical Alerts, Pending Approval, Auto-Remediated), and dynamic Scenario Playbook Stress Tester with reactive sliders.
   - View Switching: Seamless zero-reload switching between the white "Precision Legal Canvas" and the dark "3D Spatial Cockpit" directly in `App.jsx` and the navigation bar.
   - Verification: `npm run build` compiled cleanly in 4.60s. Regression tests passing. Dev servers live on port 3000 and 8000.
+- [2026-10-15 21:25] Feature 3 Phase 2 DONE (Clause Heat-map):
+  - HeatMap Component: Created `frontend/src/components/HeatMap.jsx` rendering an interactive horizontal proportional strip where segment count matches the exact clause count from `/analyze`.
+  - Proportional Sizing & Accessible Textures: Each segment width is proportional to the character length of the clause (`(len / totalChars) * 100%`). High risk segments feature a dual-encoding with high-contrast diagonal hatch stripes (`repeating-linear-gradient(45deg, #e11d48, #e11d48 4px, #9f1239 4px, #9f1239 8px)`), satisfying WCAG 2.1 AA accessibility guidelines by never communicating risk solely through color.
+  - Interactive Navigation & Screen Reader Support: Each segment is an accessible `<button>` equipped with `aria-label="Clause N, <label>, <risk> risk"`, native tooltip, and an active hover/focus inspector bar. Clicking or pressing Enter smoothly scrolls into view the target `#clause-{position}` and temporarily highlights it.
+  - Pages Integration: Mounted `HeatMap` in both `frontend/src/pages/Analyze.jsx` and the live auditor on `frontend/src/pages/Landing.jsx`.
+  - Verification: Production Vite build compiled cleanly in 4.95s with 0 errors. Backend regression test suite passed 9/9 tests (100%).
 
 
 

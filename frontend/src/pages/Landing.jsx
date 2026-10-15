@@ -6,6 +6,7 @@ import ClauseCard from '../components/ClauseCard'
 import RiskBadge from '../components/RiskBadge'
 import SearchBar from '../components/SearchBar'
 import ViewModeToggle from '../components/ViewModeToggle'
+import HeatMap from '../components/HeatMap'
 import { analyzeContract, searchDocument } from '../api/client'
 import '../styles/landing.css'
 
@@ -295,6 +296,9 @@ export default function Landing({ onSwitchToCockpit }) {
                     </div>
                   </div>
                 </div>
+
+                {/* Clause Heat Map (Feature 3) */}
+                <HeatMap clauses={result.clauses} />
 
                 {/* Natural Language Semantic Search */}
                 <SearchBar onSearch={handleSearch} loading={searchLoading} />

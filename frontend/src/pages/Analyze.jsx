@@ -7,6 +7,7 @@ import ClauseCard from '../components/ClauseCard'
 import RiskBadge from '../components/RiskBadge'
 import SearchBar from '../components/SearchBar'
 import ViewModeToggle from '../components/ViewModeToggle'
+import HeatMap from '../components/HeatMap'
 import { analyzeContract, searchDocument, getDocument } from '../api/client'
 
 function Analyze() {
@@ -111,6 +112,9 @@ function Analyze() {
               </div>
             </div>
           </div>
+
+          {/* Clause Heat Map (Feature 3) */}
+          <HeatMap clauses={result.clauses} />
 
           {/* Search */}
           <SearchBar onSearch={handleSearch} loading={searchLoading} />

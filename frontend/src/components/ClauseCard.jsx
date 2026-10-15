@@ -152,10 +152,12 @@ export default function ClauseCard({ clause, viewMode = 'lawyer' }) {
 
   return (
     <article
-      id={`clause-${clause.position}`}
+      id={`clause-${clause.position !== undefined ? clause.position : clause.id}`}
+      tabIndex={-1}
       className="clause-card card"
       onClick={handleCardClick}
       style={{
+        scrollMarginTop: '100px',
         backgroundColor: '#ffffff',
         border: '1px solid var(--border-delicate)',
         borderLeft: `3px solid ${accentBorderColor}`,
