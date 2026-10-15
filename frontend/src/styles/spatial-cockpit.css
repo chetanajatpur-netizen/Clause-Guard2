@@ -1,0 +1,145 @@
+/* Spatial Cockpit Dark Editorial Theme Styles */
+.spatial-cockpit {
+  --sc-bg: #0b0e15;
+  --sc-surface-lowest: #0a0e18;
+  --sc-surface-low: #171b26;
+  --sc-surface: #1c1f2a;
+  --sc-surface-high: #262a35;
+  --sc-surface-highest: #313540;
+  --sc-surface-bright: #353944;
+  --sc-on-surface: #dfe2f1;
+  --sc-on-surface-variant: #c7c4d8;
+  --sc-outline: #918fa1;
+  --sc-outline-variant: #464555;
+  --sc-primary: #c3c0ff;
+  --sc-primary-container: #4f46e5;
+  --sc-secondary: #4cd7f6;
+  --sc-secondary-container: #03b5d3;
+  --sc-tertiary: #ffb3ad;
+  --sc-error: #ffb4ab;
+  --sc-error-container: #93000a;
+
+  background-color: var(--sc-bg);
+  color: var(--sc-on-surface);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  padding: 12px;
+}
+
+@media (min-width: 768px) {
+  .spatial-cockpit {
+    padding: 24px;
+  }
+}
+
+/* Animations */
+@keyframes sc-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes sc-float-reverse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(6px); }
+}
+@keyframes sc-pulse-glow {
+  0%, 100% { opacity: 0.35; filter: drop-shadow(0 0 12px rgba(76, 215, 246, 0.4)); }
+  50% { opacity: 0.75; filter: drop-shadow(0 0 24px rgba(76, 215, 246, 0.7)); }
+}
+@keyframes sc-sweep-radar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes sc-orbit-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes sc-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sc-animate-float {
+  animation: sc-float 4s ease-in-out infinite;
+}
+.sc-animate-float-reverse {
+  animation: sc-float-reverse 5s ease-in-out infinite;
+}
+.sc-animate-orbit {
+  animation: sc-orbit-slow 28s linear infinite;
+}
+.sc-animate-radar {
+  animation: sc-sweep-radar 4.5s linear infinite;
+}
+.sc-animate-spin {
+  animation: sc-spin 1s linear infinite;
+  display: inline-block;
+}
+
+/* Dot Mesh Backdrop */
+.sc-grid-mesh {
+  background-image: radial-gradient(rgba(145, 143, 161, 0.12) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Tilt Card */
+.sc-tilt-card {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+.sc-tilt-card:hover {
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(76, 215, 246, 0.15);
+  border-color: rgba(145, 143, 161, 0.5);
+}
+
+/* Top bar switcher tab */
+.cockpit-view-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sc-surface-high);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--sc-outline-variant);
+}
+
+.cockpit-view-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cockpit-view-btn.active {
+  background: #ffffff;
+  color: #0b1c30;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.cockpit-view-btn.inactive {
+  background: transparent;
+  color: var(--sc-outline);
+}
+.cockpit-view-btn.inactive:hover {
+  color: var(--sc-on-surface);
+}
+
+/* Spotlight */
+.sc-spotlight {
+  pointer-events: none;
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 9999px;
+  background: rgba(49, 53, 64, 0.35);
+  filter: blur(120px);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease;
+  opacity: 0.35;
+  z-index: 0;
+}

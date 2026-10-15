@@ -9,7 +9,7 @@ import ViewModeToggle from '../components/ViewModeToggle'
 import { analyzeContract, searchDocument } from '../api/client'
 import '../styles/landing.css'
 
-export default function Landing() {
+export default function Landing({ onSwitchToCockpit }) {
   // Form component demo state
   const [testEmail, setTestEmail] = useState('')
   const [contractTitle, setContractTitle] = useState('')
@@ -94,6 +94,31 @@ export default function Landing() {
           </ul>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {onSwitchToCockpit && (
+              <button
+                type="button"
+                onClick={onSwitchToCockpit}
+                style={{
+                  background: '#0f131d',
+                  color: '#c3c0ff',
+                  border: '1px solid #464555',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontFamily: 'var(--font-mono)',
+                  cursor: 'pointer',
+                  borderRadius: '6px',
+                  fontWeight: 600,
+                  transition: 'all 0.2s ease',
+                }}
+                title="Switch to 3D Spatial Cockpit view"
+              >
+                <span>🌐</span>
+                <span>3D Spatial Cockpit</span>
+              </button>
+            )}
             <a href="#analyzer" className="landing-btn landing-btn-primary">
               Audit Contract ↓
             </a>
