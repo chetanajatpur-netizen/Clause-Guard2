@@ -3,7 +3,12 @@ import RiskBadge from './RiskBadge'
 import ClauseExplanation from './ClauseExplanation'
 import explanations from '../data/clause_explanations.json'
 
-export default function ClauseCard({ clause, viewMode = 'lawyer' }) {
+export default function ClauseCard({
+  clause,
+  viewMode = 'lawyer',
+  isSearchActive = false,
+  searchMatch = null,
+}) {
   const [textExpanded, setTextExpanded] = useState(false)
   const [explanationExpanded, setExplanationExpanded] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
@@ -154,22 +159,69 @@ export default function ClauseCard({ clause, viewMode = 'lawyer' }) {
     <article
       id={`clause-${clause.position !== undefined ? clause.position : clause.id}`}
       tabIndex={-1}
-      className="clause-card card"
+      className={`clause-card card ${searchMatch ? 'search-match-top' : ''}`}
       onClick={handleCardClick}
       style={{
         scrollMarginTop: '100px',
         backgroundColor: '#ffffff',
-        border: '1px solid var(--border-delicate)',
-        borderLeft: `3px solid ${accentBorderColor}`,
+        border: searchMatch ? '1px solid var(--primary-container)' : '1px solid var(--border-delicate)',
+        borderLeft: searchMatch ? '5px solid var(--primary-container)' : `3px solid ${accentBorderColor}`,
         borderRadius: 'var(--rounded-lg)',
         padding: '16px',
         marginBottom: '12px',
         cursor: isRisky && clause.label !== 'No Clause' ? 'pointer' : 'default',
-        boxShadow: 'var(--shadow-sm)',
-        transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
+        boxShadow: searchMatch ? '0 4px 12px rgba(79, 70, 229, 0.15)' : 'var(--shadow-sm)',
+        opacity: isSearchActive ? (searchMatch ? 1 : 0.5) : 1,
+        transition: 'border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease',
+        transform: searchMatch ? 'scale(1.002)' : 'none',
       }}
-      aria-label={`Clause: ${clause.label}, Risk: ${clause.risk_level || 'None'}`}
+      aria-label={`Clause: ${clause.label}, Risk: ${clause.risk_level || 'None'}${searchMatch ? `, Search match rank ${searchMatch.rank}` : ''}`}
     >
+      {/* Search Result Highlight: Similarity Bar with numerical score (Feature 4) */}
+      {searchMatch && (
+        <div
+          className="search-similarity-bar"
+          style={{
+            backgroundColor: 'var(--surface-container-low)',
+            border: '1px solid var(--border-delicate)',
+            borderRadius: 'var(--rounded-md)',
+            padding: '8px 12px',
+            marginBottom: '12px',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '4px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--primary)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span>🎯</span>
+              <span>Top Match #{searchMatch.rank}</span>
+              <span>•</span>
+              <span className="tnum">{(searchMatch.similarity * 100).toFixed(1)}% Similarity</span>
+            </span>
+            <span className="tnum" style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+              Similarity: {searchMatch.similarity.toFixed(4)}
+            </span>
+          </div>
+          <div
+            style={{
+              width: '100%',
+              height: '6px',
+              borderRadius: '9999px',
+              backgroundColor: 'var(--surface-subtle-2)',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                width: `${Math.min(100, Math.max(5, searchMatch.similarity * 100))}%`,
+                height: '100%',
+                backgroundColor: 'var(--primary-container)',
+                borderRadius: '9999px',
+                transition: 'width 0.3s ease',
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Card Header: Type Tag, Risk Badge, Read-Aloud, Confidence, Risk Score, Uncertainty */}
       <div
         style={{

@@ -408,4 +408,40 @@ def test_regression_analyze_saas_msa_docx(client: TestClient) -> None:
     assert data["risk_summary"]["overall_risk"] in ("High", "Medium", "Low")
 
 
+def test_search_when_can_i_terminate_doc01(client: TestClient) -> None:
+    """Phase 3 Test: query 'when can I terminate?' on DOC-01 returns a Termination clause in top 3."""
+    contract_path = Path(__file__).resolve().parent.parent.parent / "clauseguard-testkit" / "contracts" / "DOC-01_freelance_agreement.txt"
+    assert contract_path.exists(), f"DOC-01 missing at {contract_path}"
+
+    with open(contract_path, "rb") as f:
+        upload_resp = client.post(
+            "/api/v1/analyze",
+            files={"file": ("DOC-01_freelance_agreement.txt", f, "text/plain")},
+        )
+    assert upload_resp.status_code == 200
+    doc_id = upload_resp.json()["document_id"]
+
+    # Search for termination query
+    query = "when can I terminate?"
+    search_resp = client.post(
+        "/api/v1/search",
+        json={"document_id": doc_id, "query": query, "top_k": 3},
+    )
+    assert search_resp.status_code == 200
+    data = search_resp.json()
+    results = data["results"]
+    assert len(results) <= 3
+
+    # Check top 3 results include a Termination clause
+    top_3_labels = [r["label"] for r in results]
+    top_3_texts = [r["text"].lower() for r in results]
+
+    has_termination_label = any("Termination" in label for label in top_3_labels)
+    has_termination_text = any("terminate" in text or "termination" in text for text in top_3_texts)
+
+    assert has_termination_label or has_termination_text, (
+        f"Expected Termination clause in top 3 for '{query}', but got: {top_3_labels}"
+    )
+
+
 

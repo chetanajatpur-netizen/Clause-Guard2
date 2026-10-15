@@ -55,8 +55,6 @@ export default function Landing({ onSwitchToCockpit }) {
     }
   }
 
-  const displayClauses = searchResults || (result ? result.clauses : [])
-
   return (
     <div className="landing-container">
       {/* Skip Link for Keyboard Accessibility */}
@@ -306,23 +304,84 @@ export default function Landing({ onSwitchToCockpit }) {
                 {/* View Mode Toggle: Lawyer View vs Plain English */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
                   <ViewModeToggle viewMode={viewMode} onChange={setViewMode} />
-                  {searchResults && (
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => setSearchResults(null)}
-                      style={{ padding: '4px 12px', fontSize: '12px', minHeight: '32px' }}
-                    >
-                      Clear Search Results ({searchResults.length})
-                    </button>
-                  )}
                 </div>
 
-                {/* Extracted Clauses List */}
+                {searchResults && (() => {
+                  const top3Results = searchResults.slice(0, 3)
+                  return (
+                    <div
+                      style={{
+                        backgroundColor: '#f8f9ff',
+                        border: '1px solid #c7c4d8',
+                        borderRadius: '6px',
+                        padding: '10px 14px',
+                        marginBottom: '16px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                        gap: '10px',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '13px', fontWeight: 600, color: '#0b1c30' }}>
+                          Top {top3Results.length} matching clauses highlighted
+                        </span>
+                        <span style={{ fontSize: '12px', color: '#64748b' }}>
+                          (Non-matching clauses dimmed to 50%)
+                        </span>
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '11px',
+                            color: '#3525cd',
+                            backgroundColor: '#ffffff',
+                            padding: '2px 8px',
+                            borderRadius: '4px',
+                            border: '1px solid #c7c4d8',
+                          }}
+                        >
+                          ℹ️ Similarity ranks clauses. It is not a confidence score.
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setSearchResults(null)}
+                        className="btn btn-secondary"
+                        style={{ padding: '4px 12px', fontSize: '12px', minHeight: '32px', cursor: 'pointer' }}
+                      >
+                        Clear search
+                      </button>
+                    </div>
+                  )
+                })()}
+
+                {/* Extracted Clauses List (All clauses remain visible; non-matches dimmed to 50%) */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {displayClauses.map((clause) => (
-                    <ClauseCard key={clause.id || clause.position} clause={clause} viewMode={viewMode} />
-                  ))}
+                  {(() => {
+                    const top3Results = searchResults ? searchResults.slice(0, 3) : []
+                    const searchMatchMap = new Map()
+                    top3Results.forEach((r, rank) => {
+                      if (r.clause_id !== undefined) searchMatchMap.set(r.clause_id, { rank: rank + 1, similarity: r.similarity })
+                      if (r.position !== undefined) searchMatchMap.set(r.position, { rank: rank + 1, similarity: r.similarity })
+                    })
+
+                    return result.clauses.map((clause, i) => {
+                      const pos = clause.position !== undefined ? clause.position : i
+                      const matchInfo = searchResults ? (searchMatchMap.get(clause.id) || searchMatchMap.get(pos)) : null
+
+                      return (
+                        <ClauseCard
+                          key={clause.id || pos}
+                          clause={clause}
+                          viewMode={viewMode}
+                          isSearchActive={Boolean(searchResults)}
+                          searchMatch={matchInfo}
+                        />
+                      )
+                    })
+                  })()}
                 </div>
               </div>
             )}

@@ -153,6 +153,12 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Interactive Navigation & Screen Reader Support: Each segment is an accessible `<button>` equipped with `aria-label="Clause N, <label>, <risk> risk"`, native tooltip, and an active hover/focus inspector bar. Clicking or pressing Enter smoothly scrolls into view the target `#clause-{position}` and temporarily highlights it.
   - Pages Integration: Mounted `HeatMap` in both `frontend/src/pages/Analyze.jsx` and the live auditor on `frontend/src/pages/Landing.jsx`.
   - Verification: Production Vite build compiled cleanly in 4.95s with 0 errors. Backend regression test suite passed 9/9 tests (100%).
+- [2026-10-15 21:45] Feature 4 Phase 3 DONE (Ask-the-contract highlighting):
+  - Highlighting & Accent Bar: Updated `frontend/src/components/ClauseCard.jsx` to highlight top 3 matches from semantic search with a prominent 5px left accent bar (`borderLeft: 5px solid var(--primary-container)`), background tint, and a visual similarity progress bar displaying the exact numerical score (e.g. `Similarity: 0.6641` with a fill percentage bar).
+  - Dimming Non-Matches: Preserved all contract clauses in the DOM (did not slice or hide non-matching clauses); non-top-3 clauses are dimmed to 50% opacity (`opacity: 0.5`) while search is active, as specified.
+  - Required Disclaimer Note: Added `"ℹ️ Similarity ranks clauses. It is not a confidence score."` prominently displayed in both `Analyze.jsx` and `Landing.jsx` search summary strips.
+  - Automated Regression Test: Added `test_search_when_can_i_terminate_doc01` to `backend/tests/test_api.py`. Tested query `"when can I terminate?"` on `DOC-01_freelance_agreement.txt`. Verified Rank 1 returned is `Termination for Convenience` (position 7) with `similarity = 0.6641` (Rank 2: Non-Compete pos=5 similarity=0.3845, Rank 3: No Clause pos=2 similarity=0.2689).
+  - Verification: `npm run build` compiled in 4.90s. Pytest search test passed in 11.67s. All 9 regression tests passed in 48.47s.
 
 
 

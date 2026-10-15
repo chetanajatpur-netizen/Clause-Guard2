@@ -118,32 +118,89 @@ function Analyze() {
 
           {/* Search */}
           <SearchBar onSearch={handleSearch} loading={searchLoading} />
-          {searchResults && (
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px' }}>
-              Showing {searchResults.length} search results
-              <button
-                onClick={() => setSearchResults(null)}
-                style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', marginLeft: '8px', fontSize: '13px' }}
-              >
-                Clear search
-              </button>
-            </p>
-          )}
 
-          {/* Clause List */}
-          <div>
-            {displayClauses.map((clause, i) => (
-              <ClauseCard
-                key={clause.id || clause.clause_id || i}
-                clause={{
-                  ...clause,
-                  id: clause.id || clause.clause_id,
-                  risk_level: clause.risk_level,
-                  confidence: clause.confidence || clause.similarity || 0,
+          {searchResults && (() => {
+            const top3Results = searchResults.slice(0, 3)
+            return (
+              <div
+                style={{
+                  backgroundColor: 'var(--surface-container-low)',
+                  border: '1px solid var(--border-delicate)',
+                  borderRadius: 'var(--rounded-md)',
+                  padding: '10px 14px',
+                  marginBottom: '16px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: '10px',
                 }}
-                viewMode={viewMode}
-              />
-            ))}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--on-surface)' }}>
+                    Top {top3Results.length} matching clauses highlighted
+                  </span>
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                    (Non-matching clauses dimmed to 50%)
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '11px',
+                      color: 'var(--primary)',
+                      backgroundColor: 'var(--canvas-pure)',
+                      padding: '2px 8px',
+                      borderRadius: 'var(--rounded-default)',
+                      border: '1px solid var(--border-delicate)',
+                    }}
+                  >
+                    ℹ️ Similarity ranks clauses. It is not a confidence score.
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setSearchResults(null)}
+                  className="btn btn-secondary"
+                  style={{ padding: '4px 12px', fontSize: '12px', minHeight: '32px', cursor: 'pointer' }}
+                >
+                  Clear search
+                </button>
+              </div>
+            )
+          })()}
+
+          {/* Clause List (All clauses remain visible; non-matches are dimmed to 50%) */}
+          <div>
+            {(() => {
+              const top3Results = searchResults ? searchResults.slice(0, 3) : []
+              const searchMatchMap = new Map()
+              top3Results.forEach((r, rank) => {
+                if (r.clause_id !== undefined) searchMatchMap.set(r.clause_id, { rank: rank + 1, similarity: r.similarity })
+                if (r.position !== undefined) searchMatchMap.set(r.position, { rank: rank + 1, similarity: r.similarity })
+              })
+
+              return result.clauses.map((clause, i) => {
+                const pos = clause.position !== undefined ? clause.position : i
+                const matchInfo = searchResults ? (searchMatchMap.get(clause.id) || searchMatchMap.get(pos)) : null
+
+                return (
+                  <ClauseCard
+                    key={clause.id || clause.clause_id || i}
+                    clause={{
+                      ...clause,
+                      id: clause.id || clause.clause_id,
+                      position: pos,
+                      risk_level: clause.risk_level,
+                      confidence: clause.confidence || 0,
+                    }}
+                    viewMode={viewMode}
+                    isSearchActive={Boolean(searchResults)}
+                    searchMatch={matchInfo}
+                  />
+                )
+              })
+            })()}
           </div>
 
           {/* Upload another */}
