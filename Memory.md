@@ -142,6 +142,11 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Speech Synthesis Read-Aloud: Added read-aloud button per card using `window.speechSynthesis` (zero external libraries). Reads plain-English note or summary, toggles speech state (Play/Stop), gracefully disables if `speechSynthesis` is unavailable, and properly cancels speech on unmount.
   - Pages Integration: Wired `ViewModeToggle` into both `frontend/src/pages/Analyze.jsx` and the live auditor in `frontend/src/pages/Landing.jsx`.
   - Verification: Vite build passed cleanly in 5.99s. All 37/37 backend tests passed.
+- [2026-10-15 21:05] Toggleable 3D Spatial Cockpit DONE:
+  - Implementation: Built `frontend/src/components/SpatialCockpit.jsx` and `frontend/src/styles/spatial-cockpit.css` featuring the complete dark editorial Spatial Clause Risk Engine from the user mockup.
+  - Interactive Features: Ambient mouse-following spotlight, 3D tilt cards on mousemove, rotating radar scanner beam with toggle control, floating HUD overlay inspection pills, auto-remediation batch action with score animation (72 -> 48), KPI cards, active audit pipeline stream with category filters (All Contracts, Critical Alerts, Pending Approval, Auto-Remediated), and dynamic Scenario Playbook Stress Tester with reactive sliders.
+  - View Switching: Seamless zero-reload switching between the white "Precision Legal Canvas" and the dark "3D Spatial Cockpit" directly in `App.jsx` and the navigation bar.
+  - Verification: `npm run build` compiled cleanly in 4.60s. Regression tests passing. Dev servers live on port 3000 and 8000.
 
 
 
