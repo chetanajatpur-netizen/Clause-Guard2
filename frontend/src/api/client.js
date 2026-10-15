@@ -69,3 +69,11 @@ export async function deleteDocument(id) {
 export async function getInsights() {
   return request('/api/v1/insights');
 }
+
+export async function getClauseRedline(clauseText, clauseLabel) {
+  return request('/api/v1/redline', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ clause_text: clauseText, clause_label: clauseLabel }),
+  });
+}

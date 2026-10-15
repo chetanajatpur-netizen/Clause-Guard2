@@ -159,6 +159,11 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Required Disclaimer Note: Added `"ℹ️ Similarity ranks clauses. It is not a confidence score."` prominently displayed in both `Analyze.jsx` and `Landing.jsx` search summary strips.
   - Automated Regression Test: Added `test_search_when_can_i_terminate_doc01` to `backend/tests/test_api.py`. Tested query `"when can I terminate?"` on `DOC-01_freelance_agreement.txt`. Verified Rank 1 returned is `Termination for Convenience` (position 7) with `similarity = 0.6641` (Rank 2: Non-Compete pos=5 similarity=0.3845, Rank 3: No Clause pos=2 similarity=0.2689).
   - Verification: `npm run build` compiled in 4.90s. Pytest search test passed in 11.67s. All 9 regression tests passed in 48.47s.
+- [2026-10-15 22:02] Feature 1 Phase 4 DONE (Redline generator):
+  - Templates & Engine: Created `backend/app/redline/templates.json` containing regex-matched safer wording templates for the 10 PRD clause categories with negotiation rationales and `verify_status: "seed_unreviewed"`. Implemented `backend/app/redline/engine.py` with `suggest_redline(label, text)` computing word-level diff segments via `difflib.SequenceMatcher` and filling all template placeholders.
+  - API Endpoint: Added `POST /api/v1/redline` (`backend/app/routers/redline.py`, `backend/app/schemas/redline.py`) returning `diff_segments`, `replacement`, `rationale`, and `verify_status`. Uses standard error envelope for bad inputs.
+  - Frontend Component: Added accessible "Suggest safer wording" button in `frontend/src/components/ClauseCard.jsx` linked via `getClauseRedline` in `frontend/src/api/client.js`. Renders semantic diff markup with accessible screen-reader prefixes (`<span className="sr-only">removed: </span><del>...</del>` and `<span className="sr-only">added: </span><ins><strong><u>...</u></strong></ins>`) alongside rationale and verification badge.
+  - Verification: `npm run build` compiled cleanly in 11.96s. Added `backend/tests/test_redline.py` testing diff structure, no-match behavior, placeholder substitution, benign DOC-06 rejection, DOC-01 termination/liability redline generation, and API error envelopes (9/9 passed in 5.30s). Full backend regression suite passed (9/9 in 56.84s).
 
 
 

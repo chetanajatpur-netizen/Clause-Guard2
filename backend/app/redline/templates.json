@@ -1,0 +1,162 @@
+{
+  "Termination for Convenience": [
+    {
+      "id": "term_one_sided_short_notice",
+      "match": "(?i)(?P<client>Client|Company|Employer)\\s+may\\s+terminate\\s+this\\s+Agreement\\s+at\\s+any\\s+time(?:,\\s*for\\s+any\\s+reason\\s+or\\s+for\\s+no\\s+reason)?(?:,\\s*by\\s+giving\\s+(?P<party>Contractor|Employee|Vendor)\\s+(?P<notice>[^.]+?)\\s+written\\s+notice)?[^.]*?(?:\\.\\s*(?P=party)\\s+may\\s+not\\s+terminate[^.]*)?",
+      "replace_with": "Either party may terminate this Agreement for convenience at any time upon thirty (30) days' prior written notice to the other party, subject to payment for all Services satisfactorily performed and non-cancelable expenses incurred prior to the effective date of termination.",
+      "rationale": "Make termination for convenience mutual and extend the notice period to a minimum of 30 days to ensure fair planning and compensation for completed work.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "term_short_notice_simple",
+      "match": "(?i)(?:twenty-four\\s*\\(24\\)\\s*hours['’]?|48\\s*hours['’]?|\\b(?:one|1|2|two)\\s+days?['’]?)\\s+written\\s+notice",
+      "replace_with": "thirty (30) days' prior written notice",
+      "rationale": "Extend unreasonably short notice period to standard 30-day notice period.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Uncapped Liability": [
+    {
+      "id": "liability_uncapped_clause",
+      "match": "(?i)(?:(?P<party>Contractor|Vendor|Consultant)['’]?s\\s+liability\\s+(?:under\\s+this\\s+Agreement\\s+)?shall\\s+not\\s+be\\s+subject\\s+to\\s+any\\s+limit\\s+or\\s+cap|shall\\s+not\\s+be\\s+subject\\s+to\\s+any\\s+limit\\s+or\\s+cap)",
+      "replace_with": "{party}'s total aggregate liability under this Agreement shall be capped at the total fees paid or payable by {client} in the twelve (12) months preceding the claim. Neither party shall be liable for indirect or consequential damages.",
+      "rationale": "Cap total financial exposure to fees paid in the past 12 months and exclude consequential damages to prevent disproportionate personal liability.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "liability_unlimited_indemnity",
+      "match": "(?i)shall\\s+indemnify\\s+(?P<client>Client|Company)[^.]*?against,\\s*all\\s+losses[^.]*?without\\s+(?:any\\s+)?(?:limit|cap)",
+      "replace_with": "shall indemnify {client} against direct, proven losses arising from material breach, subject to the mutual liability cap in this Agreement",
+      "rationale": "Limit indemnification obligation to direct proven damages subject to the overall contract liability cap.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Non-Compete": [
+    {
+      "id": "non_compete_post_termination",
+      "match": "(?i)For\\s+a\\s+period\\s+of\\s+(?P<duration>[^.]+?)\\s+after\\s+(?:the\\s+)?termination\\s+of\\s+this\\s+Agreement,\\s*(?P<party>Contractor|Employee|Vendor)\\s+shall\\s+not[^.]*?competes?\\s+with[^.]*",
+      "replace_with": "During the active Term of this Agreement only, {party} shall not directly provide software development services to direct competitors of {client} for products substantially identical to the Services. This non-competition obligation shall expire immediately upon termination of this Agreement.",
+      "rationale": "Remove post-termination restraint; limit non-compete strictly to the active term and direct competitors so your future livelihood is not blocked.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "non_compete_worldwide_scope",
+      "match": "(?i)anywhere\\s+in\\s+(?:the\\s+world|India|the\\s+United\\s+States)",
+      "replace_with": "within the city or territory where {client} directly markets the primary product",
+      "rationale": "Narrow geographical scope from an entire country or worldwide territory to the specific local market.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Exclusivity": [
+    {
+      "id": "exclusivity_blanket_restriction",
+      "match": "(?i)(?P<party>Contractor|Consultant|Vendor)\\s+shall\\s+work\\s+exclusively\\s+for\\s+(?P<client>Client|Company)[^.]*?without\\s+(?P=client)['’]?s\\s+prior\\s+written\\s+approval",
+      "replace_with": "{party} shall dedicate sufficient professional time and effort to perform the agreed Services in a timely manner. Nothing in this Agreement shall prevent {party} from performing consulting or software services for other non-competing clients, provided such engagements do not breach confidentiality obligations under this Agreement.",
+      "rationale": "Carve out permission for non-competing freelance or consulting work so you are not locked into an exclusive, unpaid standstill.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "exclusivity_full_time_lock",
+      "match": "(?i)shall\\s+not\\s+provide\\s+(?:software\\s+development|consulting|professional)\\s+services\\s+of\\s+any\\s+kind\\s+to\\s+any\\s+other\\s+person\\s+or\\s+entity",
+      "replace_with": "shall not provide services to direct competitors of {client} that directly conflict with the deliverables scheduled under this Agreement",
+      "rationale": "Narrow exclusivity to direct competitors and conflicting deliverables rather than an absolute ban on all other professional work.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Liquidated Damages": [
+    {
+      "id": "liquidated_damages_per_day",
+      "match": "(?i)liquidated\\s+damages\\s+equal\\s+to\\s+(?P<rate>[^.]+?)\\s+for\\s+each\\s+day\\s+of\\s+delay[^.]*",
+      "replace_with": "liquidated damages of 0.5% of that milestone's fee for each full week of unexcused delay solely caused by {party}, capped in aggregate at ten percent (10%) of the fee for that milestone. Delays resulting from {client} dependency handoffs or scope changes shall extend deadlines accordingly without penalty.",
+      "rationale": "Shift daily accrual to weekly, cap total delay damages at 10% of milestone fee, and excuse delays caused by client dependencies or scope changes.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "liquidated_damages_uncapped_penalty",
+      "match": "(?i)shall\\s+pay\\s+(?P<client>Client|Company)\\s+liquidated\\s+damages[^.]*?(?:without\\s+limit|per\\s+calendar\\s+day)",
+      "replace_with": "shall pay {client} liquidated damages as a genuine pre-estimate of direct delay losses, capped at ten percent (10%) of the total contract value",
+      "rationale": "Impose a firm ceiling on liquidated damages so delay penalties cannot exceed contract value.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Anti-Assignment": [
+    {
+      "id": "assignment_one_sided",
+      "match": "(?i)(?P<party>Contractor|Vendor)\\s+shall\\s+not\\s+assign[^.]*?without\\s+(?:the\\s+)?prior\\s+written\\s+consent\\s+of\\s+(?P<client>Client|Company)\\.\\s*(?P=client)\\s+may\\s+assign\\s+this\\s+Agreement\\s+to\\s+any\\s+third\\s+party\\s+at\\s+its\\s+discretion\\.?",
+      "replace_with": "Neither party may assign or transfer this Agreement without the prior written consent of the other party (such consent not to be unreasonably withheld or delayed); provided, however, that either party may assign this Agreement upon written notice in connection with a merger, acquisition, or sale of substantially all of its assets.",
+      "rationale": "Make assignment rights mutual, require consent not to be unreasonably withheld, and permit assignment in bona fide corporate transactions.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "assignment_unilateral_transfer",
+      "match": "(?i)(?P<client>Client|Company)\\s+may\\s+assign\\s+this\\s+Agreement\\s+to\\s+any\\s+third\\s+party\\s+at\\s+its\\s+discretion",
+      "replace_with": "{client} may assign this Agreement to an affiliate or successor in interest, provided such assignee expressly assumes all obligations hereunder and is not a direct competitor of {party}",
+      "rationale": "Prevent assignment to third parties that could be direct competitors or refuse to honor existing contract commitments.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "IP Ownership Assignment": [
+    {
+      "id": "ip_assignment_broad_scope",
+      "match": "(?i)whether\\s+or\\s+not\\s+related\\s+to\\s+the\\s+Services\\s+and\\s+whether\\s+or\\s+not\\s+created\\s+using\\s+(?P<client>Client|Company)['’]?s\\s+resources[^.]*?shall\\s+be\\s+the\\s+sole\\s+and\\s+exclusive\\s+property\\s+of\\s+(?P=client)",
+      "replace_with": "All final deliverables created by {party} specifically for {client} and paid for under this Agreement shall be the property of {client}. {party} retains ownership of all pre-existing tools, libraries, and frameworks, granting {client} a perpetual, royalty-free license to use such background materials as incorporated in the deliverables.",
+      "rationale": "Carve out pre-existing background IP, developer tools, and libraries so you do not inadvertently surrender ownership of your own tooling.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "ip_assignment_all_inventions",
+      "match": "(?i)All\\s+work\\s+product,\\s*inventions,\\s*code\\s+and\\s+materials\\s+created\\s+by\\s+(?P<party>Contractor|Employee)[^.]*?irrevocably\\s+assigns",
+      "replace_with": "All bespoke work product created by {party} directly for the agreed project deliverables shall be assigned to {client} upon full receipt of payment. {party} retains ownership of pre-existing code and general domain knowledge",
+      "rationale": "Condition IP transfer on full payment and retain ownership of pre-existing intellectual property and domain know-how.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Audit Rights": [
+    {
+      "id": "audit_broad_unlimited_records",
+      "match": "(?i)(?P<client>Client|Company)[^.]*?may[^.]*?(?:at\\s+any\\s+time\\s+during\\s+the\\s+Term\\s+and\\s+for\\s+(?P<period>[^.]+?)\\s+thereafter)?[^.]*?inspect\\s+and\\s+audit\\s+(?P<party>Contractor|Vendor)['’]?s\\s+books,\\s*records,\\s*time\\s+logs\\s+and\\s+source\\s+code\\s+repositories",
+      "replace_with": "{client} may, upon at least thirty (30) business days' prior written notice and no more than once per calendar year during the Term, inspect project-specific invoices and timesheets directly relating to the Services during normal business hours. Audit expenses shall be borne by {client}.",
+      "rationale": "Require 30 business days notice, limit audit frequency to once per year, restrict scope to project-specific billing records, and allocate costs to the client.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "audit_source_code_inspection",
+      "match": "(?i)inspect\\s+and\\s+audit[^.]*?source\\s+code\\s+repositories",
+      "replace_with": "inspect completed deliverable source code solely for acceptance verification against the agreed project specifications",
+      "rationale": "Limit source code inspection strictly to acceptance testing against specifications rather than intrusive broad repository audits.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Cap on Liability": [
+    {
+      "id": "cap_excessive_multiple",
+      "match": "(?i)liability\\s+(?:of\\s+(?P<party>Contractor|Vendor)\\s+)?shall\\s+be\\s+limited\\s+to\\s+(?P<multiple>(?:three|3|two|2|5|five)\\s*(?:times|x))\\s+(?:the\\s+)?fees",
+      "replace_with": "Each party's total aggregate liability under this Agreement shall be limited to one times (1x) the total fees actually paid in the twelve (12) months preceding the incident giving rise to liability.",
+      "rationale": "Reduce excessive liability multiplier down to market standard 1x annual fees and make the cap mutual.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "cap_one_sided_ceiling",
+      "match": "(?i)(?P<client>Client|Company)['’]?s\\s+liability\\s+shall\\s+not\\s+exceed[^.]*?(?:no\\s+limitation\\s+on\\s+(?P<party>Contractor)|(?P=party)['’]?s\\s+liability\\s+shall\\s+be\\s+unlimited)",
+      "replace_with": "Both parties' aggregate liability under this Agreement shall be subject to the same mutual cap equal to total fees paid under this Agreement.",
+      "rationale": "Ensure liability caps apply equally to both parties rather than protecting only the client.",
+      "verify_status": "seed_unreviewed"
+    }
+  ],
+  "Change of Control": [
+    {
+      "id": "coc_automatic_termination",
+      "match": "(?i)(?:in\\s+the\\s+event\\s+of\\s+a\\s+change\\s+of\\s+control|upon\\s+a\\s+change\\s+of\\s+control)[^.]*?this\\s+Agreement\\s+shall\\s+(?:automatically\\s+)?terminate",
+      "replace_with": "In the event of a Change of Control, this Agreement shall remain in full force and effect and the successor entity shall assume all obligations hereunder; provided that if the acquiring entity is a direct competitor of {party}, {party} may terminate upon sixty (60) days' written notice.",
+      "rationale": "Prevent abrupt termination upon corporate acquisition and protect against forced collaboration with a direct competitor.",
+      "verify_status": "seed_unreviewed"
+    },
+    {
+      "id": "coc_unilateral_cancellation",
+      "match": "(?i)(?P<client>Client|Company)\\s+may\\s+terminate\\s+upon\\s+(?:any\\s+)?change\\s+of\\s+control\\s+without\\s+penalty",
+      "replace_with": "Upon a Change of Control, either party may terminate this Agreement upon ninety (90) days' prior written notice, subject to payment of all fees earned and uncancelable expenses incurred up to the termination date.",
+      "rationale": "Require 90 days notice and compensation for all earned fees and transition expenses if a change of control occurs.",
+      "verify_status": "seed_unreviewed"
+    }
+  ]
+}

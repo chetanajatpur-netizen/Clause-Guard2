@@ -14,3 +14,8 @@ from app.schemas.search import (
     SearchResultItem,
 )
 from app.schemas.insights import InsightsResponse
+from app.schemas.redline import (
+    DiffSegment,
+    RedlineRequest,
+    RedlineResponse,
+)

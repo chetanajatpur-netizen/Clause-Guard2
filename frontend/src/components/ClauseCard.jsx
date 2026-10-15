@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import RiskBadge from './RiskBadge'
 import ClauseExplanation from './ClauseExplanation'
 import explanations from '../data/clause_explanations.json'
+import { getClauseRedline } from '../api/client'
 
 export default function ClauseCard({
   clause,
@@ -12,6 +13,12 @@ export default function ClauseCard({
   const [textExpanded, setTextExpanded] = useState(false)
   const [explanationExpanded, setExplanationExpanded] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
+
+  // Redline generator states (Feature 1, Phase 4)
+  const [redline, setRedline] = useState(null)
+  const [redlineLoading, setRedlineLoading] = useState(false)
+  const [redlineError, setRedlineError] = useState(null)
+  const [showRedline, setShowRedline] = useState(false)
 
   const hasSpeech = typeof window !== 'undefined' && 'speechSynthesis' in window
 
@@ -70,6 +77,32 @@ export default function ClauseCard({
 
     setIsSpeaking(true)
     window.speechSynthesis.speak(utterance)
+  }
+
+  const handleToggleRedline = async (e) => {
+    e.stopPropagation()
+    if (showRedline) {
+      setShowRedline(false)
+      return
+    }
+
+    if (redline !== null) {
+      setShowRedline(true)
+      return
+    }
+
+    setRedlineLoading(true)
+    setRedlineError(null)
+    try {
+      const data = await getClauseRedline(clause.text, clause.label)
+      setRedline(data)
+      setShowRedline(true)
+    } catch (err) {
+      setRedlineError(err.message || 'Failed to generate redline')
+      setShowRedline(true)
+    } finally {
+      setRedlineLoading(false)
+    }
   }
 
   // Render the explanation block
@@ -276,6 +309,35 @@ export default function ClauseCard({
             <span aria-hidden="true">{isSpeaking ? '⏹' : '🔊'}</span>
             <span>{isSpeaking ? 'Stop' : 'Read aloud'}</span>
           </button>
+
+          {/* Suggest safer wording button (Feature 1, Phase 4) */}
+          {clause.label !== 'No Clause' && (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleToggleRedline}
+              disabled={redlineLoading}
+              style={{
+                padding: '2px 8px',
+                fontSize: '11px',
+                fontWeight: 600,
+                fontFamily: 'var(--font-family)',
+                minHeight: '28px',
+                borderRadius: 'var(--rounded-default)',
+                backgroundColor: showRedline ? 'var(--surface-container)' : 'var(--canvas-pure)',
+                color: showRedline ? 'var(--primary)' : 'var(--on-surface)',
+                border: `1px solid ${showRedline ? 'var(--primary)' : 'var(--border-delicate)'}`,
+                gap: '4px',
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+              title="Suggest safer wording for this clause"
+              aria-expanded={showRedline}
+            >
+              <span aria-hidden="true">{redlineLoading ? '⏳' : '✏️'}</span>
+              <span>{redlineLoading ? 'Drafting…' : showRedline ? 'Hide Redline' : 'Suggest safer wording'}</span>
+            </button>
+          )}
         </div>
 
         <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -343,6 +405,146 @@ export default function ClauseCard({
           })()}
         </div>
       </div>
+
+      {/* Redline diff view (Feature 1, Phase 4) */}
+      {showRedline && (
+        <div
+          className="redline-card"
+          style={{
+            marginTop: '10px',
+            marginBottom: '10px',
+            padding: '12px 14px',
+            backgroundColor: 'var(--surface-container-low)',
+            border: '1px solid var(--border-delicate)',
+            borderLeft: '4px solid var(--primary)',
+            borderRadius: 'var(--rounded-md)',
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>
+                ⚖️ Suggested Redline (Safer Terms)
+              </span>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontFamily: 'var(--font-mono)',
+                  padding: '1px 6px',
+                  borderRadius: 'var(--rounded-default)',
+                  backgroundColor: 'var(--canvas-pure)',
+                  border: '1px solid var(--border-delicate)',
+                  color: 'var(--text-muted)',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {redline?.verify_status || 'seed_unreviewed'}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowRedline(false)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '11px',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                padding: '2px 6px',
+              }}
+            >
+              ✕ Hide
+            </button>
+          </div>
+
+          {redlineError && (
+            <div style={{ fontSize: '12px', color: 'var(--risk-critical-text)', padding: '6px 0' }}>
+              {redlineError}
+            </div>
+          )}
+
+          {redline && redline.rationale && (
+            <div
+              style={{
+                fontSize: '12px',
+                lineHeight: '18px',
+                color: 'var(--text-primary)',
+                marginBottom: '10px',
+                padding: '8px 10px',
+                backgroundColor: 'var(--canvas-pure)',
+                borderRadius: 'var(--rounded-default)',
+                border: '1px solid var(--border-delicate)',
+              }}
+            >
+              <strong style={{ color: 'var(--primary)' }}>Negotiation Rationale: </strong>
+              {redline.rationale}
+            </div>
+          )}
+
+          {redline && redline.diff_segments && (
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                lineHeight: '22px',
+                backgroundColor: 'var(--canvas-pure)',
+                padding: '10px 12px',
+                borderRadius: 'var(--rounded-default)',
+                border: '1px solid var(--border-delicate)',
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+              }}
+            >
+              {redline.diff_segments.map((segment, idx) => {
+                if (segment.type === 'delete') {
+                  return (
+                    <del
+                      key={idx}
+                      style={{
+                        backgroundColor: '#fee2e2',
+                        color: '#991b1b',
+                        textDecoration: 'line-through',
+                        padding: '1px 3px',
+                        borderRadius: '2px',
+                        marginRight: '1px',
+                      }}
+                    >
+                      <span className="sr-only">removed:&nbsp;</span>
+                      {segment.text}
+                    </del>
+                  )
+                }
+                if (segment.type === 'insert') {
+                  return (
+                    <ins
+                      key={idx}
+                      style={{
+                        backgroundColor: '#dcfce7',
+                        color: '#166534',
+                        fontWeight: 700,
+                        textDecoration: 'underline',
+                        padding: '1px 3px',
+                        borderRadius: '2px',
+                        marginRight: '1px',
+                      }}
+                    >
+                      <span className="sr-only">added:&nbsp;</span>
+                      {segment.text}
+                    </ins>
+                  )
+                }
+                return <span key={idx}>{segment.text}</span>
+              })}
+            </div>
+          )}
+
+          {!redlineLoading && redline === null && !redlineError && (
+            <div style={{ fontSize: '12px', color: 'var(--text-muted)', fontStyle: 'italic', padding: '6px 0' }}>
+              No automated redline template matches this specific clause wording. Consult the negotiation tips in the explanation card below to propose amendments.
+            </div>
+          )}
+        </div>
+      )}
 
       {/* When viewMode === 'plain', explanation card is placed ABOVE clause text */}
       {viewMode === 'plain' ? (

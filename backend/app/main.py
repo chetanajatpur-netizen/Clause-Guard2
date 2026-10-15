@@ -71,11 +71,12 @@ def create_app() -> FastAPI:
     register_exception_handlers(app)
     
     # Routers
-    from app.routers import analyze, health, history, insights, search
+    from app.routers import analyze, health, history, insights, redline, search
     
     app.include_router(health.router, prefix="/api/v1", tags=["Health"])
     app.include_router(analyze.router, prefix="/api/v1", tags=["Analysis"])
     app.include_router(search.router, prefix="/api/v1", tags=["Search"])
+    app.include_router(redline.router, prefix="/api/v1", tags=["Redline"])
     app.include_router(history.router, prefix="/api/v1", tags=["History"])
     app.include_router(insights.router, prefix="/api/v1", tags=["Insights"])
     
