@@ -5,6 +5,7 @@ import ErrorBanner from '../components/ErrorBanner'
 import ClauseCard from '../components/ClauseCard'
 import RiskBadge from '../components/RiskBadge'
 import SearchBar from '../components/SearchBar'
+import ViewModeToggle from '../components/ViewModeToggle'
 import { analyzeContract, searchDocument } from '../api/client'
 import '../styles/landing.css'
 
@@ -21,6 +22,7 @@ export default function Landing() {
   const [error, setError] = useState(null)
   const [searchResults, setSearchResults] = useState(null)
   const [searchLoading, setSearchLoading] = useState(false)
+  const [viewMode, setViewMode] = useState('lawyer')
 
   const isEmailError = emailTouched && (!testEmail || !testEmail.includes('@'))
 
@@ -272,26 +274,25 @@ export default function Landing() {
                 {/* Natural Language Semantic Search */}
                 <SearchBar onSearch={handleSearch} loading={searchLoading} />
 
-                {searchResults && (
-                  <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '13px', color: '#475569', fontWeight: 500 }}>
-                      Showing {searchResults.length} matching clauses
-                    </span>
+                {/* View Mode Toggle: Lawyer View vs Plain English */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
+                  <ViewModeToggle viewMode={viewMode} onChange={setViewMode} />
+                  {searchResults && (
                     <button
                       type="button"
                       className="btn btn-secondary"
                       onClick={() => setSearchResults(null)}
                       style={{ padding: '4px 12px', fontSize: '12px', minHeight: '32px' }}
                     >
-                      Clear Search Results
+                      Clear Search Results ({searchResults.length})
                     </button>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {/* Extracted Clauses List */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {displayClauses.map((clause) => (
-                    <ClauseCard key={clause.id || clause.position} clause={clause} />
+                    <ClauseCard key={clause.id || clause.position} clause={clause} viewMode={viewMode} />
                   ))}
                 </div>
               </div>

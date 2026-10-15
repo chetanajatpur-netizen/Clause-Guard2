@@ -136,6 +136,12 @@ Model is mildly under-converged (training loss and val loss still declining stea
     - Redlines & Diffs: Live contract term redline preview with inserted baseline stroke and deleted strikethrough.
     - Accessible Forms: 16px × 16px checkbox with 4px radius and `#0f172a` check, 13px inputs with explicit label, helper, and error states.
   - Verification: Production Vite build compiled cleanly in 4.69s. All 37/37 backend pytest tests passed (100%).
+- [2026-10-15 18:10] Feature 7 Phase 1 DONE (Plain-English toggle + read-aloud):
+  - ViewModeToggle Component: Created `frontend/src/components/ViewModeToggle.jsx` with accessible segmented control ("Lawyer view" | "Plain English", default: "Lawyer view"). Uses only CSS variables from `tokens.css`, keyboard operable with `role="radiogroup"` / `role="radio"`, responsive down to 375px mobile width.
+  - Reordered ClauseCard Layout: In Plain English view mode, the explanation card is placed directly above the raw legal contract text in `frontend/src/components/ClauseCard.jsx`, with the plain summary automatically visible. In Lawyer view mode, the raw clause text remains primary on top.
+  - Speech Synthesis Read-Aloud: Added read-aloud button per card using `window.speechSynthesis` (zero external libraries). Reads plain-English note or summary, toggles speech state (Play/Stop), gracefully disables if `speechSynthesis` is unavailable, and properly cancels speech on unmount.
+  - Pages Integration: Wired `ViewModeToggle` into both `frontend/src/pages/Analyze.jsx` and the live auditor in `frontend/src/pages/Landing.jsx`.
+  - Verification: Vite build passed cleanly in 5.99s. All 37/37 backend tests passed.
 
 
 

@@ -1,10 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RiskBadge from './RiskBadge'
 import ClauseExplanation from './ClauseExplanation'
+import explanations from '../data/clause_explanations.json'
 
-export default function ClauseCard({ clause }) {
+export default function ClauseCard({ clause, viewMode = 'lawyer' }) {
   const [textExpanded, setTextExpanded] = useState(false)
   const [explanationExpanded, setExplanationExpanded] = useState(false)
+  const [isSpeaking, setIsSpeaking] = useState(false)
+
+  const hasSpeech = typeof window !== 'undefined' && 'speechSynthesis' in window
+
+  // Clean up any ongoing speech synthesis on unmount
+  useEffect(() => {
+    return () => {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+      }
+    }
+  }, [])
 
   // 3px solid left-border accent matching severity
   const leftBorderAccents = {
@@ -26,131 +39,75 @@ export default function ClauseCard({ clause }) {
     }
   }
 
-  return (
-    <article
-      className="clause-card card"
-      onClick={handleCardClick}
-      style={{
-        backgroundColor: '#ffffff',
-        border: '1px solid #e2e8f0',
-        borderLeft: `3px solid ${accentBorderColor}`,
-        borderRadius: '8px',
-        padding: '16px',
-        marginBottom: '12px',
-        cursor: isRisky && clause.label !== 'No Clause' ? 'pointer' : 'default',
-        boxShadow: 'var(--shadow-sm)',
-        transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
-      }}
-      aria-label={`Clause: ${clause.label}, Risk: ${clause.risk_level || 'None'}`}
-    >
-      {/* Card Header: Type Tag, Risk Badge, Confidence, Risk Score, Uncertainty */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '10px',
-          flexWrap: 'wrap',
-          gap: '8px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span
-            style={{
-              backgroundColor: clause.label === 'No Clause' ? '#f1f5f9' : '#e5eeff',
-              color: clause.label === 'No Clause' ? '#475569' : '#3525cd',
-              padding: '2px 8px',
-              borderRadius: '4px',
-              fontSize: '11px',
-              fontWeight: 600,
-              fontFamily: 'var(--font-mono)',
-              letterSpacing: '0.02em',
-              textTransform: 'uppercase',
-              border: `1px solid ${clause.label === 'No Clause' ? '#e2e8f0' : '#c3c0ff'}`,
-            }}
-          >
-            {clause.label}
-          </span>
-          <RiskBadge level={clause.risk_level} />
+  const handleReadAloud = (e) => {
+    e.stopPropagation()
+    if (!hasSpeech) return
+
+    if (isSpeaking) {
+      window.speechSynthesis.cancel()
+      setIsSpeaking(false)
+      return
+    }
+
+    window.speechSynthesis.cancel()
+
+    const explanationInfo = explanations.clauses[clause.label] || explanations.clauses['No Clause']
+    // Read the plain_note from legal layer, or summary, or why_risky, or clause text
+    const plainNote =
+      clause.legal?.plain_note ||
+      explanationInfo?.summary ||
+      explanationInfo?.why_risky ||
+      (clause.label !== 'No Clause' ? `${clause.label}. ${clause.text}` : clause.text)
+
+    const utterance = new SpeechSynthesisUtterance(plainNote)
+    utterance.onend = () => setIsSpeaking(false)
+    utterance.onerror = () => setIsSpeaking(false)
+
+    setIsSpeaking(true)
+    window.speechSynthesis.speak(utterance)
+  }
+
+  // Render the explanation block
+  const explanationComponent = (
+    <div style={{ marginBottom: viewMode === 'plain' ? '12px' : '0' }}>
+      <ClauseExplanation
+        clauseLabel={clause.label}
+        isExpanded={viewMode === 'plain' ? true : explanationExpanded}
+        onToggle={() => setExplanationExpanded((prev) => !prev)}
+      />
+    </div>
+  )
+
+  // Render the raw legal contract text block
+  const clauseTextComponent = (
+    <div style={{ marginTop: viewMode === 'plain' ? '8px' : '0' }}>
+      {viewMode === 'plain' && (
+        <div
+          style={{
+            fontSize: '11px',
+            fontFamily: 'var(--font-mono)',
+            textTransform: 'uppercase',
+            color: 'var(--text-muted)',
+            marginBottom: '4px',
+            letterSpacing: '0.03em',
+          }}
+        >
+          Original Contract Clause:
         </div>
-
-        <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <span
-            className="tnum"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              color: '#64748b',
-              fontWeight: 500,
-              backgroundColor: '#f8fafc',
-              padding: '2px 6px',
-              borderRadius: '4px',
-              border: '1px solid #e2e8f0',
-            }}
-          >
-            {(clause.confidence * 100).toFixed(1)}% conf
-          </span>
-
-          {clause.risk_score !== null && clause.risk_score !== undefined && (
-            <span
-              className="tnum"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '11px',
-                fontWeight: 600,
-                color: clause.risk_level === 'High' ? '#9f1239' : clause.risk_level === 'Medium' ? '#92400e' : clause.risk_level === 'Low' ? '#166534' : '#64748b',
-                backgroundColor: clause.risk_level === 'High' ? '#fff1f2' : clause.risk_level === 'Medium' ? '#fffbeb' : clause.risk_level === 'Low' ? '#f0fdf4' : '#f8fafc',
-                padding: '2px 6px',
-                borderRadius: '4px',
-                border: `1px solid ${clause.risk_level === 'High' ? '#fecdd3' : clause.risk_level === 'Medium' ? '#fef3c7' : clause.risk_level === 'Low' ? '#dcfce7' : '#e2e8f0'}`,
-              }}
-            >
-              Risk {clause.risk_score}/100
-            </span>
-          )}
-
-          {clause.uncertainty !== null && clause.uncertainty !== undefined && (() => {
-            const level = clause.uncertainty_level || (clause.uncertainty > 0.5 ? 'High' : clause.uncertainty > 0.2 ? 'Medium' : 'Low')
-            const color = level === 'High' ? '#9f1239' : level === 'Medium' ? '#92400e' : '#166534'
-            const bg = level === 'High' ? '#fff1f2' : level === 'Medium' ? '#fffbeb' : '#f0fdf4'
-            const border = level === 'High' ? '#fecdd3' : level === 'Medium' ? '#fef3c7' : '#dcfce7'
-            return (
-              <span
-                className="tnum"
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  fontWeight: 500,
-                  color: color,
-                  backgroundColor: bg,
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                  border: `1px solid ${border}`,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '3px',
-                }}
-                title={`Uncertainty Level: ${level}`}
-              >
-                <span style={{ fontSize: '7px' }} aria-hidden="true">●</span>
-                Uncertainty {(clause.uncertainty * 100).toFixed(0)}%
-              </span>
-            )
-          })()}
-        </div>
-      </div>
-
-      {/* Raw Contract Legal Text (code-md: JetBrains Mono, 13px, 22px line-height) */}
+      )}
       <div
         className="clause-text"
         style={{
           fontFamily: 'var(--font-mono)',
           fontSize: '13px',
           lineHeight: '22px',
-          color: '#0f172a',
+          color: 'var(--text-primary)',
           letterSpacing: '-0.01em',
           fontVariantNumeric: 'tabular-nums',
-          backgroundColor: '#ffffff',
+          backgroundColor: viewMode === 'plain' ? 'var(--surface-subtle-1)' : '#ffffff',
+          padding: viewMode === 'plain' ? '8px 12px' : '0',
+          borderRadius: viewMode === 'plain' ? 'var(--rounded-md)' : '0',
+          border: viewMode === 'plain' ? '1px solid var(--border-delicate)' : 'none',
           overflow: textExpanded ? 'visible' : 'hidden',
           maxHeight: textExpanded ? 'none' : '4.6em',
           transition: 'max-height 0.2s ease-out',
@@ -162,14 +119,13 @@ export default function ClauseCard({ clause }) {
         {clause.text}
       </div>
 
-      {/* Expand/Collapse Toggle for long clauses */}
       {clause.text.length > 200 && (
         <button
           type="button"
           style={{
             background: 'none',
             border: 'none',
-            color: '#3525cd',
+            color: 'var(--primary)',
             fontSize: '12px',
             fontFamily: 'var(--font-family)',
             cursor: 'pointer',
@@ -191,13 +147,161 @@ export default function ClauseCard({ clause }) {
           {textExpanded ? 'Show less text ↑' : 'Show full legal text ↓'}
         </button>
       )}
+    </div>
+  )
 
-      {/* AI Legal Explanation & Negotiation Tips */}
-      <ClauseExplanation
-        clauseLabel={clause.label}
-        isExpanded={explanationExpanded}
-        onToggle={() => setExplanationExpanded((prev) => !prev)}
-      />
+  return (
+    <article
+      id={`clause-${clause.position}`}
+      className="clause-card card"
+      onClick={handleCardClick}
+      style={{
+        backgroundColor: '#ffffff',
+        border: '1px solid var(--border-delicate)',
+        borderLeft: `3px solid ${accentBorderColor}`,
+        borderRadius: 'var(--rounded-lg)',
+        padding: '16px',
+        marginBottom: '12px',
+        cursor: isRisky && clause.label !== 'No Clause' ? 'pointer' : 'default',
+        boxShadow: 'var(--shadow-sm)',
+        transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
+      }}
+      aria-label={`Clause: ${clause.label}, Risk: ${clause.risk_level || 'None'}`}
+    >
+      {/* Card Header: Type Tag, Risk Badge, Read-Aloud, Confidence, Risk Score, Uncertainty */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '10px',
+          flexWrap: 'wrap',
+          gap: '8px',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span
+            style={{
+              backgroundColor: clause.label === 'No Clause' ? 'var(--surface-subtle-2)' : 'var(--surface-container)',
+              color: clause.label === 'No Clause' ? 'var(--text-secondary)' : 'var(--primary)',
+              padding: '2px 8px',
+              borderRadius: 'var(--rounded-default)',
+              fontSize: '11px',
+              fontWeight: 600,
+              fontFamily: 'var(--font-mono)',
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase',
+              border: `1px solid ${clause.label === 'No Clause' ? 'var(--border-delicate)' : 'var(--inverse-primary)'}`,
+            }}
+          >
+            {clause.label}
+          </span>
+          <RiskBadge level={clause.risk_level} />
+
+          {/* Read Aloud Button (Feature 7) */}
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleReadAloud}
+            disabled={!hasSpeech}
+            style={{
+              padding: '2px 8px',
+              fontSize: '11px',
+              fontWeight: 600,
+              fontFamily: 'var(--font-family)',
+              minHeight: '28px',
+              borderRadius: 'var(--rounded-default)',
+              backgroundColor: isSpeaking ? 'var(--surface-container)' : 'var(--canvas-pure)',
+              color: isSpeaking ? 'var(--primary)' : 'var(--on-surface)',
+              border: `1px solid ${isSpeaking ? 'var(--primary)' : 'var(--border-delicate)'}`,
+              gap: '4px',
+            }}
+            title={!hasSpeech ? 'Speech synthesis unavailable on this device' : isSpeaking ? 'Stop speaking' : 'Read plain English explanation aloud'}
+            aria-label={isSpeaking ? `Stop reading ${clause.label} explanation aloud` : `Read ${clause.label} explanation aloud`}
+          >
+            <span aria-hidden="true">{isSpeaking ? '⏹' : '🔊'}</span>
+            <span>{isSpeaking ? 'Stop' : 'Read aloud'}</span>
+          </button>
+        </div>
+
+        <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <span
+            className="tnum"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              color: 'var(--text-muted)',
+              fontWeight: 500,
+              backgroundColor: 'var(--surface-subtle-1)',
+              padding: '2px 6px',
+              borderRadius: 'var(--rounded-default)',
+              border: '1px solid var(--border-delicate)',
+            }}
+          >
+            {(clause.confidence * 100).toFixed(1)}% conf
+          </span>
+
+          {clause.risk_score !== null && clause.risk_score !== undefined && (
+            <span
+              className="tnum"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                fontWeight: 600,
+                color: clause.risk_level === 'High' ? 'var(--risk-critical-text)' : clause.risk_level === 'Medium' ? 'var(--risk-moderate-text)' : clause.risk_level === 'Low' ? 'var(--risk-clean-text)' : 'var(--text-muted)',
+                backgroundColor: clause.risk_level === 'High' ? 'var(--risk-critical-bg)' : clause.risk_level === 'Medium' ? 'var(--risk-moderate-bg)' : clause.risk_level === 'Low' ? 'var(--risk-clean-bg)' : 'var(--surface-subtle-1)',
+                padding: '2px 6px',
+                borderRadius: 'var(--rounded-default)',
+                border: `1px solid ${clause.risk_level === 'High' ? 'var(--risk-critical-border)' : clause.risk_level === 'Medium' ? 'var(--risk-moderate-border)' : clause.risk_level === 'Low' ? 'var(--risk-clean-border)' : 'var(--border-delicate)'}`,
+              }}
+            >
+              Risk {clause.risk_score}/100
+            </span>
+          )}
+
+          {clause.uncertainty !== null && clause.uncertainty !== undefined && (() => {
+            const level = clause.uncertainty_level || (clause.uncertainty > 0.5 ? 'High' : clause.uncertainty > 0.2 ? 'Medium' : 'Low')
+            const color = level === 'High' ? 'var(--risk-critical-text)' : level === 'Medium' ? 'var(--risk-moderate-text)' : 'var(--risk-clean-text)'
+            const bg = level === 'High' ? 'var(--risk-critical-bg)' : level === 'Medium' ? 'var(--risk-moderate-bg)' : 'var(--risk-clean-bg)'
+            const border = level === 'High' ? 'var(--risk-critical-border)' : level === 'Medium' ? 'var(--risk-moderate-border)' : 'var(--risk-clean-border)'
+            return (
+              <span
+                className="tnum"
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  fontWeight: 500,
+                  color: color,
+                  backgroundColor: bg,
+                  padding: '2px 6px',
+                  borderRadius: 'var(--rounded-default)',
+                  border: `1px solid ${border}`,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '3px',
+                }}
+                title={`Uncertainty Level: ${level}`}
+              >
+                <span style={{ fontSize: '7px' }} aria-hidden="true">●</span>
+                Uncertainty {(clause.uncertainty * 100).toFixed(0)}%
+              </span>
+            )
+          })()}
+        </div>
+      </div>
+
+      {/* When viewMode === 'plain', explanation card is placed ABOVE clause text */}
+      {viewMode === 'plain' ? (
+        <>
+          {explanationComponent}
+          {clauseTextComponent}
+        </>
+      ) : (
+        <>
+          {clauseTextComponent}
+          {explanationComponent}
+        </>
+      )}
     </article>
   )
 }

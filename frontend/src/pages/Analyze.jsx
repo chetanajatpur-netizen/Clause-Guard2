@@ -6,6 +6,7 @@ import ErrorBanner from '../components/ErrorBanner'
 import ClauseCard from '../components/ClauseCard'
 import RiskBadge from '../components/RiskBadge'
 import SearchBar from '../components/SearchBar'
+import ViewModeToggle from '../components/ViewModeToggle'
 import { analyzeContract, searchDocument, getDocument } from '../api/client'
 
 function Analyze() {
@@ -15,6 +16,7 @@ function Analyze() {
   const [error, setError] = useState(null)
   const [searchResults, setSearchResults] = useState(null)
   const [searchLoading, setSearchLoading] = useState(false)
+  const [viewMode, setViewMode] = useState('lawyer')
 
   useEffect(() => {
     if (id) {
@@ -72,8 +74,13 @@ function Analyze() {
   const displayClauses = searchResults || (result ? result.clauses : [])
 
   return (
-    <div>
-      <h2 style={{ marginBottom: '24px' }}>Analyze Contract</h2>
+    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'var(--space-md)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}>
+        <h2 style={{ margin: 0 }}>Analyze Contract</h2>
+        {result && (
+          <ViewModeToggle viewMode={viewMode} onChange={setViewMode} />
+        )}
+      </div>
 
       {!result && !loading && (
         <UploadBox onUpload={handleUpload} loading={loading} />
@@ -89,12 +96,12 @@ function Analyze() {
           <div className="card" style={{ marginBottom: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <h3>{result.filename}</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '13px' }}>
-                  {result.char_count.toLocaleString()} characters • {result.risk_summary.total_clauses} clauses
+                <h3 style={{ margin: '0 0 4px 0' }}>{result.filename}</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '13px', margin: 0 }}>
+                  <span className="tnum">{result.char_count.toLocaleString()}</span> characters • <span className="tnum">{result.risk_summary.total_clauses}</span> clauses
                 </p>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
                 <RiskBadge level={result.risk_summary.overall_risk} />
                 <div style={{ display: 'flex', gap: '12px', fontSize: '13px', fontFamily: 'var(--font-mono)' }}>
                   <span style={{ color: 'var(--risk-high)' }}>⬤ {result.risk_summary.high_count} High</span>
@@ -122,12 +129,16 @@ function Analyze() {
           {/* Clause List */}
           <div>
             {displayClauses.map((clause, i) => (
-              <ClauseCard key={clause.id || clause.clause_id || i} clause={{
-                ...clause,
-                id: clause.id || clause.clause_id,
-                risk_level: clause.risk_level,
-                confidence: clause.confidence || clause.similarity || 0,
-              }} />
+              <ClauseCard
+                key={clause.id || clause.clause_id || i}
+                clause={{
+                  ...clause,
+                  id: clause.id || clause.clause_id,
+                  risk_level: clause.risk_level,
+                  confidence: clause.confidence || clause.similarity || 0,
+                }}
+                viewMode={viewMode}
+              />
             ))}
           </div>
 
