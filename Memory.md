@@ -164,6 +164,10 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - API Endpoint: Added `POST /api/v1/redline` (`backend/app/routers/redline.py`, `backend/app/schemas/redline.py`) returning `diff_segments`, `replacement`, `rationale`, and `verify_status`. Uses standard error envelope for bad inputs.
   - Frontend Component: Added accessible "Suggest safer wording" button in `frontend/src/components/ClauseCard.jsx` linked via `getClauseRedline` in `frontend/src/api/client.js`. Renders semantic diff markup with accessible screen-reader prefixes (`<span className="sr-only">removed: </span><del>...</del>` and `<span className="sr-only">added: </span><ins><strong><u>...</u></strong></ins>`) alongside rationale and verification badge.
   - Verification: `npm run build` compiled cleanly in 11.96s. Added `backend/tests/test_redline.py` testing diff structure, no-match behavior, placeholder substitution, benign DOC-06 rejection, DOC-01 termination/liability redline generation, and API error envelopes (9/9 passed in 5.30s). Full backend regression suite passed (9/9 in 56.84s).
+- [2026-10-15 22:20] Default Dashboard Configuration DONE:
+  - Updated `frontend/src/App.jsx` to make the "3D Spatial Cockpit" (Spatial Clause Risk Engine) the default view upon load.
+  - Added localStorage persistence (`clauseguard_view`) with fallback to 'cockpit', ensuring seamless switching between 3D Spatial Cockpit and Precision Legal Canvas.
+  - Production Vite build passed (4.62s).
 
 
 

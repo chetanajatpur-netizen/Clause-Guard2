@@ -6,13 +6,33 @@ import './styles/global.css'
 import './styles/clause-explanation.css'
 
 function App() {
-  const [activeView, setActiveView] = useState('canvas')
+  const [activeView, setActiveView] = useState(() => {
+    try {
+      return localStorage.getItem('clauseguard_view') || 'cockpit'
+    } catch {
+      return 'cockpit'
+    }
+  })
 
-  if (activeView === 'cockpit') {
-    return <SpatialCockpit onSwitchToCanvas={() => setActiveView('canvas')} />
+  const handleSwitchToCanvas = () => {
+    setActiveView('canvas')
+    try {
+      localStorage.setItem('clauseguard_view', 'canvas')
+    } catch {}
   }
 
-  return <Landing onSwitchToCockpit={() => setActiveView('cockpit')} />
+  const handleSwitchToCockpit = () => {
+    setActiveView('cockpit')
+    try {
+      localStorage.setItem('clauseguard_view', 'cockpit')
+    } catch {}
+  }
+
+  if (activeView === 'canvas') {
+    return <Landing onSwitchToCockpit={handleSwitchToCockpit} />
+  }
+
+  return <SpatialCockpit onSwitchToCanvas={handleSwitchToCanvas} />
 }
 
 export default App
