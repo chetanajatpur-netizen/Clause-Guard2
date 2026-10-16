@@ -143,3 +143,55 @@
   opacity: 0.35;
   z-index: 0;
 }
+
+/* Contract Drop Box & Ingestion Zone */
+.sc-drop-box {
+  border: 2px dashed rgba(76, 215, 246, 0.4);
+  background: rgba(15, 19, 29, 0.7);
+  border-radius: 16px;
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.sc-drop-box:hover, .sc-drop-box.drag-active {
+  border-color: #4cd7f6;
+  background: rgba(3, 181, 211, 0.12);
+  box-shadow: 0 0 35px rgba(76, 215, 246, 0.25);
+  transform: translateY(-2px);
+}
+.sc-drop-box.has-error {
+  border-color: #ffb4ab;
+  background: rgba(147, 0, 10, 0.15);
+}
+
+/* Analyzed Clause Cards in Spatial Cockpit */
+.sc-clause-card {
+  background: rgba(23, 27, 38, 0.85);
+  border: 1px solid rgba(70, 69, 85, 0.35);
+  border-radius: 12px;
+  padding: 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.sc-clause-card:hover {
+  border-color: rgba(76, 215, 246, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Spatial HeatMap Theme Adaptations */
+.spatial-cockpit .heatmap-container {
+  background-color: rgba(23, 27, 38, 0.85) !important;
+  border: 1px solid rgba(70, 69, 85, 0.35) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(12px);
+}
+.spatial-cockpit .heatmap-container span {
+  color: var(--sc-on-surface);
+}

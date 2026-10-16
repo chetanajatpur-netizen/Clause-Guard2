@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { analyzeContract, searchDocument, getClauseRedline } from '../api/client'
+import HeatMap from './HeatMap'
+import explanations from '../data/clause_explanations.json'
 import '../styles/spatial-cockpit.css'
 
-export default function SpatialCockpit({ onSwitchToCanvas, liveResult }) {
+export default function SpatialCockpit({ liveResult: initialLiveResult }) {
   // Ambient Mouse Spotlight
   const [spotlightPos, setSpotlightPos] = useState({ x: -1000, y: -1000 })
   // Toast notifications
   const [toasts, setToasts] = useState([])
   // Interactive Simulation
-  const [scoreVal, setScoreVal] = useState(liveResult?.risk_summary?.overall_risk === 'High' ? 82 : liveResult ? 45 : 72)
+  const [scoreVal, setScoreVal] = useState(72)
   const [isResolving, setIsResolving] = useState(false)
   const [resolved, setResolved] = useState(false)
   const [radarActive, setRadarActive] = useState(true)
@@ -16,6 +19,23 @@ export default function SpatialCockpit({ onSwitchToCanvas, liveResult }) {
   const [activeJurisdiction, setActiveJurisdiction] = useState('delaware')
   const [sliderMultiplier, setSliderMultiplier] = useState(2)
   const [sliderSeverity, setSliderSeverity] = useState(2)
+
+  // Real Contract Ingestion & Audit States
+  const [liveResult, setLiveResult] = useState(initialLiveResult || null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadError, setUploadError] = useState(null)
+  const [dragActive, setDragActive] = useState(false)
+  const fileInputRef = useRef(null)
+
+  // Natural Language Search inside Audited Contract
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState(null)
+  const [searchLoading, setSearchLoading] = useState(false)
+
+  // Redline Suggestions & Read-Aloud per Clause
+  const [clauseRedlines, setClauseRedlines] = useState({})
+  const [redlineLoading, setRedlineLoading] = useState({})
+  const [speakingIdx, setSpeakingIdx] = useState(null)
 
   const showToast = (message, type = 'secondary', icon = 'info') => {
     const id = Date.now() + Math.random()
@@ -49,6 +69,152 @@ export default function SpatialCockpit({ onSwitchToCanvas, liveResult }) {
 
   const handleTiltLeave = (e) => {
     e.currentTarget.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+  }
+
+  const ALLOWED_EXTENSIONS = ['.pdf', '.docx', '.txt']
+  const MAX_SIZE_BYTES = 10 * 1024 * 1024
+
+  const validateAndUpload = async (file) => {
+    if (!file) return
+    setUploadError(null)
+
+    const lowerName = file.name.toLowerCase()
+    const isValidExt = ALLOWED_EXTENSIONS.some((ext) => lowerName.endsWith(ext))
+    if (!isValidExt) {
+      const err = 'Unsupported file format. Please upload a PDF, DOCX, or TXT file.'
+      setUploadError(err)
+      showToast(err, 'error', 'error')
+      return
+    }
+
+    if (file.size > MAX_SIZE_BYTES) {
+      const err = 'File exceeds the maximum limit of 10 MB.'
+      setUploadError(err)
+      showToast(err, 'error', 'error')
+      return
+    }
+
+    setIsUploading(true)
+    showToast(`Uploading and scanning ${file.name}...`, 'secondary', 'cloud_upload')
+
+    try {
+      const data = await analyzeContract(file)
+      setLiveResult(data)
+      setSearchResults(null)
+      setSearchQuery('')
+      setClauseRedlines({})
+
+      // Update cockpit stats based on real contract
+      const overall = data.risk_summary?.overall_risk
+      const newScore = overall === 'High' ? 88 : overall === 'Medium' ? 64 : 32
+      setScoreVal(newScore)
+
+      showToast(`Audit Complete: ${data.clauses?.length || 0} clauses parsed from ${file.name}`, 'secondary', 'verified')
+
+      setTimeout(() => {
+        const el = document.getElementById('contract-audit-results')
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }, 350)
+    } catch (err) {
+      const msg = err.message || 'Failed to analyze contract'
+      setUploadError(msg)
+      showToast(msg, 'error', 'error')
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  const handleDrag = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true)
+    } else if (e.type === 'dragleave') {
+      setDragActive(false)
+    }
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      validateAndUpload(e.dataTransfer.files[0])
+    }
+  }
+
+  const handleFileInputChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      validateAndUpload(e.target.files[0])
+    }
+  }
+
+  const handleSearch = async (e) => {
+    if (e) e.preventDefault()
+    if (!liveResult || !searchQuery.trim()) return
+
+    setSearchLoading(true)
+    try {
+      const res = await searchDocument(liveResult.document_id, searchQuery.trim())
+      setSearchResults(res.results || [])
+      showToast(`Found ${res.results?.length || 0} matches for query`, 'secondary', 'search')
+    } catch (err) {
+      showToast(err.message || 'Search failed', 'error', 'error')
+    } finally {
+      setSearchLoading(false)
+    }
+  }
+
+  const handleClearSearch = () => {
+    setSearchResults(null)
+    setSearchQuery('')
+  }
+
+  const handleToggleRedline = async (clause, idx) => {
+    if (clauseRedlines[idx]) {
+      setClauseRedlines((prev) => {
+        const copy = { ...prev }
+        delete copy[idx]
+        return copy
+      })
+      return
+    }
+
+    setRedlineLoading((prev) => ({ ...prev, [idx]: true }))
+    try {
+      const data = await getClauseRedline(clause.text, clause.label)
+      setClauseRedlines((prev) => ({ ...prev, [idx]: data || { empty: true } }))
+      showToast('Safer wording redline generated', 'secondary', 'edit_document')
+    } catch (err) {
+      setClauseRedlines((prev) => ({ ...prev, [idx]: { error: err.message || 'Failed to generate redline' } }))
+      showToast('No redline available for this clause', 'error', 'error')
+    } finally {
+      setRedlineLoading((prev) => ({ ...prev, [idx]: false }))
+    }
+  }
+
+  const handleReadAloud = (clause, idx) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      showToast('Speech synthesis unavailable on this device', 'error', 'volume_off')
+      return
+    }
+
+    if (speakingIdx === idx) {
+      window.speechSynthesis.cancel()
+      setSpeakingIdx(null)
+      return
+    }
+
+    window.speechSynthesis.cancel()
+    const expInfo = explanations.clauses[clause.label] || explanations.clauses['No Clause']
+    const textToRead = clause.legal?.plain_note || expInfo?.summary || expInfo?.why_risky || `${clause.label}. ${clause.text}`
+
+    const utterance = new SpeechSynthesisUtterance(textToRead)
+    utterance.onend = () => setSpeakingIdx(null)
+    utterance.onerror = () => setSpeakingIdx(null)
+
+    setSpeakingIdx(idx)
+    window.speechSynthesis.speak(utterance)
   }
 
   const handleBatchResolve = () => {
@@ -323,26 +489,36 @@ export default function SpatialCockpit({ onSwitchToCanvas, liveResult }) {
             </nav>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              {/* Perspective Theme Mode Switcher: 3D Cockpit vs Precision Canvas */}
-              <div className="cockpit-view-switcher">
-                <button
-                  type="button"
-                  className="cockpit-view-btn inactive"
-                  onClick={onSwitchToCanvas}
-                  title="Switch to white Precision Legal Canvas layout"
-                >
-                  <span>⚖️</span>
-                  <span>White Canvas</span>
-                </button>
-                <button
-                  type="button"
-                  className="cockpit-view-btn active"
-                  title="Currently in 3D Spatial Cockpit"
-                >
-                  <span>🌐</span>
-                  <span>3D Cockpit</span>
-                </button>
-              </div>
+              {/* Quick Contract Upload trigger button */}
+              <button
+                type="button"
+                onClick={() => {
+                  const dropZone = document.getElementById('contract-drop-zone')
+                  if (dropZone) {
+                    dropZone.scrollIntoView({ behavior: 'smooth' })
+                  } else {
+                    fileInputRef.current?.click()
+                  }
+                }}
+                style={{
+                  background: 'rgba(76, 215, 246, 0.1)',
+                  border: '1px solid rgba(76, 215, 246, 0.4)',
+                  color: '#4cd7f6',
+                  padding: '6px 14px',
+                  borderRadius: '8px',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+                title="Attach or drop a contract file below for AI risk analysis"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>attach_file</span>
+                <span>Attach Contract</span>
+              </button>
 
               {/* Radar Toggle Button */}
               <button
@@ -481,23 +657,27 @@ export default function SpatialCockpit({ onSwitchToCanvas, liveResult }) {
               <button
                 type="button"
                 className="sc-tilt-card"
-                onClick={() => showToast('Triggered Batch Neural Scan across 48 contracts', 'secondary', 'batch_prediction')}
+                onClick={() => {
+                  fileInputRef.current?.click()
+                }}
                 style={{
-                  background: 'var(--sc-surface-highest)',
-                  border: '1px solid rgba(70, 69, 85, 0.4)',
-                  color: 'var(--sc-on-surface)',
+                  background: 'linear-gradient(135deg, rgba(76, 215, 246, 0.2), rgba(79, 70, 229, 0.3))',
+                  border: '1px solid rgba(76, 215, 246, 0.5)',
+                  color: '#4cd7f6',
                   padding: '6px 16px',
                   borderRadius: '8px',
                   fontSize: '12px',
-                  fontWeight: 500,
+                  fontWeight: 600,
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
                   cursor: 'pointer',
+                  transition: 'all 0.2s ease',
                 }}
+                title="Upload or attach contract file for instant analysis"
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--sc-outline)' }}>batch_prediction</span>
-                <span>Run Batch Scan</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#4cd7f6' }}>cloud_upload</span>
+                <span>Upload & Audit</span>
               </button>
             </div>
           </div>
@@ -1227,6 +1407,736 @@ export default function SpatialCockpit({ onSwitchToCanvas, liveResult }) {
               </div>
             </div>
           </div>
+
+          {/* Real Contract Ingestion & Drop Box Zone */}
+            <section
+              id="contract-drop-zone"
+              style={{
+                marginTop: '32px',
+                padding: '28px',
+                borderRadius: '16px',
+                background: 'rgba(10, 14, 24, 0.85)',
+                border: '1px solid rgba(70, 69, 85, 0.35)',
+                backdropFilter: 'blur(16px)',
+                position: 'relative',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(76, 215, 246, 0.1)', border: '1px solid rgba(76, 215, 246, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4cd7f6' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>upload_file</span>
+                  </div>
+                  <div>
+                    <h2 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--sc-on-surface)', margin: 0 }}>
+                      Contract Ingestion &amp; Neural Risk Engine
+                    </h2>
+                    <p style={{ fontSize: '11px', fontFamily: 'JetBrains Mono, monospace', color: 'var(--sc-outline)', margin: '2px 0 0 0' }}>
+                      Drag and drop PDF, DOCX, or TXT agreements for real-time risk classification &amp; semantic indexing
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono, monospace', color: 'var(--sc-outline-variant)' }}>
+                    POST /api/v1/analyze
+                  </span>
+                </div>
+              </div>
+
+              {/* Hidden File Input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.docx,.txt"
+                onChange={handleFileInputChange}
+                style={{ display: 'none' }}
+                aria-label="Upload contract file"
+              />
+
+              {/* Drop Box UI */}
+              <div
+                className={`sc-drop-box ${dragActive ? 'drag-active' : ''} ${uploadError ? 'has-error' : ''}`}
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    fileInputRef.current?.click()
+                  }
+                }}
+                aria-label="Drop contract file to analyze, or press Enter to browse"
+              >
+                {isUploading ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', padding: '24px 0' }}>
+                    <div
+                      style={{
+                        width: '52px',
+                        height: '52px',
+                        borderRadius: '50%',
+                        border: '3px solid rgba(76, 215, 246, 0.2)',
+                        borderTopColor: '#4cd7f6',
+                        animation: 'sc-spin 0.8s linear infinite',
+                      }}
+                    />
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: '15px', fontWeight: 600, color: '#4cd7f6', marginBottom: '4px' }}>
+                        Analyzing Contract with Legal-BERT &amp; SBERT...
+                      </p>
+                      <p style={{ fontSize: '12px', fontFamily: 'JetBrains Mono, monospace', color: 'var(--sc-outline)' }}>
+                        Segmenting clauses, categorizing risk tiers, and computing high-dimensional vectors
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div
+                      style={{
+                        width: '64px',
+                        height: '64px',
+                        borderRadius: '16px',
+                        background: 'rgba(76, 215, 246, 0.1)',
+                        border: '1px solid rgba(76, 215, 246, 0.35)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#4cd7f6',
+                        boxShadow: dragActive ? '0 0 30px rgba(76, 215, 246, 0.5)' : 'none',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>
+                        cloud_upload
+                      </span>
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--sc-on-surface)', marginBottom: '4px' }}>
+                        Drop Contract File Here to Ingest
+                      </p>
+                      <p style={{ fontSize: '13px', color: 'var(--sc-outline)' }}>
+                        Drag &amp; drop your agreement, or{' '}
+                        <span style={{ color: '#4cd7f6', textDecoration: 'underline', fontWeight: 600 }}>
+                          browse local device
+                        </span>
+                      </p>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                      {['PDF', 'DOCX', 'TXT'].map((ext) => (
+                        <span
+                          key={ext}
+                          style={{
+                            padding: '3px 8px',
+                            borderRadius: '6px',
+                            background: 'rgba(70, 69, 85, 0.4)',
+                            border: '1px solid rgba(70, 69, 85, 0.6)',
+                            fontSize: '10px',
+                            fontFamily: 'JetBrains Mono, monospace',
+                            color: 'var(--sc-on-surface-variant)',
+                            fontWeight: 700,
+                          }}
+                        >
+                          .{ext}
+                        </span>
+                      ))}
+                      <span
+                        style={{
+                          padding: '3px 8px',
+                          borderRadius: '6px',
+                          background: 'rgba(70, 69, 85, 0.2)',
+                          fontSize: '10px',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          color: 'var(--sc-outline)',
+                        }}
+                      >
+                        Max 10 MB
+                      </span>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Error Alert */}
+              {uploadError && (
+                <div
+                  style={{
+                    marginTop: '14px',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    background: 'rgba(147, 0, 10, 0.25)',
+                    border: '1px solid #ffb4ab',
+                    color: '#ffdad6',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '12px',
+                    fontSize: '13px',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span className="material-symbols-outlined" style={{ color: '#ffb4ab', fontSize: '18px' }}>
+                      error
+                    </span>
+                    <span>{uploadError}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setUploadError(null)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#ffdad6',
+                      cursor: 'pointer',
+                      fontSize: '16px',
+                    }}
+                    title="Dismiss error"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </section>
+
+            {/* Live Contract Audit Results Stream */}
+            {liveResult && (
+              <section
+                id="contract-audit-results"
+                style={{
+                  marginTop: '28px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '24px',
+                }}
+              >
+                {/* Document Overview Header */}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: '16px',
+                    background: 'rgba(23, 27, 38, 0.85)',
+                    border: '1px solid rgba(70, 69, 85, 0.35)',
+                    padding: '18px 20px',
+                    borderRadius: '12px',
+                    backdropFilter: 'blur(12px)',
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                      <span className="material-symbols-outlined" style={{ color: '#4cd7f6', fontSize: '22px' }}>
+                        description
+                      </span>
+                      <h2 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--sc-on-surface)', margin: 0 }}>
+                        {liveResult.filename}
+                      </h2>
+                      <span
+                        style={{
+                          padding: '2px 8px',
+                          borderRadius: '6px',
+                          fontSize: '11px',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontWeight: 700,
+                          background:
+                            liveResult.risk_summary?.overall_risk === 'High'
+                              ? 'rgba(220, 38, 38, 0.25)'
+                              : liveResult.risk_summary?.overall_risk === 'Medium'
+                              ? 'rgba(217, 119, 6, 0.25)'
+                              : 'rgba(5, 150, 105, 0.25)',
+                          color:
+                            liveResult.risk_summary?.overall_risk === 'High'
+                              ? '#ffb4ab'
+                              : liveResult.risk_summary?.overall_risk === 'Medium'
+                              ? '#fef3c7'
+                              : '#d1fae5',
+                          border: `1px solid ${
+                            liveResult.risk_summary?.overall_risk === 'High'
+                              ? 'rgba(220, 38, 38, 0.5)'
+                              : liveResult.risk_summary?.overall_risk === 'Medium'
+                              ? 'rgba(217, 119, 6, 0.5)'
+                              : 'rgba(5, 150, 105, 0.5)'
+                          }`,
+                        }}
+                      >
+                        {liveResult.risk_summary?.overall_risk || 'Low'} Risk
+                      </span>
+                    </div>
+                    <p style={{ fontSize: '12px', fontFamily: 'JetBrains Mono, monospace', color: 'var(--sc-outline)', margin: 0 }}>
+                      {liveResult.char_count?.toLocaleString()} characters • {liveResult.clauses?.length || 0} extracted clauses • Document ID: {liveResult.document_id?.slice(0, 8)}...
+                    </p>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLiveResult(null)
+                        setSearchResults(null)
+                        setSearchQuery('')
+                      }}
+                      style={{
+                        background: 'rgba(70, 69, 85, 0.3)',
+                        border: '1px solid rgba(70, 69, 85, 0.5)',
+                        color: 'var(--sc-on-surface)',
+                        padding: '8px 14px',
+                        borderRadius: '8px',
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      Audit Another Contract
+                    </button>
+                  </div>
+                </div>
+
+                {/* Clause Heat-Map (Feature 3) */}
+                {liveResult.clauses && liveResult.clauses.length > 0 && (
+                  <HeatMap clauses={liveResult.clauses} />
+                )}
+
+                {/* Ask-the-Contract Semantic Search Bar (Feature 4) */}
+                <div
+                  style={{
+                    background: 'rgba(23, 27, 38, 0.85)',
+                    border: '1px solid rgba(70, 69, 85, 0.35)',
+                    padding: '16px 20px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                    backdropFilter: 'blur(12px)',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span className="material-symbols-outlined" style={{ color: '#4cd7f6', fontSize: '18px' }}>
+                        search
+                      </span>
+                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--sc-on-surface)' }}>
+                        Ask-the-Contract (Semantic Search)
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono, monospace', color: 'var(--sc-outline)' }}>
+                      Similarity ranks clauses. It is not a confidence score.
+                    </span>
+                  </div>
+
+                  <form onSubmit={handleSearch} style={{ display: 'flex', gap: '10px' }}>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Ask a question (e.g. 'when can I terminate?', 'what is the liability cap?')"
+                      style={{
+                        flex: 1,
+                        background: 'rgba(10, 14, 24, 0.8)',
+                        border: '1px solid rgba(70, 69, 85, 0.5)',
+                        borderRadius: '8px',
+                        padding: '10px 14px',
+                        color: 'var(--sc-on-surface)',
+                        fontSize: '13px',
+                        outline: 'none',
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      disabled={searchLoading || !searchQuery.trim()}
+                      style={{
+                        background: '#4f46e5',
+                        border: 'none',
+                        color: '#ffffff',
+                        padding: '10px 18px',
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        cursor: searchLoading || !searchQuery.trim() ? 'not-allowed' : 'pointer',
+                        opacity: searchLoading || !searchQuery.trim() ? 0.6 : 1,
+                      }}
+                    >
+                      {searchLoading ? 'Searching...' : 'Search'}
+                    </button>
+                    {searchResults && (
+                      <button
+                        type="button"
+                        onClick={handleClearSearch}
+                        style={{
+                          background: 'rgba(70, 69, 85, 0.4)',
+                          border: '1px solid rgba(70, 69, 85, 0.6)',
+                          color: 'var(--sc-on-surface)',
+                          padding: '10px 14px',
+                          borderRadius: '8px',
+                          fontSize: '13px',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </form>
+
+                  {searchResults && (
+                    <div style={{ fontSize: '12px', color: '#4cd7f6', fontFamily: 'JetBrains Mono, monospace' }}>
+                      Showing top {searchResults.length} ranked clauses matching &quot;{searchQuery}&quot; (top 3 highlighted, non-matches dimmed to 50%)
+                    </div>
+                  )}
+                </div>
+
+                {/* Clause Cards Stream */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--sc-on-surface)', margin: 0 }}>
+                      Audited Contract Clauses ({liveResult.clauses?.length || 0})
+                    </h3>
+                    <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono, monospace', color: 'var(--sc-outline)' }}>
+                      Scroll to any clause via Heat-Map or search
+                    </span>
+                  </div>
+
+                  {liveResult.clauses?.map((clause, idx) => {
+                    const searchMatch = searchResults?.find(
+                      (r) => r.clause_id === clause.id || r.position === clause.position
+                    )
+                    const isTop3 = searchResults && searchResults.slice(0, 3).some(
+                      (r) => r.clause_id === clause.id || r.position === clause.position
+                    )
+                    const isDimmed = searchResults && searchResults.length > 0 && !isTop3
+                    const expInfo = explanations.clauses?.[clause.label]
+                    const redlineKey = clause.id !== undefined ? clause.id : idx
+                    const redline = clauseRedlines[redlineKey]
+                    const isRedlineLoading = redlineLoading[redlineKey]
+
+                    return (
+                      <article
+                        key={clause.id || idx}
+                        id={`clause-${clause.position}`}
+                        className="sc-clause-card"
+                        style={{
+                          opacity: isDimmed ? 0.5 : 1,
+                          borderLeft: isTop3 ? '4px solid #4cd7f6' : undefined,
+                          boxShadow: isTop3 ? '0 0 24px rgba(76, 215, 246, 0.25)' : undefined,
+                        }}
+                      >
+                        {/* Search Similarity Bar (Feature 4) */}
+                        {isTop3 && searchMatch && (
+                          <div
+                            style={{
+                              marginBottom: '12px',
+                              padding: '8px 12px',
+                              background: 'rgba(76, 215, 246, 0.12)',
+                              border: '1px solid rgba(76, 215, 246, 0.3)',
+                              borderRadius: '6px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              fontSize: '11px',
+                              fontFamily: 'JetBrains Mono, monospace',
+                              color: '#4cd7f6',
+                            }}
+                          >
+                            <span>
+                              Top Match • Similarity: {(searchMatch.similarity * 100).toFixed(1)}% ({searchMatch.similarity.toFixed(4)})
+                            </span>
+                            <span style={{ fontSize: '10px', color: 'var(--sc-outline)' }}>
+                              Ranked Result
+                            </span>
+                          </div>
+                        )}
+
+                        {/* Header row: Clause index, Label, Risk Badge, Confidence, Read-Aloud */}
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            flexWrap: 'wrap',
+                            gap: '10px',
+                            marginBottom: '12px',
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <span
+                              style={{
+                                fontFamily: 'JetBrains Mono, monospace',
+                                fontSize: '11px',
+                                fontWeight: 700,
+                                color: 'var(--sc-outline)',
+                              }}
+                            >
+                              #{clause.position + 1}
+                            </span>
+                            <span
+                              style={{
+                                fontSize: '13px',
+                                fontWeight: 700,
+                                color: 'var(--sc-on-surface)',
+                              }}
+                            >
+                              {clause.label}
+                            </span>
+                            {clause.risk_level && (
+                              <span
+                                style={{
+                                  padding: '2px 8px',
+                                  borderRadius: '4px',
+                                  fontSize: '10px',
+                                  fontFamily: 'JetBrains Mono, monospace',
+                                  fontWeight: 700,
+                                  background:
+                                    clause.risk_level === 'High'
+                                      ? 'rgba(220, 38, 38, 0.2)'
+                                      : clause.risk_level === 'Medium'
+                                      ? 'rgba(217, 119, 6, 0.2)'
+                                      : 'rgba(5, 150, 105, 0.2)',
+                                  color:
+                                    clause.risk_level === 'High'
+                                      ? '#ffb4ab'
+                                      : clause.risk_level === 'Medium'
+                                      ? '#fef3c7'
+                                      : '#d1fae5',
+                                  border: `1px solid ${
+                                    clause.risk_level === 'High'
+                                      ? 'rgba(220, 38, 38, 0.4)'
+                                      : clause.risk_level === 'Medium'
+                                      ? 'rgba(217, 119, 6, 0.4)'
+                                      : 'rgba(5, 150, 105, 0.4)'
+                                  }`,
+                                }}
+                              >
+                                {clause.risk_level} Risk
+                              </span>
+                            )}
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <span
+                              style={{
+                                fontSize: '11px',
+                                fontFamily: 'JetBrains Mono, monospace',
+                                color: 'var(--sc-outline)',
+                              }}
+                            >
+                              {(clause.confidence * 100).toFixed(1)}% confidence
+                            </span>
+
+                            {/* Read-Aloud Button (Feature 7) */}
+                            <button
+                              type="button"
+                              onClick={() => handleReadAloud(clause, idx)}
+                              disabled={!('speechSynthesis' in window)}
+                              style={{
+                                background: speakingIdx === idx ? 'rgba(76, 215, 246, 0.2)' : 'none',
+                                border: `1px solid ${speakingIdx === idx ? '#4cd7f6' : 'rgba(70, 69, 85, 0.4)'}`,
+                                color: speakingIdx === idx ? '#4cd7f6' : 'var(--sc-outline)',
+                                padding: '4px 8px',
+                                borderRadius: '6px',
+                                fontSize: '11px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                cursor: 'speechSynthesis' in window ? 'pointer' : 'not-allowed',
+                              }}
+                              title="Read plain-English explanation aloud"
+                            >
+                              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                                {speakingIdx === idx ? 'volume_up' : 'volume_mute'}
+                              </span>
+                              <span>{speakingIdx === idx ? 'Stop' : 'Read'}</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Plain English Explanation Box */}
+                        {expInfo && (
+                          <div
+                            style={{
+                              background: 'rgba(10, 14, 24, 0.6)',
+                              border: '1px solid rgba(70, 69, 85, 0.25)',
+                              borderRadius: '8px',
+                              padding: '12px 14px',
+                              marginBottom: '12px',
+                            }}
+                          >
+                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#4cd7f6', marginBottom: '4px' }}>
+                              Plain English Explanation
+                            </div>
+                            <p style={{ fontSize: '12px', color: 'var(--sc-on-surface-variant)', lineHeight: 1.5, margin: '0 0 6px 0' }}>
+                              {clause.legal?.plain_note || expInfo.summary || expInfo.why_risky}
+                            </p>
+                            {expInfo.what_to_negotiate?.[0] && (
+                              <p style={{ fontSize: '11px', color: '#ffb3ad', margin: 0 }}>
+                                <strong>Negotiation Tip:</strong> {expInfo.what_to_negotiate[0]}
+                              </p>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Original Clause Legal Text */}
+                        <div
+                          style={{
+                            background: 'rgba(10, 14, 24, 0.8)',
+                            border: '1px solid rgba(70, 69, 85, 0.2)',
+                            borderRadius: '8px',
+                            padding: '12px 14px',
+                            fontSize: '12px',
+                            fontFamily: 'JetBrains Mono, monospace',
+                            color: 'var(--sc-on-surface)',
+                            lineHeight: 1.6,
+                            whiteSpace: 'pre-wrap',
+                            marginBottom: '12px',
+                          }}
+                        >
+                          {clause.text}
+                        </div>
+
+                        {/* Redline Action & Diff Container (Feature 1) */}
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() => handleToggleRedline(clause, redlineKey)}
+                            disabled={isRedlineLoading}
+                            style={{
+                              background: 'rgba(79, 70, 229, 0.15)',
+                              border: '1px solid rgba(79, 70, 229, 0.4)',
+                              color: '#c3c0ff',
+                              padding: '6px 12px',
+                              borderRadius: '6px',
+                              fontSize: '11px',
+                              fontWeight: 600,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              cursor: isRedlineLoading ? 'not-allowed' : 'pointer',
+                            }}
+                          >
+                            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                              edit_note
+                            </span>
+                            <span>
+                              {isRedlineLoading
+                                ? 'Evaluating redline...'
+                                : redline
+                                ? 'Hide safer wording'
+                                : 'Suggest safer wording'}
+                            </span>
+                          </button>
+
+                          {/* Rendered Redline Diff */}
+                          {redline && (
+                            <div
+                              style={{
+                                marginTop: '12px',
+                                padding: '14px',
+                                background: 'rgba(10, 14, 24, 0.9)',
+                                border: '1px solid rgba(70, 69, 85, 0.4)',
+                                borderRadius: '8px',
+                              }}
+                            >
+                              {redline.error ? (
+                                <p style={{ color: '#ffb4ab', fontSize: '12px', margin: 0 }}>
+                                  {redline.error}
+                                </p>
+                              ) : (
+                                <>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                    <span style={{ fontSize: '11px', fontWeight: 600, color: '#4cd7f6' }}>
+                                      Safer Redline Proposal
+                                    </span>
+                                    {redline.verify_status && (
+                                      <span
+                                        style={{
+                                          fontSize: '10px',
+                                          fontFamily: 'JetBrains Mono, monospace',
+                                          padding: '1px 6px',
+                                          borderRadius: '4px',
+                                          background: 'rgba(70, 69, 85, 0.4)',
+                                          color: 'var(--sc-outline)',
+                                        }}
+                                      >
+                                        {redline.verify_status}
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* Diff Segments with WCAG accessible prefixes */}
+                                  <div
+                                    style={{
+                                      fontFamily: 'JetBrains Mono, monospace',
+                                      fontSize: '12px',
+                                      lineHeight: 1.7,
+                                      padding: '10px',
+                                      background: 'rgba(0, 0, 0, 0.4)',
+                                      borderRadius: '6px',
+                                      marginBottom: '10px',
+                                    }}
+                                  >
+                                    {redline.diff_segments?.map((seg, sIdx) => {
+                                      if (seg.type === 'delete') {
+                                        return (
+                                          <del
+                                            key={sIdx}
+                                            style={{
+                                              color: '#ffb4ab',
+                                              backgroundColor: 'rgba(147, 0, 10, 0.35)',
+                                              textDecoration: 'line-through',
+                                              padding: '1px 3px',
+                                              borderRadius: '2px',
+                                            }}
+                                          >
+                                            <span style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: 0 }}>
+                                              removed: 
+                                            </span>
+                                            {seg.text}
+                                          </del>
+                                        )
+                                      }
+                                      if (seg.type === 'insert') {
+                                        return (
+                                          <ins
+                                            key={sIdx}
+                                            style={{
+                                              color: '#d1fae5',
+                                              backgroundColor: 'rgba(5, 150, 105, 0.35)',
+                                              textDecoration: 'underline',
+                                              fontWeight: 'bold',
+                                              padding: '1px 3px',
+                                              borderRadius: '2px',
+                                            }}
+                                          >
+                                            <span style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: 0 }}>
+                                              added: 
+                                            </span>
+                                            {seg.text}
+                                          </ins>
+                                        )
+                                      }
+                                      return <span key={sIdx} style={{ color: 'var(--sc-on-surface)' }}>{seg.text}</span>
+                                    })}
+                                  </div>
+
+                                  {redline.rationale && (
+                                    <p style={{ fontSize: '11px', color: 'var(--sc-on-surface-variant)', margin: 0 }}>
+                                      <strong style={{ color: '#c3c0ff' }}>Rationale:</strong> {redline.rationale}
+                                    </p>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </article>
+                    )
+                  })}
+                </div>
+              </section>
+            )}
         </main>
       </div>
     </div>
