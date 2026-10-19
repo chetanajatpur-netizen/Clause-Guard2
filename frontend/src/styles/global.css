@@ -195,7 +195,10 @@ button, [role="button"], .btn {
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  transition: all 0.15s ease-in-out;
+  transition: background-color var(--dur-fast) var(--ease-standard),
+              box-shadow var(--dur-fast) var(--ease-standard),
+              transform var(--dur-instant) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
   box-shadow: var(--shadow-sm);
   background-color: var(--primary-button);
   color: var(--primary-button-text);
@@ -203,16 +206,19 @@ button, [role="button"], .btn {
 
 button:hover, [role="button"]:hover, .btn:hover {
   background-color: var(--primary-button-hover);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lifted);
+  transform: translateY(-1px);
 }
 
 button:active, [role="button"]:active, .btn:active {
-  transform: translateY(1px);
+  transform: scale(0.97);
+  box-shadow: var(--shadow-sm);
 }
 
 button:focus-visible, .btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #4f46e5;
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: none;
 }
 
 button:disabled, .btn:disabled {
@@ -289,12 +295,15 @@ button:disabled, .btn:disabled {
   padding: var(--space-lg);
   margin-bottom: var(--space-md);
   box-shadow: var(--shadow-sm);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--dur-fast) var(--ease-standard),
+              box-shadow var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-emphasis);
 }
 
 .card:hover {
   border-color: var(--border-subtle);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lifted);
+  transform: translateY(-2px);
 }
 
 /* Input Fields & Textareas */
@@ -500,12 +509,15 @@ input[type="checkbox"] {
   padding: var(--space-lg);
   margin-bottom: var(--space-md);
   box-shadow: var(--shadow-sm);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--dur-fast) var(--ease-standard),
+              box-shadow var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-emphasis);
 }
 
 .clause-card:hover {
   border-color: var(--border-subtle);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lifted);
+  transform: translateY(-2px);
 }
 
 .clause-text {
@@ -556,4 +568,27 @@ input[type="checkbox"] {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Reduced-motion: remove hover lifts, press scales, and keyframe animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html, body {
+    scroll-behavior: auto;
+  }
+
+  button:hover, [role="button"]:hover, .btn:hover,
+  .card:hover, .clause-card:hover, .heatmap-segment:hover {
+    transform: none !important;
+  }
+
+  button:active, [role="button"]:active, .btn:active,
+  .heatmap-segment:active {
+    transform: none !important;
+  }
 }

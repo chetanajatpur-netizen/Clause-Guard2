@@ -204,9 +204,8 @@ export default function ClauseCard({
         marginBottom: '12px',
         cursor: isRisky && clause.label !== 'No Clause' ? 'pointer' : 'default',
         boxShadow: searchMatch ? '0 4px 12px rgba(79, 70, 229, 0.15)' : 'var(--shadow-sm)',
-        opacity: isSearchActive ? (searchMatch ? 1 : 0.5) : 1,
-        transition: 'border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease',
-        transform: searchMatch ? 'scale(1.002)' : 'none',
+        transition: 'border-color var(--dur-fast, 150ms) var(--ease-standard), box-shadow var(--dur-fast, 150ms) var(--ease-standard), opacity var(--dur-fast, 150ms) var(--ease-standard), transform var(--dur-fast, 150ms) var(--ease-emphasis)',
+        transform: searchMatch ? 'scale(1.002)' : undefined,
       }}
       aria-label={`Clause: ${clause.label}, Risk: ${clause.risk_level || 'None'}${searchMatch ? `, Search match rank ${searchMatch.rank}` : ''}`}
     >

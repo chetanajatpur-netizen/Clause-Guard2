@@ -2,9 +2,9 @@
 
 ## Current status
 - Current day: Overnight Execution COMPLETE
-- Current phase/step: 3D Cockpit Sole Interface & Contract Ingestion Drop Box Online
+- Current phase/step: UX Polish STEP 1 Complete (Motion tokens + interaction feedback)
 - File currently being worked on: None
-- Recent updates: Removed White Canvas theme switcher; set 3D Spatial Cockpit as default and sole dashboard; added interactive file drop box (#contract-drop-zone) supporting PDF/DOCX/TXT; integrated live audit stream with HeatMap, Ask-the-Contract search, read-aloud, and redline diffs; all 47 backend tests pass and frontend build passes cleanly.
+- Recent updates: STEP 1 of UX Polish pass complete: motion tokens added to tokens.css, button press/hover/focus feedback standardized, ClauseCard & HeatMap segment hover lift with deeper shadow implemented, 3D tilt capped at 3deg, prefers-reduced-motion verified across all animations, Vite build (4.82s) and 47/47 pytest tests passing.
 
 
 ## Completed
@@ -169,6 +169,14 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Updated `frontend/src/App.jsx` to make the "3D Spatial Cockpit" (Spatial Clause Risk Engine) the default view upon load.
   - Added localStorage persistence (`clauseguard_view`) with fallback to 'cockpit', ensuring seamless switching between 3D Spatial Cockpit and Precision Legal Canvas.
   - Production Vite build passed (4.62s).
+- [2026-10-19 12:00] UX Polish STEP 1 DONE:
+  - Added motion tokens (`--ease-standard`, `--ease-emphasis`, `--dur-instant`, `--dur-fast`, `--dur-normal`, `--dur-slow`, `--shadow-lifted`) to `tokens.css`.
+  - Button interaction feedback: tactile press feedback (`scale(0.97)` on `:active`), subtle hover lift (`translateY(-1px)` with `--shadow-lifted`), and accessible focus ring using `--focus-outline`.
+  - ClauseCard & HeatMap segments: hover lift (`translateY(-2px)` + deeper shadow) using `--dur-fast` and `--ease-emphasis`.
+  - 3D Tilt: capped max rotation at 3deg (reduced from 4deg).
+  - Preserved stability: zero motion applied to readable clause body text.
+  - Accessibility: all new animations and transitions wrapped in `@media (prefers-reduced-motion: no-preference)` with explicit reduced-motion cancellation overrides.
+  - Verification: Production Vite build passed in 4.82s; 47/47 backend pytest tests passed (100%).
 
 
 

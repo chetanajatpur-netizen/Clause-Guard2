@@ -173,7 +173,7 @@ export default function HeatMap({ clauses = [] }) {
           width: '100%',
           height: '32px',
           borderRadius: 'var(--rounded-md)',
-          overflow: 'hidden',
+          overflow: 'visible',
           backgroundColor: 'var(--surface-subtle-2)',
           border: '1px solid var(--border-delicate)',
         }}
@@ -190,6 +190,7 @@ export default function HeatMap({ clauses = [] }) {
             <button
               key={clause.id || position}
               type="button"
+              className="heatmap-segment"
               onClick={() => scrollToClause(position)}
               onMouseEnter={() => setHoveredClause({ ...clause, position })}
               onMouseLeave={() => setHoveredClause(null)}
@@ -205,11 +206,11 @@ export default function HeatMap({ clauses = [] }) {
                 margin: 0,
                 cursor: 'pointer',
                 opacity: isHovered ? 1 : 0.88,
-                transform: isHovered ? 'scaleY(1.15)' : 'none',
+                transform: isHovered ? 'translateY(-2px)' : 'none',
                 transformOrigin: 'bottom',
-                transition: 'transform 0.1s ease, opacity 0.1s ease',
+                transition: 'transform var(--dur-fast, 150ms) var(--ease-emphasis), box-shadow var(--dur-fast, 150ms) var(--ease-standard), opacity var(--dur-fast, 150ms) var(--ease-standard)',
                 position: 'relative',
-                boxShadow: isHovered ? '0 0 0 2px var(--primary-container)' : 'none',
+                boxShadow: isHovered ? '0 6px 16px -2px rgba(15, 23, 42, 0.25), 0 0 0 2px var(--primary-container)' : 'none',
                 zIndex: isHovered ? 10 : 1,
               }}
             />
