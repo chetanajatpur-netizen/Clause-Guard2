@@ -177,6 +177,26 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Preserved stability: zero motion applied to readable clause body text.
   - Accessibility: all new animations and transitions wrapped in `@media (prefers-reduced-motion: no-preference)` with explicit reduced-motion cancellation overrides.
   - Verification: Production Vite build passed in 4.82s; 47/47 backend pytest tests passed (100%).
+- [2026-10-20 10:35] Comprehensive Multi-Vector Stress Test & Concurrency Hardening DONE:
+  - Adversarial & Edge-Case Input Stress (`clauseguard-testkit/stress_adversarial.py`):
+    - Pathological unpunctuated text (185,000 characters) safely partitioned into 93 chunks bounded at <=2,000 chars.
+    - Massive synthetic contracts (500 clauses, ~35k words) parsed in 0.0002s.
+    - Malicious unicode, astral plane emojis, Arabic/Hebrew RTL text, SQL injections, and script tags processed safely with 0 unhandled exceptions.
+    - Corrupted PDFs, malformed DOCX archives, empty payloads, and >10MB files rejected with structured 4xx error envelopes.
+    - Numerical extremes on enhanced risk engine ([-10, 100, NaN, Inf, -Inf]) verified strictly bounded in [0, 100].
+    - Redline engine ReDoS and formatting bracket injection attacks verified safe (0.002s).
+  - High Concurrency & Load Stress (`clauseguard-testkit/stress_concurrency.py`):
+    - Concurrent `/analyze`: 5 parallel workers processed DOC-01 in 1.118s with 100% success rate (4.48 RPS, median P50 = 1.07s).
+    - Concurrent `/redline`: 30 concurrent requests completed in 0.026s with 100% success rate (1,115.99 RPS, median P50 = 7.8ms).
+    - Concurrent Semantic `/search`: 30 concurrent queries completed in 0.215s with 100% success rate (124.11 RPS, median P50 = 75.2ms).
+    - Memory Leak Profiling: 15 sequential contracts profiled; resident set size stabilized at ~1,006 MB with net growth of 0.0 MB post-GC (`leak_detected = False`).
+  - Architectural Hardening Applied:
+    - Fixed CPU inference setting across `config.py`, `classifier.py`, and `embedder.py` (preventing native Apple Silicon Metal MPS thread-race SIGSEGV crashes under multi-threaded load).
+    - Hardened `parser.py` (`extract_text_from_pdf`, `extract_text_from_docx`) to catch corrupt binary stream exceptions and return `NO_TEXT_EXTRACTED` (422) instead of unhandled 500s.
+    - Hardened `segmenter.py` with fallback word-boundary splitting for oversized unpunctuated sentences.
+    - Added `timeout=30` to SQLite connection pool in `db/session.py` to prevent locking under concurrent burst writes.
+  - Stress Test Report: Generated at `clauseguard-testkit/results/stress_test_report.md`.
+  - Verification: Master runner `clauseguard-testkit/stress_test.py` executed cleanly. Full backend pytest suite passed (47/47 in 112.87s). Vite build compiled in 4.65s.
 
 
 

@@ -24,9 +24,14 @@ class ClauseEmbedder:
             model_name: HuggingFace model name or path.
         """
         from sentence_transformers import SentenceTransformer
+        try:
+            from app.config import settings
+            device = getattr(settings, "device", "cpu")
+        except Exception:  # noqa: BLE001
+            device = "cpu"
         
-        logger.info("Loading SBERT model: %s", model_name)
-        self.model = SentenceTransformer(model_name)
+        logger.info("Loading SBERT model: %s on device=%s", model_name, device)
+        self.model = SentenceTransformer(model_name, device=device)
         self._loaded = True
         logger.info("SBERT model loaded successfully")
 

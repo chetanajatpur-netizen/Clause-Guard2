@@ -30,6 +30,7 @@ class Settings(BaseSettings):
     metrics_path: str = "ml/artifacts/metrics.json"
     label_map_path: str = "ml/artifacts/label_map.json"
     cors_origins: str = "*"
+    device: str = "cpu"
 
     model_config = {
         "env_file": ".env",

@@ -16,19 +16,23 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
         Extracted text content.
     
     Raises:
-        ValueError: If no text could be extracted.
+        ValueError: If no text could be extracted or file is corrupted.
     """
     from pypdf import PdfReader
     
-    reader = PdfReader(io.BytesIO(file_bytes))
-    text_parts: list[str] = []
+    try:
+        reader = PdfReader(io.BytesIO(file_bytes))
+        text_parts: list[str] = []
+        
+        for page in reader.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text_parts.append(page_text)
+        
+        text = "\n".join(text_parts).strip()
+    except Exception as e:
+        raise ValueError(f"Failed to extract text from PDF: {e}") from e
     
-    for page in reader.pages:
-        page_text = page.extract_text()
-        if page_text:
-            text_parts.append(page_text)
-    
-    text = "\n".join(text_parts).strip()
     if not text:
         raise ValueError("No text extracted from PDF. It may be a scanned document.")
     
@@ -44,12 +48,18 @@ def extract_text_from_docx(file_bytes: bytes) -> str:
     
     Returns:
         Extracted text content.
+    
+    Raises:
+        ValueError: If no text could be extracted or file is corrupted.
     """
     from docx import Document
     
-    doc = Document(io.BytesIO(file_bytes))
-    paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
-    text = "\n\n".join(paragraphs).strip()
+    try:
+        doc = Document(io.BytesIO(file_bytes))
+        paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
+        text = "\n\n".join(paragraphs).strip()
+    except Exception as e:
+        raise ValueError(f"Failed to extract text from DOCX: {e}") from e
     
     if not text:
         raise ValueError("No text extracted from DOCX.")

@@ -6,7 +6,7 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
+connect_args = {"check_same_thread": False, "timeout": 30} if settings.database_url.startswith("sqlite") else {}
 engine = create_engine(settings.database_url, echo=False, connect_args=connect_args)
 SessionLocal = sessionmaker(bind=engine, class_=Session, expire_on_commit=False)
 

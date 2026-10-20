@@ -186,11 +186,16 @@ class ClauseClassifier:
 
     @staticmethod
     def _get_device() -> torch.device:
-        """Auto-detect best available device."""
-        if torch.cuda.is_available():
-            return torch.device("cuda")
-        if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
-            return torch.device("mps")
+        """Get inference device respecting architecture.md CPU rule and config settings."""
+        try:
+            from app.config import settings
+            configured = getattr(settings, "device", "cpu").lower()
+            if configured == "cuda" and torch.cuda.is_available():
+                return torch.device("cuda")
+            if configured == "mps" and hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+                return torch.device("mps")
+        except Exception:  # noqa: BLE001
+            pass
         return torch.device("cpu")
 
 

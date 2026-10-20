@@ -65,7 +65,21 @@ def segment_text(
             sentences = re.split(r'(?<=[.!?])\s+', chunk)
             sub_buffer = ""
             for sent in sentences:
-                if len(sub_buffer) + len(sent) > max_len and sub_buffer:
+                if len(sent) > max_len:
+                    if sub_buffer:
+                        final.append(sub_buffer.strip())
+                        sub_buffer = ""
+                    words = sent.split(" ")
+                    w_buf = ""
+                    for w in words:
+                        if len(w_buf) + len(w) + 1 > max_len and w_buf:
+                            final.append(w_buf.strip())
+                            w_buf = w
+                        else:
+                            w_buf = (w_buf + " " + w).strip()
+                    if w_buf:
+                        sub_buffer = w_buf
+                elif len(sub_buffer) + len(sent) > max_len and sub_buffer:
                     final.append(sub_buffer.strip())
                     sub_buffer = sent
                 else:
