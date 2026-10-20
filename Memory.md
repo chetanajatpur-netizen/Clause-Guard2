@@ -1,10 +1,10 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: Overnight Execution COMPLETE
-- Current phase/step: UX Polish STEP 1 Complete (Motion tokens + interaction feedback)
-- File currently being worked on: None
-- Recent updates: STEP 1 of UX Polish pass complete: motion tokens added to tokens.css, button press/hover/focus feedback standardized, ClauseCard & HeatMap segment hover lift with deeper shadow implemented, 3D tilt capped at 3deg, prefers-reduced-motion verified across all animations, Vite build (4.82s) and 47/47 pytest tests passing.
+- Current day: Minimalist Glassmorphism Redesign Pass
+- Current phase/step: Minimalist Glassmorphism Redesign STEP 1 Complete (Remove fabricated data and features)
+- File currently being worked on: frontend/src/components/SpatialCockpit.jsx
+- Recent updates: Audited frontend for all hardcoded/fabricated data not backed by real API responses (dollar caps, TCV/ACV figures, fake vendor names, "Synthesis Confidence", fake Auto-Resolve button, playbook version strings, and mock sliders/simulators). Removed all fabricated portfolio elements and unbuilt mock features from SpatialCockpit.jsx. Retained and cleanly wired all real features (Contract Drop Zone, Legal-BERT clause classification, HeatMap, real risk summaries, Ask-the-Contract semantic search, AI Redlines, plain-English legal context notes, read-aloud TTS, History archive via /api/v1/documents, and Model Insights via /api/v1/insights). Vite build passed in 7.91s; 47/47 pytest tests passed.
 
 
 ## Completed
@@ -197,6 +197,19 @@ Model is mildly under-converged (training loss and val loss still declining stea
     - Added `timeout=30` to SQLite connection pool in `db/session.py` to prevent locking under concurrent burst writes.
   - Stress Test Report: Generated at `clauseguard-testkit/results/stress_test_report.md`.
   - Verification: Master runner `clauseguard-testkit/stress_test.py` executed cleanly. Full backend pytest suite passed (47/47 in 112.87s). Vite build compiled in 4.65s.
+- [2026-10-20 17:35] Minimalist Glassmorphism Redesign STEP 1 DONE:
+  - Audited frontend for all fabricated data and unbuilt mock features not backed by backend API endpoints.
+  - Removed all mock portfolio variables, fake ACV/TCV dollar metrics, fake vendor cards, fake exposure index gauge (72/100), fake "98.4% Synthesis Confidence", fake "Auto-Resolve 3 Criticals" button, and mock playbook sliders from `SpatialCockpit.jsx`.
+  - Preserved and cleanly wired all real features:
+    - Contract Ingestion Drop Box (`#contract-drop-zone` for PDF, DOCX, TXT with 10MB validation).
+    - Legal-BERT classification & real Risk Summary cards (High, Medium, Low, Total clauses from real response).
+    - HeatMap clause visualization (`<HeatMap clauses={liveResult.clauses} />`).
+    - Ask-the-Contract semantic search (`searchDocument`) with SBERT cosine similarity ranking.
+    - Clause cards with plain-English breakdowns (`explanations`), browser `SpeechSynthesis` read-aloud, and AI Redline diff generator (`getClauseRedline`).
+    - History view with real documents archive from `/api/v1/documents` (view/open audit, delete).
+    - Model Insights view with real empirical test metrics from `/api/v1/insights` (CUAD test split comparison of Baseline vs Legal-BERT).
+  - Cleaned up top header with one primary action button ("Upload Contract") and tabs for Analyze, History, and Insights.
+  - Verified Vite production build (`npm run build` in 7.91s) and full backend test suite (`47/47 passed in 153.24s`).
 
 
 
