@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from fastapi.testclient import TestClient
 from app.main import app
-from app.redline.engine import suggest_redline, compute_word_diff
+from app.redline.engine import suggest_redline
 from app.services.segmenter import segment_text
 
 client = TestClient(app)

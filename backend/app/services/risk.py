@@ -2,17 +2,17 @@
 import logging
 import sys
 from pathlib import Path
-from typing import Optional, List, Dict, Any, Tuple
+from typing import Optional, Dict, Any
 import math
 from functools import lru_cache
 
 logger = logging.getLogger(__name__)
 
 try:
-    from app.core.risk_map import RISK_MAP, get_overall_risk, get_risk_level
+    from app.core.risk_map import get_overall_risk, get_risk_level
 except ImportError:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "ml" / "src"))
-    from risk_map import RISK_MAP, get_overall_risk, get_risk_level
+    from risk_map import get_overall_risk, get_risk_level
 
 
 def compute_clause_risk(label: str) -> Optional[str]:

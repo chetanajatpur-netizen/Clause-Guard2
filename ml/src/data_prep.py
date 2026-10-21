@@ -7,7 +7,7 @@ downsamples 'No Clause', and splits by contract (70/15/15, seed 42) to prevent d
 import json
 import random
 import re
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 

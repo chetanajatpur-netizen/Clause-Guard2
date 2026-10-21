@@ -10,7 +10,6 @@ from typing import Any
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
 import torch
@@ -18,7 +17,6 @@ from sklearn.metrics import (
     accuracy_score,
     classification_report,
     confusion_matrix,
-    f1_score,
 )
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 

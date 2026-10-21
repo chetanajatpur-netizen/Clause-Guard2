@@ -10,7 +10,6 @@ from sqlalchemy import (
     LargeBinary,
     String,
     Text,
-    Uuid,
 )
 from sqlalchemy.orm import relationship
 from app.db.session import Base

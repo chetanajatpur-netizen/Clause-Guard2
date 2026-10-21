@@ -1,8 +1,6 @@
 """Contract analysis endpoint."""
 import logging
-from uuid import uuid4
 
-import numpy as np
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 
@@ -19,7 +17,7 @@ from app.schemas.analysis import AnalysisResponse, ClauseResponse, RiskSummary
 from app.services.classifier import classifier
 from app.services.embedder import embedder
 from app.services.parser import extract_text
-from app.services.risk import compute_clause_risk, compute_document_risk, compute_enhanced_clause_risk
+from app.services.risk import compute_document_risk, compute_enhanced_clause_risk
 from app.services.segmenter import segment_text
 
 logger = logging.getLogger(__name__)

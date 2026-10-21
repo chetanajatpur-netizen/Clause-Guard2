@@ -36,43 +36,11 @@
 
 /* Animations — only when user has no motion preference */
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes sc-float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-7px); }
-  }
-  @keyframes sc-float-reverse {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(6px); }
-  }
-  @keyframes sc-pulse-glow {
-    0%, 100% { opacity: 0.35; filter: drop-shadow(0 0 12px rgba(76, 215, 246, 0.4)); }
-    50% { opacity: 0.75; filter: drop-shadow(0 0 24px rgba(76, 215, 246, 0.7)); }
-  }
-  @keyframes sc-sweep-radar {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  @keyframes sc-orbit-slow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
   @keyframes sc-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
 
-  .sc-animate-float {
-    animation: sc-float 4s ease-in-out infinite;
-  }
-  .sc-animate-float-reverse {
-    animation: sc-float-reverse 5s ease-in-out infinite;
-  }
-  .sc-animate-orbit {
-    animation: sc-orbit-slow 28s linear infinite;
-  }
-  .sc-animate-radar {
-    animation: sc-sweep-radar 4.5s linear infinite;
-  }
   .sc-animate-spin {
     animation: sc-spin 1s linear infinite;
     display: inline-block;
@@ -86,14 +54,12 @@
   .sc-drop-box:hover,
   .sc-drop-box.drag-active,
   .spatial-cockpit button:hover,
-  .spatial-cockpit [role="button"]:hover,
-  .cockpit-view-btn:hover {
+  .spatial-cockpit [role="button"]:hover {
     transform: none !important;
   }
   .sc-tilt-card:active,
   .spatial-cockpit button:active,
-  .spatial-cockpit [role="button"]:active,
-  .cockpit-view-btn:active {
+  .spatial-cockpit [role="button"]:active {
     transform: none !important;
   }
 }
@@ -120,55 +86,6 @@
   transform: scale(0.97);
 }
 .sc-tilt-card:focus-visible {
-  outline: var(--focus-outline, 2px solid #4f46e5);
-  outline-offset: var(--focus-outline-offset, 1px);
-}
-
-/* Top bar switcher tab */
-.cockpit-view-switcher {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--sc-surface-high);
-  padding: 4px;
-  border-radius: 8px;
-  border: 1px solid var(--sc-outline-variant);
-}
-
-.cockpit-view-btn {
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color var(--dur-fast, 150ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
-              box-shadow var(--dur-fast, 150ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
-              transform var(--dur-instant, 100ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
-              border-color var(--dur-fast, 150ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1));
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.cockpit-view-btn.active {
-  background: #ffffff;
-  color: #0b1c30;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-.cockpit-view-btn.inactive {
-  background: transparent;
-  color: var(--sc-outline);
-}
-.cockpit-view-btn.inactive:hover {
-  color: var(--sc-on-surface);
-}
-.cockpit-view-btn:hover {
-  transform: translateY(-1px);
-}
-.cockpit-view-btn:active {
-  transform: scale(0.97);
-}
-.cockpit-view-btn:focus-visible {
   outline: var(--focus-outline, 2px solid #4f46e5);
   outline-offset: var(--focus-outline-offset, 1px);
 }

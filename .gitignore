@@ -17,6 +17,8 @@ dist/
 
 # Data & Models (large files)
 ml/data/
+ml/data/raw/
+ml/data/processed/
 ml/artifacts/*.pt
 ml/artifacts/*.bin
 ml/artifacts/*.safetensors

@@ -1,7 +1,6 @@
 import os
 os.environ["DATABASE_URL"] = "sqlite:///:memory:"
 
-from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -10,7 +9,6 @@ from sqlalchemy.pool import StaticPool
 
 from app.db.session import Base, get_db
 from app.main import app
-from app.services.classifier import classifier
 from app.services.embedder import embedder
 
 # In-memory SQLite for test isolation
