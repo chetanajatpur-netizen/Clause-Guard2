@@ -1,9 +1,8 @@
-import SpatialCockpit from './components/SpatialCockpit'
-import './styles/tokens.css'
-import './styles/global.css'
+import React from 'react';
+import DocumentDashboard from './components/DocumentDashboard';
+import './styles/tokens.css';
+import './styles/global.css';
 
-function App() {
-  return <SpatialCockpit />
+export default function App() {
+  return <DocumentDashboard />;
 }
-
-export default App

@@ -1,10 +1,10 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: Minimalist Glassmorphism Redesign Pass
-- Current phase/step: Dead Code Review & Workspace Optimization Complete
+- Current day: 3D Interactive Document Risk Analysis Dashboard
+- Current phase/step: 3D Document Dashboard Complete & Verified
 - File currently being worked on: None
-- Recent updates: Cleaned up unused Python imports across backend, tests, and ml/src. Removed dead CSS classes from spatial-cockpit.css. Removed 14 orphaned legacy frontend components, pages, and stylesheets (3,267 lines eliminated). Vite production build compiled cleanly in 4.84s (CSS bundle reduced to 22.47 kB); 47/47 backend pytest tests passing (105.16s).
+- Recent updates: Implemented modern 3D Document Risk Analysis Dashboard matching user specification and screenshots. Created LeftPanel.jsx (dotted drop box, storage stat, uploaded documents list with active selection, download & delete), DocumentViewer3D.jsx (digital paper sheet with 3D depth/perspective, mouse-tilt, top toolbar with page navigation, risk pills, zoom controls, 3D toggle, semantic search, minimap tick strip, and inline clause highlights), RiskPanel.jsx (findings accordion, colored risk indicators, plain English legal context, AI balanced redlines with diff and one-click copy, text-to-speech read-aloud, and review tracker), and DocumentDashboard.jsx (main orchestrator). Clean production build (npm run build in 4.76s); 47/47 backend pytest tests passing (29.11s).
 
 
 ## Completed
@@ -210,13 +210,13 @@ Model is mildly under-converged (training loss and val loss still declining stea
     - Model Insights view with real empirical test metrics from `/api/v1/insights` (CUAD test split comparison of Baseline vs Legal-BERT).
   - Cleaned up top header with one primary action button ("Upload Contract") and tabs for Analyze, History, and Insights.
   - Verified Vite production build (`npm run build` in 7.91s) and full backend test suite (`47/47 passed in 153.24s`).
-- [2026-10-21 10:45] Dead Code Review & Workspace Cleanup DONE:
-  - Cleaned up unused imports across `backend/app/routers/analyze.py` (`uuid4`, `np`, `compute_clause_risk`), `backend/app/schemas/redline.py` (`Optional`), `backend/app/db/models.py` (`Uuid`), `backend/app/services/risk.py` (`List`, `Tuple`, `RISK_MAP`), `backend/tests/conftest.py` (`Path`, `classifier`), `backend/tests/test_redline.py` (`compute_word_diff`), `ml/src/baseline.py` (`np`), `ml/src/data_prep.py` (`Counter`), and `ml/src/evaluate.py` (`np`, `f1_score`).
-  - Removed dead keyframes and legacy switcher classes from `spatial-cockpit.css`.
-  - Removed 14 unreferenced legacy frontend files (3,267 lines: `Landing.jsx`, `landing.css`, `Analyze.jsx`, `History.jsx`, `Insights.jsx`, `ClauseCard.jsx`, `ClauseExplanation.jsx`, `ErrorBanner.jsx`, `Loader.jsx`, `RiskBadge.jsx`, `SearchBar.jsx`, `UploadBox.jsx`, `ViewModeToggle.jsx`, `clause-explanation.css`).
-  - Added explicit `.gitignore` rules for `ml/data/raw/` and `ml/data/processed/`.
-  - Verified full test suite: 47/47 pytest tests passed in 105.16s (100% pass rate).
-  - Verified production build: Vite compiled in 4.84s with CSS bundle reduced from 26.94 kB to 22.47 kB.
+- [2026-10-22 19:05] 3D Interactive Document Risk Analysis Dashboard DONE:
+  - Visual Layout & Design System: Built `frontend/src/styles/document-dashboard.css` matching user specifications and reference screenshots (professional light blue-gray theme `#edf2f7`, white digital paper `#ffffff`, teal accents `#0891b2`, red `#ef4444`, moderate yellow `#f59e0b`, and cream/teal `#0891b2` highlights).
+  - Left Panel (`LeftPanel.jsx`): Implemented dotted drop box for drag & drop or click-to-upload (PDF, DOCX, TXT up to 10MB), real-time upload progress indicator, document count / storage stats, uploaded contracts list with file icons, size, timestamps, active selection, download text icon, and delete `x`.
+  - Center 3D Digital Paper Viewer (`DocumentViewer3D.jsx`): Digital paper sheet with subtle 3D perspective and mouse-responsive tilt (capped at 2.5deg, respecting `prefers-reduced-motion`), 3D / Flat reading mode toggle, top toolbar with page navigation (`< Page X of Y >`), risk category count pills (Red High, Yellow Moderate, Teal Low with filter toggles), zoom controls (`100%`, `-`, `+`), semantic search bar (`/api/v1/search`), vertical minimap tick strip with colored clause ticks, and exact inline highlights on readable, selectable digital paper.
+  - Right Risks Sidebar (`RiskPanel.jsx`): "Risks" header with total count badge, filter tabs (All, High, Moderate, Low), finding accordion cards with colored left accent bars, `> Recommendation` toggle pill, plain English legal breakdowns from `clause_explanations.json`, AI balanced redline viewer (`getClauseRedline`), copy replacement button, text-to-speech read-aloud via Web Speech API, and "Mark as reviewed" checkbox tracker.
+  - Dashboard Orchestration (`DocumentDashboard.jsx` & `App.jsx`): Fully integrated the 3 panels with bi-directional synchronization (clicking paper clause opens sidebar finding; clicking sidebar finding scrolls to and highlights paper clause). Connected live backend endpoints (`/api/v1/analyze`, `/api/v1/documents`, `/api/v1/search`, `/api/v1/redline`).
+  - Verification: Production build passed (`npm run build` in 4.76s with 0 errors); full backend test suite passed (47/47 pytest tests in 29.11s).
 
 
 
