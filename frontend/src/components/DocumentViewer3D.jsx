@@ -257,9 +257,9 @@ export default function DocumentViewer3D({
         </div>
       </div>
 
-      {/* 3D Paper Stage */}
+      {/* Center Stage: 3D Document Paper Canvas */}
       <div
-        className="dd-stage"
+        className="dd-center-stage dd-stage"
         ref={stageRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -375,9 +375,9 @@ export default function DocumentViewer3D({
                         )}
                       </div>
 
-                      {/* Readable Text with Exact Inline Highlight */}
+                      {/* In-Text Clause Risk Highlights */}
                       <div
-                        className={`dd-clause-text ${riskClass ? `dd-highlight ${riskClass}` : ''} ${isActive ? 'highlight-active' : ''}`}
+                        className={`dd-clause-text clause-highlight ${clause.risk_level ? `risk-${clause.risk_level.toLowerCase()}` : ''} ${isActive ? 'active' : ''}`}
                       >
                         {clause.text}
                       </div>

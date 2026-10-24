@@ -177,8 +177,8 @@ export default function DocumentDashboard() {
         </div>
       </header>
 
-      {/* 3-Column Workspace */}
-      <div className="dd-workspace">
+      {/* 3-Column Split Cockpit */}
+      <div className="dd-body dd-workspace">
         {/* Left Panel: Upload Drop Box & Document History */}
         <LeftPanel
           documents={documents}

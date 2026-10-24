@@ -197,7 +197,7 @@ export default function RiskPanel({
               <div
                 key={clause.id}
                 ref={(el) => (cardRefs.current[clause.id] = el)}
-                className={`dd-finding-card ${riskClass} ${isExpanded ? 'expanded' : ''} ${isReviewed ? 'reviewed' : ''}`}
+                className={`dd-finding-card risk-card ${clause.risk_level?.toLowerCase()} ${riskClass} ${isExpanded ? 'expanded' : ''} ${isReviewed ? 'reviewed' : ''}`}
                 onClick={() => {
                   if (onSelectClause) onSelectClause(clause.id);
                 }}
@@ -208,8 +208,8 @@ export default function RiskPanel({
                     <span className="dd-finding-num">§ {clause.position + 1}</span>
                     <h4 className="dd-finding-title">{clause.label}</h4>
                   </div>
-                  <span className={`dd-finding-pill ${riskClass}`}>
-                    {clause.risk_level}
+                  <span className={`risk-score-badge ${clause.risk_level?.toLowerCase()} ${riskClass}`}>
+                    {clause.risk_score ? `${clause.risk_score}/100` : clause.risk_level}
                   </span>
                 </div>
 
