@@ -16,7 +16,7 @@ import '../styles/document-dashboard.css';
  * Combines LeftPanel (upload/history), DocumentViewer3D (center 3D paper stage),
  * and RiskPanel (right risks sidebar).
  */
-export default function DocumentDashboard() {
+export default function DocumentDashboard({ onBackToHome }) {
   const [documents, setDocuments] = useState([]);
   const [activeDocId, setActiveDocId] = useState(null);
   const [documentData, setDocumentData] = useState(null);
@@ -160,6 +160,15 @@ export default function DocumentDashboard() {
         </div>
 
         <div className="dd-header-actions">
+          {onBackToHome && (
+            <button
+              className="dd-header-btn"
+              onClick={onBackToHome}
+              title="Return to Front Page"
+            >
+              ← Home
+            </button>
+          )}
           <button
             className={`dd-header-btn ${leftCollapsed ? 'active' : ''}`}
             onClick={() => setLeftCollapsed(!leftCollapsed)}
