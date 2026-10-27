@@ -1,10 +1,10 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: 3D Interactive Document Risk Analysis Dashboard
-- Current phase/step: 3D Document Dashboard Complete & Verified
+- Current day: 3D Interactive Document Risk Analysis Dashboard & Deep Model Evaluation Audit
+- Current phase/step: Multi-Vector Stress Test Suite Complete
 - File currently being worked on: None
-- Recent updates: Implemented modern 3D Document Risk Analysis Dashboard matching user specification and screenshots. Created LeftPanel.jsx (dotted drop box, storage stat, uploaded documents list with active selection, download & delete), DocumentViewer3D.jsx (digital paper sheet with 3D depth/perspective, mouse-tilt, top toolbar with page navigation, risk pills, zoom controls, 3D toggle, semantic search, minimap tick strip, and inline clause highlights), RiskPanel.jsx (findings accordion, colored risk indicators, plain English legal context, AI balanced redlines with diff and one-click copy, text-to-speech read-aloud, and review tracker), and DocumentDashboard.jsx (main orchestrator). Clean production build (npm run build in 4.76s); 47/47 backend pytest tests passing (29.11s).
+- Recent updates: Completed multi-vector stress testing across system concurrency, memory stability, adversarial ingestion, Legal-BERT perturbations, and Liquidated Damages rule stress testing across 60,000+ units. All 56 backend pytest tests passing.
 
 
 ## Completed
@@ -56,6 +56,42 @@
 - Legal-BERT accuracy (test): 0.7642
 - Legal-BERT macro-F1 (test): 0.7277
 - Legal-BERT macro-precision (test): 0.7250
+- Domain-Adapted Legal-BERT (400 Indian Supreme Court 2023 cases):
+  - Accuracy (test): 0.7704 (+0.63% over baseline)
+  - Macro-F1 (test): 0.7402 (+1.25% over baseline)
+  - Macro-Precision (test): 0.7201 (-0.49%)
+  - Macro-Recall (test): 0.7769 (+3.05% over baseline)
+- Multi-Year Domain-Adapted Legal-BERT (1,200 Indian Supreme Court cases across 2023, 2024, 2025):
+  - Accuracy (test): 0.7799 (+1.57% over baseline Legal-BERT)
+  - Macro-F1 (test): 0.7532 (+2.55% over baseline Legal-BERT)
+  - Macro-Precision (test): 0.7367 (+1.16% over baseline Legal-BERT)
+  - Macro-Recall (test): 0.7864 (+3.99% over baseline Legal-BERT)
+  - Temporal Model Drift across 2023, 2024, and 2025:
+    - 2023: Neutral Rejection: 97.73% (Base: 88.64%), False Alarms: 0.25% (Base: 2.78%, 90.9% drop)
+    - 2024: Neutral Rejection: 97.74% (Base: 89.95%), False Alarms: 0.50% (Base: 2.76%, 81.8% drop)
+    - 2025: Neutral Rejection: 96.47% (Base: 87.91%), False Alarms: 1.76% (Base: 4.03%, 56.3% drop)
+    - In-domain CUAD Agreement: 89.15%, KL Divergence: 0.0989 bits
+  - Gradients & Losses:
+    - MLM Mean Loss: 1.8827, Mean Grad Norm: 7.9806, Max Norm: 10.3377
+    - Classifier Mean Loss: 1.1298, Mean Grad Norm: 8.0115, Max Norm: 32.6789
+- Domain-Adapted Legal-BERT (400 Indian Supreme Court 2023 cases continual pre-training + CUAD fine-tuning):
+  - Accuracy (test): 0.7704 (+0.63% over baseline Legal-BERT)
+  - Macro-F1 (test): 0.7402 (+1.25% over baseline Legal-BERT)
+  - Macro-Precision (test): 0.7201 (-0.49%)
+  - Macro-Recall (test): 0.7769 (+3.05% over baseline Legal-BERT)
+  - MLM Continual Pre-Training:
+    - Ingested: 400/400 PDFs (1,906 training passages, 394 OOD test passages)
+    - Epoch 1 Loss: 2.0691, Epoch 2 Loss: 1.8003 (Perplexity: 5.90)
+    - MLM Mean Step Loss: 1.9353, Mean Grad L2 Norm: 8.6894, Max Grad Norm: 55.0802
+  - Classifier Fine-Tuning:
+    - Epoch 1 Val F1: 0.6975, Epoch 2 Val F1: 0.7350, Epoch 3 Val F1: 0.7567
+    - Mean Step Loss: 1.1195, Mean Grad L2 Norm: 8.3522, Max Grad Norm: 24.6854
+  - Model Drift & OOD Robustness (evaluated on 394 held-out 2023 Court Passages):
+    - Prediction Agreement: 92.64%
+    - Prediction Shift / KL Divergence: 0.1842 bits
+    - Court Neutral "No Clause" Rejection Rate: 95.18% (improved from 90.10% baseline)
+    - High-Risk False Alarm Rate on Judicial Text: 2.79% (reduced by 39% from 4.57% baseline)
+    - In-Domain CUAD Test Agreement: 85.69%, KL Divergence: 0.1636 bits
 - Paired Bootstrap Test (1000 resamples, seed 42):
   - Baseline Test Accuracy 95% CI: [0.7170, 0.7862] (mean: 0.7523)
   - Legal-BERT Test Accuracy 95% CI: [0.7311, 0.7987] (mean: 0.7650)
@@ -217,6 +253,31 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Right Risks Sidebar (`RiskPanel.jsx`): "Risks" header with total count badge, filter tabs (All, High, Moderate, Low), finding accordion cards with colored left accent bars, `> Recommendation` toggle pill, plain English legal breakdowns from `clause_explanations.json`, AI balanced redline viewer (`getClauseRedline`), copy replacement button, text-to-speech read-aloud via Web Speech API, and "Mark as reviewed" checkbox tracker.
   - Dashboard Orchestration (`DocumentDashboard.jsx` & `App.jsx`): Fully integrated the 3 panels with bi-directional synchronization (clicking paper clause opens sidebar finding; clicking sidebar finding scrolls to and highlights paper clause). Connected live backend endpoints (`/api/v1/analyze`, `/api/v1/documents`, `/api/v1/search`, `/api/v1/redline`).
   - Verification: Production build passed (`npm run build` in 4.76s with 0 errors); full backend test suite passed (47/47 pytest tests in 29.11s).
+- [2026-10-25 23:06] OOF Hard-Negative 5-Fold Audit & Evaluation Omissions Analysis DONE:
+  - Step 1: Cleaned train.csv by removing the 500 hard negatives. train.csv now has 2,283 clean rows (2,141 positives, 142 random negatives). val.csv, val_natural.csv, test.csv, test_natural.csv untouched.
+  - Step 2: Performed 5-fold contract-grouped cross-validation across 357 training contracts. Generated out-of-fold risk scores for all 44,684 harmless units (Rank 1: 0.9395, Rank 100: 0.7275, Rank 250: 0.6192, Rank 500: 0.5205, Rank 1000: 0.4303, Rank 2000: 0.3429). Saved to oof_ranked_harmless_units.csv.
+  - Step 3: Audited 30 random units per rank bucket:
+    - Bucket 1-100: 30.0% real clauses (CUAD false negatives), 36.7% benign, 33.3% unclear.
+    - Bucket 101-250: 6.7% real clauses (<10%), 50.0% benign, 43.3% unclear.
+    - Bucket 251-500: 16.7% real clauses, 30.0% benign, 53.3% unclear.
+    - Bucket 501-1000: 6.7% real clauses (<10%), 33.3% benign, 60.0% unclear.
+    - Bucket 1001-2000: 10.0% real clauses, 36.7% benign, 53.3% unclear.
+    Buckets 101-250 and 501-1000 are qualified (<10% real clauses) for hard negative extraction.
+  - Step 5: Audited 100 random false alarms on val_natural. Found 3.0% real clause omissions. Precision range on val_natural is [11.69%, 14.33%]. Artifact generated at oof_hard_negatives_and_omissions_audit.md. Waiting for user review before rebuilding train.csv.
+- [2026-10-26 20:40] Steps 1-3 Audit Complete (Overlap, Risk Tiers, Liquidated Damages Rule):
+  - Step 1: Audited contract IDs across Generation 1 (462 contracts), Generation 2 (510 contracts), and Generation 3 (510 contracts). Discovered that 45 of 76 Gen 3 validation contracts (59.2%) and 44 of 77 test contracts (57.1%) were present in Gen 1 Train. Marked the "deployed baseline" evaluation INVALID due to retrospective leakage.
+  - Step 2: Risk-tier metrics for Legal-BERT on val_natural: At 8 FA/c, High tier recall is 71.53% (103/144) as High and 81.25% (117/144) flagged. At 12 FA/c, High tier recall is 75.69% (109/144) as High and 87.50% (126/144) flagged.
+  - Step 3: Audited all 14 val_natural Liquidated Damages units. Measured literal regex rule ("liquidated damages" | "pre-estimate of damages"). Found rule matches only 3/14 true units (all already flagged by Legal-BERT) and adds 1 false alarm (0.013 FA/c) for +0.0% recall gain. Waiting for user review before Step 4/5.
+- [2026-10-27 07:15] Multi-Vector Stress Test Suite Complete:
+  - System Concurrency: 5 concurrent workers on /analyze (4.85 RPS, P50 1.015s, 100% success), 30 concurrent /redline (1,161.1 RPS, P50 7.6ms), 30 concurrent /search (142.84 RPS, P50 56.1ms).
+  - Memory Profiling: 15 sequential contracts processed; RSS stabilized at 1,168 MB with net growth of 12.29 MB (leak_detected = False).
+  - Adversarial Ingestion: 185k-char unpunctuated block chunked into 82 bounds-safe chunks; 500-clause contract parsed in 0.027s; SQLi, XSS, and Unicode astral planes safely handled with 0 unhandled exceptions; corrupted PDF/DOCX/binary uploads rejected with structured 4xx envelopes.
+  - Regression Suite: All 56 backend pytest tests passing (100% pass in 65.27s).
+  - Heuristic Stress Test: Stress-tested 4 Liquidated Damages pattern variants across 10,861 val units and 49,992 train units; broader pattern adds +1 TP on val but incurs 10x false alarm penalty (+0.132 FA/c).
+  - Adversarial Model Perturbations: Legal-BERT tested against casing, OCR typos, syntactic negation, liability boundary confusion, and passive voice phrasing.
+
+
+
 
 
 

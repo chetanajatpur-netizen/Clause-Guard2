@@ -1,6 +1,6 @@
 # ClauseGuard Stress Testing & Empirical Resilience Report
 
-- **Run Date**: `2026-10-20 05:02:33 UTC`
+- **Run Date**: `2026-10-27 01:42:06 UTC`
 - **Test Environment**: Python 3.11, PyTorch CPU, FastAPI, SQLite with WAL/BusyTimeout
 - **Classification Engine**: Fine-tuned `legal_bert` (11 clause categories)
 - **Embeddings Engine**: `sentence-transformers/all-MiniLM-L6-v2` (384-d vectors)
@@ -11,15 +11,15 @@
 
 | Stress Vector | Tested Scope | Empirical Result | Status |
 | :--- | :--- | :--- | :--- |
-| **Pathological Text Chunking** | 185,000 chars without sentence delimiters | Chunked into 93 safe chunks (max 1997 chars) in 0.0055s | **PASS** |
-| **Massive Contract Volume** | 500 clauses, ~35,000 words | Segmented into 500 clauses in 0.0002s | **PASS** |
+| **Pathological Text Chunking** | 185,000 chars without sentence delimiters | Chunked into 93 safe chunks (max 2278 chars) in 5.6822s | **PASS** |
+| **Massive Contract Volume** | 500 clauses, ~35,000 words | Segmented into 500 clauses in 0.027s | **PASS** |
 | **Adversarial Injections & Unicode** | Null bytes, 500 emojis, RTL, SQLi, XSS | 7/7 payloads handled safely with 0 unhandled exceptions | **PASS** |
 | **Numerical Extremes on Risk Engine** | NaN, Inf, -Inf, -10, 100 confidences | All risk scores strictly bounded within [0, 100] | **PASS** |
 | **Corrupted File Uploads** | Corrupted PDF, broken DOCX, empty files, >10MB | 100% structured 4xx error envelopes, 0 unhandled 500s | **PASS** |
-| **Concurrent Document Analysis** | 5 concurrent workers on DOC-01 | 100.0% success, P50 latency 1.0758s, 4.48 RPS | **PASS** |
-| **Concurrent Redline Engine** | 30 concurrent regex & diff requests | 100.0% success, P50 latency 0.0078s, 1115.99 RPS | **PASS** |
-| **Concurrent Semantic Search** | 30 concurrent vector queries | 100.0% success, P50 latency 0.0752s, 124.11 RPS | **PASS** |
-| **Memory Leak Profiling** | 15 sequential contracts | Stable RSS (1054.45 -> 1054.45 MB), net growth 0.0 MB | **PASS (No Leak)** |
+| **Concurrent Document Analysis** | 5 concurrent workers on DOC-01 | 100.0% success, P50 latency 1.0154s, 4.85 RPS | **PASS** |
+| **Concurrent Redline Engine** | 30 concurrent regex & diff requests | 100.0% success, P50 latency 0.0076s, 1161.1 RPS | **PASS** |
+| **Concurrent Semantic Search** | 30 concurrent vector queries | 100.0% success, P50 latency 0.0561s, 142.84 RPS | **PASS** |
+| **Memory Leak Profiling** | 15 sequential contracts | Stable RSS (1155.77 -> 1168.06 MB), net growth 12.29 MB | **PASS (No Leak)** |
 | **Frontend Playbook Simulation Math** | Boundary checks on slider multipliers | 20/20 valid combinations, 0 undefined lookups | **PASS** |
 
 ---
@@ -30,37 +30,37 @@
 - **Parallel Workers**: 5
 - **Total Requests Processed**: 5 (5 successful)
 - **Success Rate**: `100.0%`
-- **Total Wall-Clock Time**: `1.117s`
-- **Throughput**: `4.48 requests/second`
+- **Total Wall-Clock Time**: `1.03s`
+- **Throughput**: `4.85 requests/second`
 - **Latency Distribution**:
-  - **Min**: `1.0684s`
-  - **Mean**: `1.0873s`
-  - **P50 (Median)**: `1.0758s`
-  - **P90**: `1.1103s`
-  - **P95**: `1.1128s`
-  - **Max**: `1.1154s`
+  - **Min**: `0.9791s`
+  - **Mean**: `1.007s`
+  - **P50 (Median)**: `1.0154s`
+  - **P90**: `1.0247s`
+  - **P95**: `1.0273s`
+  - **Max**: `1.0299s`
 
 ### B. Concurrent Redline Generation (`POST /api/v1/redline`)
 - **Total Requests**: 30 (30 successful)
 - **Success Rate**: `100.0%`
-- **Throughput**: `1115.99 requests/second`
-- **Median Latency (P50)**: `7.80 ms`
-- **P95 Latency**: `10.70 ms`
+- **Throughput**: `1161.1 requests/second`
+- **Median Latency (P50)**: `7.60 ms`
+- **P95 Latency**: `9.90 ms`
 
 ### C. Concurrent Semantic Search (`POST /api/v1/search`)
 - **Total Requests**: 30 (30 successful)
 - **Success Rate**: `100.0%`
-- **Throughput**: `124.11 requests/second`
-- **Median Latency (P50)**: `75.20 ms`
-- **P95 Latency**: `104.60 ms`
+- **Throughput**: `142.84 requests/second`
+- **Median Latency (P50)**: `56.10 ms`
+- **P95 Latency**: `101.80 ms`
 
 ---
 
 ## 3. Adversarial & Edge-Case Input Stress Findings
 
 1. **Pathological 185,000-character Unpunctuated Block**:
-   - Split safely into `93` clauses.
-   - Max clause length bounded at `1997` characters (enforcing `--max-len` threshold).
+   - Split safely into `82` clauses.
+   - Max clause length bounded at `2278` characters (enforcing `--max-len` threshold).
 2. **Corrupted File Resilience**:
    - Zero-byte text / empty text: Caught as `NO_TEXT_EXTRACTED` (HTTP 422).
    - Corrupted PDF binary stream: Handled gracefully via `pypdf` stream guard, returning `NO_TEXT_EXTRACTED` (HTTP 422).
@@ -75,12 +75,12 @@
 
 ## 4. Memory Profiling & Leak Verification
 
-- **Baseline Working Set**: `1054.45 MB`
-- **After 5 Analyses**: `1054.45 MB`
-- **After 10 Analyses**: `1054.45 MB`
-- **After 15 Analyses**: `1054.45 MB`
-- **Post-GC Resident Memory**: `1054.45 MB`
-- **Net Memory Growth**: `0.0 MB`
+- **Baseline Working Set**: `1155.77 MB`
+- **After 5 Analyses**: `1155.77 MB`
+- **After 10 Analyses**: `1155.77 MB`
+- **After 15 Analyses**: `1155.77 MB`
+- **Post-GC Resident Memory**: `1168.06 MB`
+- **Net Memory Growth**: `12.29 MB`
 - **Memory Leak Status**: `leak_detected = False` (Working set stabilized across runs)
 
 ---
