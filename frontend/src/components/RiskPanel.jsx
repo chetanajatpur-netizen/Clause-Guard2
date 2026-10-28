@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import explanationsData from '../data/clause_explanations.json';
 import { getClauseRedline } from '../api/client';
+import { getRiskyClauses } from '../utils/risks';
 
 /**
  * RiskPanel component matching Screenshot 1 (Right Sidebar):
  * - "Risks" header with count badge
- * - Filter tabs (All, High, Moderate, Low)
+ * - Filter tabs (All, High, Medium, Low)
  * - Findings accordion with colored left accent bars
  * - "> Recommendation" toggle button
  * - Plain English breakdown, Red Flags, Negotiation strategies
@@ -29,15 +30,21 @@ export default function RiskPanel({
 
   const cardRefs = useRef({});
 
-  // Only show clauses that have risk (or classified label != 'No Clause')
-  const riskyClauses = clauses.filter(
-    (c) => c.label !== 'No Clause' && c.risk_level
-  );
+  // Reset risk filter and expansion when document changes
+  useEffect(() => {
+    setActiveFilter('ALL');
+    setExpandedId(null);
+    setReviewedIds(new Set());
+  }, [clauses]);
+
+  // Unified single function building the Risks list
+  const riskyClauses = getRiskyClauses(clauses);
 
   const filteredRisks = riskyClauses.filter((c) => {
-    if (activeFilter === 'HIGH') return c.risk_level === 'High';
-    if (activeFilter === 'MODERATE') return c.risk_level === 'Medium';
-    if (activeFilter === 'LOW') return c.risk_level === 'Low';
+    const tier = c.risk_tier || c.risk_level;
+    if (activeFilter === 'HIGH') return tier === 'High';
+    if (activeFilter === 'MEDIUM') return tier === 'Medium';
+    if (activeFilter === 'LOW') return tier === 'Low';
     return true;
   });
 
@@ -150,7 +157,7 @@ export default function RiskPanel({
         </div>
       </div>
 
-      {/* Filter Tabs (All, High, Moderate, Low) */}
+      {/* Filter Tabs (All, High, Medium, Low) */}
       <div className="dd-risk-tabs">
         <button
           className={`dd-risk-tab ${activeFilter === 'ALL' ? 'active' : ''}`}
@@ -162,19 +169,19 @@ export default function RiskPanel({
           className={`dd-risk-tab ${activeFilter === 'HIGH' ? 'active' : ''}`}
           onClick={() => setActiveFilter('HIGH')}
         >
-          High ({riskyClauses.filter((c) => c.risk_level === 'High').length})
+          High ({riskyClauses.filter((c) => (c.risk_tier || c.risk_level) === 'High').length})
         </button>
         <button
-          className={`dd-risk-tab ${activeFilter === 'MODERATE' ? 'active' : ''}`}
-          onClick={() => setActiveFilter('MODERATE')}
+          className={`dd-risk-tab ${activeFilter === 'MEDIUM' ? 'active' : ''}`}
+          onClick={() => setActiveFilter('MEDIUM')}
         >
-          Mod ({riskyClauses.filter((c) => c.risk_level === 'Medium').length})
+          Medium ({riskyClauses.filter((c) => (c.risk_tier || c.risk_level) === 'Medium').length})
         </button>
         <button
           className={`dd-risk-tab ${activeFilter === 'LOW' ? 'active' : ''}`}
           onClick={() => setActiveFilter('LOW')}
         >
-          Low ({riskyClauses.filter((c) => c.risk_level === 'Low').length})
+          Low ({riskyClauses.filter((c) => (c.risk_tier || c.risk_level) === 'Low').length})
         </button>
       </div>
 
@@ -205,12 +212,17 @@ export default function RiskPanel({
                 {/* Header row with Title and Badges */}
                 <div className="dd-finding-top">
                   <div className="dd-finding-title-row">
-                    <span className="dd-finding-num">§ {clause.position + 1}</span>
+                    <span className="dd-finding-num" style={{ whiteSpace: 'nowrap' }}>§ {clause.position + 1}</span>
                     <h4 className="dd-finding-title">{clause.label}</h4>
                   </div>
-                  <span className={`risk-score-badge ${clause.risk_level?.toLowerCase()} ${riskClass}`}>
-                    {clause.risk_score ? `${clause.risk_score}/100` : clause.risk_level}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span className={`risk-score-badge ${clause.risk_level?.toLowerCase()} ${riskClass}`} style={{ whiteSpace: 'nowrap' }}>
+                      {clause.risk_tier || clause.risk_level}
+                    </span>
+                    <span style={{ fontSize: '10px', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.06)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
+                      Conf: {Math.round((clause.calibrated_probability || clause.confidence || 0) * 100)}%
+                    </span>
+                  </div>
                 </div>
 
                 {/* Excerpt */}

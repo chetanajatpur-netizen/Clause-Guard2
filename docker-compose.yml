@@ -33,6 +33,7 @@ services:
       MODEL_PATH: /app/model_artifacts/legal_bert
       LABEL_MAP_PATH: /app/model_artifacts/label_map.json
       METRICS_PATH: /app/model_artifacts/metrics.json
+      OPERATING_POINTS_PATH: /app/model_artifacts/operating_points.json
       SBERT_MODEL: sentence-transformers/all-MiniLM-L6-v2
       MAX_FILE_SIZE_MB: 10
       LOG_LEVEL: ${LOG_LEVEL:-INFO}

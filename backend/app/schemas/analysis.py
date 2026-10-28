@@ -10,6 +10,11 @@ class ClauseResponse(BaseModel):
     label: str
     confidence: float
     risk_level: str | None
+    flagged: bool = False
+    risk_tier: str | None = None
+    calibrated_probability: float | None = None
+    char_start: int | None = None
+    char_end: int | None = None
     # Enhanced risk scoring fields (optional for backward compatibility)
     risk_score: int | None = None
     risk_score_normalized: float | None = None

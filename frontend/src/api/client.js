@@ -35,11 +35,12 @@ async function request(url, options = {}) {
   return response.json();
 }
 
-export async function analyzeContract(file) {
+export async function analyzeContract(file, sensitivity = 'balanced') {
   const formData = new FormData();
   formData.append('file', file);
 
-  return request('/api/v1/analyze', {
+  const query = sensitivity ? `?sensitivity=${encodeURIComponent(sensitivity)}` : '';
+  return request(`/api/v1/analyze${query}`, {
     method: 'POST',
     body: formData,
     headers: {},

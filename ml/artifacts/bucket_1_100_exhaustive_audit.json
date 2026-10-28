@@ -1,0 +1,153 @@
+{
+  "total": 100,
+  "real_count": 24,
+  "benign_count": 33,
+  "clearly_not_target_count": 21,
+  "cant_tell_count": 22,
+  "real_clauses": [
+    {
+      "rank": 1,
+      "class": "Termination for Convenience",
+      "reason": "Zogenix may terminate agreement at will upon written notice following expiration of distribution term.",
+      "text": "(c) Zogenix Convenience. At any time following the expiration of the Distribution Term, Zogenix may terminate this Agreement at will upon [***] prior written notice to Distributor."
+    },
+    {
+      "rank": 3,
+      "class": "Change of Control",
+      "reason": "Explicit substantive definition establishing what acquisitions or mergers trigger a Change of Control.",
+      "text": "16.01.2 Change of Control. A \"Change of Control\" means:"
+    },
+    {
+      "rank": 5,
+      "class": "Termination for Convenience",
+      "reason": "Unilateral right to terminate agreement upon 90 days prior written notice without cause.",
+      "text": "terminate this Agreement upon giving at least ninety (90) days prior       written notice of such termination to the Agent."
+    },
+    {
+      "rank": 6,
+      "class": "Exclusivity",
+      "reason": "Grants co-exclusive commercial right and license under product trademarks in the defined territory.",
+      "text": "(a) Product Trademarks. Subject to the terms and conditions of this Agreement, Zogenix hereby grants to Distributor an co-exclusive, royalty-free, limited right under the Product Trademarks solely to promote, market, sell, offer for sale, import, package and distribute the Product in Field in the Territory in accordance with the terms of this Agreement."
+    },
+    {
+      "rank": 12,
+      "class": "Change of Control",
+      "reason": "Defines Acquired Party Family and triggers legal consequences following a Change of Control transaction.",
+      "text": "1.2 \"Acquired Party Family\" means in the case of a Change of Control of a Party or its Affiliate, such Party or such Affiliate existing immediately prior to the Change of Control transaction and any subsidiaries thereof (then existing or thereafter created)."
+    },
+    {
+      "rank": 13,
+      "class": "Anti-Assignment",
+      "reason": "Prohibits assignment of agreement, rights, or duties without prior written consent of the other party.",
+      "text": "(h) Assignment. Neither party may assign its rights, duties or obligations under this Agreement to any third party in whole or in part, without the other party's prior written consent, except that (i) Licensee may assign its rights and obligations to this Agreement to any of its Affiliate or subsidiaries with the prior written consent of the Licensor, and (ii) Licensor may assign its rights and obligations in this Agreement to its Affiliates or subsidiaries and either party may assign this Agreement in its entirety to any purchaser of all or substantially all of its business or assets pertaining to the line of business to which this Agreement relates or to any Affiliate of the party without the other party's approval. This Agreement will be binding upon, and inure to the benefit of, the respective permitted assignees, transferees and successors of each of the parties. (i) No Third Party Beneficiaries. The parties acknowledge and agree that there are no third party beneficiaries to this Agreement. (j) Interpretation. In interpreting the terms and conditions of this Agreement, no presumption shall be interpreted for or against a party as a result of the role of such party in the drafting of this Agreement. Sections headings are for convenience only and shall not be used to interpret this Agreement. (k) Notice."
+    },
+    {
+      "rank": 14,
+      "class": "Termination for Convenience",
+      "reason": "AIG possesses absolute right to terminate agreement upon 30 days prior written notice.",
+      "text": "7.   Termination. Unless earlier terminated in accordance with this paragraph 7, this Agreement shall continue indefinitely. AIG shall have the absolute right to terminate this Agreement upon thirty (30) days' prior written notice to the Company, which notice shall state the effective date of termination (the \"Termination Date\"); provided, however, that AIG agrees not to terminate this Agreement unless (a) AIG significantly modifies the"
+    },
+    {
+      "rank": 18,
+      "class": "Termination for Convenience",
+      "reason": "Grants either party right to terminate at will upon 30 days written notice prior to annual renewal.",
+      "text": "10.1 Term and Termination. This Agreement shall continue in effect from the Effective Date for a one (1) year period, unless earlier terminated as set forth below, and thereafter shall renew automatically for successive one (1) year periods unless either party gives the other party at least thirty (30) days prior written notice of its intent not to renew the Agreement. In addition, either party may terminate this Agreement by giving to the other party written notice"
+    },
+    {
+      "rank": 19,
+      "class": "IP Ownership Assignment",
+      "reason": "Affirmative covenant stipulating that Parent solely owns all right, title, and interest in and to all Improvements.",
+      "text": "3.5 Improvements. For the avoidance of doubt, as between the Parties, Parent shall own all right, title and interest in and to any and all Improvements authored, developed, invented, reduced to practice or otherwise created by Parent or any member of the Parent Group and all Intellectual Property rights therein and thereto."
+    },
+    {
+      "rank": 25,
+      "class": "Termination for Convenience",
+      "reason": "Unilateral termination right exercisable upon 30 days prior written notice.",
+      "text": "B. Either Party may terminate this Agreement at any time in the event of a material breach by the other Party which remains uncured after thirty days written notice thereof."
+    },
+    {
+      "rank": 30,
+      "class": "Audit Rights",
+      "reason": "Requires maintenance of books and records and confers right to annual CPA audit upon reasonable notice.",
+      "text": "3.3     Ownership  by  NETTAXI.  NETTAXI  shall  own  all right, title, and              ---------------------- interest  in  the NETTAXI Brand Features, the NETTAXI Pages and all Intellectual Property  Rights  therein,  including  any  derivatives,  improvements  thereof, excluding  the  SpinRecords.com  Brand  Features"
+    },
+    {
+      "rank": 34,
+      "class": "IP Ownership Assignment",
+      "reason": "Assigns and allocates all worldwide right, title, and ownership of website intellectual property to Company.",
+      "text": "B. COMPANY will retain all worldwide rights, title, and interest in and to the Web Site (including, but not limited to, ownership of all copyrights, trademarks, look and feel and other intellectual property rights therein), as well as all right, title and interest in and to its trademarks, service marks and trade names worldwide, including any goodwill associated therewith, subject to the limited license granted"
+    },
+    {
+      "rank": 35,
+      "class": "Termination for Convenience",
+      "reason": "Customer or Changepoint may terminate maintenance services upon 90 days prior written notice.",
+      "text": "15.5 T-Mobile shall retain all right, title and interest in and to the Hosting Services, including all intellectual property rights therein and any modifications or enhancements thereof."
+    },
+    {
+      "rank": 39,
+      "class": "Anti-Assignment",
+      "reason": "Expressly bars assignment or transfer of rights and obligations without prior written consent.",
+      "text": "customization, enhancement, amendment or change to the Application. HSNS hereby assigns all right, title and interest in and to any customization, enhancement, amendment or changes made by or for HSNS pursuant to this Agreement, and hereby waives any and all moral rights that HSNS may retain in and to such customizations, enhancements, amendment and changes. The Application and any modifications are licensed pursuant to this Agreement to HSNS for use of the Application and any modifications thereto. HSNS hereby represents and warrants that the assignment of rights by HSNS in and to such modifications includes any right, title and interest in and to all modifications created by or for HSNS For avoidance of doubt, modification to the Application to be owned by E.piphany shall not include pre-existing HSNS intellectual property or intellectual property developed by HSNS without reference to E.piphany Confidential Information. All data created by HSNS using the Outsourcing Application shall be owned by HSNS."
+    },
+    {
+      "rank": 49,
+      "class": "Audit Rights",
+      "reason": "Grants party right to inspect and audit books, records, and manufacturing facilities during normal business hours.",
+      "text": "2. APPOINTMENT 2.1 Appointment of Nonexclusive Distributor. Subject to the terms and conditions of this Agreement, JRVS appoints the Distributor, and the Distributor hereby accepts such appointment, as JRVS'S non-exclusive authorized distributor for sale of the Products to the Customers (other than House Account) in the Territory (as these terms are defined in Section 1.8, above). Under no circumstances shall Distributor sell Products for use outside the Territory. 1"
+    },
+    {
+      "rank": 54,
+      "class": "IP Ownership Assignment",
+      "reason": "Affirmatively transfers and assigns all moral rights, work product, and copyright interests throughout the universe.",
+      "text": "MusclePharm irrevocably and unconditionally transfers and assigns to the AS Parties in perpetuity and throughout the universe any and all of MusclePharm's right, title, and interest, if any (including, without limitation, the rights generally known as 'moral rights') in and to all works, including any packaging, advertising and promotional materials, and other materials based upon the Trademarks and/or Name and Appearance Rights, all of which shall, upon their creation, become and remain the property of the AS Parties. All such works based upon the Trademarks and/or Name and Appearance Rights shall be prepared by an employee-for- hire of MusclePharm (under MusclePharms's sole supervision, responsibility, and monetary obligation) or as a work-for-hire by a third party who assigns to the AS Parties in writing and in perpetuity throughout the universe all right, title, and interest in the same provided however, nothing herein shall preclude MusclePharm from using any of the intellectual property to be retained by MusclePharm contemplated pursuant to Section 9(f) of this Agreement after the termination of this Agreement. (f) Injunctive Relief."
+    },
+    {
+      "rank": 55,
+      "class": "Termination for Convenience",
+      "reason": "Either party may terminate the agreement at will upon sixty (60) days prior written notice.",
+      "text": "INTELLECTUAL PROPERTY 7.1 Ownership of SIGA Intellectual Property. Subject to the license granted to MMT under Section 2.1, SIGA shall own and retain all of its rights, title and interest in and to the SIGA Intellectual Property and the goodwill related to such Intellectual Property."
+    },
+    {
+      "rank": 64,
+      "class": "Anti-Assignment",
+      "reason": "Specifies that agreement and rights hereunder may not be assigned without mutual written agreement.",
+      "text": "B.       ENVISION is the manufacturer of certain nutritional  supplements and is          desirous of becoming an  exclusive  distributor  for the Product in any          blend  with  Krill Oil  (hereinafter  \"the  Finished  Product\")  in all          distribution  channels in the Territory on the terms and conditions set          forth herein."
+    },
+    {
+      "rank": 72,
+      "class": "Termination for Convenience",
+      "reason": "Licensee may terminate this agreement at any time upon thirty (30) days prior written notice.",
+      "text": "C. Either Party may terminate this Agreement immediately following written notice to the other Party if the other Party:"
+    },
+    {
+      "rank": 73,
+      "class": "Change of Control",
+      "reason": "Grants consultant right to terminate agreement and receive accelerated vesting upon a Change of Control.",
+      "text": "1.3 \"Change of Control\" means any transaction or series of transactions that results in (i) the consolidation or merger of the specified party (\"Target\") into or with any other corporation or corporations, (ii) the sale, conveyance or disposition of all or substantially all of the assets of the Target, (iii) the transfer of more than fifty percent (50%) of the voting power of the Target to any entity or entities not controlled by the Target, or (iv) any similar form of acquisition or any liquidation, dissolution or winding up of the Target or other transaction that results in the discontinuance of the Target's business; provided, however, that Change of Control will not include any transaction or series of transactions entered into primarily for equity financing purposes (including, without limitation, any private equity investment or any public offering of securities)."
+    },
+    {
+      "rank": 78,
+      "class": "Audit Rights",
+      "reason": "Establishes audit rights over relevant financial books and accounts exercisable once per year.",
+      "text": "9.1 Manufacturing License Grant. Subject to the terms herein, MediWound hereby grants to Vericel a non-exclusive, sublicensable (subject to Section 4.2 of the License Agreement) license under the MediWound Technology and MediWound's interest in the Joint Technology, to Manufacture and have Manufactured Licensed Products in the Territory for use in the Field in the Territory."
+    },
+    {
+      "rank": 83,
+      "class": "Termination for Convenience",
+      "reason": "Provides right to terminate agreement for convenience upon 60 days advance written notice.",
+      "text": "11.2 Termination for Cause. (a) This Agreement may be terminated by either Party on country-by-country basis, or in its entirety, upon [***] days prior written notice at any time during the Term by giving written notice to the other Party in the event that such other Party has committed a material breach of its obligations under this Agreement with respect to such country(ies) or the Agreement in its entirety, as applicable, and such material breach remains uncured for [***] days from the date of such notice."
+    },
+    {
+      "rank": 89,
+      "class": "IP Ownership Assignment",
+      "reason": "Assigns and confirms that all proprietary rights, trademarks, and trade secrets remain exclusive property of Polycom.",
+      "text": "9. Intellectual Property 9.1 Reseller acknowledges and agrees that any and all proprietary rights, trade secrets, trademarks, trade names, copyrights, patents, know-how, and other intellectual property rights used or embodied in, related to, or associated with the Products, including all developments, modifications, enhancements, improvements, and derivative works thereof, and all documentation with respect thereto, are and shall remain the sole and exclusive property of Todos or its licensors."
+    },
+    {
+      "rank": 97,
+      "class": "Exclusivity",
+      "reason": "Restrictive covenant barring distributor from marketing, promoting, or distributing competing products in territory.",
+      "text": "2.4 No Other Rights; Other Limitations. Except for the rights expressly granted in this Agreement, Zogenix retains all rights under the Zogenix Technology and with respect to the Product, including the exclusive right to manufacture and sell the Product to Distributor, to develop the Product, and to promote, market and sell the Product outside the Territory, and all rights with respect to the Product outside the Field in the Territory. No rights shall be deemed granted by one Party to the other Party under this Agreement by implication, estoppel or otherwise. Distributor agrees not to use any Zogenix Technology except as necessary to file for and maintain Regulatory Approval of, promote, market, sell, offer for sale, distribute and import the Product in the Field in the Territory during the Term in accordance with the terms of this Agreement and the Supply Agreement. Without limiting the foregoing, Distributor agrees that in no event shall Distributor or its Affiliates manufacture or have manufactured the Product, or purchase the Product from any party other than Zogenix pursuant to the Supply Agreement."
+    }
+  ]
+}

@@ -23,7 +23,11 @@ ml/artifacts/*.pt
 ml/artifacts/*.bin
 ml/artifacts/*.safetensors
 ml/artifacts/*.joblib
+ml/artifacts/*.npy
+ml/artifacts/*.npz
+ml/artifacts/*.csv
 ml/artifacts/legal_bert/
+ml/artifacts/legal_bert_*/
 ml/artifacts/sbert/
 
 # Environment

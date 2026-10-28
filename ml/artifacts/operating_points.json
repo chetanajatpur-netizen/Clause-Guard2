@@ -1,0 +1,50 @@
+{
+  "model": "nlpaueb/legal-bert-base-uncased",
+  "checkpoint": "ml/artifacts/legal_bert_final",
+  "seed": 42,
+  "temperature": 0.927,
+  "rule": "P_calibrated(No Clause) < tau",
+  "validation_contracts": 76,
+  "validation_units": 10861,
+  "presets": {
+    "strict": {
+      "target_fa_per_contract": 3,
+      "tau": 0.012957,
+      "actual_fa_per_contract": 2.99,
+      "flags_count": 549,
+      "fa_count": 227,
+      "tp_flagged": 322,
+      "tp_correct": 284,
+      "total_positives": 501,
+      "recall_flagged": 64.27,
+      "recall_correct": 56.69,
+      "precision": 58.65
+    },
+    "balanced": {
+      "target_fa_per_contract": 8,
+      "tau": 0.035452,
+      "actual_fa_per_contract": 7.99,
+      "flags_count": 1011,
+      "fa_count": 607,
+      "tp_flagged": 404,
+      "tp_correct": 356,
+      "total_positives": 501,
+      "recall_flagged": 80.64,
+      "recall_correct": 71.06,
+      "precision": 39.96
+    },
+    "thorough": {
+      "target_fa_per_contract": 12,
+      "tau": 0.07185,
+      "actual_fa_per_contract": 11.99,
+      "flags_count": 1345,
+      "fa_count": 911,
+      "tp_flagged": 434,
+      "tp_correct": 379,
+      "total_positives": 501,
+      "recall_flagged": 86.63,
+      "recall_correct": 75.65,
+      "precision": 32.27
+    }
+  }
+}

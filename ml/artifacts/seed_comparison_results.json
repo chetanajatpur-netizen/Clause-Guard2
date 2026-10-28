@@ -1,0 +1,66 @@
+{
+  "seed_42": {
+    "3": {
+      "thresh": 0.012956921011209488,
+      "flags": 549,
+      "fa": 227,
+      "tp_flagged": 322,
+      "tp_correct": 284,
+      "rec_flagged": 64.27,
+      "rec_correct": 56.69,
+      "precision": 58.65
+    },
+    "8": {
+      "thresh": 0.035451896488666534,
+      "flags": 1011,
+      "fa": 607,
+      "tp_flagged": 404,
+      "tp_correct": 356,
+      "rec_flagged": 80.64,
+      "rec_correct": 71.06,
+      "precision": 39.96
+    },
+    "12": {
+      "thresh": 0.07185016572475433,
+      "flags": 1345,
+      "fa": 911,
+      "tp_flagged": 434,
+      "tp_correct": 379,
+      "rec_flagged": 86.63,
+      "rec_correct": 75.65,
+      "precision": 32.27
+    }
+  },
+  "seed_100": {
+    "3": {
+      "thresh": 0.019925527274608612,
+      "flags": 565,
+      "fa": 227,
+      "tp_flagged": 338,
+      "tp_correct": 305,
+      "rec_flagged": 67.47,
+      "rec_correct": 60.88,
+      "precision": 59.82
+    },
+    "8": {
+      "thresh": 0.0884629562497139,
+      "flags": 1024,
+      "fa": 607,
+      "tp_flagged": 417,
+      "tp_correct": 370,
+      "rec_flagged": 83.23,
+      "rec_correct": 73.85,
+      "precision": 40.72
+    },
+    "12": {
+      "thresh": 0.1735294610261917,
+      "flags": 1348,
+      "fa": 911,
+      "tp_flagged": 437,
+      "tp_correct": 384,
+      "rec_flagged": 87.23,
+      "rec_correct": 76.65,
+      "precision": 32.42
+    }
+  }
+}

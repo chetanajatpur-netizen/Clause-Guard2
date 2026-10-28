@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { getRiskyClauses, getUnflaggedClauses } from '../utils/risks';
 
 /**
  * DocumentViewer3D component matching Screenshot 1:
  * - Digital paper sheet with subtle 3D depth, perspective, and mouse-tilt
  * - Top Toolbar: page nav, risk count pills, zoom controls, 3D toggle, semantic search
- * - Paper sheet with exact inline text highlights (Red = High, Yellow = Moderate, Teal/Cream = Low)
+ * - Paper sheet with exact inline text highlights (Red = High, Yellow = Medium, Teal/Cream = Low)
  * - Vertical minimap tick strip showing clause risk distribution
  * - Bidirectional selection: clicking clause highlights it and opens right finding
  */
@@ -24,6 +25,7 @@ export default function DocumentViewer3D({
   const [filterRisk, setFilterRisk] = useState(null); // 'High', 'Medium', 'Low', or null
   const [hoveredClauseId, setHoveredClauseId] = useState(null);
   const [searchInputValue, setSearchInputValue] = useState('');
+  const [showUnflagged, setShowUnflagged] = useState(false);
 
   const stageRef = useRef(null);
   const paperRef = useRef(null);
@@ -39,13 +41,25 @@ export default function DocumentViewer3D({
     total_clauses: clauses.length,
   };
 
-  // Pagination: 6 clauses per page
+  // Reset risk filter when active document changes
+  useEffect(() => {
+    setFilterRisk(null);
+    setCurrentPage(1);
+    setShowUnflagged(false);
+  }, [documentData?.id, documentData?.filename]);
+
+  // Partition clauses: show flagged units first, group unflagged into expander
+  const flaggedClauses = getRiskyClauses(clauses);
+  const unflaggedClauses = getUnflaggedClauses(clauses);
+
+  const displayFlagged = filterRisk
+    ? flaggedClauses.filter((c) => (c.risk_tier || c.risk_level) === filterRisk)
+    : flaggedClauses;
+
+  // Pagination for flagged clauses: 6 per page
   const CLAUSES_PER_PAGE = 6;
-  const filteredClauses = filterRisk
-    ? clauses.filter((c) => c.risk_level === filterRisk)
-    : clauses;
-  const totalPages = Math.max(1, Math.ceil(filteredClauses.length / CLAUSES_PER_PAGE));
-  const pageClauses = filteredClauses.slice(
+  const totalPages = Math.max(1, Math.ceil(displayFlagged.length / CLAUSES_PER_PAGE));
+  const pageClauses = displayFlagged.slice(
     (currentPage - 1) * CLAUSES_PER_PAGE,
     currentPage * CLAUSES_PER_PAGE
   );
@@ -53,13 +67,12 @@ export default function DocumentViewer3D({
   // Synchronize page when activeClauseId changes
   useEffect(() => {
     if (activeClauseId) {
-      const idx = filteredClauses.findIndex((c) => c.id === activeClauseId);
+      const idx = displayFlagged.findIndex((c) => c.id === activeClauseId);
       if (idx !== -1) {
         const targetPage = Math.floor(idx / CLAUSES_PER_PAGE) + 1;
         if (targetPage !== currentPage) {
           setCurrentPage(targetPage);
         }
-        // Scroll clause into view within paper
         setTimeout(() => {
           const el = clauseRefs.current[activeClauseId];
           if (el) {
@@ -68,7 +81,7 @@ export default function DocumentViewer3D({
         }, 100);
       }
     }
-  }, [activeClauseId, filteredClauses]);
+  }, [activeClauseId, displayFlagged]);
 
   // Subtle 3D mouse tilt over stage (max 3 degrees, respects prefers-reduced-motion)
   const handleMouseMove = (e) => {
@@ -169,11 +182,11 @@ export default function DocumentViewer3D({
                 setFilterRisk(filterRisk === 'Medium' ? null : 'Medium');
                 setCurrentPage(1);
               }}
-              title="Filter Moderate Risk clauses"
+              title="Filter Medium Risk clauses"
               role="button"
               tabIndex={0}
             >
-              ● {riskSummary.medium_count} Moderate
+              ● {riskSummary.medium_count} Medium
             </span>
             <span
               className={`dd-pill dd-pill-teal ${filterRisk === 'Low' ? 'selected' : ''}`}
@@ -355,21 +368,21 @@ export default function DocumentViewer3D({
                     >
                       {/* Clause Meta Strip */}
                       <div className="dd-clause-header">
-                        <span className="dd-clause-num">
+                        <span className="dd-clause-num" style={{ whiteSpace: 'nowrap' }}>
                           § {clause.position + 1}
                         </span>
                         {clause.label !== 'No Clause' && (
-                          <span className={`dd-clause-badge ${riskClass}`}>
+                          <span className={`dd-clause-badge ${riskClass}`} style={{ whiteSpace: 'nowrap' }}>
                             {clause.label}
                           </span>
                         )}
-                        {clause.risk_level && (
-                          <span className={`dd-risk-indicator ${riskClass}`}>
-                            {clause.risk_level} Risk ({(clause.confidence * 100).toFixed(0)}%)
+                        {(clause.risk_level || clause.risk_tier) && (
+                          <span className={`dd-risk-indicator ${riskClass}`} style={{ whiteSpace: 'nowrap' }}>
+                            {(clause.risk_tier || clause.risk_level)} Risk • Model Conf: {Math.round((clause.calibrated_probability || clause.confidence || 0) * 100)}%
                           </span>
                         )}
                         {searchMatch && (
-                          <span className="dd-search-similarity">
+                          <span className="dd-search-similarity" style={{ whiteSpace: 'nowrap' }}>
                             🎯 {(searchMatch.similarity * 100).toFixed(0)}% match
                           </span>
                         )}
@@ -391,6 +404,57 @@ export default function DocumentViewer3D({
                     </div>
                   );
                 })
+              )}
+
+              {/* Expander for Unflagged / Harmless Units */}
+              {unflaggedClauses.length > 0 && (
+                <div className="dd-unflagged-container" style={{ marginTop: '24px', borderTop: '1px dashed rgba(255, 255, 255, 0.15)', paddingTop: '16px' }}>
+                  <button
+                    type="button"
+                    className="dd-unflagged-expander-btn"
+                    onClick={() => setShowUnflagged(!showUnflagged)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 14px',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      borderRadius: '6px',
+                      color: '#cbd5e1',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      width: '100%',
+                      justifyContent: 'center',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    <span>{showUnflagged ? '▼ Hide Unflagged Units' : '▶ Show Unflagged Units'}</span>
+                    <span style={{ background: 'rgba(255, 255, 255, 0.1)', padding: '2px 8px', borderRadius: '10px', fontSize: '11px', color: '#94a3b8' }}>
+                      {unflaggedClauses.length} harmless / boilerplate units
+                    </span>
+                  </button>
+                  {showUnflagged && (
+                    <div className="dd-unflagged-list" style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {unflaggedClauses.map((clause) => (
+                        <div
+                          key={clause.id}
+                          className="dd-clause-block dd-unflagged-block"
+                          style={{ opacity: 0.7, padding: '10px 14px', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '6px', border: '1px solid rgba(255, 255, 255, 0.05)' }}
+                        >
+                          <div className="dd-clause-header" style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="dd-clause-num">§ {clause.position + 1}</span>
+                            <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>Unflagged (Harmless Unit)</span>
+                          </div>
+                          <div className="dd-clause-text" style={{ fontSize: '12px', color: '#94a3b8', lineHeight: 1.5 }}>
+                            {clause.text}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 

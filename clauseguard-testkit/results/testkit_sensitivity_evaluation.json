@@ -1,0 +1,50 @@
+{
+  "strict": {
+    "tau": 0.012957,
+    "total_sections": 80,
+    "true_positives": 34,
+    "true_negatives": 46,
+    "tp_flagged": 29,
+    "tp_correct": 27,
+    "false_alarms": 0,
+    "precision": 100.0,
+    "recall_flagged": 85.29411764705883,
+    "recall_correct": 79.41176470588235,
+    "flagged_harmless": []
+  },
+  "balanced": {
+    "tau": 0.035452,
+    "total_sections": 80,
+    "true_positives": 34,
+    "true_negatives": 46,
+    "tp_flagged": 34,
+    "tp_correct": 30,
+    "false_alarms": 0,
+    "precision": 100.0,
+    "recall_flagged": 100.0,
+    "recall_correct": 88.23529411764706,
+    "flagged_harmless": []
+  },
+  "thorough": {
+    "tau": 0.07185,
+    "total_sections": 80,
+    "true_positives": 34,
+    "true_negatives": 46,
+    "tp_flagged": 34,
+    "tp_correct": 30,
+    "false_alarms": 1,
+    "precision": 97.14285714285714,
+    "recall_flagged": 100.0,
+    "recall_correct": 88.23529411764706,
+    "flagged_harmless": [
+      {
+        "contract": "DOC-03_saas_agreement.txt",
+        "section_idx": 3,
+        "text": "2. Access Rights and Restrictions. Customer is granted a non-exclusive, non-transferable right to access and use the platform solely for internal business operations.",
+        "predicted_label": "Exclusivity",
+        "risk_tier": "High",
+        "confidence": 0.8818
+      }
+    ]
+  }
+}

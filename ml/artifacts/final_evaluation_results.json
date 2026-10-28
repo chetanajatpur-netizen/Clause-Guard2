@@ -1,0 +1,500 @@
+{
+  "operating_points": {
+    "legal_bert": [
+      {
+        "model": "Legal-BERT (Calibrated)",
+        "target_fa_c": 3,
+        "actual_fa_c": 2.99,
+        "threshold": 0.013,
+        "flags": 549,
+        "fa": 227,
+        "tp_flagged": 322,
+        "tp_correct": 284,
+        "precision": 58.65,
+        "rec_flagged_overall": 64.27,
+        "rec_correct_overall": 56.69,
+        "Non-Compete_flagged": 80.95,
+        "Non-Compete_correct": 78.57,
+        "Exclusivity_flagged": 16.95,
+        "Exclusivity_correct": 1.69,
+        "Uncapped Liability_flagged": 89.66,
+        "Uncapped Liability_correct": 65.52,
+        "Liquidated Damages_flagged": 35.71,
+        "Liquidated Damages_correct": 35.71
+      },
+      {
+        "model": "Legal-BERT (Calibrated)",
+        "target_fa_c": 5,
+        "actual_fa_c": 4.99,
+        "threshold": 0.0211,
+        "flags": 753,
+        "fa": 379,
+        "tp_flagged": 374,
+        "tp_correct": 330,
+        "precision": 49.67,
+        "rec_flagged_overall": 74.65,
+        "rec_correct_overall": 65.87,
+        "Non-Compete_flagged": 90.48,
+        "Non-Compete_correct": 88.1,
+        "Exclusivity_flagged": 57.63,
+        "Exclusivity_correct": 38.98,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 65.52,
+        "Liquidated Damages_flagged": 50.0,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Legal-BERT (Calibrated)",
+        "target_fa_c": 8,
+        "actual_fa_c": 7.99,
+        "threshold": 0.0355,
+        "flags": 1011,
+        "fa": 607,
+        "tp_flagged": 404,
+        "tp_correct": 356,
+        "precision": 39.96,
+        "rec_flagged_overall": 80.64,
+        "rec_correct_overall": 71.06,
+        "Non-Compete_flagged": 92.86,
+        "Non-Compete_correct": 90.48,
+        "Exclusivity_flagged": 74.58,
+        "Exclusivity_correct": 54.24,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 65.52,
+        "Liquidated Damages_flagged": 50.0,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Legal-BERT (Calibrated)",
+        "target_fa_c": 12,
+        "actual_fa_c": 11.99,
+        "threshold": 0.0719,
+        "flags": 1345,
+        "fa": 911,
+        "tp_flagged": 434,
+        "tp_correct": 379,
+        "precision": 32.27,
+        "rec_flagged_overall": 86.63,
+        "rec_correct_overall": 75.65,
+        "Non-Compete_flagged": 97.62,
+        "Non-Compete_correct": 92.86,
+        "Exclusivity_flagged": 81.36,
+        "Exclusivity_correct": 61.02,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 65.52,
+        "Liquidated Damages_flagged": 71.43,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Legal-BERT (Calibrated)",
+        "target_fa_c": 20,
+        "actual_fa_c": 19.99,
+        "threshold": 0.184,
+        "flags": 1980,
+        "fa": 1519,
+        "tp_flagged": 461,
+        "tp_correct": 398,
+        "precision": 23.28,
+        "rec_flagged_overall": 92.02,
+        "rec_correct_overall": 79.44,
+        "Non-Compete_flagged": 97.62,
+        "Non-Compete_correct": 92.86,
+        "Exclusivity_flagged": 91.53,
+        "Exclusivity_correct": 67.8,
+        "Uncapped Liability_flagged": 96.55,
+        "Uncapped Liability_correct": 65.52,
+        "Liquidated Damages_flagged": 85.71,
+        "Liquidated Damages_correct": 50.0
+      }
+    ],
+    "court_adapted_legal_bert": [
+      {
+        "model": "Court-Adapted Legal-BERT (Calibrated)",
+        "target_fa_c": 3,
+        "actual_fa_c": 2.99,
+        "threshold": 0.0117,
+        "flags": 556,
+        "fa": 227,
+        "tp_flagged": 329,
+        "tp_correct": 300,
+        "precision": 59.17,
+        "rec_flagged_overall": 65.67,
+        "rec_correct_overall": 59.88,
+        "Non-Compete_flagged": 71.43,
+        "Non-Compete_correct": 66.67,
+        "Exclusivity_flagged": 25.42,
+        "Exclusivity_correct": 16.95,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 79.31,
+        "Liquidated Damages_flagged": 42.86,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Court-Adapted Legal-BERT (Calibrated)",
+        "target_fa_c": 5,
+        "actual_fa_c": 4.99,
+        "threshold": 0.0184,
+        "flags": 759,
+        "fa": 379,
+        "tp_flagged": 380,
+        "tp_correct": 345,
+        "precision": 50.07,
+        "rec_flagged_overall": 75.85,
+        "rec_correct_overall": 68.86,
+        "Non-Compete_flagged": 78.57,
+        "Non-Compete_correct": 73.81,
+        "Exclusivity_flagged": 57.63,
+        "Exclusivity_correct": 49.15,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 79.31,
+        "Liquidated Damages_flagged": 50.0,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Court-Adapted Legal-BERT (Calibrated)",
+        "target_fa_c": 8,
+        "actual_fa_c": 7.99,
+        "threshold": 0.0318,
+        "flags": 1014,
+        "fa": 607,
+        "tp_flagged": 407,
+        "tp_correct": 361,
+        "precision": 40.14,
+        "rec_flagged_overall": 81.24,
+        "rec_correct_overall": 72.06,
+        "Non-Compete_flagged": 83.33,
+        "Non-Compete_correct": 76.19,
+        "Exclusivity_flagged": 71.19,
+        "Exclusivity_correct": 54.24,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 79.31,
+        "Liquidated Damages_flagged": 57.14,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Court-Adapted Legal-BERT (Calibrated)",
+        "target_fa_c": 12,
+        "actual_fa_c": 11.99,
+        "threshold": 0.0601,
+        "flags": 1343,
+        "fa": 911,
+        "tp_flagged": 432,
+        "tp_correct": 384,
+        "precision": 32.17,
+        "rec_flagged_overall": 86.23,
+        "rec_correct_overall": 76.65,
+        "Non-Compete_flagged": 90.48,
+        "Non-Compete_correct": 80.95,
+        "Exclusivity_flagged": 84.75,
+        "Exclusivity_correct": 67.8,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 79.31,
+        "Liquidated Damages_flagged": 57.14,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Court-Adapted Legal-BERT (Calibrated)",
+        "target_fa_c": 20,
+        "actual_fa_c": 19.99,
+        "threshold": 0.1577,
+        "flags": 1979,
+        "fa": 1519,
+        "tp_flagged": 460,
+        "tp_correct": 406,
+        "precision": 23.24,
+        "rec_flagged_overall": 91.82,
+        "rec_correct_overall": 81.04,
+        "Non-Compete_flagged": 97.62,
+        "Non-Compete_correct": 88.1,
+        "Exclusivity_flagged": 94.92,
+        "Exclusivity_correct": 76.27,
+        "Uncapped Liability_flagged": 96.55,
+        "Uncapped Liability_correct": 79.31,
+        "Liquidated Damages_flagged": 85.71,
+        "Liquidated Damages_correct": 50.0
+      }
+    ],
+    "ensemble": [
+      {
+        "model": "Ensemble (alpha=0.75)",
+        "target_fa_c": 3,
+        "actual_fa_c": 2.99,
+        "threshold": 0.04,
+        "flags": 550,
+        "fa": 227,
+        "tp_flagged": 323,
+        "tp_correct": 286,
+        "precision": 58.73,
+        "rec_flagged_overall": 64.47,
+        "rec_correct_overall": 57.09,
+        "Non-Compete_flagged": 66.67,
+        "Non-Compete_correct": 66.67,
+        "Exclusivity_flagged": 50.85,
+        "Exclusivity_correct": 35.59,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 68.97,
+        "Liquidated Damages_flagged": 35.71,
+        "Liquidated Damages_correct": 35.71
+      },
+      {
+        "model": "Ensemble (alpha=0.75)",
+        "target_fa_c": 5,
+        "actual_fa_c": 4.99,
+        "threshold": 0.0521,
+        "flags": 755,
+        "fa": 379,
+        "tp_flagged": 376,
+        "tp_correct": 332,
+        "precision": 49.8,
+        "rec_flagged_overall": 75.05,
+        "rec_correct_overall": 66.27,
+        "Non-Compete_flagged": 78.57,
+        "Non-Compete_correct": 78.57,
+        "Exclusivity_flagged": 66.1,
+        "Exclusivity_correct": 47.46,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 68.97,
+        "Liquidated Damages_flagged": 42.86,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Ensemble (alpha=0.75)",
+        "target_fa_c": 8,
+        "actual_fa_c": 7.99,
+        "threshold": 0.0741,
+        "flags": 1017,
+        "fa": 607,
+        "tp_flagged": 410,
+        "tp_correct": 359,
+        "precision": 40.31,
+        "rec_flagged_overall": 81.84,
+        "rec_correct_overall": 71.66,
+        "Non-Compete_flagged": 85.71,
+        "Non-Compete_correct": 83.33,
+        "Exclusivity_flagged": 76.27,
+        "Exclusivity_correct": 55.93,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 68.97,
+        "Liquidated Damages_flagged": 64.29,
+        "Liquidated Damages_correct": 42.86
+      },
+      {
+        "model": "Ensemble (alpha=0.75)",
+        "target_fa_c": 12,
+        "actual_fa_c": 11.99,
+        "threshold": 0.1061,
+        "flags": 1344,
+        "fa": 911,
+        "tp_flagged": 433,
+        "tp_correct": 376,
+        "precision": 32.22,
+        "rec_flagged_overall": 86.43,
+        "rec_correct_overall": 75.05,
+        "Non-Compete_flagged": 92.86,
+        "Non-Compete_correct": 88.1,
+        "Exclusivity_flagged": 83.05,
+        "Exclusivity_correct": 61.02,
+        "Uncapped Liability_flagged": 93.1,
+        "Uncapped Liability_correct": 68.97,
+        "Liquidated Damages_flagged": 78.57,
+        "Liquidated Damages_correct": 50.0
+      },
+      {
+        "model": "Ensemble (alpha=0.75)",
+        "target_fa_c": 20,
+        "actual_fa_c": 19.99,
+        "threshold": 0.1933,
+        "flags": 1983,
+        "fa": 1519,
+        "tp_flagged": 464,
+        "tp_correct": 400,
+        "precision": 23.4,
+        "rec_flagged_overall": 92.61,
+        "rec_correct_overall": 79.84,
+        "Non-Compete_flagged": 97.62,
+        "Non-Compete_correct": 92.86,
+        "Exclusivity_flagged": 93.22,
+        "Exclusivity_correct": 69.49,
+        "Uncapped Liability_flagged": 96.55,
+        "Uncapped Liability_correct": 68.97,
+        "Liquidated Damages_flagged": 85.71,
+        "Liquidated Damages_correct": 50.0
+      }
+    ]
+  },
+  "ensemble_alpha": {
+    "optimal_alpha": 0.75,
+    "legal_bert_weight": 0.75,
+    "tfidf_weight": 0.25,
+    "tuning_set": "5-fold contract-grouped cross-validation on 357 training contracts"
+  },
+  "temperature_scaling": {
+    "legal_bert_t": 0.927,
+    "court_adapted_t": 0.994,
+    "validation_set": "ml/data/processed/val.csv (651 units)"
+  },
+  "contract_bootstrap_8fa": [
+    {
+      "pair": "TF-IDF Model B vs Deployed Baseline",
+      "m1": "TF-IDF Model B",
+      "m2": "Deployed Baseline",
+      "flagged_recall": {
+        "m1_point": 68.06,
+        "m2_point": 65.07,
+        "delta_point": 2.99,
+        "delta_mean": 3.1,
+        "ci_95": [
+          0.19,
+          6.56
+        ],
+        "p_value": "0.0460"
+      },
+      "correct_class_recall": {
+        "m1_point": 58.48,
+        "m2_point": 61.08,
+        "delta_point": -2.59,
+        "delta_mean": -2.48,
+        "ci_95": [
+          -5.86,
+          1.04
+        ],
+        "p_value": "0.1940"
+      }
+    },
+    {
+      "pair": "Legal-BERT vs Deployed Baseline",
+      "m1": "Legal-BERT",
+      "m2": "Deployed Baseline",
+      "flagged_recall": {
+        "m1_point": 80.64,
+        "m2_point": 65.07,
+        "delta_point": 15.57,
+        "delta_mean": 15.59,
+        "ci_95": [
+          9.4,
+          21.75
+        ],
+        "p_value": "<0.001"
+      },
+      "correct_class_recall": {
+        "m1_point": 71.06,
+        "m2_point": 61.08,
+        "delta_point": 9.98,
+        "delta_mean": 10.12,
+        "ci_95": [
+          4.1,
+          16.08
+        ],
+        "p_value": "0.0020"
+      }
+    },
+    {
+      "pair": "Legal-BERT vs TF-IDF Model B",
+      "m1": "Legal-BERT",
+      "m2": "TF-IDF Model B",
+      "flagged_recall": {
+        "m1_point": 80.64,
+        "m2_point": 68.06,
+        "delta_point": 12.57,
+        "delta_mean": 12.49,
+        "ci_95": [
+          5.8,
+          18.75
+        ],
+        "p_value": "<0.001"
+      },
+      "correct_class_recall": {
+        "m1_point": 71.06,
+        "m2_point": 58.48,
+        "delta_point": 12.57,
+        "delta_mean": 12.54,
+        "ci_95": [
+          6.03,
+          18.25
+        ],
+        "p_value": "<0.001"
+      }
+    },
+    {
+      "pair": "Court-Adapted Legal-BERT vs Legal-BERT",
+      "m1": "Court-Adapted Legal-BERT",
+      "m2": "Legal-BERT",
+      "flagged_recall": {
+        "m1_point": 81.24,
+        "m2_point": 80.64,
+        "delta_point": 0.6,
+        "delta_mean": 0.61,
+        "ci_95": [
+          -2.46,
+          3.38
+        ],
+        "p_value": "0.7100"
+      },
+      "correct_class_recall": {
+        "m1_point": 72.06,
+        "m2_point": 71.06,
+        "delta_point": 1.0,
+        "delta_mean": 1.03,
+        "ci_95": [
+          -2.33,
+          4.16
+        ],
+        "p_value": "0.5800"
+      }
+    },
+    {
+      "pair": "Ensemble vs Legal-BERT",
+      "m1": "Ensemble",
+      "m2": "Legal-BERT",
+      "flagged_recall": {
+        "m1_point": 81.84,
+        "m2_point": 80.64,
+        "delta_point": 1.2,
+        "delta_mean": 1.11,
+        "ci_95": [
+          -1.46,
+          3.83
+        ],
+        "p_value": "0.4480"
+      },
+      "correct_class_recall": {
+        "m1_point": 71.66,
+        "m2_point": 71.06,
+        "delta_point": 0.6,
+        "delta_mean": 0.55,
+        "ci_95": [
+          -1.87,
+          2.76
+        ],
+        "p_value": "0.6820"
+      }
+    },
+    {
+      "pair": "Ensemble vs TF-IDF Model B",
+      "m1": "Ensemble",
+      "m2": "TF-IDF Model B",
+      "flagged_recall": {
+        "m1_point": 81.84,
+        "m2_point": 68.06,
+        "delta_point": 13.77,
+        "delta_mean": 13.69,
+        "ci_95": [
+          8.42,
+          19.11
+        ],
+        "p_value": "<0.001"
+      },
+      "correct_class_recall": {
+        "m1_point": 71.66,
+        "m2_point": 58.48,
+        "delta_point": 13.17,
+        "delta_mean": 13.14,
+        "ci_95": [
+          8.05,
+          18.7
+        ],
+        "p_value": "<0.001"
+      }
+    }
+  ]
+}

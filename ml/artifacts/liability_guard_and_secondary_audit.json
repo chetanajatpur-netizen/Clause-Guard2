@@ -1,0 +1,153 @@
+{
+  "liability_guard": {
+    "triggered_count": 0,
+    "overridden_units": [],
+    "metrics_before": {
+      "Uncapped Liability": {
+        "tp": 19,
+        "fp": 12,
+        "fn": 10,
+        "precision": 61.29,
+        "recall": 65.52,
+        "f1": 63.33
+      },
+      "Cap on Liability": {
+        "tp": 42,
+        "fp": 45,
+        "fn": 35,
+        "precision": 48.28,
+        "recall": 54.55,
+        "f1": 51.22
+      }
+    },
+    "metrics_after": {
+      "Uncapped Liability": {
+        "tp": 19,
+        "fp": 12,
+        "fn": 10,
+        "precision": 61.29,
+        "recall": 65.52,
+        "f1": 63.33
+      },
+      "Cap on Liability": {
+        "tp": 42,
+        "fp": 45,
+        "fn": 35,
+        "precision": 48.28,
+        "recall": 54.55,
+        "f1": 51.22
+      }
+    }
+  },
+  "secondary_label": {
+    "total_flagged_units": 1012,
+    "units_with_second_prob_ge_20": 131,
+    "pct_of_flagged": 12.94,
+    "true_chips": 33,
+    "false_chips": 98,
+    "false_chips_per_contract": 1.2895,
+    "gate_passed": false
+  },
+  "doc08_analysis": [
+    {
+      "section": 1,
+      "text_snippet": "PLATFORM PARTNERSHIP AGREEMENT (COMPOUND CLAUSES)",
+      "flagged": false,
+      "primary_label": "No Clause",
+      "confidence": 0.9371,
+      "risk_tier": "None",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 2,
+      "text_snippet": "1. Parties. This Platform Partnership Agreement is made on 5 August 2026 between",
+      "flagged": false,
+      "primary_label": "No Clause",
+      "confidence": 0.8868,
+      "risk_tier": "None",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 3,
+      "text_snippet": "2. Term and Exit. Zenith may terminate this Agreement at any time on seven days'",
+      "flagged": true,
+      "primary_label": "Termination for Convenience",
+      "confidence": 0.7569,
+      "risk_tier": "Medium",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 4,
+      "text_snippet": "3. Platform Commitment. During the term Kora shall create content solely for Zen",
+      "flagged": true,
+      "primary_label": "Non-Compete",
+      "confidence": 0.9474,
+      "risk_tier": "High",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 5,
+      "text_snippet": "4. Content Ownership. All content produced under this Agreement, including chara",
+      "flagged": true,
+      "primary_label": "IP Ownership Assignment",
+      "confidence": 0.945,
+      "risk_tier": "Medium",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 6,
+      "text_snippet": "5. Liability and Accounts. Zenith's liability to Kora shall not exceed the fees ",
+      "flagged": true,
+      "primary_label": "Audit Rights",
+      "confidence": 0.9805,
+      "risk_tier": "Low",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 7,
+      "text_snippet": "6. Ownership Changes. Any merger, acquisition or transfer of control of Kora req",
+      "flagged": true,
+      "primary_label": "Change of Control",
+      "confidence": 0.963,
+      "risk_tier": "Medium",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 8,
+      "text_snippet": "7. Late Delivery. If Kora delivers an episode late, Kora shall pay Zenith USD 10",
+      "flagged": true,
+      "primary_label": "Liquidated Damages",
+      "confidence": 0.9737,
+      "risk_tier": "High",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 9,
+      "text_snippet": "8. Payment. Zenith shall pay Kora a licence fee of USD 40,000 per episode within",
+      "flagged": false,
+      "primary_label": "No Clause",
+      "confidence": 0.546,
+      "risk_tier": "None",
+      "secondary_label": null,
+      "second_prob": null
+    },
+    {
+      "section": 10,
+      "text_snippet": "9. Governing Law. This Agreement is governed by the laws of the State of New Yor",
+      "flagged": false,
+      "primary_label": "No Clause",
+      "confidence": 0.9034,
+      "risk_tier": "None",
+      "secondary_label": null,
+      "second_prob": null
+    }
+  ]
+}

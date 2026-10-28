@@ -1,0 +1,267 @@
+{
+  "step_c_calibration": {
+    "uncalibrated_ece": 0.0931,
+    "calibrated_ece": 0.0135,
+    "optimal_temperature": 0.7761,
+    "reliability_table": [
+      {
+        "bin_range": "[0.0, 0.1)",
+        "count": 0,
+        "pct_total": 0.0,
+        "avg_confidence": 0.05,
+        "empirical_accuracy": 0.0,
+        "calibration_gap": 0.0
+      },
+      {
+        "bin_range": "[0.1, 0.2)",
+        "count": 2,
+        "pct_total": 0.41,
+        "avg_confidence": 0.1853,
+        "empirical_accuracy": 0.5,
+        "calibration_gap": 0.3147
+      },
+      {
+        "bin_range": "[0.2, 0.3)",
+        "count": 9,
+        "pct_total": 1.87,
+        "avg_confidence": 0.2584,
+        "empirical_accuracy": 0.1111,
+        "calibration_gap": 0.1473
+      },
+      {
+        "bin_range": "[0.3, 0.4)",
+        "count": 31,
+        "pct_total": 6.43,
+        "avg_confidence": 0.3563,
+        "empirical_accuracy": 0.5161,
+        "calibration_gap": 0.1599
+      },
+      {
+        "bin_range": "[0.4, 0.5)",
+        "count": 50,
+        "pct_total": 10.37,
+        "avg_confidence": 0.4643,
+        "empirical_accuracy": 0.48,
+        "calibration_gap": 0.0157
+      },
+      {
+        "bin_range": "[0.5, 0.6)",
+        "count": 71,
+        "pct_total": 14.73,
+        "avg_confidence": 0.5461,
+        "empirical_accuracy": 0.6338,
+        "calibration_gap": 0.0877
+      },
+      {
+        "bin_range": "[0.6, 0.7)",
+        "count": 52,
+        "pct_total": 10.79,
+        "avg_confidence": 0.6471,
+        "empirical_accuracy": 0.7692,
+        "calibration_gap": 0.1221
+      },
+      {
+        "bin_range": "[0.7, 0.8)",
+        "count": 74,
+        "pct_total": 15.35,
+        "avg_confidence": 0.7504,
+        "empirical_accuracy": 0.8649,
+        "calibration_gap": 0.1145
+      },
+      {
+        "bin_range": "[0.8, 0.9)",
+        "count": 141,
+        "pct_total": 29.25,
+        "avg_confidence": 0.8562,
+        "empirical_accuracy": 0.9574,
+        "calibration_gap": 0.1012
+      },
+      {
+        "bin_range": "[0.9, 1.0)",
+        "count": 52,
+        "pct_total": 10.79,
+        "avg_confidence": 0.9254,
+        "empirical_accuracy": 0.9615,
+        "calibration_gap": 0.0361
+      }
+    ],
+    "calibrated_table": [
+      {
+        "bin_range": "[0.0, 0.1)",
+        "count": 0,
+        "pct_total": 0.0,
+        "avg_confidence": 0.05,
+        "empirical_accuracy": 0.0,
+        "calibration_gap": 0.0
+      },
+      {
+        "bin_range": "[0.1, 0.2)",
+        "count": 0,
+        "pct_total": 0.0,
+        "avg_confidence": 0.15,
+        "empirical_accuracy": 0.0,
+        "calibration_gap": 0.0
+      },
+      {
+        "bin_range": "[0.2, 0.3)",
+        "count": 5,
+        "pct_total": 1.04,
+        "avg_confidence": 0.2503,
+        "empirical_accuracy": 0.4,
+        "calibration_gap": 0.1497
+      },
+      {
+        "bin_range": "[0.3, 0.4)",
+        "count": 11,
+        "pct_total": 2.28,
+        "avg_confidence": 0.3474,
+        "empirical_accuracy": 0.2727,
+        "calibration_gap": 0.0747
+      },
+      {
+        "bin_range": "[0.4, 0.5)",
+        "count": 34,
+        "pct_total": 7.05,
+        "avg_confidence": 0.4479,
+        "empirical_accuracy": 0.4706,
+        "calibration_gap": 0.0227
+      },
+      {
+        "bin_range": "[0.5, 0.6)",
+        "count": 54,
+        "pct_total": 11.2,
+        "avg_confidence": 0.5525,
+        "empirical_accuracy": 0.5185,
+        "calibration_gap": 0.034
+      },
+      {
+        "bin_range": "[0.6, 0.7)",
+        "count": 51,
+        "pct_total": 10.58,
+        "avg_confidence": 0.6526,
+        "empirical_accuracy": 0.6471,
+        "calibration_gap": 0.0056
+      },
+      {
+        "bin_range": "[0.7, 0.8)",
+        "count": 51,
+        "pct_total": 10.58,
+        "avg_confidence": 0.7482,
+        "empirical_accuracy": 0.7255,
+        "calibration_gap": 0.0227
+      },
+      {
+        "bin_range": "[0.8, 0.9)",
+        "count": 72,
+        "pct_total": 14.94,
+        "avg_confidence": 0.8581,
+        "empirical_accuracy": 0.8611,
+        "calibration_gap": 0.003
+      },
+      {
+        "bin_range": "[0.9, 1.0)",
+        "count": 204,
+        "pct_total": 42.32,
+        "avg_confidence": 0.9527,
+        "empirical_accuracy": 0.9559,
+        "calibration_gap": 0.0032
+      }
+    ]
+  },
+  "step_d_rules": {
+    "rule_metrics": {
+      "Change of Control": {
+        "precision_before": 64.29,
+        "precision_after": 63.33,
+        "recall_before": 72.0,
+        "recall_after": 76.0,
+        "f1_before": 67.92,
+        "f1_after": 69.09,
+        "fp_before": 10,
+        "fp_after": 11
+      },
+      "Uncapped Liability": {
+        "precision_before": 52.0,
+        "precision_after": 53.85,
+        "recall_before": 68.42,
+        "recall_after": 73.68,
+        "f1_before": 59.09,
+        "f1_after": 62.22,
+        "fp_before": 12,
+        "fp_after": 12
+      }
+    },
+    "overall_macro_f1_before": 76.85,
+    "overall_macro_f1_after": 77.27,
+    "keep_rules": false
+  },
+  "step_e_enhancements": {
+    "standard": {
+      "macro_f1": 76.85,
+      "precision": 75.88,
+      "recall": 78.87
+    },
+    "sliding_window": {
+      "macro_f1": 74.87,
+      "precision": 74.64,
+      "recall": 76.12
+    },
+    "tfidf_ensemble": {
+      "macro_f1": 80.34,
+      "precision": 78.9,
+      "recall": 82.36,
+      "alpha": 0.3
+    },
+    "per_class_thresholds": {
+      "macro_f1": 76.94,
+      "precision": 75.31,
+      "recall": 79.43,
+      "thresholds": {
+        "Anti-Assignment": 0.45,
+        "Audit Rights": 0.47,
+        "Cap on Liability": 0.35,
+        "Change of Control": 0.45,
+        "Exclusivity": 0.45,
+        "IP Ownership Assignment": 0.2,
+        "Liquidated Damages": 0.22,
+        "No Clause": 0.25,
+        "Non-Compete": 0.35,
+        "Termination for Convenience": 0.72,
+        "Uncapped Liability": 0.38
+      }
+    }
+  },
+  "step_f_contract_bootstrap": {
+    "pooled_oof_point_estimates": {
+      "TF-IDF": 72.83,
+      "Un-adapted": 60.17,
+      "Adapted": 63.83
+    },
+    "contract_cluster_bootstrap": {
+      "Adapted vs Un-adapted": {
+        "mean_delta_f1": 3.7,
+        "ci_95": [
+          1.72,
+          5.68
+        ],
+        "p_value": 0.002
+      },
+      "Adapted vs TF-IDF": {
+        "mean_delta_f1": -9.01,
+        "ci_95": [
+          -11.06,
+          -6.83
+        ],
+        "p_value": 0.001
+      },
+      "Un-adapted vs TF-IDF": {
+        "mean_delta_f1": -12.71,
+        "ci_95": [
+          -14.69,
+          -10.77
+        ],
+        "p_value": 0.001
+      }
+    }
+  }
+}

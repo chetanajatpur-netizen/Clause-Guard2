@@ -1,0 +1,436 @@
+{
+  "step1_alignment_audit": {
+    "total_positive_units": 4462,
+    "total_mismatches_under_50": 2255,
+    "hist_summary": {
+      "Anti-Assignment": {
+        "count": 711,
+        "span_in_unit": {
+          "mean": 0.7992321780321043,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            60,
+            94,
+            78,
+            479
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.638548038010053,
+          "median": 0.6325088339222615,
+          "bins_0_25_50_75_100": [
+            85,
+            180,
+            140,
+            306
+          ]
+        }
+      },
+      "Audit Rights": {
+        "count": 726,
+        "span_in_unit": {
+          "mean": 0.8480998642697697,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            50,
+            74,
+            41,
+            561
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.6754760472161451,
+          "median": 0.7190241228070176,
+          "bins_0_25_50_75_100": [
+            80,
+            154,
+            144,
+            348
+          ]
+        }
+      },
+      "Cap on Liability": {
+        "count": 651,
+        "span_in_unit": {
+          "mean": 0.7944237924718835,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            61,
+            91,
+            54,
+            445
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.6766654111602729,
+          "median": 0.7903225806451613,
+          "bins_0_25_50_75_100": [
+            92,
+            112,
+            111,
+            336
+          ]
+        }
+      },
+      "Change of Control": {
+        "count": 344,
+        "span_in_unit": {
+          "mean": 0.7462389054570374,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            40,
+            64,
+            28,
+            212
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.6905784560172079,
+          "median": 0.8776333575959239,
+          "bins_0_25_50_75_100": [
+            59,
+            37,
+            53,
+            195
+          ]
+        }
+      },
+      "Exclusivity": {
+        "count": 574,
+        "span_in_unit": {
+          "mean": 0.7861920458176631,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            53,
+            86,
+            52,
+            383
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.6463283757590311,
+          "median": 0.7154497559233242,
+          "bins_0_25_50_75_100": [
+            105,
+            92,
+            99,
+            278
+          ]
+        }
+      },
+      "IP Ownership Assignment": {
+        "count": 450,
+        "span_in_unit": {
+          "mean": 0.7258281091841886,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            46,
+            94,
+            56,
+            254
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.7153361373740955,
+          "median": 0.8701133021968518,
+          "bins_0_25_50_75_100": [
+            58,
+            62,
+            67,
+            263
+          ]
+        }
+      },
+      "Liquidated Damages": {
+        "count": 181,
+        "span_in_unit": {
+          "mean": 0.7905511362024231,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            19,
+            23,
+            16,
+            123
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.5874554025903328,
+          "median": 0.6933867735470942,
+          "bins_0_25_50_75_100": [
+            54,
+            21,
+            18,
+            88
+          ]
+        }
+      },
+      "Non-Compete": {
+        "count": 342,
+        "span_in_unit": {
+          "mean": 0.7081136248330286,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            53,
+            61,
+            35,
+            193
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.7175037852789731,
+          "median": 0.8586056067333819,
+          "bins_0_25_50_75_100": [
+            36,
+            54,
+            61,
+            191
+          ]
+        }
+      },
+      "Termination for Convenience": {
+        "count": 254,
+        "span_in_unit": {
+          "mean": 0.8982534774968943,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            12,
+            19,
+            10,
+            213
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.5559645908577481,
+          "median": 0.46853146853146854,
+          "bins_0_25_50_75_100": [
+            41,
+            91,
+            42,
+            80
+          ]
+        }
+      },
+      "Uncapped Liability": {
+        "count": 229,
+        "span_in_unit": {
+          "mean": 0.729150707923282,
+          "median": 1.0,
+          "bins_0_25_50_75_100": [
+            27,
+            41,
+            28,
+            133
+          ]
+        },
+        "unit_in_span": {
+          "mean": 0.7256788607128437,
+          "median": 0.9010238907849829,
+          "bins_0_25_50_75_100": [
+            33,
+            21,
+            35,
+            140
+          ]
+        }
+      }
+    },
+    "sample_10_mismatches": [
+      {
+        "category": "Exclusivity",
+        "u_text": "Source: AIMMUNE THERAPEUTICS, INC., 8-K, 2/5/2020 1.83 Additional Definitions. The following terms have the meanings set forth in the corresponding Sections of this Agreement: ARTICLE 2 LICENSES 2.1 Grant to Aimmune. Subject to the terms and conditions of this Agreement, Xencor hereby grants to Aimmune during the Term an exclusive, worldwide, payment-bearing license under and with respect to Xencor Patents and Xencor's interest in Joint Collaboration Patents, and",
+        "a_text": "Subject to the terms and conditions of this Agreement, Xencor hereby grants to Aimmune during the Term an exclusive, worldwide, payment-bearing license under and with respect to Xencor Patents and Xencor's interest in Joint Collaboration Patents, and a non-exclusive, payment bearing license under and with respect to Xencor Know-How, in each case, with the right to sublicense solely in accordance with Section 2.3.2, solely to Develop, Manufacture and Commercialize the Product in and for the Licensed Field; provided that notwithstanding the foregoing, Xencor shall retain the right under and with respect to Xencor Patents and Xencor's interest in Joint Collaboration Patents to the extent necessary to perform its obligations under this Agreement.",
+        "ov_len": 250,
+        "span_in_u": 0.3324468085106383,
+        "unit_in_span": 0.5274261603375527,
+        "contract": "AimmuneTherapeuticsInc_20200205_8-K_EX-10.3_11967170_EX-10.3_Development Agreement"
+      },
+      {
+        "category": "Exclusivity",
+        "u_text": "hereby agrees to cause the other Seller Parties to grant to the Purchaser Assignees, an unlimited, exclusive, irrevocable, assignable, transferable, sublicenseable, worldwide, perpetual, royalty-free, fully-paid up license to use, exploit, and commercialize in any manner now known or in the future discovered and for whatever purpose, any and all rights to Assigned IP that cannot be assigned as contemplated by Section 2.1(b)(i). (iii) Patent Review Process. (A) Information Exchange.",
+        "a_text": "If and to the extent that, as a matter of Law in any jurisdiction, ownership, title, or any rights or interest in or to any of the Assigned IP cannot be assigned as provided in Section 2.1(b)(i), (A) the Seller irrevocably agrees to (and shall cause the other Seller Parties to) assign and transfer, and the Seller hereby assigns and transfers (and shall cause the other Seller Parties to assign and transfer) to the Purchaser Assignees all rights (including all economic and commercialization rights) that can be assigned pursuant to Section 2.1(b)(i) to the fullest extent permissible, and (B) the Seller hereby grants to the Purchaser Assignees, and hereby agrees to cause the other Seller Parties to grant to the Purchaser Assignees, an unlimited, exclusive, irrevocable, assignable, transferable, sublicenseable, worldwide, perpetual, royalty-free, fully-paid up license to use, exploit, and commercialize in any manner now known or in the future discovered and for whatever purpose, any and all rights to Assigned IP that cannot be assigned as contemplated by Section 2.1(b)(i).",
+        "ov_len": 431,
+        "span_in_u": 0.39760147601476015,
+        "unit_in_span": 0.8831967213114754,
+        "contract": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "category": "IP Ownership Assignment",
+        "u_text": "(i) cause its employees, contractors, and consultants to render reasonable and timely assistance to ExxonMobil and its attorneys or agents; (ii) assign, and will cause its and its Affiliates' employees, contractors, and consultants to assign, its right, title, and interest in and to such Program Patent to ExxonMobil for filing; and",
+        "a_text": "For Program Patents, if one or more employees or other representatives of FCE are determined to be inventors, then FCE will:\n\n(i) cause its employees, contractors, and consultants to render reasonable and timely assistance to ExxonMobil and its attorneys or agents;\n\n(ii) assign, and will cause its and its Affiliates' employees, contractors, and consultants to assign, its right, title, and interest in and to such Program Patent to ExxonMobil for filing; and\n\n(iii) cause its and its Affiliate employees, contractors, and consultants, to execute any documents as may be required to effect such assignments, or file, prosecute, and maintain any patent applications or patents that are based on, derived from, or protect such Program Patent.",
+        "ov_len": 334,
+        "span_in_u": 0.4507422402159244,
+        "unit_in_span": 1.0,
+        "contract": "FuelcellEnergyInc_20191106_8-K_EX-10.1_11868007_EX-10.1_Development Agreement"
+      },
+      {
+        "category": "Termination for Convenience",
+        "u_text": "2.5      LKPL will have no liability whatsoever for any of Axiometric's                   equipment, furniture, supplies or other personal property;                   Axiometric will use the space at its sole risk. 2.6      Axiometric will have the right to terminate the license to use                   the office space and to move out of the office space at any                   time upon two weeks notice.",
+        "a_text": "Axiometric will have the right to terminate the license to use                   the office space and to move out of the office space at any                   time upon two weeks notice.",
+        "ov_len": 186,
+        "span_in_u": 1.0,
+        "unit_in_span": 0.44285714285714284,
+        "contract": "LinkPlusCorp_20050802_8-K_EX-10_3240252_EX-10_Affiliate Agreement"
+      },
+      {
+        "category": "Exclusivity",
+        "u_text": "any purpose in the SpinCo Core Field and (y) a perpetual (subject to Section 4.4), irrevocable, non-exclusive, royalty-free, worldwide right and license with the right to grant sublicenses (solely as set forth in Section 5.6) to use the Shared Library Materials, including all Know-How and Copyrights embodied therein, for any purpose in any field other than the RemainCo Core Field or the SpinCo Core Field and (ii) with respect to SpinCo's right and interest in",
+        "a_text": "Accordingly, (i) with respect to RemainCo's right and interest in and to the Shared Library Materials, RemainCo, for itself and as representative of all other members of the RemainCo Group, hereby grants to SpinCo (x) a perpetual (subject to Section 4.4), irrevocable, exclusive, royalty-free, worldwide right and license with the right to grant sublicenses (solely as set forth in Section 5.6) to use the Shared Library Materials, including all Know-How and Copyrights embodied therein, for any purpose in the SpinCo Core Field and (y) a perpetual (subject to Section 4.4), irrevocable, non-exclusive, royalty-free, worldwide right and license with the right to grant sublicenses (solely as set forth in Section 5.6) to use the Shared Library Materials, including all Know-How and Copyrights embodied therein, for any purpose in any field other than the RemainCo Core Field or the SpinCo Core Field and (ii) with respect to SpinCo's right and interest in and to the Shared Library Materials, SpinCo, for itself and as representative of all other members of the SpinCo Group, hereby grants to RemainCo (x) a perpetual (subject to Section 4.4), irrevocable, exclusive, royalty-free, worldwide right and license with the right to grant sublicenses (solely as set forth in Section 5.6) to use the Shared Library Materials, including all Know-How and Copyrights embodied therein, for any purpose in the RemainCo Core Field and (y) a perpetual (subject to Section 4.4), irrevocable, non- exclusive, royalty-free, worldwide right and license with the right to grant sublicenses (solely as set forth in Section 5.6) to use the Shared Library Materials, including all Know-How and Copyrights embodied therein, for any purpose in any field other than the SpinCo Core Field or the RemainCo Core Field.",
+        "ov_len": 463,
+        "span_in_u": 0.2585147962032384,
+        "unit_in_span": 1.0,
+        "contract": "BABCOCK_WILCOXENTERPRISES,INC_08_04_2015-EX-10.17-INTELLECTUAL PROPERTY AGREEMENT between THE BABCOCK _ WILCOX COMPANY and BABCOCK _ WILCOX ENTERPRISES, INC."
+      },
+      {
+        "category": "Anti-Assignment",
+        "u_text": "This Agreement shall become binding when any one or more counterparts hereof, individually or taken together, bear the signatures of both parties hereto. For the purposes hereof, a facsimile copy of this Agreement, including the signature pages hereto, shall be deemed an original. 10.9 Assignment. A party may assign this Agreement to any Affiliate. Otherwise, neither party may assign this Agreement without the other party's prior written consent (not to be unreasonably withheld).",
+        "a_text": "Otherwise, neither party may assign this Agreement without the other party's prior written consent (not to be unreasonably withheld).",
+        "ov_len": 133,
+        "span_in_u": 1.0,
+        "unit_in_span": 0.2676056338028169,
+        "contract": "VERTICALNETINC_04_01_2002-EX-10.19-MAINTENANCE AND SUPPORT AGREEMENT"
+      },
+      {
+        "category": "Audit Rights",
+        "u_text": "Section 4.1 of the Existing Agreement (Audits) shall be deleted and replaced by the following: \"4.1  Audits. Columbia QA, any other person appointed by Columbia, Columbia's customer, and/or any Regulatory Authority may conduct inspections and audits of Fleet's manufacturing facility, Columbia Equipment, quality control laboratories, and",
+        "a_text": "Columbia QA, any other person appointed by Columbia, Columbia's customer, and/or any Regulatory Authority may conduct inspections and audits of Fleet's manufacturing facility, Columbia Equipment, quality control laboratories, and other quality systems relating to the manufacture and storage of the Product according to Columbia's reasonable procedures upon reasonable prior written notice, during normal business hours, provided, however, that Columbia QA, any other person appointed by Columbia and/or any Regulatory Authority may conduct a \"For Cause\" audit during normal business hours upon three (3) business days prior written notice to Fleet.",
+        "ov_len": 229,
+        "span_in_u": 0.35285053929121724,
+        "unit_in_span": 0.6755162241887905,
+        "contract": "Columbia Laboratories, (Bermuda) Ltd. - AMEND NO. 2 TO MANUFACTURING AND SUPPLY AGREEMENT"
+      },
+      {
+        "category": "Anti-Assignment",
+        "u_text": "not withhold its consent to an assignment of this Agreement in the event of a merger or reorganization of the Dolphins, a sale of all or substantially all of the Dolphins' assets or a consolidation of the Dolphins with any of its affiliates or related parties.",
+        "a_text": "No party may assign any of its rights or obligations\n\nhereunder without the prior written consent of the other party, except that Hydron may assign its rights and obligations under this Agreement to its parent, its successor or to an affiliate (as such term is defined under the rules and regulations promulgated under the federal securities laws of the U.S.) upon the reasonable consent of the Dolphins that such affiliate assignee has the financial means and corporate authority to perform such obligations and Hydron may not withhold its consent to an assignment of this Agreement in the event of a merger or reorganization of the Dolphins, a sale of all or substantially all of the Dolphins' assets or a consolidation of the Dolphins with any of its affiliates or related parties.",
+        "ov_len": 260,
+        "span_in_u": 0.33163265306122447,
+        "unit_in_span": 1.0,
+        "contract": "HYDRONTECHNOLOGIESINC_03_31_1997-EX-10.47-SPONSORSHIP AGREEMENT"
+      },
+      {
+        "category": "Change of Control",
+        "u_text": "(d) is subject to any sale, lease or other transfer of all or substantially all of its assets to any entity; or (e) is subject to a change of control (whether by merger, stock transfer or otherwise), except in the case of an initial public offering. 15.",
+        "a_text": "Before expiration of the Term, either Party may terminate this Agreement upon: (i) any material breach of the Agreement by the other Party, if such breach is not remedied to the reasonable satisfaction of the non-breaching Party within ten (10) business days after written notice; (ii) ten (10) business days written notice to the other Party whenever the notifying Party in its sole discretion determines that the continuation of the Agreement will damage its reputation or good will; or (iii) written notice in the event one Party (a) becomes or is declared insolvent or bankrupt or is subject to the appointment of a trustee or receiver or any equivalent thereof, (b) is the subject of any proceeding related to its liquidation or insolvency (whether voluntary or involuntary) which is not dismissed within ninety (90) days, (c) makes an assignment for the benefit of creditors, or (d) is subject to any sale, lease or other transfer of all or substantially all of its assets to any entity; or (e) is subject to a change of control (whether by merger, stock transfer or otherwise), except in the case of an initial public offering.",
+        "ov_len": 249,
+        "span_in_u": 0.21957671957671956,
+        "unit_in_span": 0.9841897233201581,
+        "contract": "FreezeTagInc_20180411_8-K_EX-10.1_11139603_EX-10.1_Sponsorship Agreement"
+      },
+      {
+        "category": "IP Ownership Assignment",
+        "u_text": "At Aduro's request and expense, Consultant shall assist Aduro in acquiring and maintaining its right in and title to, any Work Product. Such assistance may include, but will not be limited to, signing applications and other documents, cooperating in legal proceedings, and taking any other steps considered necessary or desirable by Aduro. 7. Nonsolicitation.",
+        "a_text": "At Aduro's request and expense, Consultant shall assist Aduro in acquiring and maintaining its right in and title to, any Work Product.",
+        "ov_len": 135,
+        "span_in_u": 1.0,
+        "unit_in_span": 0.3708791208791209,
+        "contract": "ADUROBIOTECH,INC_06_02_2020-EX-10.7-CONSULTING AGREEMENT(1)"
+      }
+    ]
+  },
+  "step2_and_3_resegmentation": {
+    "total_units": 67048,
+    "units_over_256": 2,
+    "pct_over_256": 2.982937596945472e-05,
+    "units_with_secondary": 268,
+    "pct_with_secondary": 0.003997136379906932
+  },
+  "step5_splits": {
+    "train_size": 2783,
+    "val_balanced_size": 621,
+    "test_balanced_size": 499,
+    "val_natural_size": 10270,
+    "test_natural_size": 9953
+  },
+  "step6_tfidf_natural_prevalence": {
+    "num_contracts": 76,
+    "total_units": 10270,
+    "total_actual_clauses": 478,
+    "total_flags": 3866,
+    "true_positives": 452,
+    "total_false_alarms": 3414,
+    "false_alarms_per_contract": 44.921052631578945,
+    "flag_precision": 0.11691670977754785,
+    "flag_recall": 0.9456066945606695,
+    "classification_report": {
+      "Anti-Assignment": {
+        "precision": 0.1623529411764706,
+        "recall": 0.8518518518518519,
+        "f1-score": 0.2727272727272727,
+        "support": 81.0
+      },
+      "Audit Rights": {
+        "precision": 0.11742424242424243,
+        "recall": 0.8985507246376812,
+        "f1-score": 0.20770519262981574,
+        "support": 69.0
+      },
+      "Cap on Liability": {
+        "precision": 0.11214953271028037,
+        "recall": 0.8,
+        "f1-score": 0.19672131147540983,
+        "support": 75.0
+      },
+      "Change of Control": {
+        "precision": 0.1602787456445993,
+        "recall": 0.92,
+        "f1-score": 0.27299703264094954,
+        "support": 50.0
+      },
+      "Exclusivity": {
+        "precision": 0.0667574931880109,
+        "recall": 0.8596491228070176,
+        "f1-score": 0.12389380530973451,
+        "support": 57.0
+      },
+      "IP Ownership Assignment": {
+        "precision": 0.07579462102689487,
+        "recall": 1.0,
+        "f1-score": 0.1409090909090909,
+        "support": 31.0
+      },
+      "Liquidated Damages": {
+        "precision": 0.06091370558375635,
+        "recall": 1.0,
+        "f1-score": 0.11483253588516747,
+        "support": 12.0
+      },
+      "No Clause": {
+        "precision": 0.9959400374765771,
+        "recall": 0.6513480392156863,
+        "f1-score": 0.7876018770066683,
+        "support": 9792.0
+      },
+      "Non-Compete": {
+        "precision": 0.09114583333333333,
+        "recall": 0.8536585365853658,
+        "f1-score": 0.16470588235294117,
+        "support": 41.0
+      },
+      "Termination for Convenience": {
+        "precision": 0.10064935064935066,
+        "recall": 0.9393939393939394,
+        "f1-score": 0.18181818181818182,
+        "support": 33.0
+      },
+      "Uncapped Liability": {
+        "precision": 0.4745762711864407,
+        "recall": 0.9655172413793104,
+        "f1-score": 0.6363636363636364,
+        "support": 29.0
+      },
+      "accuracy": 0.66222005842259,
+      "macro avg": {
+        "precision": 0.21981661585454149,
+        "recall": 0.885451768715532,
+        "f1-score": 0.2818432562835334,
+        "support": 10270.0
+      },
+      "weighted avg": {
+        "precision": 0.955952264323444,
+        "recall": 0.66222005842259,
+        "f1-score": 0.7615423274398092,
+        "support": 10270.0
+      }
+    }
+  }
+}

@@ -58,12 +58,28 @@ async def get_document(
         .all()
     )
     
-    labels = [c.label for c in clauses]
-    risk_data = compute_document_risk(labels) if labels else {
-        "overall_risk": "Low", "high_count": 0, "medium_count": 0,
-        "low_count": 0, "none_count": 0, "total_clauses": 0,
+    # Risk summary computed from persisted clause flagged states and tiers
+    high_count = sum(1 for c in clauses if c.flagged and (c.risk_tier == "High" or c.risk_level == "High"))
+    medium_count = sum(1 for c in clauses if c.flagged and (c.risk_tier == "Medium" or c.risk_level == "Medium"))
+    low_count = sum(1 for c in clauses if c.flagged and (c.risk_tier == "Low" or c.risk_level == "Low"))
+    none_count = sum(1 for c in clauses if not c.flagged)
+
+    if high_count > 0:
+        overall_doc_risk = "High"
+    elif medium_count > 0:
+        overall_doc_risk = "Medium"
+    else:
+        overall_doc_risk = "Low"
+
+    risk_data = {
+        "overall_risk": doc.overall_risk or overall_doc_risk,
+        "high_count": high_count,
+        "medium_count": medium_count,
+        "low_count": low_count,
+        "none_count": none_count,
+        "total_clauses": len(clauses),
     }
-    
+
     clause_responses = []
     for c in clauses:
         enhanced = compute_enhanced_clause_risk(
@@ -79,6 +95,11 @@ async def get_document(
                 label=c.label,
                 confidence=c.confidence,
                 risk_level=c.risk_level or enhanced["risk_level"],
+                flagged=bool(c.flagged),
+                risk_tier=c.risk_tier or ("None" if not c.flagged else (c.risk_level or "Low")),
+                calibrated_probability=c.calibrated_probability if c.calibrated_probability is not None else c.confidence,
+                char_start=c.char_start,
+                char_end=c.char_end,
                 risk_score=enhanced["risk_score"],
                 risk_score_normalized=enhanced["risk_score_normalized"],
                 uncertainty=enhanced["uncertainty"],

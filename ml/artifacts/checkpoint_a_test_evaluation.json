@@ -1,0 +1,329 @@
+{
+  "strict": {
+    "preset": "strict",
+    "target_fa_per_contract": 3,
+    "tau": 0.012957,
+    "flags_count": 498,
+    "fa_count": 218,
+    "fa_per_contract": 2.83,
+    "precision": 56.22,
+    "tp_flagged": 280,
+    "tp_correct": 250,
+    "total_positives": 406,
+    "recall_flagged": 68.97,
+    "recall_correct": 61.58,
+    "recall_by_tier": {
+      "High": {
+        "total": 123,
+        "flagged": 57,
+        "correct": 44,
+        "recall_flagged": 46.34,
+        "recall_correct": 35.77
+      },
+      "Medium": {
+        "total": 166,
+        "flagged": 140,
+        "correct": 131,
+        "recall_flagged": 84.34,
+        "recall_correct": 78.92
+      },
+      "Low": {
+        "total": 117,
+        "flagged": 83,
+        "correct": 75,
+        "recall_flagged": 70.94,
+        "recall_correct": 64.1
+      }
+    },
+    "recall_by_class": {
+      "Anti-Assignment": {
+        "total": 75,
+        "flagged": 71,
+        "correct": 66,
+        "recall_flagged": 94.67,
+        "recall_correct": 88.0
+      },
+      "Audit Rights": {
+        "total": 65,
+        "flagged": 62,
+        "correct": 62,
+        "recall_flagged": 95.38,
+        "recall_correct": 95.38
+      },
+      "Cap on Liability": {
+        "total": 52,
+        "flagged": 21,
+        "correct": 13,
+        "recall_flagged": 40.38,
+        "recall_correct": 25.0
+      },
+      "Change of Control": {
+        "total": 25,
+        "flagged": 21,
+        "correct": 17,
+        "recall_flagged": 84.0,
+        "recall_correct": 68.0
+      },
+      "Exclusivity": {
+        "total": 55,
+        "flagged": 6,
+        "correct": 1,
+        "recall_flagged": 10.91,
+        "recall_correct": 1.82
+      },
+      "IP Ownership Assignment": {
+        "total": 28,
+        "flagged": 17,
+        "correct": 17,
+        "recall_flagged": 60.71,
+        "recall_correct": 60.71
+      },
+      "Liquidated Damages": {
+        "total": 14,
+        "flagged": 8,
+        "correct": 6,
+        "recall_flagged": 57.14,
+        "recall_correct": 42.86
+      },
+      "Non-Compete": {
+        "total": 31,
+        "flagged": 21,
+        "correct": 19,
+        "recall_flagged": 67.74,
+        "recall_correct": 61.29
+      },
+      "Termination for Convenience": {
+        "total": 38,
+        "flagged": 31,
+        "correct": 31,
+        "recall_flagged": 81.58,
+        "recall_correct": 81.58
+      },
+      "Uncapped Liability": {
+        "total": 23,
+        "flagged": 22,
+        "correct": 18,
+        "recall_flagged": 95.65,
+        "recall_correct": 78.26
+      }
+    }
+  },
+  "balanced": {
+    "preset": "balanced",
+    "target_fa_per_contract": 8,
+    "tau": 0.035452,
+    "flags_count": 887,
+    "fa_count": 541,
+    "fa_per_contract": 7.03,
+    "precision": 39.01,
+    "tp_flagged": 346,
+    "tp_correct": 308,
+    "total_positives": 406,
+    "recall_flagged": 85.22,
+    "recall_correct": 75.86,
+    "recall_by_tier": {
+      "High": {
+        "total": 123,
+        "flagged": 96,
+        "correct": 78,
+        "recall_flagged": 78.05,
+        "recall_correct": 63.41
+      },
+      "Medium": {
+        "total": 166,
+        "flagged": 152,
+        "correct": 141,
+        "recall_flagged": 91.57,
+        "recall_correct": 84.94
+      },
+      "Low": {
+        "total": 117,
+        "flagged": 98,
+        "correct": 89,
+        "recall_flagged": 83.76,
+        "recall_correct": 76.07
+      }
+    },
+    "recall_by_class": {
+      "Anti-Assignment": {
+        "total": 75,
+        "flagged": 73,
+        "correct": 67,
+        "recall_flagged": 97.33,
+        "recall_correct": 89.33
+      },
+      "Audit Rights": {
+        "total": 65,
+        "flagged": 62,
+        "correct": 62,
+        "recall_flagged": 95.38,
+        "recall_correct": 95.38
+      },
+      "Cap on Liability": {
+        "total": 52,
+        "flagged": 36,
+        "correct": 27,
+        "recall_flagged": 69.23,
+        "recall_correct": 51.92
+      },
+      "Change of Control": {
+        "total": 25,
+        "flagged": 22,
+        "correct": 18,
+        "recall_flagged": 88.0,
+        "recall_correct": 72.0
+      },
+      "Exclusivity": {
+        "total": 55,
+        "flagged": 39,
+        "correct": 31,
+        "recall_flagged": 70.91,
+        "recall_correct": 56.36
+      },
+      "IP Ownership Assignment": {
+        "total": 28,
+        "flagged": 24,
+        "correct": 23,
+        "recall_flagged": 85.71,
+        "recall_correct": 82.14
+      },
+      "Liquidated Damages": {
+        "total": 14,
+        "flagged": 9,
+        "correct": 7,
+        "recall_flagged": 64.29,
+        "recall_correct": 50.0
+      },
+      "Non-Compete": {
+        "total": 31,
+        "flagged": 26,
+        "correct": 22,
+        "recall_flagged": 83.87,
+        "recall_correct": 70.97
+      },
+      "Termination for Convenience": {
+        "total": 38,
+        "flagged": 33,
+        "correct": 33,
+        "recall_flagged": 86.84,
+        "recall_correct": 86.84
+      },
+      "Uncapped Liability": {
+        "total": 23,
+        "flagged": 22,
+        "correct": 18,
+        "recall_flagged": 95.65,
+        "recall_correct": 78.26
+      }
+    }
+  },
+  "thorough": {
+    "preset": "thorough",
+    "target_fa_per_contract": 12,
+    "tau": 0.07185,
+    "flags_count": 1200,
+    "fa_count": 825,
+    "fa_per_contract": 10.71,
+    "precision": 31.25,
+    "tp_flagged": 375,
+    "tp_correct": 329,
+    "total_positives": 406,
+    "recall_flagged": 92.36,
+    "recall_correct": 81.03,
+    "recall_by_tier": {
+      "High": {
+        "total": 123,
+        "flagged": 108,
+        "correct": 85,
+        "recall_flagged": 87.8,
+        "recall_correct": 69.11
+      },
+      "Medium": {
+        "total": 166,
+        "flagged": 156,
+        "correct": 143,
+        "recall_flagged": 93.98,
+        "recall_correct": 86.14
+      },
+      "Low": {
+        "total": 117,
+        "flagged": 111,
+        "correct": 101,
+        "recall_flagged": 94.87,
+        "recall_correct": 86.32
+      }
+    },
+    "recall_by_class": {
+      "Anti-Assignment": {
+        "total": 75,
+        "flagged": 73,
+        "correct": 67,
+        "recall_flagged": 97.33,
+        "recall_correct": 89.33
+      },
+      "Audit Rights": {
+        "total": 65,
+        "flagged": 64,
+        "correct": 63,
+        "recall_flagged": 98.46,
+        "recall_correct": 96.92
+      },
+      "Cap on Liability": {
+        "total": 52,
+        "flagged": 47,
+        "correct": 38,
+        "recall_flagged": 90.38,
+        "recall_correct": 73.08
+      },
+      "Change of Control": {
+        "total": 25,
+        "flagged": 23,
+        "correct": 19,
+        "recall_flagged": 92.0,
+        "recall_correct": 76.0
+      },
+      "Exclusivity": {
+        "total": 55,
+        "flagged": 46,
+        "correct": 37,
+        "recall_flagged": 83.64,
+        "recall_correct": 67.27
+      },
+      "IP Ownership Assignment": {
+        "total": 28,
+        "flagged": 25,
+        "correct": 23,
+        "recall_flagged": 89.29,
+        "recall_correct": 82.14
+      },
+      "Liquidated Damages": {
+        "total": 14,
+        "flagged": 10,
+        "correct": 7,
+        "recall_flagged": 71.43,
+        "recall_correct": 50.0
+      },
+      "Non-Compete": {
+        "total": 31,
+        "flagged": 29,
+        "correct": 23,
+        "recall_flagged": 93.55,
+        "recall_correct": 74.19
+      },
+      "Termination for Convenience": {
+        "total": 38,
+        "flagged": 35,
+        "correct": 34,
+        "recall_flagged": 92.11,
+        "recall_correct": 89.47
+      },
+      "Uncapped Liability": {
+        "total": 23,
+        "flagged": 23,
+        "correct": 18,
+        "recall_flagged": 100.0,
+        "recall_correct": 78.26
+      }
+    }
+  }
+}

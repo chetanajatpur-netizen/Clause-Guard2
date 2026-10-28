@@ -16,6 +16,8 @@ export default function LeftPanel({
   uploadError = null,
   isCollapsed = false,
   onToggleCollapse,
+  sensitivity = 'balanced',
+  onSensitivityChange,
 }) {
   const fileInputRef = useRef(null);
   const [dragActive, setDragActive] = useState(false);
@@ -57,7 +59,7 @@ export default function LeftPanel({
       return;
     }
     if (onUpload) {
-      onUpload(file);
+      onUpload(file, sensitivity);
     }
   };
 
@@ -113,6 +115,49 @@ export default function LeftPanel({
 
   return (
     <aside className={`dd-left-panel ${isCollapsed ? 'collapsed' : ''}`}>
+      {/* Sensitivity Preset Control */}
+      <div className="dd-sensitivity-card" style={{ marginBottom: '14px', padding: '12px', background: 'rgba(255, 255, 255, 0.04)', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#94a3b8' }}>Sensitivity Preset</span>
+          <span style={{ fontSize: '11px', color: '#38bdf8', fontWeight: 600 }}>{sensitivity.toUpperCase()}</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '4px', marginBottom: '8px' }}>
+          {[
+            { key: 'strict', label: 'Strict (3)', fa: 3 },
+            { key: 'balanced', label: 'Balanced (8)', fa: 8 },
+            { key: 'thorough', label: 'Thorough (12)', fa: 12 },
+          ].map((preset) => (
+            <button
+              key={preset.key}
+              type="button"
+              title={`${preset.fa} false alarms per contract (measured on 77 held-out CUAD contracts)`}
+              onClick={() => onSensitivityChange && onSensitivityChange(preset.key)}
+              style={{
+                padding: '6px 4px',
+                fontSize: '11px',
+                fontWeight: sensitivity === preset.key ? 700 : 500,
+                borderRadius: '6px',
+                border: 'none',
+                cursor: 'pointer',
+                background: sensitivity === preset.key ? '#38bdf8' : 'rgba(255, 255, 255, 0.06)',
+                color: sensitivity === preset.key ? '#0f172a' : '#cbd5e1',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
+        <p style={{ margin: 0, fontSize: '11px', color: '#94a3b8', lineHeight: 1.4 }}>
+          {sensitivity === 'strict' && 'Strict: 3 false alarms per contract (measured on 77 held-out CUAD contracts).'}
+          {sensitivity === 'balanced' && 'Balanced: 8 false alarms per contract (measured on 77 held-out CUAD contracts).'}
+          {sensitivity === 'thorough' && 'Thorough: 12 false alarms per contract (measured on 77 held-out CUAD contracts).'}
+        </p>
+        <p style={{ margin: '6px 0 0 0', fontSize: '10px', color: '#64748b', fontStyle: 'italic', lineHeight: 1.3 }}>
+          Trade-off: Higher sensitivity catches more risky clauses (higher recall) at the cost of reviewing more non-risky units (more false alarms).
+        </p>
+      </div>
+
       {/* Upload Drop Box */}
       <div
         className={`dd-drop-box ${dragActive ? 'drag-active' : ''} ${isUploading ? 'uploading' : ''}`}
@@ -166,12 +211,6 @@ export default function LeftPanel({
           <span>⚠️ {uploadError}</span>
         </div>
       )}
-
-      {/* Storage / Document Stats Bar */}
-      <div className="dd-stats-bar">
-        <span>STORAGE</span>
-        <span>{documents.length} / 10MB</span>
-      </div>
 
       {/* Uploaded Documents List */}
       <div className="dd-section-header">

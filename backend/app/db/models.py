@@ -2,6 +2,7 @@
 import uuid
 from datetime import datetime
 from sqlalchemy import (
+    Boolean,
     Column,
     DateTime,
     Float,
@@ -43,6 +44,11 @@ class Clause(Base):
     label = Column(String(50), nullable=False)
     confidence = Column(Float, nullable=False)
     risk_level = Column(String(10), nullable=True)
+    flagged = Column(Boolean, default=False, nullable=True)
+    calibrated_probability = Column(Float, nullable=True)
+    risk_tier = Column(String(20), nullable=True)
+    char_start = Column(Integer, nullable=True)
+    char_end = Column(Integer, nullable=True)
     embedding = Column(LargeBinary, nullable=True)
 
     document = relationship("Document", back_populates="clauses")

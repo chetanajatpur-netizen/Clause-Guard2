@@ -131,7 +131,7 @@ export default function HeatMap({ clauses = [] }) {
               }}
               aria-hidden="true"
             />
-            <span style={{ color: 'var(--risk-moderate-text)', fontWeight: 600 }}>Moderate</span>
+            <span style={{ color: 'var(--risk-moderate-text)', fontWeight: 600 }}>Medium</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>

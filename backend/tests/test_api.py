@@ -2,7 +2,7 @@
 from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
-from app.services.classifier import classifier
+from app.services.classifier import classifier, apply_liability_guard
 from app.services.embedder import embedder
 
 FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
@@ -14,6 +14,10 @@ def setup_models_for_testing():
     if not embedder.is_loaded:
         embedder.load("sentence-transformers/all-MiniLM-L6-v2")
         
+    orig_predict = classifier.predict
+    orig_loaded = classifier._loaded
+    orig_id2label = classifier.id2label
+
     if not classifier.is_loaded:
         # If fine-tuned model checkpoint is not yet saved, provide a lightweight mock
         classifier._loaded = True
@@ -56,9 +60,22 @@ def setup_models_for_testing():
                     label = "Change of Control"
                 else:
                     label = "No Clause"
-                results.append({"label": label, "confidence": 0.92})
+                label = apply_liability_guard(label, t)
+                results.append({
+                    "label": label,
+                    "confidence": 0.92,
+                    "flagged": label != "No Clause",
+                    "risk_tier": "High" if label in ["Non-Compete", "Exclusivity", "Uncapped Liability", "Liquidated Damages"] else ("Medium" if label in ["Termination for Convenience", "Anti-Assignment", "Change of Control", "IP Ownership Assignment"] else ("Low" if label != "No Clause" else "None")),
+                    "calibrated_probability": 0.92,
+                })
             return results
         classifier.predict = mock_predict
+
+    yield
+
+    classifier.predict = orig_predict
+    classifier._loaded = orig_loaded
+    classifier.id2label = orig_id2label
 
 
 def test_health_check(client: TestClient) -> None:
@@ -442,6 +459,60 @@ def test_search_when_can_i_terminate_doc01(client: TestClient) -> None:
     assert has_termination_label or has_termination_text, (
         f"Expected Termination clause in top 3 for '{query}', but got: {top_3_labels}"
     )
+
+
+def test_saved_vs_fresh_document_parity(client: TestClient) -> None:
+    """Opening a saved document gives the exact same risk counts and clause fields as the fresh upload."""
+    doc01_pdf = Path(__file__).resolve().parent.parent.parent / "clauseguard-testkit" / "contracts" / "DOC-01_freelance_agreement.pdf"
+    if not doc01_pdf.exists():
+        doc01_pdf = Path(__file__).resolve().parent.parent.parent / "clauseguard-testkit" / "contracts" / "DOC-01_freelance_agreement.txt"
+    assert doc01_pdf.exists()
+
+    with open(doc01_pdf, "rb") as f:
+        upload_resp = client.post(
+            "/api/v1/analyze",
+            files={"file": (doc01_pdf.name, f, "application/pdf" if doc01_pdf.name.endswith(".pdf") else "text/plain")},
+        )
+    assert upload_resp.status_code == 200
+    fresh_data = upload_resp.json()
+    doc_id = fresh_data["document_id"]
+
+    get_resp = client.get(f"/api/v1/documents/{doc_id}")
+    assert get_resp.status_code == 200
+    saved_data = get_resp.json()
+
+    # Assert risk summary counts match exactly
+    assert fresh_data["risk_summary"]["overall_risk"] == saved_data["risk_summary"]["overall_risk"]
+    assert fresh_data["risk_summary"]["high_count"] == saved_data["risk_summary"]["high_count"]
+    assert fresh_data["risk_summary"]["medium_count"] == saved_data["risk_summary"]["medium_count"]
+    assert fresh_data["risk_summary"]["low_count"] == saved_data["risk_summary"]["low_count"]
+    assert fresh_data["risk_summary"]["none_count"] == saved_data["risk_summary"]["none_count"]
+    assert fresh_data["risk_summary"]["total_clauses"] == saved_data["risk_summary"]["total_clauses"]
+
+    # Assert clauses count matches
+    assert len(fresh_data["clauses"]) == len(saved_data["clauses"])
+
+    # Assert every clause has matching flagged, label, risk_tier, char_start, char_end
+    for c_fresh, c_saved in zip(fresh_data["clauses"], saved_data["clauses"]):
+        assert c_fresh["position"] == c_saved["position"]
+        assert c_fresh["flagged"] == c_saved["flagged"]
+        assert c_fresh["label"] == c_saved["label"]
+        assert c_fresh["risk_tier"] == c_saved["risk_tier"]
+        assert c_fresh["char_start"] == c_saved["char_start"]
+        assert c_fresh["char_end"] == c_saved["char_end"]
+
+    # Liability Guard: Section 8 of DOC-01 must be Uncapped Liability (High)
+    sec8_fresh = next((c for c in fresh_data["clauses"] if "not be subject to any limit or cap" in c["text"]), None)
+    sec8_saved = next((c for c in saved_data["clauses"] if "not be subject to any limit or cap" in c["text"]), None)
+    assert sec8_fresh is not None
+    assert sec8_saved is not None
+    assert sec8_fresh["label"] == "Uncapped Liability"
+    assert sec8_fresh["risk_tier"] == "High"
+    assert sec8_fresh["flagged"] is True
+    assert sec8_saved["label"] == "Uncapped Liability"
+    assert sec8_saved["risk_tier"] == "High"
+    assert sec8_saved["flagged"] is True
+
 
 
 

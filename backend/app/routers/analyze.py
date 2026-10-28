@@ -1,7 +1,8 @@
 """Contract analysis endpoint."""
 import logging
+from typing import Optional
 
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends, File, Query, UploadFile
 from sqlalchemy.orm import Session
 
 from app.config import settings
@@ -18,7 +19,7 @@ from app.services.classifier import classifier
 from app.services.embedder import embedder
 from app.services.parser import extract_text
 from app.services.risk import compute_document_risk, compute_enhanced_clause_risk
-from app.services.segmenter import segment_text
+from app.services.segmenter import resegment_contract, segment_text
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -29,9 +30,10 @@ ALLOWED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 @router.post("/analyze", response_model=AnalysisResponse)
 async def analyze_contract(
     file: UploadFile = File(...),
+    sensitivity: str = Query("balanced", description="Sensitivity preset: strict (3 FA/c), balanced (8 FA/c), thorough (12 FA/c)"),
     db: Session = Depends(get_db),
 ) -> AnalysisResponse:
-    """Upload and analyze a contract file."""
+    """Upload and analyze a contract file using calibrated operating point thresholding."""
     if not classifier.is_loaded or not embedder.is_loaded:
         raise ModelNotLoadedError()
     
@@ -56,51 +58,85 @@ async def analyze_contract(
     if not text.strip():
         raise NoTextExtractedError()
     
-    logger.info("Analyzing '%s' (%d chars)", filename, len(text))
+    logger.info("Analyzing '%s' (%d chars, sensitivity=%s)", filename, len(text), sensitivity)
     
-    # Segment
-    chunks = segment_text(text)
-    if not chunks:
-        raise NoTextExtractedError()
+    # Slice-based resegmentation guaranteeing exact context offsets
+    units = resegment_contract(text)
+    if not units:
+        fallback_chunks = segment_text(text)
+        if not fallback_chunks:
+            raise NoTextExtractedError()
+        units = [{"text": c, "text_raw": c, "char_start": None, "char_end": None} for c in fallback_chunks]
+
+    chunk_texts = [u["text"] for u in units]
     
-    # Classify
-    predictions = classifier.predict(chunks)
+    # Classify with chosen operating point preset
+    predictions = classifier.predict(chunk_texts, sensitivity=sensitivity)
     
-    # Compute risk
-    labels = [p["label"] for p in predictions]
-    risk_summary_data = compute_document_risk(labels)
+    # Risk calculation based on flagged clauses
+    flagged_tiers = [p.get("risk_tier", "None") for p in predictions if p.get("flagged", p.get("label", "No Clause") != "No Clause")]
+    if any(t == "High" for t in flagged_tiers):
+        overall_doc_risk = "High"
+    elif any(t == "Medium" for t in flagged_tiers):
+        overall_doc_risk = "Medium"
+    else:
+        overall_doc_risk = "Low"
+
+    high_count = sum(1 for p in predictions if p.get("flagged", p.get("label", "No Clause") != "No Clause") and p.get("risk_tier") == "High")
+    medium_count = sum(1 for p in predictions if p.get("flagged", p.get("label", "No Clause") != "No Clause") and p.get("risk_tier") == "Medium")
+    low_count = sum(1 for p in predictions if p.get("flagged", p.get("label", "No Clause") != "No Clause") and p.get("risk_tier") == "Low")
+    none_count = sum(1 for p in predictions if not p.get("flagged", p.get("label", "No Clause") != "No Clause"))
+
+    risk_summary_data = {
+        "overall_risk": overall_doc_risk,
+        "high_count": high_count,
+        "medium_count": medium_count,
+        "low_count": low_count,
+        "none_count": none_count,
+        "total_clauses": len(units),
+    }
     
     # Generate embeddings
-    embeddings = embedder.encode(chunks)
+    embeddings = embedder.encode(chunk_texts)
     
     # Save to database
     doc = Document(
         filename=filename,
         file_type=suffix.lstrip("."),
         char_count=len(text),
-        overall_risk=risk_summary_data["overall_risk"],
+        overall_risk=overall_doc_risk,
     )
     db.add(doc)
     db.flush()
 
     clause_responses: list[ClauseResponse] = []
-    for i, (chunk, pred) in enumerate(zip(chunks, predictions)):
-        # Compute enhanced risk score
+    for i, (unit, pred) in enumerate(zip(units, predictions)):
+        chunk_text = unit["text"]
+        pred_label = pred.get("label", "No Clause")
+        cal_prob = float(pred.get("calibrated_probability", pred.get("confidence", 0.0)))
+        flagged = bool(pred.get("flagged", pred_label != "No Clause"))
+        risk_tier = pred.get("risk_tier", "None")
+        risk = risk_tier if risk_tier != "None" else None
+
         enhanced_risk = compute_enhanced_clause_risk(
-            label=pred["label"],
-            confidence=pred["confidence"],
-            clause_text=chunk
+            label=pred_label,
+            confidence=cal_prob,
+            clause_text=chunk_text,
         )
-        risk = enhanced_risk["risk_level"]
         emb_bytes = embeddings[i].tobytes()
 
         clause = Clause(
             document_id=doc.id,
             position=i,
-            text=chunk,
-            label=pred["label"],
-            confidence=pred["confidence"],
+            text=chunk_text,
+            label=pred_label,
+            confidence=cal_prob,
             risk_level=risk,
+            flagged=flagged,
+            calibrated_probability=cal_prob,
+            risk_tier=risk_tier,
+            char_start=unit.get("char_start"),
+            char_end=unit.get("char_end"),
             embedding=emb_bytes,
         )
         db.add(clause)
@@ -109,10 +145,15 @@ async def analyze_contract(
         clause_responses.append(ClauseResponse(
             id=clause.id,
             position=i,
-            text=chunk,
-            label=pred["label"],
-            confidence=pred["confidence"],
+            text=chunk_text,
+            label=pred_label,
+            confidence=cal_prob,
             risk_level=risk,
+            flagged=flagged,
+            risk_tier=risk_tier,
+            calibrated_probability=cal_prob,
+            char_start=unit.get("char_start"),
+            char_end=unit.get("char_end"),
             risk_score=enhanced_risk["risk_score"],
             risk_score_normalized=enhanced_risk["risk_score_normalized"],
             uncertainty=enhanced_risk["uncertainty"],
@@ -120,7 +161,7 @@ async def analyze_contract(
         ))
     
     db.commit()
-    logger.info("Analysis saved: doc_id=%s, %d clauses", doc.id, len(chunks))
+    logger.info("Analysis saved: doc_id=%s, %d clauses (%d flagged)", doc.id, len(units), len(flagged_tiers))
     
     return AnalysisResponse(
         document_id=str(doc.id),

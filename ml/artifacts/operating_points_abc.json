@@ -1,0 +1,248 @@
+{
+  "model_a": [
+    {
+      "target_fa_per_contract": 3,
+      "actual_fa_per_contract": 3.0526315789473686,
+      "threshold": 0.9335187057633973,
+      "flags": 503,
+      "fa_count": 232,
+      "tp_count": 271,
+      "precision": 0.5387673956262425,
+      "overall_recall": 0.5409181636726547,
+      "class_recalls": {
+        "Non-Compete": 0.5714285714285714,
+        "Exclusivity": 0.4406779661016949,
+        "Uncapped Liability": 0.8275862068965517,
+        "Liquidated Damages": 0.21428571428571427
+      }
+    },
+    {
+      "target_fa_per_contract": 5,
+      "actual_fa_per_contract": 5.026315789473684,
+      "threshold": 0.9146916076845298,
+      "flags": 683,
+      "fa_count": 382,
+      "tp_count": 301,
+      "precision": 0.4407027818448023,
+      "overall_recall": 0.6007984031936128,
+      "class_recalls": {
+        "Non-Compete": 0.5714285714285714,
+        "Exclusivity": 0.5254237288135594,
+        "Uncapped Liability": 0.896551724137931,
+        "Liquidated Damages": 0.2857142857142857
+      }
+    },
+    {
+      "target_fa_per_contract": 8,
+      "actual_fa_per_contract": 8.039473684210526,
+      "threshold": 0.8879373104145601,
+      "flags": 947,
+      "fa_count": 611,
+      "tp_count": 336,
+      "precision": 0.35480464625131997,
+      "overall_recall": 0.6706586826347305,
+      "class_recalls": {
+        "Non-Compete": 0.6190476190476191,
+        "Exclusivity": 0.6949152542372882,
+        "Uncapped Liability": 0.9310344827586207,
+        "Liquidated Damages": 0.42857142857142855
+      }
+    },
+    {
+      "target_fa_per_contract": 12,
+      "actual_fa_per_contract": 11.973684210526315,
+      "threshold": 0.8621739130434782,
+      "flags": 1275,
+      "fa_count": 910,
+      "tp_count": 365,
+      "precision": 0.28627450980392155,
+      "overall_recall": 0.7285429141716567,
+      "class_recalls": {
+        "Non-Compete": 0.6904761904761905,
+        "Exclusivity": 0.7457627118644068,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.5
+      }
+    },
+    {
+      "target_fa_per_contract": 20,
+      "actual_fa_per_contract": 20.13157894736842,
+      "threshold": 0.8245197168857431,
+      "flags": 1939,
+      "fa_count": 1530,
+      "tp_count": 409,
+      "precision": 0.2109334708612687,
+      "overall_recall": 0.8163672654690619,
+      "class_recalls": {
+        "Non-Compete": 0.7857142857142857,
+        "Exclusivity": 0.8305084745762712,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.7142857142857143
+      }
+    }
+  ],
+  "model_b": [
+    {
+      "target_fa_per_contract": 3,
+      "actual_fa_per_contract": 2.960526315789474,
+      "threshold": 0.9176643073811931,
+      "flags": 508,
+      "fa_count": 225,
+      "tp_count": 283,
+      "precision": 0.5570866141732284,
+      "overall_recall": 0.564870259481038,
+      "class_recalls": {
+        "Non-Compete": 0.5714285714285714,
+        "Exclusivity": 0.4067796610169492,
+        "Uncapped Liability": 0.8620689655172413,
+        "Liquidated Damages": 0.2857142857142857
+      }
+    },
+    {
+      "target_fa_per_contract": 5,
+      "actual_fa_per_contract": 5.052631578947368,
+      "threshold": 0.8978463094034378,
+      "flags": 692,
+      "fa_count": 384,
+      "tp_count": 308,
+      "precision": 0.44508670520231214,
+      "overall_recall": 0.6147704590818364,
+      "class_recalls": {
+        "Non-Compete": 0.5714285714285714,
+        "Exclusivity": 0.559322033898305,
+        "Uncapped Liability": 0.896551724137931,
+        "Liquidated Damages": 0.2857142857142857
+      }
+    },
+    {
+      "target_fa_per_contract": 8,
+      "actual_fa_per_contract": 7.947368421052632,
+      "threshold": 0.8740647118301315,
+      "flags": 943,
+      "fa_count": 604,
+      "tp_count": 339,
+      "precision": 0.35949098621421,
+      "overall_recall": 0.6766467065868264,
+      "class_recalls": {
+        "Non-Compete": 0.6428571428571429,
+        "Exclusivity": 0.6779661016949152,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.5
+      }
+    },
+    {
+      "target_fa_per_contract": 12,
+      "actual_fa_per_contract": 11.947368421052632,
+      "threshold": 0.8492922143579373,
+      "flags": 1282,
+      "fa_count": 908,
+      "tp_count": 374,
+      "precision": 0.2917316692667707,
+      "overall_recall": 0.7465069860279441,
+      "class_recalls": {
+        "Non-Compete": 0.7142857142857143,
+        "Exclusivity": 0.7796610169491526,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.5714285714285714
+      }
+    },
+    {
+      "target_fa_per_contract": 20,
+      "actual_fa_per_contract": 20.157894736842106,
+      "threshold": 0.8116380182002022,
+      "flags": 1944,
+      "fa_count": 1532,
+      "tp_count": 412,
+      "precision": 0.21193415637860083,
+      "overall_recall": 0.8223552894211577,
+      "class_recalls": {
+        "Non-Compete": 0.7857142857142857,
+        "Exclusivity": 0.847457627118644,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.7857142857142857
+      }
+    }
+  ],
+  "model_c": [
+    {
+      "target_fa_per_contract": 3,
+      "actual_fa_per_contract": 2.973684210526316,
+      "threshold": 0.9275733063700707,
+      "flags": 504,
+      "fa_count": 226,
+      "tp_count": 278,
+      "precision": 0.5515873015873016,
+      "overall_recall": 0.5548902195608783,
+      "class_recalls": {
+        "Non-Compete": 0.5714285714285714,
+        "Exclusivity": 0.423728813559322,
+        "Uncapped Liability": 0.8275862068965517,
+        "Liquidated Damages": 0.2857142857142857
+      }
+    },
+    {
+      "target_fa_per_contract": 5,
+      "actual_fa_per_contract": 5.0131578947368425,
+      "threshold": 0.9107280080889787,
+      "flags": 680,
+      "fa_count": 381,
+      "tp_count": 299,
+      "precision": 0.43970588235294117,
+      "overall_recall": 0.5968063872255489,
+      "class_recalls": {
+        "Non-Compete": 0.5714285714285714,
+        "Exclusivity": 0.5084745762711864,
+        "Uncapped Liability": 0.896551724137931,
+        "Liquidated Damages": 0.2857142857142857
+      }
+    },
+    {
+      "target_fa_per_contract": 8,
+      "actual_fa_per_contract": 7.947368421052632,
+      "threshold": 0.8859555106167846,
+      "flags": 938,
+      "fa_count": 604,
+      "tp_count": 334,
+      "precision": 0.35607675906183367,
+      "overall_recall": 0.6666666666666666,
+      "class_recalls": {
+        "Non-Compete": 0.6190476190476191,
+        "Exclusivity": 0.6779661016949152,
+        "Uncapped Liability": 0.9310344827586207,
+        "Liquidated Damages": 0.42857142857142855
+      }
+    },
+    {
+      "target_fa_per_contract": 12,
+      "actual_fa_per_contract": 12.078947368421053,
+      "threshold": 0.859201213346815,
+      "flags": 1288,
+      "fa_count": 918,
+      "tp_count": 370,
+      "precision": 0.28726708074534163,
+      "overall_recall": 0.7385229540918163,
+      "class_recalls": {
+        "Non-Compete": 0.7380952380952381,
+        "Exclusivity": 0.7457627118644068,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.5
+      }
+    },
+    {
+      "target_fa_per_contract": 20,
+      "actual_fa_per_contract": 20.144736842105264,
+      "threshold": 0.8225379170879676,
+      "flags": 1941,
+      "fa_count": 1531,
+      "tp_count": 410,
+      "precision": 0.211231324059763,
+      "overall_recall": 0.8183632734530938,
+      "class_recalls": {
+        "Non-Compete": 0.7857142857142857,
+        "Exclusivity": 0.847457627118644,
+        "Uncapped Liability": 0.9655172413793104,
+        "Liquidated Damages": 0.7142857142857143
+      }
+    }
+  ]
+}

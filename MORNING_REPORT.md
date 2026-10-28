@@ -12,8 +12,10 @@ While you were asleep, ClauseGuard was taken from initial scaffolding to a **ful
 - Trained both a **TF-IDF + Logistic Regression baseline** and a fine-tuned **Legal-BERT** transformer model.
 - Evaluated both models on a zero-leakage contract-level test split with real metrics.
 - Built and verified a full-stack **FastAPI** backend and **React 18** frontend with live API calls.
-- Passed **19 out of 19 automated tests** in pytest.
-- Prepared production-ready Docker Compose configurations and deployment documentation.
+- Passed full test suite (now **57 automated tests** in pytest, up from initial 19).
+- Prepared Docker Compose configurations and deployment documentation.
+
+> **Note on Model Evolution**: The initial metrics below represent Day 1 Gen-1 exploratory training on artificially downsampled data (636 test clauses). The final validated system evaluates on full natural contract prevalence (~96% boilerplate): on held-out `test_natural.csv` (10,480 clauses across 77 contracts), Legal-BERT achieves **85.22% recall at 7.03 false alarms/contract** (39.01% precision) under the Balanced preset ($\tau=0.035452$), outperforming the clean TF-IDF baseline by **+12.58 recall points** at 8 FA/c (95% bootstrap CI `[+5.80%, +18.75%]`).
 
 ---
 
@@ -106,7 +108,7 @@ While you were asleep, ClauseGuard was taken from initial scaffolding to a **ful
 ## 6. Key Decisions Made
 
 - **Zero-Leakage Splitting**: Grouped by contract identifier rather than clause chunks.
-- **Unified DB Model**: Standardized UUID columns as `String(36)` across SQLite and PostgreSQL.
+- **Unified DB Model**: Standardized UUID columns as `String(36)` in SQLite.
 - **Lightweight Containers**: Configured backend Dockerfile to pre-install CPU PyTorch wheel (`--index-url https://download.pytorch.org/whl/cpu`), drastically reducing container footprint.
 - **Self-Contained Backend**: Created `backend/app/core/risk_map.py` to prevent parent directory references during Docker builds.
 

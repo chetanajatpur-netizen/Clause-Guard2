@@ -1,0 +1,113 @@
+{
+  "step1_token_distribution": {
+    "Train": {
+      "total_segments": 2751,
+      "exceeding_256": 689,
+      "pct_exceeding": 25.05,
+      "min": 4,
+      "median": 114.0,
+      "mean": 158.2,
+      "p90": 365.0,
+      "p95": 392.0,
+      "p99": 430.5,
+      "max": 915
+    },
+    "Val": {
+      "total_segments": 482,
+      "exceeding_256": 116,
+      "pct_exceeding": 24.07,
+      "min": 5,
+      "median": 115.0,
+      "mean": 153.0,
+      "p90": 352.7000000000001,
+      "p95": 382.9,
+      "p99": 414.0,
+      "max": 453
+    },
+    "Test": {
+      "total_segments": 636,
+      "exceeding_256": 157,
+      "pct_exceeding": 24.69,
+      "min": 4,
+      "median": 116.5,
+      "mean": 157.9,
+      "p90": 367.5,
+      "p95": 390.0,
+      "p99": 426.89999999999986,
+      "max": 544
+    },
+    "Full Dataset": {
+      "total_segments": 3869,
+      "exceeding_256": 962,
+      "pct_exceeding": 24.86,
+      "min": 4,
+      "median": 114.0,
+      "mean": 157.5,
+      "p90": 364.0,
+      "p95": 390.0,
+      "p99": 427.32000000000016,
+      "max": 915
+    }
+  },
+  "step1_reconciliation": {
+    "all_11_classes": {
+      "baseline_tfidf_macro_recall": 0.7526,
+      "legal_bert_macro_recall": 0.7465
+    },
+    "clause_only_10_classes": {
+      "baseline_tfidf_macro_recall": 0.7606,
+      "legal_bert_macro_recall": 0.7453
+    },
+    "reconciliation_explanation": "The 74.65% figure is the un-adapted Legal-BERT macro recall evaluated across all 11 classes (including the negative 'No Clause' class, which scored 75.76% recall). The 76.01% figure corresponds to the Baseline TF-IDF macro recall computed strictly over the 10 positive clause categories (excluding 'No Clause', which was 67.27%, lowering the 11-class average to 75.26%)."
+  },
+  "step2_cv_summary": {
+    "TF-IDF": {
+      "macro_f1": "71.83 \u00b1 2.58%",
+      "Non-Compete_recall": "68.50 \u00b1 6.40%",
+      "Exclusivity_recall": "69.58 \u00b1 8.00%",
+      "Uncapped Liability_recall": "62.36 \u00b1 13.48%",
+      "Liquidated Damages_recall": "65.50 \u00b1 7.77%"
+    },
+    "Un-adapted Legal-BERT": {
+      "macro_f1": "59.99 \u00b1 2.13%",
+      "Non-Compete_recall": "59.39 \u00b1 7.61%",
+      "Exclusivity_recall": "55.20 \u00b1 6.52%",
+      "Uncapped Liability_recall": "47.49 \u00b1 13.02%",
+      "Liquidated Damages_recall": "51.24 \u00b1 11.65%"
+    },
+    "Adapted Legal-BERT": {
+      "macro_f1": "63.16 \u00b1 1.95%",
+      "Non-Compete_recall": "62.31 \u00b1 7.54%",
+      "Exclusivity_recall": "57.91 \u00b1 8.25%",
+      "Uncapped Liability_recall": "44.99 \u00b1 10.41%",
+      "Liquidated Damages_recall": "50.48 \u00b1 16.96%"
+    }
+  },
+  "step2_bootstrap_significance": {
+    "Adapted vs Un-adapted": {
+      "mean_delta_f1": 3.17,
+      "ci_95": [
+        2.21,
+        4.11
+      ],
+      "p_value": 0.001
+    },
+    "Adapted vs TF-IDF": {
+      "mean_delta_f1": -8.66,
+      "ci_95": [
+        -9.73,
+        -7.78
+      ],
+      "p_value": 0.001
+    },
+    "Un-adapted vs TF-IDF": {
+      "mean_delta_f1": -11.84,
+      "ci_95": [
+        -13.06,
+        -10.62
+      ],
+      "p_value": 0.001
+    }
+  },
+  "step3_error_csv": "/Users/chetanajatpur/Desktop/clauseguard/ml/artifacts/weakest_classes_wrong_predictions.csv"
+}

@@ -1,0 +1,1262 @@
+{
+  "1-100": {
+    "bucket_range": "Ranks 1 - 100",
+    "score_range": "0.9395 - 0.7275",
+    "real_clause_count": 9,
+    "benign_count": 11,
+    "unclear_count": 10,
+    "pct_real_clauses": 0.3,
+    "pct_benign": 0.36666666666666664,
+    "pct_unclear": 0.3333333333333333,
+    "samples": [
+      {
+        "rank": 84,
+        "oof_risk_score": 0.7482391043889095,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "ARTICLE XII  OWNERSHIP     Section 12.1 NCM Property. As between NCM and Network Affiliate, NCM owns, solely and exclusively, any and all right, title, and  interest in and to the Service (including all Service content supplied by or on behalf of NCM, but excluding any Service content supplied by or on  behalf of Network Affiliate), the Marks, the Software, NCM's Confidential Information, the Digital Content Network, and any and all other data,  information, equipment (excluding any rights to Equipment held by Network Affiliate pursuant to Article II), material, inventions, discoveries,  processes, methods, technology, know-how, written works, software, works of visual art, audio works, and multimedia works provided, developed,  created, reduced to practice, conceived, or made available by or on behalf of NCM to Network Affiliate or used by NCM to perform any of its  obligations under or in connection with this Agreement, as well as any and all translations, improvements, adaptations, reproductions, look-and- feel attributes, and derivates thereof (collectively, the \"NCM Property\"), and, except as expressly and explicitly stated in this Agreement, reserves  all such right, title, and interest.",
+        "contract": "DigitalCinemaDestinationsCorp_20111220_S-1_EX-10.10_7346719_EX-10.10_Affiliate Agreement"
+      },
+      {
+        "rank": 54,
+        "oof_risk_score": 0.7823931876241641,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "MusclePharm irrevocably and unconditionally transfers and assigns to the AS Parties in perpetuity and throughout the universe any and all of MusclePharm's right, title, and interest, if any (including, without limitation, the rights generally known as 'moral rights') in and to all works, including any packaging, advertising and promotional materials, and other materials based upon the Trademarks and/or Name and Appearance Rights, all of which shall, upon their creation, become and remain the property of the AS Parties. All such works based upon the Trademarks and/or Name and Appearance Rights shall be prepared by an employee-for- hire of MusclePharm (under MusclePharms's sole supervision, responsibility, and monetary obligation) or as a work-for-hire by a third party who assigns to the AS Parties in writing and in perpetuity throughout the universe all right, title, and interest in the same provided however, nothing herein shall preclude MusclePharm from using any of the intellectual property to be retained by MusclePharm contemplated pursuant to Section 9(f) of this Agreement after the termination of this Agreement. (f) Injunctive Relief.",
+        "contract": "MusclepharmCorp_20170208_10-KA_EX-10.38_9893581_EX-10.38_Co-Branding Agreement"
+      },
+      {
+        "rank": 71,
+        "oof_risk_score": 0.7644531020884813,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Real risky clause (Audit Rights)",
+        "text": "4. Audit  Rights. SpinRecords.com  shall maintain for a period of two             ------------- (2) years after the end of the year to which they pertain,  complete  records of it's customers in order to calculate and confirm  SpinRecords.com's  obligations hereunder. Upon  reasonable  prior  notice,   NETTAXI  will  have  the  right, exercisable  not more  than  once  every  twelve  (12)  months,  to  appoint  an independent   accounting   firm  or  other  agent   reasonably   acceptable   to SpinRecords.com,  at  NETTAXI'S  expense,  to examine  such  books,  records and accounts  during  SpinRecords.com's  normal business hours to verify the amounts due by  SpinRecords.com  to  NETTAXI  herein,  subject  execution  of  NETTAXI's standard  confidentiality  agreement by the accounting firm or agent;  provided, however,  that  execution of such  agreement  will not  preclude  such firm from reporting  its  results  to  NETTAXI. In the  event  such  audit  discloses  an underpayment or overpayment of royalties due hereunder,  the  appropriate  party will  promptly  remit the  amounts  due to the other  party.",
+        "contract": "RaeSystemsInc_20001114_10-Q_EX-10.57_2631790_EX-10.57_Co-Branding Agreement"
+      },
+      {
+        "rank": 46,
+        "oof_risk_score": 0.801498889160332,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "Customer acknowledges and agrees that Changepoint or licensors of Changepoint shall retain all right, title and interest in and to the Licensed Materials and all copies thereof, including, without limitation, the Intellectual Property Rights therein, and that nothing herein transfers or conveys to Customer any ownership right, title or interest in or to the Licensed Materials or to any copy thereof or any license right with respect to same not expressly granted herein, including, without limitation, with respect to the Intellectual Property Rights therein.",
+        "contract": "CHANGEPOINTCORP_03_08_2000-EX-10.6-LICENSE AND HOSTING AGREEMENT"
+      },
+      {
+        "rank": 45,
+        "oof_risk_score": 0.8062969768759986,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "8. Intellectual Property Rights 8.1. Background Intellectual Property Rights. Each Party shall own and retain all right, title and interest in and to all of its Intellectual Property Rights created before or independently from the Development Plan and this Agreement (\"Qualigen Background IP\" and \"Sekisui Background IP,\" respectively).",
+        "contract": "RitterPharmaceuticalsInc_20200313_S-4A_EX-10.54_12055220_EX-10.54_Development Agreement"
+      },
+      {
+        "rank": 40,
+        "oof_risk_score": 0.8162349525024395,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "b)   Excite@Home will retain all right, title, and interest in and to the           Excite Network worldwide (including, but not limited to, ownership of           all copyrights, look and feel and other intellectual property rights           therein).",
+        "contract": "InvendaCorp_20000828_S-1A_EX-10.2_2588206_EX-10.2_Co-Branding Agreement"
+      },
+      {
+        "rank": 23,
+        "oof_risk_score": 0.8509865729691533,
+        "oof_pred_class": "Change of Control",
+        "classification": "Benign look-alike",
+        "text": "14.2 Termination For Change Of Control",
+        "contract": "ELANDIAINTERNATIONALINC_04_25_2007-EX-10.21-Outsourcing Agreement"
+      },
+      {
+        "rank": 81,
+        "oof_risk_score": 0.7510910769011571,
+        "oof_pred_class": "Change of Control",
+        "classification": "Benign look-alike",
+        "text": "Change Control Procedures",
+        "contract": "CardlyticsInc_20180112_S-1_EX-10.16_11002987_EX-10.16_Maintenance Agreement1"
+      },
+      {
+        "rank": 11,
+        "oof_risk_score": 0.8776711856376713,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "7.2 Books and Records Audits.",
+        "contract": "IMMUNOMEDICSINC_08_07_2019-EX-10.1-PROMOTION AGREEMENT"
+      },
+      {
+        "rank": 1,
+        "oof_risk_score": 0.9394521186714693,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Real risky clause (Termination for Convenience)",
+        "text": "(c) Zogenix Convenience. At any time following the expiration of the Distribution Term, Zogenix may terminate this Agreement at will upon [***] prior written notice to Distributor.",
+        "contract": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement"
+      },
+      {
+        "rank": 19,
+        "oof_risk_score": 0.8598726313758556,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "3.5 Improvements. For the avoidance of doubt, as between the Parties, Parent shall own all right, title and interest in and to any and all Improvements authored, developed, invented, reduced to practice or otherwise created by Parent or any member of the Parent Group and all Intellectual Property rights therein and thereto.",
+        "contract": "INGEVITYCORP_05_16_2016-EX-10.5-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 31,
+        "oof_risk_score": 0.8375786157153795,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "An examination by a Party under this Section 4.6(c) shall (i) occur not more than once in any Calendar Year, (ii) be limited to the pertinent books and records for any Calendar Year during the Term ending not more than twenty-four (24) months before the date of the request and (iii) be at the sole expense of the Auditing Party. The external auditors of the Auditing Party shall be provided access to such books and records at the Audited Party's facility(ies) in the Territory where such books and records are normally kept and such examination shall be conducted during the Audited Party's normal business hours. The Audited Party may require any external auditors to sign a standard non-disclosure agreement before providing the accounting firm access to the Audited Party's facilities or records. 36",
+        "contract": "ExactSciencesCorp_20180822_8-K_EX-10.1_11331629_EX-10.1_Promotion Agreement"
+      },
+      {
+        "rank": 74,
+        "oof_risk_score": 0.7556189875426176,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "WHEREAS, pursuant to the Intellectual Property Agreement, Assignor has agreed to sell, convey, assign, and transfer to Assignee all of Assignor's right, title, and interest in and to the trademarks applications and registrations set forth on Schedule A hereto (collectively, the \"Assigned Marks\").",
+        "contract": "ARMSTRONGFLOORING,INC_01_07_2019-EX-10.2-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 34,
+        "oof_risk_score": 0.8334417418744335,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "B. COMPANY will retain all worldwide rights, title, and interest in and to the Web Site (including, but not limited to, ownership of all copyrights, trademarks, look and feel and other intellectual property rights therein), as well as all right, title and interest in and to its trademarks, service marks and trade names worldwide, including any goodwill associated therewith, subject to the limited license granted",
+        "contract": "MidwestEnergyEmissionsCorp_20080604_8-K_EX-10.2_3093976_EX-10.2_Content License Agreement"
+      },
+      {
+        "rank": 91,
+        "oof_risk_score": 0.7374641063956546,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "(a) Honeywell hereby acknowledges (on behalf of itself and each other member of the Honeywell Group) SpinCo's right, title and interest in and to the SpinCo IP.",
+        "contract": "GarrettMotionInc_20181001_8-K_EX-2.4_11364532_EX-2.4_Intellectual Property Agreement"
+      },
+      {
+        "rank": 5,
+        "oof_risk_score": 0.9122113123373119,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Real risky clause (Termination for Convenience)",
+        "text": "terminate this Agreement upon giving at least ninety (90) days prior       written notice of such termination to the Agent.",
+        "contract": "BIOPURECORP_06_30_1999-EX-10.13-AGENCY AGREEMENT"
+      },
+      {
+        "rank": 77,
+        "oof_risk_score": 0.7544208677344655,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "(b)      Customer or Changepoint may terminate Maintenance Services at the end of a Maintenance Term by providing the other with no less than thirty (30) days prior written notice before the end of the Maintenance Term.",
+        "contract": "CHANGEPOINTCORP_03_08_2000-EX-10.6-LICENSE AND HOSTING AGREEMENT"
+      },
+      {
+        "rank": 78,
+        "oof_risk_score": 0.7538536867161146,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "9.1 Manufacturing License Grant. Subject to the terms herein, MediWound hereby grants to Vericel a non-exclusive, sublicensable (subject to Section 4.2 of the License Agreement) license under the MediWound Technology and MediWound's interest in the Joint Technology, to Manufacture and have Manufactured Licensed Products in the Territory for use in the Field in the Territory.",
+        "contract": "VERICELCORP_08_06_2019-EX-10.10-SUPPLY AGREEMENT"
+      },
+      {
+        "rank": 13,
+        "oof_risk_score": 0.8755110904468213,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Real risky clause (Termination for Convenience)",
+        "text": "(h) Assignment. Neither party may assign its rights, duties or obligations under this Agreement to any third party in whole or in part, without the other party's prior written consent, except that (i) Licensee may assign its rights and obligations to this Agreement to any of its Affiliate or subsidiaries with the prior written consent of the Licensor, and (ii) Licensor may assign its rights and obligations in this Agreement to its Affiliates or subsidiaries and either party may assign this Agreement in its entirety to any purchaser of all or substantially all of its business or assets pertaining to the line of business to which this Agreement relates or to any Affiliate of the party without the other party's approval. This Agreement will be binding upon, and inure to the benefit of, the respective permitted assignees, transferees and successors of each of the parties. (i) No Third Party Beneficiaries. The parties acknowledge and agree that there are no third party beneficiaries to this Agreement. (j) Interpretation. In interpreting the terms and conditions of this Agreement, no presumption shall be interpreted for or against a party as a result of the role of such party in the drafting of this Agreement. Sections headings are for convenience only and shall not be used to interpret this Agreement. (k) Notice.",
+        "contract": "IdeanomicsInc_20151124_8-K_EX-10.2_9354744_EX-10.2_Content License Agreement"
+      },
+      {
+        "rank": 32,
+        "oof_risk_score": 0.837262450863783,
+        "oof_pred_class": "Change of Control",
+        "classification": "Benign look-alike",
+        "text": "16.01 Assignment or Change of Control.",
+        "contract": "PHLVARIABLEINSURANCECOCT_08_17_2009-EX-10.1-STRATEGIC ALLIANCE AGREEMENT"
+      },
+      {
+        "rank": 56,
+        "oof_risk_score": 0.7806176181037487,
+        "oof_pred_class": "Change of Control",
+        "classification": "Benign look-alike",
+        "text": "Change Control Number: CMS",
+        "contract": "ELANDIAINTERNATIONALINC_04_25_2007-EX-10.21-Outsourcing Agreement"
+      },
+      {
+        "rank": 89,
+        "oof_risk_score": 0.7416930927328624,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Real risky clause (IP Ownership Assignment)",
+        "text": "9. Intellectual Property 9.1 Reseller acknowledges and agrees that any and all proprietary rights, trade secrets, trademarks, trade names, copyrights, patents, know-how, and other intellectual property rights used or embodied in, related to, or associated with the Products, including all developments, modifications, enhancements, improvements, and derivative works thereof, and all documentation with respect thereto, are and shall remain the sole and exclusive property of Todos or its licensors.",
+        "contract": "TodosMedicalLtd_20190328_20-F_EX-4.10_11587157_EX-4.10_Marketing Agreement_ Reseller Agreement"
+      },
+      {
+        "rank": 27,
+        "oof_risk_score": 0.8413162042028391,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Real risky clause (Termination for Convenience)",
+        "text": "22. SPECIAL RIGHT OF TERMINATION BY TPC. TPC shall have the right to terminate this Agreement upon thirty (30) days prior written notice to Consolidated Artists or Advantage in the event of the occurrence of any of the following contingencies:",
+        "contract": "TEARDROPGOLFCO_10_23_1996-EX-10.12-ENDORSEMENT AGREEMENT"
+      },
+      {
+        "rank": 43,
+        "oof_risk_score": 0.8089526413219167,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "5.3 Emeralds' Right to Terminate this Agreement for Cause. The Company may terminate this Agreement and the Contractor's engagement for Cause at any time on written notice to the Contractor. The date of termination will be the date specified in the written notice and may be, in the sole discretion of the Company, the same day the notice is given to the Contractor, or such later date as the Company may decide.",
+        "contract": "EMERALDHEALTHTHERAPEUTICSINC_06_10_2020-EX-4.5-CONSULTING AGREEMENT - DR. GAETANO MORELLO N.D. INC."
+      },
+      {
+        "rank": 70,
+        "oof_risk_score": 0.7653434336545998,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "7.1.1 Ownership of Technology. Subject to Section 3.8.2(c) and Section 7.1.2, as between the Parties, each Party, or their respective Affiliates, shall own and retain all right, title, and interest in and to any and all: (a) Information and inventions that are conceived, discovered, developed, or otherwise made by or on behalf of such Party or its Affiliates (including subcontractors thereof) under or in connection with this Agreement, whether or not patented or patentable, and any and all Patents and other intellectual property rights with respect thereto, except to the extent that any such Information or invention or any Patent or intellectual property rights with respect thereto, is Joint Know-How or Joint Patents, and (b) other Information, inventions, Patents, and other intellectual property rights that are owned or otherwise Controlled (other than pursuant to the license grants set forth in Sections 5.1 and 5.2) by such Party or its Affiliates.",
+        "contract": "HarpoonTherapeuticsInc_20200312_10-K_EX-10.18_12051356_EX-10.18_Development Agreement"
+      },
+      {
+        "rank": 16,
+        "oof_risk_score": 0.8651579156311129,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "7.3 Termination by Antares. This Agreement may be terminated in its entirety by Antares upon Antares' prior written notice to AMAG:",
+        "contract": "Antares Pharma, Inc. - Manufacturing Agreement"
+      },
+      {
+        "rank": 41,
+        "oof_risk_score": 0.813159415449387,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "2.8     Ownership. Commerce One hereby retains all of its right, title, and         interest in and to the Software, including all copyrights, patents,         trade secret rights, trademarks and other intellectual property rights         therein. All rights not expressly granted hereunder are reserved to         Commerce One. The Software and all copies thereof are licensed, not         sold, to Corio.",
+        "contract": "CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT"
+      },
+      {
+        "rank": 97,
+        "oof_risk_score": 0.7300923412468225,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Real risky clause (Exclusivity)",
+        "text": "2.4 No Other Rights; Other Limitations. Except for the rights expressly granted in this Agreement, Zogenix retains all rights under the Zogenix Technology and with respect to the Product, including the exclusive right to manufacture and sell the Product to Distributor, to develop the Product, and to promote, market and sell the Product outside the Territory, and all rights with respect to the Product outside the Field in the Territory. No rights shall be deemed granted by one Party to the other Party under this Agreement by implication, estoppel or otherwise. Distributor agrees not to use any Zogenix Technology except as necessary to file for and maintain Regulatory Approval of, promote, market, sell, offer for sale, distribute and import the Product in the Field in the Territory during the Term in accordance with the terms of this Agreement and the Supply Agreement. Without limiting the foregoing, Distributor agrees that in no event shall Distributor or its Affiliates manufacture or have manufactured the Product, or purchase the Product from any party other than Zogenix pursuant to the Supply Agreement.",
+        "contract": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement"
+      },
+      {
+        "rank": 10,
+        "oof_risk_score": 0.8782373122776138,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Real risky clause (Termination for Convenience)",
+        "text": "13.2  Either party may terminate this Agreement at any time during the term of this Agreement if  either party fails materially to comply with any covenant, term, or provision of this Agreement, by written notice given to the other party not less than thirty (30) days prior to the effective date of such termination. Either party's right to terminate this Agreement under this Section 13.2 may not be exercised unless said",
+        "contract": "AIRSPANNETWORKSINC_04_11_2000-EX-10.5-Distributor Agreement"
+      },
+      {
+        "rank": 73,
+        "oof_risk_score": 0.7578200234696049,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "1.3 \"Change of Control\" means any transaction or series of transactions that results in (i) the consolidation or merger of the specified party (\"Target\") into or with any other corporation or corporations, (ii) the sale, conveyance or disposition of all or substantially all of the assets of the Target, (iii) the transfer of more than fifty percent (50%) of the voting power of the Target to any entity or entities not controlled by the Target, or (iv) any similar form of acquisition or any liquidation, dissolution or winding up of the Target or other transaction that results in the discontinuance of the Target's business; provided, however, that Change of Control will not include any transaction or series of transactions entered into primarily for equity financing purposes (including, without limitation, any private equity investment or any public offering of securities).",
+        "contract": "ENERGOUSCORP_03_16_2017-EX-10.24-STRATEGIC ALLIANCE AGREEMENT"
+      }
+    ]
+  },
+  "101-250": {
+    "bucket_range": "Ranks 101 - 250",
+    "score_range": "0.7271 - 0.6192",
+    "real_clause_count": 2,
+    "benign_count": 15,
+    "unclear_count": 13,
+    "pct_real_clauses": 0.06666666666666667,
+    "pct_benign": 0.5,
+    "pct_unclear": 0.43333333333333335,
+    "samples": [
+      {
+        "rank": 174,
+        "oof_risk_score": 0.6650039546349887,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "7.2 On2 Intellectual Property. Wildform acknowledges that On2 retains all right, title, and interest in and to the Incorporated Technology and the Incorporated Technologies Works, and in all copies&sbsp;thereof, and no title to the Incorporated Technology or other rights therein are transferred to Wildform by virtue of this Agreement other than as explicitly stated herein or reasonably necessary to accomplish the purposes hereof.",
+        "contract": "ON2TECHNOLOGIES,INC_11_17_2006-EX-10.3-SUPPORT AND MAINTENANCE AGREEMENT"
+      },
+      {
+        "rank": 119,
+        "oof_risk_score": 0.7120269151022298,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "The parties acknowledge and agree that, as between the                           parties, all right, title and interest in and to the",
+        "contract": "FIDELITYNATIONALINFORMATIONSERVICES,INC_08_05_2009-EX-10.3-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 219,
+        "oof_risk_score": 0.640348510735755,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "9. Termination:   (a) This Agreement may be terminated by MusclePharm only:   (i) In the event Endorser is convicted of a felony. (ii) In the event Endorser is in material breach or default of this Agreement, then MusclePharm may give written notice to Endorser of its intent to terminate this agreement and in such notice shall set forth in reasonable detail the facts, circumstances or events causing the alleged breach or default (\"Endorser Events of Default\"). The Endorser shall have thirty (30) days' notice in which to cure the Endorser Events of Default to the reasonable and objective satisfaction of Musclepharm. If the Endorser fails, refuses or is unable for any reason to cure the Endorser Events of Default to the reasonable and objective satisfaction of MusclePharm, then MusclePharm may terminate this Agreement by giving a written termination notice which shall be effective on third calendar day after the date of such termination notice. (iii) This Agreement may also be terminated by MusclePharm, upon fifteen days prior written notice, if death, or physical disability, physical injury, or other incapacity lasting more than eight (8) weeks, causes Endorser to be unable to perform a material amount of the personal or consulting services described in this Agreement.",
+        "contract": "MusclepharmCorp_20170208_10-KA_EX-10.38_9893581_EX-10.38_Co-Branding Agreement"
+      },
+      {
+        "rank": 179,
+        "oof_risk_score": 0.6609209557595658,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "(d) If after exercise of good faith efforts, the parties fail to       timely agree upon a Business Plan for any Contract Year before the start       of such year (with respect to the Business Plan for Contract Year ending       October 31, 1999, at least thirty (30) days or on a mutually agreed upon       date after the Agent Launch Date), this Agreement may be terminated by       either party upon giving at least thirty (30) days prior written notice of       such termination to the other party.",
+        "contract": "BIOPURECORP_06_30_1999-EX-10.13-AGENCY AGREEMENT"
+      },
+      {
+        "rank": 177,
+        "oof_risk_score": 0.662230420745958,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "2.1 The Supplier appoints the Distributor as its non-exclusive distributor to distribute the Products in the Territory on the terms of this agreement.",
+        "contract": "FuseMedicalInc_20190321_10-K_EX-10.43_11575454_EX-10.43_Distributor Agreement"
+      },
+      {
+        "rank": 132,
+        "oof_risk_score": 0.6995717340639975,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "13. Property rights to Intellectual Property Both Parties acknowledge that all Intellectual Property existing at the Effective Date shall be and remain the sole property of the Licensor. All right, title and interest in and to any Developed Intellectual Property shall vest in and belong to the Licensor. The Licensee shall execute and deliver all reasonably necessary signatures and/or documents and take any further steps (or have his employees, agents and officers do the same) to the extent necessary to make any Developed Intellectual Property the sole property of the Licensor. The Licensee shall have right to use the Developed Intellectual Property for exploiting its rights granted in this Agreement until its expiration or termination as set forth in Article 19 hereunder. Licensee Know-how shall belong to the Licensee. The Licensee hereby grants to the Licensor an irrevocable, non-exclusive, royalty-free, perpetual, worldwide license to use of any Licensee Know-how.",
+        "contract": "NlsPharmaceuticsLtd_20200228_F-1_EX-10.14_12029046_EX-10.14_Development Agreement"
+      },
+      {
+        "rank": 165,
+        "oof_risk_score": 0.6695744425731631,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Benign look-alike",
+        "text": "ARTICLE X. TERM AND TERMINATION 10.1 Term. The initial term of this Agreement shall commence on the Effective Date and end on the five (5) year anniversary of the Effective Date (the \"Initial Term\"), unless sooner terminated pursuant to the terms hereof. Upon expiration of the Initial Term of this Agreement, this Agreement will automatically renew for additional, successive five (5) year periods unless either Party provides the other Party written notice of its desire to terminate at least one hundred twenty (120) days prior to the end of the Initial Term or any renewal.",
+        "contract": "WaterNowInc_20191120_10-Q_EX-10.12_11900227_EX-10.12_Distributor Agreement"
+      },
+      {
+        "rank": 242,
+        "oof_risk_score": 0.6255388946720537,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "Roche hereby grants to FMI a non-exclusive, royalty-free, worldwide and perpetual license, sublicensable to Affiliates, to use the Roche-Owned Advanced Genomic Analysis Results to develop, make, have made, use, offer for sale, sell, import and commercialize FMI's products and services relating to genomic analysis.",
+        "contract": "FOUNDATIONMEDICINE,INC_02_02_2015-EX-10.2-Collaboration Agreement"
+      },
+      {
+        "rank": 169,
+        "oof_risk_score": 0.667694379320554,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "(a) Without limiting the generality of the foregoing, as between the Parties, PB shall be and remain the sole and exclusive owner of all right, title and interest in and to all PB Intellectual Property existing as of the Effective Date (\"Existing PB Intellectual Property\"), including, in the case of Patents within the Existing PB Intellectual Property (\"Existing PB Patents\"), all patent applications filed after the Effective Date that claim priority to, or are foreign counterparts of, patent applications within the Existing PB Patents (\"Corresponding PB Patent Applications\") and all Patents that may issue or be granted from any patent application within the Existing PB Patents or any Corresponding PB Patent Application after the Effective Date. In addition, PB shall be and remain the sole and exclusive owner of all right, title and interest in and to all PB Intellectual Property arising during the term of this Agreement independent of the conduct of the activities contemplated by this Agreement.",
+        "contract": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement"
+      },
+      {
+        "rank": 183,
+        "oof_risk_score": 0.6581535050781487,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "(a) Janssen hereby engages Company on a non-exclusive basis to Promote the Product for the Initial Indication in the Territory on the terms, and subject to the conditions, set forth in this Agreement, and Company hereby accepts such engagement. Company shall not Promote the Product for any indication other than the Initial Indication. Company shall not conduct any promotion or marketing activities with respect to the Product that are not set forth in the Brand Plan without the prior written consent of Janssen. Janssen and its Affiliates retain the right to Detail and otherwise promote the Product in the Territory.",
+        "contract": "IMMUNOMEDICSINC_08_07_2019-EX-10.1-PROMOTION AGREEMENT"
+      },
+      {
+        "rank": 211,
+        "oof_risk_score": 0.6432157202391202,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "1.6 \"Change of Control\" shall mean (i) any change, sale, merger, reorganization, or any other event or action that results in a third party, which is a material competitor to the other Party to this agreement, acquiring: (a) all or substantially all of the business or assets of a Party relating to this Agreement, (b) Control, directly or indirectly, of such Party (and/or any corporate entity that Controls, directly or indirectly, such Party), or (ii) any assignment or delegation of, sale or transfer of a Party's rights and obligations under this Agreement (or any part hereof) to a third party. Notwithstanding anything in the immediately preceding paragraph to the contrary, where the Party in question is Dexcel, any of the foregoing events or actions shall not be considered a Change of Control where any one or more of the relevant third party or parties referred to in clause (i) above is (A) a Family Member, or (B) any entity Controlled by Mr. **** and/or a Family Member.",
+        "contract": "KitovPharmaLtd_20190326_20-F_EX-4.15_11584449_EX-4.15_Manufacturing Agreement"
+      },
+      {
+        "rank": 113,
+        "oof_risk_score": 0.7186261525341374,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "o Article 18 (Records and Audit);",
+        "contract": "FuelcellEnergyInc_20191106_8-K_EX-10.1_11868007_EX-10.1_Development Agreement"
+      },
+      {
+        "rank": 137,
+        "oof_risk_score": 0.6917312641532448,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "6.2 Diamond Licensed Trademark Grant. Subject to the terms and conditions of this Agreement, Arizona hereby grants to the Company a limited, non- exclusive, royalty-free, non-sublicensable (except as set forth in Section 7.1), non-assignable (except as set forth in Section 13.2) license in, to and under the Diamond Licensed Trademarks for the Diamond Trademark License Term for use with respect to the Diamond Product throughout the world only in the form and manner set forth on Schedule 6.2.",
+        "contract": "ArmstrongFlooringInc_20190107_8-K_EX-10.2_11471795_EX-10.2_Intellectual Property Agreement"
+      },
+      {
+        "rank": 110,
+        "oof_risk_score": 0.7197345709151851,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "7.2   SNAP. As between the parties, Snap retains all right, title and interest in and to: (a) the Snap Content, Snap Web Site (including, without limitation, any and all Snap Web Site content (other than the Sponsor Content), Sponsor generated data, URLs, domain names, technology, hardware, software, code, know-how, techniques, algorithms, processes, user interfaces, \"look and feel\", Trademarks and any other items posted thereon or used in connection or associated therewith) and the Snap Marks and other Snap Brand Features, along with all Intellectual Property Rights associated with any of the foregoing.",
+        "contract": "EmbarkComInc_19991008_S-1A_EX-10.10_6487661_EX-10.10_Co-Branding Agreement"
+      },
+      {
+        "rank": 120,
+        "oof_risk_score": 0.7099702885293163,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "3.6 Records; Reports; Audits",
+        "contract": "FOUNDATIONMEDICINE,INC_02_02_2015-EX-10.2-Collaboration Agreement"
+      },
+      {
+        "rank": 157,
+        "oof_risk_score": 0.676133496066599,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "The Supplier wishes to appoint the Distributor as its non-exclusive distributor for the promotion and sale of the Products within the Territory (both as defined below), and the Distributor wishes to promote and sell the Products within the Territory on the terms of this agreement.",
+        "contract": "FuseMedicalInc_20190321_10-K_EX-10.43_11575454_EX-10.43_Distributor Agreement"
+      },
+      {
+        "rank": 205,
+        "oof_risk_score": 0.644835761056743,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "3.  Term and Termination: This term of this Agreement commences on the Effective Date and terminates on August 2nd, 2015 upon completion of event. ANTHEMIC may at any time terminate this Agreement if the Sponsor breaches any material term or provision of this Agreement.",
+        "contract": "VNUE,INC_07_10_2015-EX-10.1-SPONSORSHIP AGREEMENT"
+      },
+      {
+        "rank": 170,
+        "oof_risk_score": 0.6676789903278479,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "3. GRANT OF COPYRIGHT LICENSE 3.1 Arizona Copyright Grant. Subject to the terms and conditions of this Agreement, Arizona hereby grants to the Company a perpetual, non- exclusive, royalty-free license in, to and under the Arizona Licensed Copyrights for use in the Company Field throughout the world.",
+        "contract": "ArmstrongFlooringInc_20190107_8-K_EX-10.2_11471795_EX-10.2_Intellectual Property Agreement"
+      },
+      {
+        "rank": 156,
+        "oof_risk_score": 0.6764282023763477,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "Article 6  Intellectual Property    6.1 During the Term of this Agreement and subject to its provisions, Aura grants to Zanotti a limited, non-exclusive license to use Aura's  Trademarks to identify and promote the sale of the AETRU System within the Field of Use in the Territory and Zanotti grants to Aura a limited,  non-exclusive license to use Zanotti's Trademarks to identify and promote the Products used in conjunction with the AETRU System within the  Field of Use in the Territory. Zanotti may not use Trademarks belonging or licenses to Aura in connection with the sale or promotion of any  goods, services, products, equipment or process other than the Products within the Field of Use in the Territory. Aura may not use Trademarks  belonging or licensed to Zanotti in connection with the sale or promotion of any goods, services, products, equipment or process other than the  Products within the Field of Use in the Territory. Upon termination of this Agreement, Zanotti and Aura shall each promptly cease using any  trademarks belonging to the other Party.",
+        "contract": "AURASYSTEMSINC_06_16_2010-EX-10.25-STRATEGIC ALLIANCE AGREEMENT"
+      },
+      {
+        "rank": 233,
+        "oof_risk_score": 0.6322078748715212,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "5. Measurement. Upon request, Tickets shall have access to pertinent statistics related to Impressions covering the period of this contract. Tickets agrees to accept MP3.com's measurement of Impressions (the \"Count\") according to MP3.com's logs and other tracking devices and/or software MP3.com may use, provided however, that Tickets shall have the right to audit MP3.com's records in this regard. If Tickets reasonably disputes the Count pursuant to this Agreement, then Tickets shall have the right to select the independent auditor of its choice to conduct an audit of MP3.com's records (the \"Audit\"). The Audit will be conducted in such a way so as not to interfere to any material extent with MP3.com's operations. If, for any applicable period, the independent auditor determines that MP3.com overstated the Count by more than five percent (5%), than MP3.com shall pay the cost of the Audit and shall refund Tickets the difference between the amount originally paid and the amount which should have been paid, or MP3.com shall credit the appropriate amount of Impressions to Tickets' account.",
+        "contract": "TICKETSCOMINC_06_22_1999-EX-10.22-SPONSORSHIP AGREEMENT"
+      },
+      {
+        "rank": 130,
+        "oof_risk_score": 0.7015962697410725,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Unclear",
+        "text": "This Agreement may not be amended in whole or in part without the unanimous written consent of all Participants.",
+        "contract": "MJBIOTECH,INC_12_06_2018-EX-99.01-JOINT VENTURE AGREEMENT"
+      },
+      {
+        "rank": 228,
+        "oof_risk_score": 0.6358033054342507,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "4.7 Maintenance of Records; Audits. (a) Record Keeping. Each Party shall keep and shall cause its Affiliates to keep accurate books and accounts of record in connection with (i) its Marketing and Promotion of the Product, (ii) (with respect to Exact) performance of Product Laboratory Services, and (iii) its activities under this Agreement and any Annual Marketing Plan, in sufficient detail to permit accurate determination of all figures necessary for verification of (A) amounts to be paid hereunder and (B) compliance with the terms of this Agreement. Each Party shall, and shall cause its Affiliates to, maintain such records for a period of at least three (3) years after the end of the Calendar Year to which they pertain. (b) Financial Audits. (i) Audit Right.",
+        "contract": "ExactSciencesCorp_20180822_8-K_EX-10.1_11331629_EX-10.1_Promotion Agreement"
+      },
+      {
+        "rank": 127,
+        "oof_risk_score": 0.7035964604786289,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "(b)      IN NO EVENT WILL CHANGEPOINT BE LIABLE FOR SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL LOSS OR DAMAGE, LOST BUSINESS REVENUE, LOSS OF PROFITS, LOSS OF DATA, FAILURE TO REALIZE EXPECTED PROFITS OR SAVINGS OR ANY CLAIM AGAINST CUSTOMER BY ANY OTHER PERSON (EVEN IF CHANGEPOINT HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE).",
+        "contract": "CHANGEPOINTCORP_03_08_2000-EX-10.6-LICENSE AND HOSTING AGREEMENT"
+      },
+      {
+        "rank": 229,
+        "oof_risk_score": 0.6340042664362057,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "(c) Diligence. During the Term, Distributor shall use Commercially Reasonable Efforts to market, promote, sell, offer for sale, import, package, distribute and otherwise commercialize the Product in the Field in the Territory in accordance with the Commercialization Plan and the terms of this Agreement. Without limiting the foregoing, Distributor shall Submit the first purchase order of the Product in the Field in the Territory to Zogenix within [***], achieve First Commercial Sale of the Product in the Field in the Territory as soon as reasonably practicable after the Product is first available for delivery to Distributor in the Territory, and use Commercially Reasonable Efforts to timely accomplish all the activities set forth in the Commercialization Plan.",
+        "contract": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement"
+      },
+      {
+        "rank": 232,
+        "oof_risk_score": 0.6327709496379703,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Real risky clause (Audit Rights)",
+        "text": "5.7 Books and Records. Bachem shall maintain true, complete and accurate books, records, test and laboratory data, reports and all other information relating to Services performed and Product manufactured under this Agreement, including all information required to be maintained by Applicable Laws.",
+        "contract": "Magenta Therapeutics, Inc. - Master Development and Manufacturing Agreement"
+      },
+      {
+        "rank": 246,
+        "oof_risk_score": 0.6215750157301776,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "6.4 License Grant. OntoChem hereby grants to Anixa a non-exclusive, fully paid-up, royalty-free, perpetual, irrevocable, transferable, worldwide license (with the right to grant and authorize sublicenses through multiple tiers) under any patents which OntoChem or any of its Affiliates own or control during the term of this Agreement, to make, have made, use, sell, offer for sale and import the Lead Scaffold(s) and products that incorporate compounds from the Lead Scaffold(s). OntoChem will not incorporate any invention, discovery or other proprietary information owned by any third party into any Anixa Inventions or Deliverables without Anixa's prior written consent.",
+        "contract": "ANIXABIOSCIENCESINC_06_09_2020-EX-10.1-COLLABORATION AGREEMENT"
+      },
+      {
+        "rank": 209,
+        "oof_risk_score": 0.6436772828464,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "The format and media for the delivery of the Affinities, such as FTP or other mutually-agreeable method, and the XML schema and applicable metadata requirements are set forth in Schedule C. (iii) Scope of License for Affinity & Content Included in Affinity. Subject to the terms and conditions of this Agreement, World Book grants HSWI the right to use, copy, store, archive, distribute, transmit, modify, translate (subject to Section 2.3), and Display the Content that comprises the Affinities as part of the Affinities, and the Affinities themselves, in any manner and in any digital media (and to sublicense such rights to third parties), provided that HSWI does not resell all or license substantially all of the Content for a fee to other content publishers. The term of the license for the Content delivered to HSWI as part of the Affinities, and the Affinities themselves, shall be perpetual, Exclusive, and irrevocable.",
+        "contract": "RemarkHoldingsInc_20081114_10-Q_EX-10.24_2895649_EX-10.24_Content License Agreement"
+      },
+      {
+        "rank": 244,
+        "oof_risk_score": 0.6242006539345852,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "rights, in each case, other than Software, whether or not registered, and all registrations and applications for registration of any of the foregoing, and all rights in and to any of the foregoing provided by international treaties or conventions, (e) confidential and proprietary information, including trade secrets, invention disclosures, processes and know-how and (f) any other intellectual property rights, in each case, other than Software.",
+        "contract": "INGEVITYCORP_05_16_2016-EX-10.5-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 146,
+        "oof_risk_score": 0.6854153326690563,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "2.1 For the term of this Agreement, Tripath appoints Distributor as a non-exclusive distributor for the Products in the Territory, subject to Tripath's direct sales activities under Section 4.",
+        "contract": "ETELOS,INC_03_09_2004-EX-10.8-DISTRIBUTOR AGREEMENT"
+      },
+      {
+        "rank": 131,
+        "oof_risk_score": 0.6997248185069034,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "3.2. VerticalNet hereby grants to PaperExchange a non-exclusive, non-transferable license to use, reproduce, display and transmit the VerticalNet Content, solely in connection with the development, maintenance and operation of the PaperExchange Site, subject to and in accordance with the terms, conditions and provisions of this Agreement. PaperExchange may",
+        "contract": "PaperexchangeComInc_20000322_S-1A_EX-10.4_5202103_EX-10.4_Co-Branding Agreement"
+      }
+    ]
+  },
+  "251-500": {
+    "bucket_range": "Ranks 251 - 500",
+    "score_range": "0.6186 - 0.5205",
+    "real_clause_count": 5,
+    "benign_count": 9,
+    "unclear_count": 16,
+    "pct_real_clauses": 0.16666666666666666,
+    "pct_benign": 0.3,
+    "pct_unclear": 0.5333333333333333,
+    "samples": [
+      {
+        "rank": 393,
+        "oof_risk_score": 0.556883710484791,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "2.6 The Parties acknowledge and agree that prior to commercialization of the Licensed Products by NeuroBo, its Affiliates and/or sublicensees, the Parties shall, in good faith, negotiate the terms and conditions for, including, without limitation, the supply price, and enter into a definitive non-exclusive supply agreement pursuant to which Dong-A shall supply to NeuroBo the Licensed Products for the commercialization by NeuroBo, its Affiliates and/or sublicensees of the Licensed Products in the Field in the Territory pursuant to the License Agreement.",
+        "contract": "NeuroboPharmaceuticalsInc_20190903_S-4_EX-10.36_11802165_EX-10.36_Manufacturing Agreement_ Supply Agreement"
+      },
+      {
+        "rank": 257,
+        "oof_risk_score": 0.6162312767384159,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "The term \"Change in Control\", as used in this Agreement, means (A) the sale or transfer, through one transaction or a series of transactions, of all or some portion of the issued and outstanding shares of voting equity interests of a Party, or such Party's parent, such that the majority of such equity interests are owned by individual(s) or entity(ies) that did not own a majority of such equity interests on the Commencement Date; (B) the reorganization, merger or consolidation of a Party, or such Party's parent, unless immediately following such business combination, all or substantially all of the individuals and entities who were the beneficial owners of either entity immediately prior to such business combination beneficially own, directly or indirectly, a majority of the issued and outstanding shares of voting equity interests of such entity; (C) the sale or transfer, through one transaction or a series of transactions, of all or substantially all of the assets of a Party, or such Party's parent; or (D) the occurrence of any other event(s) whereby the individual or group of individuals who ultimately own or control a Party or such Party's parent as of the Commencement Date no longer has the",
+        "contract": "VertexEnergyInc_20200113_8-K_EX-10.1_11943624_EX-10.1_Marketing Agreement"
+      },
+      {
+        "rank": 348,
+        "oof_risk_score": 0.5698261409575048,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Benign look-alike",
+        "text": "5. Indemnification   5.1 WCC shall indemnify, defend and hold harmless XLI, and its respective affiliates, officers, directors, employees, agents and representatives, from any and all claims, losses, damages, expenses, costs and other liabilities to any person or entity (\"Claims\") arising out of, relating to or in connection with: (i) the breach by WCC of any of the representations and warranties made by WCC in this Agreement or the failure by WCC to fulfill any of its covenants set forth herein, and (ii) the use by XLI (as approved by WCC) of the WCC Trademarks pursuant to Section 1.1.1, above. Notwithstanding any other provision herein, under no circumstances shall WCC be liable for any claims arising out of the negligent acts or omissions of XLI or third parties.",
+        "contract": "XLITECHNOLOGIES,INC_12_11_2015-EX-10.1-Sponsorship Agreement"
+      },
+      {
+        "rank": 311,
+        "oof_risk_score": 0.5829883802182034,
+        "oof_pred_class": "Change of Control",
+        "classification": "Unclear",
+        "text": "b)    In the event of a necessary or desired change in any material aspect             of the Agreement, the Parties shall mutually agree to any such             change in writing prior to its implementation. A proposed change             shall be initiated by the proposing Party in a written notice to the             other Party.",
+        "contract": "MANUFACTURERSSERVICESLTD_06_05_2000-EX-10.14-OUTSOURCING AGREEMENT"
+      },
+      {
+        "rank": 363,
+        "oof_risk_score": 0.5663322928970612,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "2. Ownership. Licensee acknowledges and agrees that, as between the parties, Licensor is the sole owner of all right, title and interest in and to the Brand. Licensee agrees not to do anything inconsistent with such ownership, including (i) filing to register any trademark or service mark containing the Brand or (ii) directly or indirectly challenging, contesting or otherwise",
+        "contract": "MorganStanleyDirectLendingFund_20191119_10-12GA_EX-10.5_11898508_EX-10.5_Trademark License Agreement"
+      },
+      {
+        "rank": 432,
+        "oof_risk_score": 0.5429917730682317,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Unclear",
+        "text": "16.2 Permitted Assignments. Notwithstanding the foregoing, (i) either Party may assign this Agreement to an Affiliate of such Party without the consent of the other Party, (ii) either Party may pledge this Agreement to secure any credit facility or indebtedness of such   16",
+        "contract": "RangeResourcesLouisianaInc_20150417_8-K_EX-10.5_9045501_EX-10.5_Transportation Agreement"
+      },
+      {
+        "rank": 448,
+        "oof_risk_score": 0.537075078066449,
+        "oof_pred_class": "Liquidated Damages",
+        "classification": "Benign look-alike",
+        "text": "V.   \"Estimated Remaining Value\" shall mean the number of calendar months remaining between the Effective Date of Termination and the last day of the contracted-for Term, multiplied by the average of the three (3) highest monthly fees (but in any event no less than the Monthly Base Fee or other monthly minimums) payable by Customer during the twelve (12) -month period prior to the event giving rise to termination rights under this Agreement. In the event the Effective Date of Termination occurs prior to expiration of the First Contract Year, the monthly fees used in calculating the Estimated Remaining Value shall be the greater of (i) the estimated monthly fees set forth in the Fee Schedule(s) and (ii) the average monthly fees described in the preceding sentence.",
+        "contract": "OFGBANCORP_03_28_2007-EX-10.23-OUTSOURCING AGREEMENT"
+      },
+      {
+        "rank": 435,
+        "oof_risk_score": 0.5420905103865588,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "2.1 Term. This Agreement shall commence on the Effective Date and continue in full force and effect until the end of the fifteenth (15th) Contract Year, and shall continue in full force and effect thereafter until terminated by either Party by providing thirty (30) calendar days' prior written notice of termination to the other Party (such fifteen (15) Contract Year period, as may be further extended as provided herein is referred to as the \"Term\").",
+        "contract": "RangeResourcesLouisianaInc_20150417_8-K_EX-10.5_9045501_EX-10.5_Transportation Agreement"
+      },
+      {
+        "rank": 260,
+        "oof_risk_score": 0.6124846519987799,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "2. Term of Agreement. Agent's appointment hereunder shall commence on the next business day after the later of (i) the date hereof, or (ii) the date Agent has confirmed that Client's records have been converted to Agent's system (the \"Effective Date\"), and shall continue for three years thereafter (the \"Initial Term\"). Unless either party gives written notice of termination of this Agreement at least 60 days prior to the end of the Initial Term, or any successive three-year term, this Agreement shall automatically renew for successive additional three-year terms; provided, however, that this Agreement shall automatically terminate upon the dissolution of the client.",
+        "contract": "BLACKSTONEGSOLONG-SHORTCREDITINCOMEFUND_05_11_2020-EX-99.(K)(1)-SERVICE AGREEMENT"
+      },
+      {
+        "rank": 355,
+        "oof_risk_score": 0.5667784645521312,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Benign look-alike",
+        "text": "9.2 For the purpose of this Section, \"liability\" means liability for any and all claims, causes of action, judgments, costs and expenses (including but not limited to reasonable attorney fees and expenses), reimbursements, losses, and any and all other liabilities and damages of any kind, whether in contract, tort (including negligence), equity, statute or otherwise arising out of, in relation to or as a result of this Agreement.",
+        "contract": "BELLRINGBRANDS,INC_02_07_2020-EX-10.18-MASTER SUPPLY AGREEMENT"
+      },
+      {
+        "rank": 451,
+        "oof_risk_score": 0.5365132434092131,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "(a) Termination by either party. Either party may terminate this Agreement by giving written notice of termination to the other party, which termination will be effective immediately upon such notice, if the other party defaults in the performance of any of its material obligations provided for in this Agreement and fails to cure such default within sixty (60) days after receipt of notice from the other party of such default, unless a plan for remedying such default has been proposed by the defaulting party and accepted by the non- defaulting party within such period.",
+        "contract": "REWALKROBOTICSLTD_07_10_2014-EX-10.2-STRATEGIC ALLIANCE AGREEMENT"
+      },
+      {
+        "rank": 467,
+        "oof_risk_score": 0.5317566097042989,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "School                   shall inform its Clients of the requirement to maintain                   records with respect to the Cards and Cardholders, and to                   verify the identity of Cardholders as required by law, to                   maintain records of the information used to verify each                   Cardholder's identity, to retain such records for at least                   seven (7) years following the date of distribution, including    &sbsp;              name, home address, Card number, and other identifying                   information, and the name, title and phone number of the                   individual responsible for maintaining such records, and to                   provide such records and other information to AEIS upon                   reasonable request and subject to applicable law. Schoolpop                   and Schoolpop's Clients shall establish and maintain an                   anti-money laundering program with an assigned compliance                   officer and compliance program. Details of such shall be                   provided to AEIS upon request. Schoolpop and Schoolpop's                   Clients shall not accept cash, coin or currency in exchange                   for Cards.",
+        "contract": "LOYALTYPOINTINC_11_16_2004-EX-10.2-RESELLER AGREEMENT"
+      },
+      {
+        "rank": 487,
+        "oof_risk_score": 0.5252404954016218,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Benign look-alike",
+        "text": "Section 14.1   TERM.  This Agreement shall be effective until the earlier of (a) its termination in accordance with the provisions of this Article 14 or (b) the date that is two (2) years after the date of this Agreement; provided, however, that this Agreement will renew automatically for successive terms of one (1) year each unless a party to this Agreement delivers written notice of termination to the other party to this Agreement at least sixty (60) days prior to the end of the original or any renewal term or the parties to this Agreement do not agree in writing to the Quota Amount referred to in subsection 14.2(b)(1) for any one (1) year renewal term at least sixty (60) days prior to the commencement of such term.",
+        "contract": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_New"
+      },
+      {
+        "rank": 491,
+        "oof_risk_score": 0.5235560510454521,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Real risky clause (Exclusivity)",
+        "text": "6.1 Upfront Payment. Distributor shall pay to Zogenix, upon the receipt of the invoice from Zogenix after the Effective Date, a non-refundable, non-creditable upfront payment of Seven Million Five Hundred Thousand U.S. Dollars (US $7,500,000), which upfront payment shall consist of [***] in consideration for the exclusive right to distribute Product in the Territory for the treatment of Dravet syndrome and [***] in consideration for the exclusive right to distribute Product in the Territory for the treatment of Lennox-Gastaut syndrome. Distributor shall pay such payment to Zogenix within [***] of receipt of the invoice.",
+        "contract": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement"
+      },
+      {
+        "rank": 318,
+        "oof_risk_score": 0.5804908393517709,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Real risky clause (Exclusivity)",
+        "text": "1.138 \"Regulatory Exclusivity\" means, with respect to any country or other jurisdiction in the Territory, an additional market protection, other than Patent protection, granted by a Regulatory Authority in such country or other jurisdiction which confers an exclusive Commercialization period during which AbbVie or its Affiliates or Sublicensees has the exclusive right to market and sell, and any unauthorized Third Party is prevented from marketing or selling, a Licensed Compound or Licensed Product in such country or other jurisdiction.",
+        "contract": "HarpoonTherapeuticsInc_20200312_10-K_EX-10.18_12051356_EX-10.18_Development Agreement"
+      },
+      {
+        "rank": 475,
+        "oof_risk_score": 0.5285162553136729,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "5.1  LICENSOR  is  the  owner  of  all  intellectual  property  rights,           including  without  limitation,  any  and all patents, utility models,           trade  marks,  rights  in  designs,  trade,  business or domain names,           know-how,  rights  in  databases and copyrights, rights in inventions,           ideas, concepts, trade secrets and confidential information which have           to  be  given  to  fulfill  this  contract.",
+        "contract": "DataCallTechnologies_20060918_SB-2A_EX-10.9_944510_EX-10.9_Content License Agreement"
+      },
+      {
+        "rank": 445,
+        "oof_risk_score": 0.5382828564353487,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "months, each such extension commencing at the end of the last day of the      Initial Term or the relevant anniversary thereof, unless either Party      serves written notice of termination on the other Party at least 65 days      prior to the end of the Initial Term, or any subsequent extension.",
+        "contract": "CHAPARRALRESOURCESINC_03_30_2000-EX-10.66-TRANSPORTATION CONTRACT"
+      },
+      {
+        "rank": 266,
+        "oof_risk_score": 0.6085461358979329,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "8. Termination 8.1 Termination by Mutual Agreement. This Agreement may be terminated at any time upon the mutual written agreement of the parties.",
+        "contract": "SimplicityEsportsGamingCompany_20181130_8-K_EX-10.1_11444071_EX-10.1_Franchise Agreement"
+      },
+      {
+        "rank": 428,
+        "oof_risk_score": 0.5453849927707293,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "9.1  Distributor acknowledges Airspan's exclusive right, title, and interest in and to any trademarks, trade names, logos and designations which Airspan may at any time have adopted, used, or registered in the United States of America and in the Territory (the \"Trademarks\"), and will not at any time do or cause to be done any act or thing contesting or in any way impairing or tending to impair any part of said right, title, and interest.  In connection with any reference to the Trademarks, Distributor shall not in any manner represent that it has an ownership interest in the Trademarks or registration(s) thereof, and Distributor acknowledges that no action by it or on its behalf shall create in Distributor's favor any right, title, or interest in or to the Trademarks.",
+        "contract": "AIRSPANNETWORKSINC_04_11_2000-EX-10.5-Distributor Agreement"
+      },
+      {
+        "rank": 275,
+        "oof_risk_score": 0.6034602196979687,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "5.2 Company Patent Grant. Subject to the terms and conditions of this Agreement, the Company hereby grants to Seller a perpetual, non-exclusive, royalty-free license in, to and under the Company Licensed Patents for use in the Arizona Field throughout the world.",
+        "contract": "ARMSTRONGFLOORING,INC_01_07_2019-EX-10.2-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 498,
+        "oof_risk_score": 0.5217354056416507,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "13.2.2.4 Privately Held Equity Interests: 25% or Greater Change/No Change of Control. You or any Equity Owner as of the Effective Date (or any transferee Equity Owner we subsequently approve) may Transfer an Equity Interest in Franchisee even though, after the completion of such Transfer, twenty-five percent (25%) or more of the Equity Interests in Franchisee will have changed hands since the Effective Date of this Agreement.",
+        "contract": "HOSPITALITYINVESTORSTRUST,INC_04_07_2014-EX-10.26-FRANCHISE AGREEMENT"
+      },
+      {
+        "rank": 270,
+        "oof_risk_score": 0.6053607113668699,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "9.3 Termination for Cause. This Agreement may be terminated in its entirety by written notice by either Party at any time:   9.3.1 For material breach by the other Party, which breach remains uncured for ninety (90) days from the date written notice of such breach is given to the breaching Party, or, if such breach is not susceptible of cure within such ninety (90) day period and the breaching Party uses diligent good faith efforts to cure such breach, for one hundred eighty (180) days after written notice to the breaching Party if such breach remains uncured; or",
+        "contract": "Microgenics Corporation - Collaborative Development and Commercialization Agreement"
+      },
+      {
+        "rank": 365,
+        "oof_risk_score": 0.5654933064237294,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "4. GRANT OF KNOW-HOW LICENSE 4.1 Arizona Know-How Grant. Subject to the terms and conditions of this Agreement, Arizona hereby grants to the Company a perpetual, non- exclusive, royalty-free license in, to and under the Arizona Licensed Know-How for use in the Company Field throughout the world.",
+        "contract": "ARMSTRONGFLOORING,INC_01_07_2019-EX-10.2-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 319,
+        "oof_risk_score": 0.5800347389205806,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "2.3 Information Exchange, Records and Compliance.",
+        "contract": "Microgenics Corporation - Collaborative Development and Commercialization Agreement"
+      },
+      {
+        "rank": 427,
+        "oof_risk_score": 0.5460439920135519,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "a) Rights: Kallo grants to Agent the non-exclusive and non-transferable right to distribute the use of the Kallo Mobile  care suite of products to commercial end user customers. Refer to section (2) subparagraph (f) for non-exclusive  and exclusive status and qualifying requirements.",
+        "contract": "KALLOINC_11_03_2011-EX-10.1-STRATEGIC ALLIANCE AGREEMENT"
+      },
+      {
+        "rank": 296,
+        "oof_risk_score": 0.5932224857596259,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Benign look-alike",
+        "text": "11.4 Termination for Failure to [***]. SIGA may terminate this Agreement immediately upon written notice to MMT if MMT does not, in accordance with the provisions of Section 2.3, notify SIGA in writing [***].",
+        "contract": "SigaTechnologiesInc_20190603_8-K_EX-10.1_11695818_EX-10.1_Promotion Agreement"
+      },
+      {
+        "rank": 306,
+        "oof_risk_score": 0.5854921857221688,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "2.5.1.1 Promptly following the Effective Date, PB will provide SFJ with all copies of documents and information Controlled by PB that SFJ, acting in good faith, identifies as reasonably necessary for SFJ to perform its Development Program responsibilities hereunder (the \"Background Materials\"), except to the extent the provision of any such documents is otherwise provided for in this Agreement. For clarity, PB will remain the sole owner of, and will retain all right, title and interest in, to and under all Background Materials, including all Intellectual Property thereto, and the Background Materials will be PB Confidential Information.",
+        "contract": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement"
+      },
+      {
+        "rank": 261,
+        "oof_risk_score": 0.6117799415068665,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "(a) SpinCo hereby acknowledges (on behalf of itself and each other member of the SpinCo Group) Honeywell's right, title and interest in and to the Honeywell IP. SpinCo agrees that it will not, and agrees to cause each member of the SpinCo Group not to, (i) 7",
+        "contract": "GarrettMotionInc_20181001_8-K_EX-2.4_11364532_EX-2.4_Intellectual Property Agreement"
+      },
+      {
+        "rank": 281,
+        "oof_risk_score": 0.5997303023048902,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "16.4 Termination for Challenge to Patent Validity. MacroGenics may terminate this Agreement immediately upon written notice to Green Cross in the event Green Cross or any of its Affiliates:",
+        "contract": "MACROGENICSINC_08_02_2013-EX-10-COLLABORATION AGREEMENT"
+      },
+      {
+        "rank": 371,
+        "oof_risk_score": 0.563017109333532,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "13.2.1.1 Privately Held Equity Interests: Less than 25% Change/No Change of Control. An Equity Interest that is not publicly traded may be Transferred if, immediately after the transaction, the transferee Equity Owner will own less than twenty-five percent (25%) of the Equity Interest.",
+        "contract": "HOSPITALITYINVESTORSTRUST,INC_04_07_2014-EX-10.26-FRANCHISE AGREEMENT"
+      }
+    ]
+  },
+  "501-1000": {
+    "bucket_range": "Ranks 501 - 1000",
+    "score_range": "0.5200 - 0.4303",
+    "real_clause_count": 2,
+    "benign_count": 10,
+    "unclear_count": 18,
+    "pct_real_clauses": 0.06666666666666667,
+    "pct_benign": 0.3333333333333333,
+    "pct_unclear": 0.6,
+    "samples": [
+      {
+        "rank": 862,
+        "oof_risk_score": 0.4497717491805825,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "1.10 INTELLECTUAL PROPERTY shall mean any and all trade secrets, patents, copyrights, trademarks, URLs, trade dress, brand features, know-how and similar rights of any type under the laws of any applicable governmental authority, including, without limitation, all applications and registrations relating to any of the foregoing.",
+        "contract": "NeoformaInc_19991202_S-1A_EX-10.26_5224521_EX-10.26_Co-Branding Agreement"
+      },
+      {
+        "rank": 574,
+        "oof_risk_score": 0.5051515454423728,
+        "oof_pred_class": "Change of Control",
+        "classification": "Benign look-alike",
+        "text": "8.3. For Insolvency. In addition to the termination rights set forth in Sections 8.1 and 8.2, subject to the provisions of Title 11, United States Code, if either party becomes or is declared insolvent or bankrupt, is the subject to any proceedings relating to its liquidation, insolvency or for the appointment of a receiver or similar officer for it, makes an assignment for the benefit of all or substantially all of its creditors, or enters into an agreement for the composition, extension, or readjustment of all or substantially all of its obligations, or is subject to regulatory sanction by any Federal Regulator, then the other party may, by giving written notice to such party, may terminate this Agreement as of a date specified in such notice of termination; provided that the foregoing shall not apply with respect to any involuntary petition in bankruptcy filed against a party unless such petition is not dismissed within sixty (60) days of such filing.",
+        "contract": "OFGBANCORP_03_28_2007-EX-10.23-OUTSOURCING AGREEMENT"
+      },
+      {
+        "rank": 875,
+        "oof_risk_score": 0.44808575383861243,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "(b) King hereby grants to Depomed a non-assignable, non-sublicensable (except to any Third Party acting as the Depomed Sales Force), non-exclusive, royalty-free right and license to use the King Trademarks in the Territory solely in connection with Depomed's Promotion of the Product. Such license shall expire immediately upon the expiration or termination of this Agreement. Subject to this Section 4.8 and to applicable Legal Requirements, Depomed shall have the right to use Depomed Trademarks, and include the name \"Depomed,\" \"AcuForm,\" or any variation thereof on the Promotional Materials developed by Depomed in accordance with this Agreement. Depomed recognizes King's title to the King Trademarks, and shall not at any time, during or after the Term, do or knowingly suffer to be done any act or thing which will in any way impair the rights of King in or to the King Trademarks. Depomed shall not be obligated to use the King Trademarks in the Depomed Promotional Materials.",
+        "contract": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT"
+      },
+      {
+        "rank": 656,
+        "oof_risk_score": 0.48396655669673083,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "Intellectual Property shall mean Intellectual Property Rights and Know-how.",
+        "contract": "NlsPharmaceuticsLtd_20200228_F-1_EX-10.14_12029046_EX-10.14_Development Agreement"
+      },
+      {
+        "rank": 605,
+        "oof_risk_score": 0.49656066240931845,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "2.       This Agreement shall terminate, subject to any automatic                   renewal or extension for one year as required by law, upon                   either party giving at least one hundred twenty (120) days                   advance written notice to the other, if not otherwise contrary                   to applicable law or this Agreement.",
+        "contract": "AMERICANPHYSICIANSCAPITALINC_03_31_2003-EX-10.26-AGENCY AGREEMENT"
+      },
+      {
+        "rank": 895,
+        "oof_risk_score": 0.446163386320103,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "14.2. Igene represents and warrants to T&L (i) that the Technology, the Brands and all other Transferred Assets set forth in Appendix 3.2 constitute all know-how and intellectual property owned, used or possessed by Igene with respect to the Field of Agreement, (ii) that it has good and workable title to the Transferred Assets, free and clear of any and all liens, claims and encumbrances, except for the Lawsuit, and (iii) this Agreement and each document contemplated hereby is sufficient to transfer Igene's right, title and interest in the Transferred Assets to the Operating Company.",
+        "contract": "IGENEBIOTECHNOLOGYINC_05_13_2003-EX-1-JOINT VENTURE AGREEMENT"
+      },
+      {
+        "rank": 878,
+        "oof_risk_score": 0.44779188185647667,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "5.3. If at any time an Event of Default (as defined below) has occurred and is continuing, the Defaulting Party shall have ten (10) days after receipt of written notice from the Non-Defaulting Party speci- fying the default, within which to cure any such default, unless such default is not susceptible of cure within such ten (10) day period in which case the Defaulting Party shall have such additional time as may be accepted by the Non-Defaulting Party (in its sole discretion), provided that the Defaulting Party initiates cure proceedings promptly and thereafter diligently pursues cure to completion. Notwithstanding the foregoing, in no event shall the cure period exceed thirty (30) days. Upon the expiration or lapse of all notice and cure rights if the default remains uncured the Non-Defaulting Party may terminate this JSMA with immediate effect.",
+        "contract": "VertexEnergyInc_20200113_8-K_EX-10.1_11943624_EX-10.1_Marketing Agreement"
+      },
+      {
+        "rank": 625,
+        "oof_risk_score": 0.49105670050105077,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "AGREEMENT 1. TERM. The initial term of this Agreement shall commence on the Effective Date and shall continue until the fifth (5t h) anniversary of the Effective Date (the \"Term\"), unless the Agreement is sooner terminated in accordance with the terms of this Agreement. Upon the expiration of the Term, the Term shall automatically extend for successive 12-month periods until one Party terminates the Agreement by providing at least 180 days prior written notice to the other Party prior to the expiration of the then-current term or unless sooner terminated in accordance with the terms of this Agreement.",
+        "contract": "LiquidmetalTechnologiesInc_20200205_8-K_EX-10.1_11968198_EX-10.1_Development Agreement"
+      },
+      {
+        "rank": 569,
+        "oof_risk_score": 0.5056855377850874,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "9.2 Clinical Trials-Related Records. Each Party shall, and shall cause its Affiliates and its and their Permitted Third Parties conducting Development of the Product to, maintain, in good scientific manner, complete and accurate books and records pertaining to Development of the Product hereunder, in sufficient detail to verify compliance with its obligations under this Agreement. Such books and records shall (a) be appropriate for patent and regulatory purposes, (b) be in compliance with Applicable Law, (c) properly reflect all work done and results achieved in the performance of its Development activities hereunder, and (d) be retained by such Party for such period as may be required by Applicable Law.",
+        "contract": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement"
+      },
+      {
+        "rank": 951,
+        "oof_risk_score": 0.43684782763120866,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "days prior, written notice to EKR only in the event Royalties and Additional Royalties paid hereunder in any one year  period following the date of such termination are less than $[**], unless the difference between $[**] and the actual  Royalties and Additional Royalties paid by EKR is paid to PPI within thirty (30) days of notice of such termination.",
+        "contract": "PACIRA PHARMACEUTICALS, INC. - A_R STRATEGIC LICENSING, DISTRIBUTION AND MARKETING AGREEMENT "
+      },
+      {
+        "rank": 510,
+        "oof_risk_score": 0.5180979325074556,
+        "oof_pred_class": "Change of Control",
+        "classification": "Benign look-alike",
+        "text": "(b) Insolvency or Bankruptcy. If either Party files a petition in bankruptcy or is adjudicated a bankrupt, or if a petition in bankruptcy is filed against a Party, or if a Party becomes insolvent, makes an assignment for the benefit of its creditors or an arrangement pursuant to any bankruptcy law, or if a Party discontinues its business or if a receiver is appointed for it or its business, exclusivity under Section 4 shall terminate automatically and immediately and the other Party shall have the right to terminate this Agreement effective upon giving of notice to insolvent/bankrupt Party.",
+        "contract": "VIOLINMEMORYINC_12_12_2012-EX-10.14-SPONSORSHIP AGREEMENT"
+      },
+      {
+        "rank": 695,
+        "oof_risk_score": 0.4775154258636542,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "\"Change in Control\" has the meaning given to that term in the Schedule to this Agreement.",
+        "contract": "BICYCLETHERAPEUTICSPLC_03_10_2020-EX-10.11-SERVICE AGREEMENT"
+      },
+      {
+        "rank": 907,
+        "oof_risk_score": 0.44448795970602994,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Benign look-alike",
+        "text": "13.MISCELLANEOUS:   (a) Assignment; Binding Effect; Reorganization. This Agreement shall be binding on the respective transferees and successors of the parties hereto, except that neither this Agreement nor either party's rights or obligations hereunder shall be assigned or transferred by either party without the prior written consent of the other party. Affiliate agrees to use reasonable efforts to obtain the agreement of any proposed assignee or transferee that, upon consummation of the assignment or transfer of control of the FCC license for any Station, such assignee or transferee shall negotiate in good faith with Network for continued rights to broadcast the Service over the affected Station. It will not be a breach of this Agreement, and Affiliate will not be required to accept a lower price or different terms in a proposed acquisition, if the proposed assignee or transferee does not accept this condition. Affiliate agrees to give Network timely notice of the filing of an assignment or transfer of control application with the FCC. (b) Entire Agreement; Amendments; Waivers; Cumulative Remedies. This Agreement, including the Exhibits attached hereto, contains the entire understanding of the parties hereto and supersedes and abrogates all contemporaneous and prior understandings of the parties, whether written or oral, relating to the subject matter hereof. This Agreement may not be modified except in a writing executed by both parties hereto.",
+        "contract": "TubeMediaCorp_20060310_8-K_EX-10.1_513921_EX-10.1_Affiliate Agreement"
+      },
+      {
+        "rank": 585,
+        "oof_risk_score": 0.5006372849175789,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "4.5 Inspections/Compliance Assistance. We will administer a quality assurance program for the System that may include conducting pre- opening and periodic inspections of the Hotel and guest satisfaction surveys and audits to ensure compliance with the Standards. You will permit us to inspect the Hotel without prior notice to you to determine if the Hotel is in compliance with the Standards. You will cooperate with our representatives during these inspections. You will then take all steps necessary to correct any deficiencies within the times we establish. You may be charged a Quality Assurance Re-Evaluation Fee as set forth in the Standards. You will provide complimentary accommodations for the quality assurance auditor each time we conduct a regular inspection or a special on-site quality assurance re-evaluation after the Hotel has failed a regular quality assurance evaluation or to verify that deficiencies noted in a quality assurance evaluation report or PIP have been corrected or completed by the required dates.",
+        "contract": "HOSPITALITYINVESTORSTRUST,INC_04_07_2014-EX-10.26-FRANCHISE AGREEMENT"
+      },
+      {
+        "rank": 872,
+        "oof_risk_score": 0.44846590478205617,
+        "oof_pred_class": "Non-Compete",
+        "classification": "Unclear",
+        "text": "(B)      Distributor further agrees that it will not interfere                            with or  otherwise  disrupt  the  business  relations                            between the Company or nay of its  affiliates and any                            of their current or prospective customers,  suppliers                            or distributors, during the",
+        "contract": "LIMEENERGYCO_09_09_1999-EX-10-DISTRIBUTOR AGREEMENT"
+      },
+      {
+        "rank": 889,
+        "oof_risk_score": 0.4464594745715246,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Benign look-alike",
+        "text": "b) Termination: This agreement shall terminate:",
+        "contract": "KALLOINC_11_03_2011-EX-10.1-STRATEGIC ALLIANCE AGREEMENT"
+      },
+      {
+        "rank": 996,
+        "oof_risk_score": 0.430647508767649,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "Subject to the provisions herein, the COMPANY and CELEBRITY agree to      indemnify, defend and hold each other harmless from and against all      demands, claims, actions, losses, damages, liabilities, costs and expenses,      including without limitation, interest, penalties and attorneys' fees and      expenses asserted against or imposed or incurred by either party by reason      of or resulting from any action or a breach of any representation,      warranty, covenant, condition, or agreement of the other party to this      Agreement. The CELEBRITY will have full release of liability in regards to      product performance and/or law suites resulting from use of the product.      This liability will remain the responsibility of the COMPANY and      manufacturers.",
+        "contract": "MARSHALLHOLDINGSINTERNATIONAL,INC_04_14_2004-EX-10.15-ENDORSEMENT AGREEMENT"
+      },
+      {
+        "rank": 531,
+        "oof_risk_score": 0.5134408721946149,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "2.1 Assigned Intellectual Property Rights",
+        "contract": "OTISWORLDWIDECORP_04_03_2020-EX-10.4-INTELLECTUAL PROPERTY AGREEMENT by and among UNITED TECHNOLOGIES CORPORATION, OTIS WORLDWIDE CORPORATION and CARRIER ~1"
+      },
+      {
+        "rank": 817,
+        "oof_risk_score": 0.45698659460272617,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "and performing other related functions; and (i) dealing with any Remedial Actions in relation to the Licensed Products in the Field in the Territory.",
+        "contract": "CoherusBiosciencesInc_20200227_10-K_EX-10.29_12021376_EX-10.29_Development Agreement"
+      },
+      {
+        "rank": 909,
+        "oof_risk_score": 0.44401609786295826,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Benign look-alike",
+        "text": "Notwithstanding anything else in this Agreement, Subcontractor makes no representations or warranties whatsoever with respect to: (i) any materials, components or subassemblies; (ii) defects resulting from the Specifications or the design of the Manufacturer's Products; (iii) Manufacturer's Product that has been abused, damaged, altered or misused by any person or entity after title passes to Manufacturer; (iv) first articles, prototypes, pre-production units, test units or other similar Manufacturer's Products; or (v) defects resulting from tooling, designs or instructions produced or supplied by Manufacturer. Manufacturer shall be liable for costs or expenses incurred by Subcontractor related to the foregoing exclusions to Subcontractor's express limited warranty. If Subcontractor determines that the Manufacturer's Products are nonconforming under the Standards, Subcontractor, shall work with their vendors to rework the Manufacturer's Products or otherwise replace the Manufacturer's Products. Manufacturer shall be liable for the cost of rework or replacement and all associated costs therewith including, without limitation, transportation charges and inspection fees. If requested by the Manufacturer, Subcontractor will provide a cause of failure, a failure analysis provided in Subcontractor's standard format and correction action.",
+        "contract": "Zounds Hearing, Inc. - MANUFACTURING DESIGN MARKETING AGREEMENT"
+      },
+      {
+        "rank": 991,
+        "oof_risk_score": 0.43160628097359927,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "In such an event, ETON may pursue maintaining such patent(s) or filing and prosecuting such patent applications relating to the Products, at its own cost and expense, and shall obtain from Aucta rights and licenses to those patents and patent applications with the same scope as that in Section 2.1. Aucta shall maintain the confidentiality of any trade secrets included in the Aucta Background Intellectual Property. Each Party shall promptly render all necessary assistance reasonably requested by the other Party, at the requesting Party's expense, in applying for and prosecuting patent applications based on intellectual property owned by such other Party pursuant to this Agreement.",
+        "contract": "EtonPharmaceuticalsInc_20191114_10-Q_EX-10.1_11893941_EX-10.1_Development Agreement"
+      },
+      {
+        "rank": 992,
+        "oof_risk_score": 0.43153086870836177,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "b. Either party may terminate this Agreement in the event of a material breach by the other party, provided the breaching party is first given reasonably detailed, written notice of the breach. If the breach is not cured within ten days of such notice, the Agreement will terminate immediately.",
+        "contract": "InnerscopeHearingTechnologiesInc_20181109_8-K_EX-10.6_11419704_EX-10.6_Distributor Agreement"
+      },
+      {
+        "rank": 781,
+        "oof_risk_score": 0.4640575452404033,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "9. GINARES's Indemnity   9.1. HPIL ET shall indemnify, defend, and hold harmless GINARES  from, against and with respect to any claim, liability, obligations, loss, damage, assessment, judgment, cost and expense (including, without limitation, reasonable attorneys' and accountants' fees and costs and expenses reasonably incurred in investigating, preparing, defending against or prosecuting any litigation or claim, action, suit, proceeding or demand) or any kind or character (collectively, \"Losses\") arising out of or in any manner, incident, relating or attributable to: any inaccuracy in any representation or breach of warranty of GINARES contained in this Agreement and (ii) any failure by HPIL ET to perform or observe, or to have performed or observed in full any covenant, agreement or condition to be performed or observed by HPIL ET under this Agreement or any of the other agreements or instruments executed and delivered by HPIL ET on the Closing Date.",
+        "contract": "HPILHOLDING_01_07_2015-EX-99.1-COOPERATION AGREEMENT"
+      },
+      {
+        "rank": 857,
+        "oof_risk_score": 0.4501019567054301,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "Notwithstanding the foregoing, HSWI may not translate any Affinity into English for which a same subject Affinity has not been previously licensed by World Book to HowStuffWorks, Inc. (ii) Scope of License. The term of the license for Translated Content shall be for a term of [*] ([*]) years from the time such Translated Content is first Displayed on an HSWI Website. In addition, such license for Translated Content shall be Exclusive for Display on the Open Free Web. At the end of such [*] ([*]) year period, HSWI shall have the right to renew the Agreement under materially the same terms or shall have an option to purchase the Translated Content outright to the extent rights permit and to the extent the parties mutually agree to terms for such sale.",
+        "contract": "RemarkHoldingsInc_20081114_10-Q_EX-10.24_2895649_EX-10.24_Content License Agreement"
+      },
+      {
+        "rank": 577,
+        "oof_risk_score": 0.5047885860815394,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "6.6      Sample Products.  Company will,  during the Term of this Agreement (and          any renewal term), provide Distributor,  at Distributor's cost pursuant          to the  terms of this  Agreement,  with  five  (5)  sample  units  (the          \"Sample\" or  \"Samples\")  for use by  Distributor  in  promoting  sales.          Distributor shall use the Samples for purposes of permitting  potential          customers  to use the Products in the field.  The Samples  purchased by          Distributor hereunder shall count toward the minimum expectations under          this Agreement.",
+        "contract": "LIMEENERGYCO_09_09_1999-EX-10-DISTRIBUTOR AGREEMENT"
+      },
+      {
+        "rank": 962,
+        "oof_risk_score": 0.4355950987761263,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Real risky clause (Exclusivity)",
+        "text": "WHEREAS GALEN and LEO have entered into a License and Supply Agreement dated as of even date herewith pursuant to which GALEN will be the exclusive distributor of Dovonex(R) Product in the Territory subsequent to the exercise of the Option by GALEN and the acquisition of BMS's rights and assumption of BMS's obligations under the BMS Agreements by GALEN (the \"Dovonex(R) Agreement\"); and",
+        "contract": "WARNERCHILCOTTPLC_12_31_2003-EX-4.36-DEVELOPMENT AGREEMENT"
+      },
+      {
+        "rank": 998,
+        "oof_risk_score": 0.43059000314246954,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "1.74 \"Zogenix Patents\" means all Patents that Zogenix Controls as of the Effective Date or during the Term, which Patents would be infringed, absent a license, by the use, sale, offer for sale or import of the Product in the Field in the Territory, including any Patents issuing from the applications listed in Exhibit 1.74.",
+        "contract": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement"
+      },
+      {
+        "rank": 712,
+        "oof_risk_score": 0.4737951649171746,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "(i) \"Infringement Loss\" shall mean any Liability, loss, claim, demand, suit, cause of action, settlement payment, cost, expense, interest, award, judgment, damages (including punitive and exemplary damages and increased damages for willful infringement), Liens, fines, fees, penalties, and Litigation Expense.",
+        "contract": "AtnInternationalInc_20191108_10-Q_EX-10.1_11878541_EX-10.1_Maintenance Agreement"
+      },
+      {
+        "rank": 602,
+        "oof_risk_score": 0.4971416534031804,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "6.2 Records and Accounting by Antares. Antares shall keep records of the manufacture, testing and shipping of the Products, sample Products and Trainers and retain samples of such Products, sample Products and Trainers as are necessary to comply with cGMPs, Applicable Laws, the Quality Agreement, and manufacturing regulatory requirements applicable to Antares, as well as to assist with resolving Product, sample Product and Trainer complaints and other similar investigations. Copies of such records and samples shall be retained for the respective periods set forth in the Quality Agreement.",
+        "contract": "Antares Pharma, Inc. - Manufacturing Agreement"
+      },
+      {
+        "rank": 835,
+        "oof_risk_score": 0.4545670890332497,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "This agreement shall be for a term of five years from the date of this document. This agreement shall renew automatically each year thereafter, unless either party serves written notice of its intention not to renew, on the other at least 90 days prior to the expiration of the then current term of this agreement.",
+        "contract": "BOLIVARMININGCORP_05_23_2003-EX-2.1-VISP WEB SITE BUILDING AND HOSTING AGREEMENT"
+      }
+    ]
+  },
+  "1001-2000": {
+    "bucket_range": "Ranks 1001 - 2000",
+    "score_range": "0.4302 - 0.3429",
+    "real_clause_count": 3,
+    "benign_count": 11,
+    "unclear_count": 16,
+    "pct_real_clauses": 0.1,
+    "pct_benign": 0.36666666666666664,
+    "pct_unclear": 0.5333333333333333,
+    "samples": [
+      {
+        "rank": 1522,
+        "oof_risk_score": 0.37603659761035624,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "Insurance 48. The Venture will insure all its assets against loss where reasonable and standard practice in the industry. Indemnification 49. Each Member will be indemnified and held harmless by the Venture from any and all harm or damages of any nature relating to the Member's participation in Venture affairs except where such harm or damages results from gross negligence or willful misconduct on the part of the Member. Liability 50. No Member will be liable to the Venture or to any other Member for any error in judgment or any act or failure to act where made in good faith. The Member will be liable for any and all acts or failures to act resulting from gross negligence or willful misconduct. Liability Insurance 51. The Venture may acquire insurance on behalf of any Member, employee, agent or other person engaged in the business interest of the Venture against any liability asserted against them or incurred by them while acting in good faith on behalf of the Venture. Covenant of Good Faith 52. Members will use their best efforts, fairly and in good faith to facilitate the success of the Venture. Joint Venture Property 53. Where allowed by statute, title to all Venture property, including intellectual property, will remain in the name of the Venture.",
+        "contract": "BORROWMONEYCOM,INC_06_11_2020-EX-10.1-JOINT VENTURE AGREEMENT"
+      },
+      {
+        "rank": 1738,
+        "oof_risk_score": 0.3590320289998969,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "in each case of clauses (i) and (ii), (1) such payment to be made within sixty (60) days of the owing Party's receipt of the relevant detailed report and final Price pursuant to Section 3.4(a) and (2) Manufacturer shall be responsible for payment of the applicable accounting firm's reasonable and actual fees in connection with such audit.",
+        "contract": "UpjohnInc_20200121_10-12G_EX-2.6_11948692_EX-2.6_Manufacturing Agreement_ Supply Agreement"
+      },
+      {
+        "rank": 1741,
+        "oof_risk_score": 0.35882508327115364,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "9. Indemnification   9.1 Adaptimmune and Adaptimmune Limited agree to defend, indemnify, and hold harmless MD Anderson, System, each Principal Investigator and its/their Regents, trustees, directors, officers, staff, employees, students, faculty members, and its/their affiliates and contracted clients and other parties as may be listed on a Study Order (\"Indemnified Party/ies\"): (a) from and against any and all liability, claims, lawsuits, losses, demands, damages, costs, and expenses as a result of third party claims or judgments (\"Indemnified Losses\") resulting from (i) personal injury (including death) to any person or damage to property to the extent arising from the design or manufacture of the Study Drug, and (ii) the use of the Data or results of the Study by or on behalf of Adaptimmune, Adaptimmune Limited or any Joint Research Partner and (iii) Adaptimmune's or Adaptimmune Limited's negligence in connection with a Study or this Agreement; (b) from and against any Indemnified Losses arising from an injury to a Study subject caused by the Study Drug or any procedure required by the Protocol.",
+        "contract": "ADAPTIMMUNETHERAPEUTICSPLC_04_06_2017-EX-10.11-STRATEGIC ALLIANCE AGREEMENT"
+      },
+      {
+        "rank": 1661,
+        "oof_risk_score": 0.36526046934106693,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Unclear",
+        "text": "15.10 Changes. We will have the right, periodically, to make such changes in minimum policy limits and endorsements as we may determine are necessary or appropriate; provided, however, all changes will apply to all of our franchisees who are similarly situated. 16 TRANSFER OF INTEREST 16.1 By Us. We will have the right to transfer or assign this Agreement and all or any part of our rights or obligations under this Agreement to any person or legal entity, and any assignee of us, which assignee will become solely responsible for all of our obligations under this Agreement from the date of assignment.",
+        "contract": "GOOSEHEADINSURANCE,INC_04_02_2018-EX-10.6-Franchise Agreement"
+      },
+      {
+        "rank": 1412,
+        "oof_risk_score": 0.3848030659396653,
+        "oof_pred_class": "Liquidated Damages",
+        "classification": "Unclear",
+        "text": "10.1 Sponsorship, Advertising and Exclusivity Fees.  Client will pay Intuit       ---------------------------------------------      sponsorship and advertising fees of $2,644,010 and an exclusivity fee of      $661,003.  Such fees shall be paid to Intuit as follows.  An initial fee of      $[***] shall be due and payable on the Effective Date.  The remaining        ---      balance of $[***] shall be paid to Intuit in 12 equal monthly installments                   ---      of [***]. Each monthly installment should be payable in advance and due no          ---      later than the fifth (5th) of the month.",
+        "contract": "STAMPSCOMINC_06_24_1999-EX-10.18-SPONSORSHIP AGREEMENT"
+      },
+      {
+        "rank": 1679,
+        "oof_risk_score": 0.36380038767154166,
+        "oof_pred_class": "Non-Compete",
+        "classification": "Benign look-alike",
+        "text": ".  [*] page views three (3) months after the launch of the Co-Branded Site;",
+        "contract": "HealthcentralCom_19991108_S-1A_EX-10.27_6623292_EX-10.27_Co-Branding Agreement"
+      },
+      {
+        "rank": 1627,
+        "oof_risk_score": 0.3680748371866516,
+        "oof_pred_class": "Change of Control",
+        "classification": "Real risky clause (Change of Control)",
+        "text": "A \"Change of Control\" shall mean any event or circumstance as a result of which (i) any \"Person\" or \"group\" (as such terms are defined in Sections 13(d) and 14(d) of The Securities Exchange Act of 1934 (the \"Exchange Act\"), as in effect on the date hereof), other than the Subcontractor, is or becomes the \"beneficial owner\" (as defined in Rules 13(d)-3 and 13(d)-5 under the Exchange Act), directly or indirectly, of 50% or more on a fully diluted basis of the then outstanding voting equity interest of the Company, (ii) the board of directors of the Manufacturer shall cease to consist of a majority of the Manufacturer's board of directors on the date hereof (or directors appointed by a majority of the board of directors in effect immediately prior to such appointment) or (iii) the Manufacturer or any of its affiliates merges or consolidates with, or sells all or substantially all of its assets to, any other person or entity; 15.8 Amendment. This Agreement may be amended only by written amendment duly signed by authorized representatives of both Parties.",
+        "contract": "Zounds Hearing, Inc. - MANUFACTURING DESIGN MARKETING AGREEMENT"
+      },
+      {
+        "rank": 1514,
+        "oof_risk_score": 0.3770604972341712,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "1.33 \"First Commercial Sale\" means, with respect to any Product, the first sale to a Third Party for end use or consumption of such Product in the Territory after Regulatory Approval has been granted by the Regulatory Agency for the Product in the Territory.",
+        "contract": "MACROGENICSINC_08_02_2013-EX-10-COLLABORATION AGREEMENT"
+      },
+      {
+        "rank": 1860,
+        "oof_risk_score": 0.35137100189355974,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "for use in connection with the Promotion of the Product (the \"Promotional Materials\") and agrees to provide Company with sufficient quantities of the materials based on market demand and expected levels of Detailing efforts. Janssen agrees to consider in good faith Company's feedback in the development of any new promotional materials during the Term. Such Promotional Materials shall comply with all applicable Laws and may include written sales and advertising materials, detail aids, brochures, hand-outs, reprints, booth panels and any other promotional support items. Company shall use only the Promotional Materials provided by Janssen and the Product Label and Insert in its Promotion of the Product in the Territory. Company shall not add any Company Trademark to the Promotional Materials or otherwise alter the Promotional Materials in any way. Company shall not develop or use any other promotional materials in its Promotion of the Product.",
+        "contract": "IMMUNOMEDICSINC_08_07_2019-EX-10.1-PROMOTION AGREEMENT"
+      },
+      {
+        "rank": 1137,
+        "oof_risk_score": 0.4122246536788233,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "12.1. Vertex shall promptly indemnify Bunker One and pay any and all damages, losses, liabilities, costs and expenses, including reasonable attorneys' fees, incident to any suits, actions, investigations, claims or proceedings suffered, sustained, incurred or required to be paid by Bunker One by reason of any negligence, gross negligence and/or intentional act or omission on the part of Vertex in rendering services hereunder, or any breach or failure of observance or performance of any representation, warranty, covenant or agreement made by Vertex hereunder.",
+        "contract": "VertexEnergyInc_20200113_8-K_EX-10.1_11943624_EX-10.1_Marketing Agreement"
+      },
+      {
+        "rank": 1812,
+        "oof_risk_score": 0.35451245699538114,
+        "oof_pred_class": "Liquidated Damages",
+        "classification": "Unclear",
+        "text": "Charterer agrees to pay to Owner a fee of $______ per gallon of product transported. Owner will invoice such fees to Charterer on a monthly basis and Charterer will pay such invoiced amounts within 30 days of invoice date.",
+        "contract": "MARTINMIDSTREAMPARTNERSLP_01_23_2004-EX-10.3-TRANSPORTATION SERVICES AGREEMENT"
+      },
+      {
+        "rank": 1077,
+        "oof_risk_score": 0.420644235497209,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Unclear",
+        "text": "Subject to the terms and conditions of this Agreement, Licensee shall have the sole right and obligation to conduct the Commercialization of the Licensed Products in the Field in the Territory, including the sole right to conduct the following activities: (a) developing and executing a commercial launch and pre-launch plan; (b) set-up of distribution network in the Territory, negotiation of wholesaler contracts and negotiations with buyer groups (including group purchasing organizations) and key accounts; (c) negotiating with public and private health insurance companies and governmental authorities regarding the price and reimbursement status of the Licensed Products and obtaining and maintaining pricing and reimbursement approvals; (d) marketing, medical affairs, and promotion (including by entertaining a dedicated and sufficiently qualified sales staff, providing for appropriate incentive mechanisms for such sales staff, attending relevant conferences, interacting with key opinion leaders, etc.); (e) set-up of hub services including pre-authorization and reimbursement support and co-pay assist programs; (f) booking of sales and performance of related services; (g) handling all aspects of order processing, invoicing and collection, inventory and receivables; (h) providing customer support, including handling medical queries,",
+        "contract": "CoherusBiosciencesInc_20200227_10-K_EX-10.29_12021376_EX-10.29_Development Agreement"
+      },
+      {
+        "rank": 1637,
+        "oof_risk_score": 0.3671423687851572,
+        "oof_pred_class": "Exclusivity",
+        "classification": "Benign look-alike",
+        "text": "15. Non-Exclusive. This Agreement does not create an exclusive arrangement for the Agent to provide services to the Company, and nothing in this Agreement shall preclude the Company from contracting or entering into an arrangement with any other sales agent, consultant, broker-dealer or other person for such other person or entity to provide services to the Company as agent in the Offering and to receive compensation from the Company in connection with the Offering.",
+        "contract": "BANUESTRAFINANCIALCORP_09_08_2006-EX-10.16-AGENCY AGREEMENT"
+      },
+      {
+        "rank": 1974,
+        "oof_risk_score": 0.34422605541893675,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Benign look-alike",
+        "text": "16.      AUDITS AND INSPECTIONS............................................42          16.A.    AUDITS...................................................42          16.B.    RIGHT OF ENTRY AND INSPECTION............................42",
+        "contract": "MRSFIELDSORIGINALCOOKIESINC_01_29_1998-EX-10-FRANCHISE AGREEMENT"
+      },
+      {
+        "rank": 1939,
+        "oof_risk_score": 0.346307512215871,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "INTELLECTUAL PROPERTY AGREEMENT",
+        "contract": "VERSOTECHNOLOGIESINC_12_28_2007-EX-99.3-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 1900,
+        "oof_risk_score": 0.3484993688295919,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "8. OWNERSHIP 8.1 Ownership of Arizona Licensed IP. The Buyer Entities acknowledge and agree that (a) Arizona and its Affiliates own the Arizona Licensed IP (other than the Arizona Licensed Trademarks), (b) AWI Licensing LLC owns the Arizona Licensed Trademarks, (b) neither the Company, nor its Affiliates or its Sublicensees, will acquire any ownership rights in the Arizona Licensed IP, and (c) the Company shall not represent or make any claim that it has an ownership interest in any Arizona Licensed IP. Without limitation to the foregoing, the Company shall not file applications to register any Arizona Licensed IP or assist any person in doing the same, or contest, challenge, or otherwise take any action adverse to Arizona's and its Affiliates' ownership of or rights in and to the Arizona Licensed IP, or assist any person in doing the same.",
+        "contract": "ArmstrongFlooringInc_20190107_8-K_EX-10.2_11471795_EX-10.2_Intellectual Property Agreement"
+      },
+      {
+        "rank": 1281,
+        "oof_risk_score": 0.39739747740183873,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Real risky clause (Anti-Assignment)",
+        "text": "13.5 PUBLICITY. Except as may be required by applicable laws, rules or regulations (including those arising under any securities laws), neither Party will originate any publicity, news release or other public announcement, written or oral, whether to the public press or otherwise, concerning the relationship between the Parties or the transactions described in this Agreement without the prior written consent of the other Party, which consent shall not be unreasonably withheld or delayed. In the event disclosure is required by applicable law, rules or regulations, then the Party required to so disclose such information shall, to the extent possible, provide to the other Party for its approval (such approval not to be unreasonably withheld) a written copy of such public announcement at least five business days prior to disclosure. Notwithstanding the foregoing, either Party shall have the right to make a press release with respect to its entering into this Agreement; provided that such Party provides to the other Party a copy of the proposed press release no less than five business days prior to its proposed release and that the contents of such press release shall be subject to the other Party's consent, which consent shall not be unreasonably delayed or withheld.",
+        "contract": "NeoformaInc_19991202_S-1A_EX-10.26_5224521_EX-10.26_Co-Branding Agreement"
+      },
+      {
+        "rank": 1884,
+        "oof_risk_score": 0.34981643469380913,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "(k) \"Assigned Other IP\" means all of the Intellectual Property (other than Copyrights, Know-How, Patents, and Software), if any, owned by any Seller Party as of the Initial Closing Date that was created by a Business Employee, including the Trademarks and other Intellectual Property set forth on Schedule 1.1(k)(i), but for the avoidance of doubt, excluding the Trademarks set forth on Schedule 1.1(k)(ii).",
+        "contract": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT"
+      },
+      {
+        "rank": 1762,
+        "oof_risk_score": 0.3572385708712205,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Unclear",
+        "text": "D.       RESERVATION OF RIGHTS. NETGEAR, on behalf of itself and its suppliers, reserves all proprietary rights in and to (i) all designs, engineering details, and other data pertaining to the Products, (ii) all original works, computer programs, fixes, updates (but not Distributor's or 'end-users' developed programs), discoveries, inventions, patents, know-how and techniques arising out",
+        "contract": "NETGEAR,INC_04_21_2003-EX-10.16-DISTRIBUTOR AGREEMENT"
+      },
+      {
+        "rank": 1320,
+        "oof_risk_score": 0.3935547035829764,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "20. Warranty Disclaimer   Chase makes no warranties, representations or conditions with regard to the Chase Affiliate Program or any services provided hereunder, whether express or implied, arising by law or otherwise, INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR NONINFRINGEMENT OR ANY IMPLIED WARRANTY ARISING OUT OF COURSE OF PERFORMANCE, COURSE OF DEALING OR USAGE OF TRADE.",
+        "contract": "CreditcardscomInc_20070810_S-1_EX-10.33_362297_EX-10.33_Affiliate Agreement"
+      },
+      {
+        "rank": 1550,
+        "oof_risk_score": 0.3738402490501798,
+        "oof_pred_class": "Anti-Assignment",
+        "classification": "Benign look-alike",
+        "text": "party without the prior written approval of IBM.",
+        "contract": "MANUFACTURERSSERVICESLTD_06_05_2000-EX-10.14-OUTSOURCING AGREEMENT"
+      },
+      {
+        "rank": 1175,
+        "oof_risk_score": 0.4075508415283053,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Unclear",
+        "text": "6.3 Indemnification by ArTara. To the extent permitted by law, ArTara agrees to defend, indemnify and hold the University of Iowa Research Foundation, the University, the State of Iowa, the University's Board of Regents, their respective affiliates, trustees, officers, directors, faculty, staff, students, successors, assigns, independent contractors, agents and employees including but not limited to Principal Investigator (\"University Indemnitees\"), harmless from and against any and all liability, loss, expense, reasonable adjudicated attorneys' fees, or claims for injury or damages arising out of the use of the Program Data by ArTara and its Affiliates and subcontractors including but not limited to the CRO involved in the Project, but only in proportion to and to the extent such liability, loss, expense, attorneys' fees, or claims for injury or damages are caused by or result from the negligent or acts or omissions of ArTara, its officers, agents, employees, subcontractors, the CRO or Affiliates.",
+        "contract": "ArtaraTherapeuticsInc_20200110_8-K_EX-10.5_11943350_EX-10.5_License Agreement"
+      },
+      {
+        "rank": 1372,
+        "oof_risk_score": 0.38905608705052425,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Unclear",
+        "text": "This Agreement shall have an initial term of one (1) year from the date first above written (the \"Initial Term\"), and shall thereafter automatically renew for successive two (2) year periods (each a \"Renewal Term\"), unless earlier terminated in accordance with the terms of this Agreement. Developer may cancel this Agreement if the total gross annual software revenue does not meet DeVeloper's revenue forecast for the Distributor, such cancellation to be eftected by written notice delivered to Distributor not later than 30 days after any Developer's Fiscal Year end (June 30). Either party may cancel this Agreement effective on the last day of the Initial Term, or",
+        "contract": "HYPERIONSOFTWARECORP_09_28_1994-EX-10.47-EXCLUSIVE DISTRIBUTOR AGREEMENT"
+      },
+      {
+        "rank": 1528,
+        "oof_risk_score": 0.375723704805852,
+        "oof_pred_class": "IP Ownership Assignment",
+        "classification": "Benign look-alike",
+        "text": "ARTICLE 9 INTELLECTUAL PROPERTY RIGHTS",
+        "contract": "VERICELCORP_08_06_2019-EX-10.10-SUPPLY AGREEMENT"
+      },
+      {
+        "rank": 1211,
+        "oof_risk_score": 0.4038603141576005,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Benign look-alike",
+        "text": "(i) IBM may, at IBM's sole discretion, terminate all rights granted to          MSL under this Attachment 6 (and its associated Exhibits and          Appendices), with cause immediately upon written notice to MSL;",
+        "contract": "MANUFACTURERSSERVICESLTD_06_05_2000-EX-10.14-OUTSOURCING AGREEMENT"
+      },
+      {
+        "rank": 1236,
+        "oof_risk_score": 0.4012896029382045,
+        "oof_pred_class": "Termination for Convenience",
+        "classification": "Real risky clause (Termination for Convenience)",
+        "text": "18.2.4 Development Diligence Failure. FG may terminate this Agreement upon thirty (30) days notice to Astellas in the event Astellas fails to meet any of its development diligence requirements as set forth in Article 11 hereof, provided, however, that with respect to the development diligence obligations set forth in Section 11.3.2, such termination right on behalf of FG shall be triggered only upon Astellas' failure to meet such development diligence obligations for a Major Indication (except those Major Indications set forth in Section 11.3.1(iv)), and Astellas may terminate this Agreement upon thirty (30) days notice to FG in the event FG fails to meet the development diligence requirement as set forth in Section 11.2 hereof.",
+        "contract": "FIBROGENINC_10_01_2014-EX-10.11-COLLABORATION AGREEMENT"
+      },
+      {
+        "rank": 1102,
+        "oof_risk_score": 0.41703637630971335,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "1(b). After Business Hours (Outside Business hours)   Severity Level   Time to Respond   Escalation Time   Comments",
+        "contract": "ELANDIAINTERNATIONALINC_04_25_2007-EX-10.21-Outsourcing Agreement"
+      },
+      {
+        "rank": 1987,
+        "oof_risk_score": 0.3437313114516895,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Benign look-alike",
+        "text": "16.5  Save as provided for in Section 17 Distributor shall indemnify and hold harmless and defend the Airspan Parties from and against all claims, demands, actions, suits, proceedings, writs, judgments, orders and decrees brought, made or rendered against them or any of them and all damages, losses and expenses suffered or incurred by them or any of them howsoever arising out of or related to the breach by Distributor of any of the terms of this Agreement. Airspan shall notify Distributor forthwith of any claim, demand, action, suit, proceeding, writ, judgment, order or decree falling within the scope of this Section 16.5 and shall permit Distributor sole conduct of the same and shall provide reasonable assistance in relation thereto, subject to appropriate defense by Distributor and the payment by Distributor of Airspan's reasonable costs and expenses.",
+        "contract": "AIRSPANNETWORKSINC_04_11_2000-EX-10.5-Distributor Agreement"
+      },
+      {
+        "rank": 1903,
+        "oof_risk_score": 0.3482814215586275,
+        "oof_pred_class": "Audit Rights",
+        "classification": "Unclear",
+        "text": "16 9.5 Web Sites 16 9.6 Covenant 17 10.0 REPORTS, RECORDS, AUDITS, AND PRIVACY 17 10.1 Reports 17 10.2 Maintenance of Records 17 10.3 Audit 17 10.4 Ownership of Information 18 10.5 Privacy and Data Protection 18",
+        "contract": "HOSPITALITYINVESTORSTRUST,INC_04_07_2014-EX-10.26-FRANCHISE AGREEMENT"
+      },
+      {
+        "rank": 1948,
+        "oof_risk_score": 0.34573808418624585,
+        "oof_pred_class": "Cap on Liability",
+        "classification": "Benign look-alike",
+        "text": "6.3. DISCLAIMER OF ALL OTHER WARRANTIES. THIS PERFORMANCE WARRANTY, AND THE WARRANTIES IN ARTICLE 12 HEREOF, ARE IN LIEU OF, AND METAVANTE DISCLAIMS ANY AND ALL OTHER WARRANTIES, CONDITIONS, OR REPRESENTATIONS (EXPRESS OR IMPLIED, ORAL OR WRITTEN) WITH RESPECT TO THE SERVICES PROVIDED UNDER THIS AGREEMENT, INCLUDING, WITHOUT LIMITATION, ANY AND ALL IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS OR SUITABILITY FOR ANY PURPOSE (WHETHER OR NOT METAVANTE KNOWS, HAS REASON TO KNOW, HAS BEEN ADVISED, OR IS OTHERWISE IN FACT AWARE OF ANY SUCH PURPOSE), WHETHER ALLEGED TO ARISE BY LAW, BY REASON OF CUSTOM OR USAGE IN THE TRADE, OR BY COURSE OF DEALING. IN ADDITION, METAVANTE DISCLAIMS ANY WARRANTY OR REPRESENTATION TO ANY PERSON OTHER THAN CUSTOMER WITH RESPECT TO THE SERVICES PROVIDED UNDER THIS AGREEMENT.",
+        "contract": "OFGBANCORP_03_28_2007-EX-10.23-OUTSOURCING AGREEMENT"
+      }
+    ]
+  }
+}

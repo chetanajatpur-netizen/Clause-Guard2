@@ -1,0 +1,613 @@
+{
+  "total_flags": 3866,
+  "true_positives": 452,
+  "total_false_alarms": 3414,
+  "raw_precision": 0.11691670977754785,
+  "real_clause_omissions_in_100": 3,
+  "benign_in_100": 27,
+  "unclear_in_100": 70,
+  "adjusted_precision_as_tp": 0.14330056906363167,
+  "adjusted_precision_excluding": 0.12008501594048884,
+  "samples": [
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Unclear",
+      "contract": "IpassInc_20181203_8-K_EX-99.1_11445874_EX-99.1_Reseller Agreement",
+      "text": "5. INTELLECTUAL PROPERTY 5.1 Channel Partner acknowledges that all iPass intellectual property referenced herein contains the valuable trade secrets of iPass, and Channel Partner agrees not to cause or permit the reverse engineering, translation, disassembly, or decompilation of the intellectual property, or otherwise to attempt to derive the source code thereof, whether in whole or in part. Channel Partner will not use, reproduce, modify, prepare derivative works of, distribute, sublicense, loan, sell, or otherwise transfer any such iPass intellectual property except as expressly permitted herein."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "HertzGroupRealtyTrustInc_20190920_S-11A_EX-10.8_11816941_EX-10.8_Trademark License Agreement",
+      "text": "1.4 Licensor desires to license the Licensed Mark to Licensee to be used as part of, and in conjunction with, the trade name Hertz Group Realty Trust, Inc., subject to the terms and conditions set forth in this Agreement."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Benign look-alike",
+      "contract": "ConformisInc_20191101_10-Q_EX-10.6_11861402_EX-10.6_Development Agreement",
+      "text": "Conformis shall have no obligation or liability with respect to any Claim under Section   7.3(a)(iii) or Section 7.3(a)(iv) to the extent directly arising out of or relating to: (1) any use of the Products in any manner not in   accordance with applicable documentation (e.g., instructions for use, package inserts, labels, surgical guides and other materials   provided by or approved by Conformis) that is not a result of Conformis' conduct; (2) damage to the Products occurring after   shipment that is not a result of Conformis' conduct; or (3) any modifications to the Products that are not contemplated by the   instructions for use thereto by any Person other than Supplier and that is not a result of Conformis' conduct. Notwithstanding   anything to the contrary, Stryker's sole remedy and Conformis' exclusive liability for breach of Section 3.2 with respect to a   Product or a Stryker Product shall be as set forth in Section 10.1(i) of the Distribution Agreement. (b) Indemnification by Stryker."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "ELFBEAUTY,INC_07_02_2020-EX-10.1-COOPERATION AGREEMENT",
+      "text": "(xiv) enter into substantive discussions, negotiations, agreements or understandings with any Third Party with respect to the foregoing, or solicit, assist, prompt, induce or attempt to induce any Third Party to take any action or make any statement with respect to any of the foregoing, or otherwise take or cause any action or make any statement inconsistent with any of the foregoing; or"
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Benign look-alike",
+      "contract": "BERKELEYLIGHTS,INC_06_26_2020-EX-10.12-COLLABORATION AGREEMENT",
+      "text": "Any express acceptance of a Purchase Order by BLI shall confirm the quantity of Beacon Optofluidic Machines (including related Hardware and Software), Consumables (on a Consumable-by-Consumable basis) and Services requested to be supplied or performed, the prices, pursuant to Section 5.2 (Pricing), associated with such Beacon Optofluidic Machines (including related Hardware and Software), Consumables (on a Consumable-by-Consumable basis) and Services and that delivery or performance of such Optofluidic Machines (including related Hardware and Software), Consumables and Services shall occur [***]; provided that (i) BLI shall not have the right to reject, and shall be deemed to have accepted, any Purchase Order meeting the requirements of this Section 5.3 (Purchase Orders; Delivery and Payment) and (ii) if any Purchase Order contains quantities in excess of the Maximum Amount for such month and otherwise meets the requirements of this Section 5.3 (Purchase Orders; Delivery and Payment), then such Purchase Order shall be deemed accepted except with respect to such excess quantities and, subject to Section 5.3.1 (Issuance), BLI shall"
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "MEETGROUP,INC_06_29_2017-EX-10.1-COOPERATION AGREEMENT",
+      "text": "Each of the parties hereto irrevocably waives, and agrees not to assert, by way of motion, as a defense, counterclaim or otherwise, in any action, suit or other legal proceeding with respect to this Agreement, (a) any claim that it is not personally subject to the jurisdiction of the above-named courts for any reason, (b) that it or its property is exempt or immune from jurisdiction of any such court or from any legal process commenced in such courts (whether through service of notice, attachment before judgment, attachment in aid of execution of judgment, execution of judgment or otherwise), and (c) to the fullest extent permitted by applicable law, that (i) such action, suit or other legal proceeding in any such court is brought in an inconvenient forum, (ii) the venue of such action, suit or other legal proceeding is improper or (iii) this agreement, or the subject matter hereof, may not be enforced in or by such court."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "NakedBrandGroupInc_20150731_POS AM (on S-1)_EX-10.75_9196027_EX-10.75_Endorsement Agreement",
+      "text": "(3) In marketing and media opportunities in connection with the Wade Services (as defined below); and"
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "VirtuosoSurgicalInc_20191227_1-A_EX1A-6 MAT CTRCT_11933379_EX1A-6 MAT CTRCT_License Agreement",
+      "text": "LICENSEE hereby grants JHU permission to include LICENSEE's name and a link to LICENSEE's website in JHU's annual reports and on JHU's website to showcase technology transfer-related stories. JHU shall have the right to list LICENSEE and display the logotype or symbol of LICENSEE on JHU's website and on JHU publications as a licensee startup company based upon JHU technology."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Unclear",
+      "contract": "HALITRON,INC_03_01_2005-EX-10.15-SPONSORSHIP AND DEVELOPMENT AGREEMENT",
+      "text": "(i) TDA has full right to enter into this Agreement and to             perform all of its obligations hereunder without, to its knowledge,             violating the legal or equitable rights of any person, firm or             entity and that Smith shall not be under any obligation for the             payment of any commissions or fees to any person, firm or entity             related to or connected with TDA on account of this Agreement."
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Unclear",
+      "contract": "ReynoldsConsumerProductsInc_20200121_S-1A_EX-10.22_11948918_EX-10.22_Service Agreement",
+      "text": "(b) Each Party shall, and shall cause its Affiliates to, as required by applicable Law, (i) ensure that only those of its Personnel who are specifically authorized to have access to the Systems of the other Party or its Affiliates gain such access and (ii) prevent unauthorized access, use, destruction, alteration or loss of information contained therein, including by notifying its Personnel regarding the restrictions set forth in this Agreement and establishing appropriate policies designed to effectively enforce such restrictions."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "Monsanto Company - SECOND A_R EXCLUSIVE AGENCY AND MARKETING AGREEMENT ",
+      "text": "(a) Indemnification. Each party hereto agrees to indemnify, defend and hold harmless the other party and its employees, officers, directors, agents and assigns from and against any and all loss (including reasonable attorneys' fees), damage, injury or liability, whether incurred as a party or non-party to any action or proceeding, that may arise out of any actual or threatened claim asserted or action brought by or on behalf of a third party for injury to or death of a person for loss of or damage to property, including employees and property of the indemnified party (\"Loss\"), to the extent resulting directly or indirectly from the indemnifying party's actual or alleged (i) breach of a duty, representation, or obligation of this Agreement, or (ii) negligence or willful misconduct in the performance of its obligations under this Agreement, except to the extent that such indemnification is void or otherwise unenforceable under applicable law in effect on or validly retroactive to the date of this Agreement."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Unclear",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "8.4   Assignment / Subcontracts: [CERES/IGER] has concluded this Agreement with [Party] in view of [Party]'s specific qualifications and  [Party] shall not have the right to assign any of its rights or obligations under this Agreement nor to sub-contract any part of the  Program activities to any third party, except with the prior written approval of [CERES/IGER]. [CERES/IGER] has the right to assign its rights and obligations under this Agreement to any third party. Further, [CERES/IGER] has the right to       CERES-IGER Collaboration Agreement   Page 43 of 75"
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Unclear",
+      "contract": "VerizonAbsLlc_20200123_8-K_EX-10.4_11952335_EX-10.4_Service Agreement",
+      "text": "(a) Transfer and Absolute Assignment of Initial Receivables. In consideration of the Issuer's delivery to the Depositor of the Notes, the Class A Certificate and the Class B Certificate, effective on the Closing Date, the Depositor transfers and absolutely assigns to the Issuer, without recourse (other than the Depositor's obligations under this Agreement), all of the Depositor's right, title and interest, whether now owned or later acquired, in the Initial Receivables and the other related Depositor Transferred Property. The Depositor certifies that the Credit Enhancement Test and the Pool Composition Tests are satisfied for the transfer and assignment of the Initial Receivables and the other related Depositor Transferred Property on the Closing Date."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "7.2   [Party] warrants that the CERES/IGER Plant Material will exclusively and restrictedly be used under suitable containment conditions,  and in accordance with all applicable regulations, and it will not be used on human subjects. In addition, [Party] will strictly comply  with any planting distance, isolation and similar requirements set forth in ANNEX I. [Party] will obtain any authorizations or permits or  proceed to any notifications which may be required for the Program activities, [Party] will inform [CERES/IGER] in writing, within  thirty (30) days from the Effective Date, of any such requirements and certify its compliance with same."
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Unclear",
+      "contract": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement",
+      "text": "11.3 Dynamic Hearing may terminate this Agreement immediately by written notice to IntriCon if IntriCon:"
+    },
+    {
+      "pred": "Liquidated Damages",
+      "classification": "Unclear",
+      "contract": "SCOUTCAMINC_05_12_2020-EX-10.22-SERVICES AGREEMENT",
+      "text": "4. Compensation. In consideration of the services to be rendered by Maimon hereunder and for Maimon's service as a director on the Board of Directors of the Company, the Company will pay Maimon a monthly fee of $1,000 during the Minimum Period, beginning on the Effective Date."
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Unclear",
+      "contract": "LeadersonlineInc_20000427_S-1A_EX-10.8_4991089_EX-10.8_Co-Branding Agreement",
+      "text": "1.8.  Intellectual Property shall mean any and all trade secrets, patents, copyrights, trademarks, service marks, URLs, trade dress, brand features, know- how and similar rights of any type under the laws of any applicable governmental authority, including, without limitation, all applications and registrations relating to any of the foregoing."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "Monsanto Company - SECOND A_R EXCLUSIVE AGENCY AND MARKETING AGREEMENT ",
+      "text": "(a) Anti-Corruption Compliance. Agent represents and warrants that it will take no action in relation to this Agreement that would be in violation of, or would subject Monsanto to any liability for, or penalty under, the applicable anti- corruption laws and regulations of any Included Market."
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Real risky clause (Non-Compete)",
+      "contract": "TomOnlineInc_20060501_20-F_EX-4.46_749700_EX-4.46_Co-Branding Agreement",
+      "text": "8.3.2.3 the Party who delivers the Type Two Notice gives notice to the other Parties of its intention to exercise its right to end the Non-Competition Period within 30 days of the expiry of the Type Two Cure Period."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "FulucaiProductionsLtd_20131223_10-Q_EX-10.9_8368347_EX-10.9_Content License Agreement",
+      "text": "This CONTENT DISTRIBUTION AND LICENSE AGREEMENT (the \"Agreement\") is entered into as of November 15, 2012 (the \"Effective Date\") by and between, CONVERGTV, INC., a Delaware Corporation, (\"ConvergTV\"), whose principal place of business is located at 3201 Budinger Ave., St. Cloud, FL 34769, P.O. Box 540817, Merritt Island, Florida 32954, and Fulucai Productions Ltd. (the producer, publisher, content owner, authorized distributor, agent, or assignee of the Program rights, licensor, and grantor, any and all referred to herein as the \"Producer\"), whose principal place of business is located at 3632- 13 St. SW, Calgary, Alberta, Canada, T2T 3R1. The foregoing entities may be individually referred to as a \"Party\" or may be jointly referred to as the \"Parties\". The Parties agree as follow:   1. Grant of License and Rights."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "XpresspaGroupInc_20190401_10-K_EX-10.28_11599457_EX-10.28_Marketing Agreement",
+      "text": "5.05. Calm or its authorized designees shall be the sole suppliers to XSPA of XSPA's requirements for Products, Gifts, Shopping Bags, Uniforms and Inserts (collectively, \"Product Collateral\") for each Store throughout the Territory. Calm shall use reasonable efforts to fulfill all of XSPA's requirements for Product Collateral in accordance with the terms and conditions of this Agreement. In the event that inventory of any Product Collateral in any Store falls below fifty percent (50%) of the initial amount of such Product Collateral provided to such Store, XSPA shall use best efforts to advise Calm in sufficient detail to enable Calm to ship additional inventory of such Product Collateral to such Store. The Parties acknowledge and agree that, as between the Parties, Calm shall retain legal title to any and all Product Collateral (other than Uniforms) until sold in a Store in the Territory or otherwise disbursed in a Store in the Territory (in the case of Gifts, Inserts and Shopping Bags) in accordance with the terms and conditions of this Agreement."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Benign look-alike",
+      "contract": "BERKELEYLIGHTS,INC_06_26_2020-EX-10.12-COLLABORATION AGREEMENT",
+      "text": "8.6.1 Access to New Products. During the Term, BLI shall promptly notify Ginkgo of any upcoming or then-current commercial availability of any new Beacon Optofluidic Machine or Consumable that, at that time, is not listed in Schedule 1.10 (Beacon Optofluidic Machine) or Schedule 1.36 (Consumables) and the Parties shall[***]. Page 44 of 85"
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Benign look-alike",
+      "contract": "Monsanto Company - SECOND A_R EXCLUSIVE AGENCY AND MARKETING AGREEMENT ",
+      "text": "(1) The Agent intends to terminate this Agreement pursuant to Section 10.5(b), in which case such notice shall constitute a termination notice for purposes of this Agreement provided that the termination shall be effective at the end of the Third Program Year following the Program Year in which the Agent delivers its Notice of Termination pursuant to this provision; or"
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Benign look-alike",
+      "contract": "Monsanto Company - SECOND A_R EXCLUSIVE AGENCY AND MARKETING AGREEMENT ",
+      "text": "(b) Any suit, action or proceeding against any party hereto with respect to the subject matter of this Agreement, or any judgment entered by any court in respect thereof, must be brought or entered in the United States District Court for the District of Delaware, and each such party hereby irrevocably submits to the jurisdiction of such court for the purpose of any such suit, action, proceeding or judgment. If such court does not have jurisdiction over the subject matter of such proceeding or, if such jurisdiction is not available, then such action or proceeding against any party hereto shall be brought or entered in the Court of Chancery of the State of Delaware, County of New Castle, and each party hereby irrevocably submits to the jurisdiction of such court for the purpose of any such suit, action, proceeding or judgment. Each party hereto hereby irrevocably waives any objection which either of them may now or hereafter have to the laying of venue of any suit, action or proceeding arising out of or relating to this Agreement brought as provided in this subsection, and hereby further irrevocably waives any claim that any such suit, action or proceeding brought in any such court has been brought in an inconvenient forum."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement",
+      "text": "3.2 Dynamic Hearing grants to IntriCon in accordance with this Agreement, for the Term, a license, to Use Dynamic Hearing's  Technology, Software and Documentation developed as of the Commencement Date to manufacture, import, sell and offer for sale throughout the  Territory, Products containing Dynamic Hearing's Technology and Software. This grant specifically excludes products for Contact Centers, and  the use of ADRO Technology in electrical stimulation of the auditory system."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "TomOnlineInc_20060501_20-F_EX-4.46_749700_EX-4.46_Co-Branding Agreement",
+      "text": "1.3 \"Affiliate Program\" means a marketing and/or advertising affiliate program made generally available from time to time to third parties on non-negotiated and generally available terms by (i) Skype or (ii) any third party that contracts with Skype which (a) is not a Primarily PRC Based Service Provider and (b) operates in multiple international markets (which may include the PRC) (\"Third Party Affiliate Partner\"), in each case whereby other third parties are permitted to (x) in the case of a program made available by Skype, advertise the Skype Software and/or link to the Skype Site from Web Sites hosted and operated by such third parties, or (y) in the case of a program made available by a Third Party Affiliate Partner, (1) advertise the Skype Software together with such Third Party Affiliate Partner's software and/or (2) link to Web Sites hosted and operated by such Third Party Affiliate Partner, provided that, in each case, the arrangement with the Third Party Affiliate Partner applies to multiple territories (which may include the PRC)."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "HALITRON,INC_03_01_2005-EX-10.15-SPONSORSHIP AND DEVELOPMENT AGREEMENT",
+      "text": "6.2 Post-Term Sales. Upon expiration of this Agreement, TDA shall cease all uses of the Rights and/or Smith's Likeness with respect to advertising, endorsing and/or promoting TDA, but TDA shall be free to continue to distribute and sell its Golf Instruction Related Products which incorporate Smith's Likeness for up to 180 days after the expiration of the Term (although TDA may not use the Rights or Smith's Likeness to promote or advertise TDA or any of TDA's non-Golf Instruction Related Products when selling the Golf Instruction Related Products, nor can TDA highlight Smith's Likeness in its packaging or sales efforts); provided, however, that TDA shall have no such right of post-Term sales unless TDA is not in default of any of its obligations hereunder as of the date of expiration or termination."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT",
+      "text": "3.    Is convicted of or pleads no contest to a felony or other crime or offense that is likely to adversely affect your reputation, the Franchised Restaurant, or the goodwill associated with the Marks or System;"
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "TomOnlineInc_20060501_20-F_EX-4.46_749700_EX-4.46_Co-Branding Agreement",
+      "text": "1.16 \"Gross Revenue\" means any and all revenue actually received and collected by a Party, or any Subsidiary or other Affiliate, licensee, distributor or reseller thereof, from (i) any SkypeOut, SkypeIn or Skype Plus services (or other products or services similar to Skype Plus developed under this Agreement by the Parties) provided through or in connection with the Company-Skype Branded Application, Company-Skype Branded Content or Company-Skype Branded Web Site, and (ii) any advertising, licensing, distribution or other exploitation of the Company-Skype Branded Application, Company-Skype Branded Content or Company-Skype Branded Web Site. For purposes of clarity, save as otherwise provided in this Agreement, no development (including, without limitation, any development, updating, upgrading and improvement of software or other technology), sales, promotional, operating, customer support or marketing costs incurred by any Party, including, without limitation, of any third party, in connection with the Company- Skype Branded Application, Company-Skype Branded Content or Company-Skype Branded Web Site, shall be deducted from Gross Revenue."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "JOINTCORP_09_19_2014-EX-10.15-FRANCHISE AGREEMENT",
+      "text": "From time to time we grant to persons who meet our qualifications, franchises to own and operate a The Joint Corp. Location franchise business that will manage clinics that specialize in providing chiropractic services and products to the general public through licensed chiropractic professionals (\"Clinic(s)\"). This Agreement is being presented to you because of the desire you have expressed to obtain the right to develop, own, and be franchised to operate a The Joint Corp. Location (we will refer to your The Joint Corp. franchise as the \"Franchise\" or the \"Franchised Business\"). You may purchase and operate your Franchise as a new, start-up Location (a \"Start-up Location\"), or may convert an existing chiropractic practice to a The Joint Corp. Location (a \"Conversion Location\"). In signing this Agreement, you acknowledge that you have conducted an independent investigation of The Joint Corp. Franchised Business, and recognize that, like any other business, the nature of it may evolve and change over time, that an investment in a The Joint Corp. Franchised Business involves business risks, and that the success of this business venture is primarily dependent on your business abilities and efforts."
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Unclear",
+      "contract": "JOINTCORP_09_19_2014-EX-10.15-FRANCHISE AGREEMENT",
+      "text": "Under the Waiver Agreement, you will agree that, instead of entering into the Management Agreement with a separate PC, you will (a) operate the Clinic, including performing all responsibilities and obligations of the \"PC\" under the Management Agreement, and (b) manage the Clinic as required in this Agreement and by performing all the responsibilities and obligations of the \"Company\" under the Management Agreement. You are responsible for operating in full compliance with all laws that apply to a Clinic, and you must make your own determination as to your legal compliance obligations. Additionally, the laws applicable to your Clinic may change, and if there are any chiropractic regulations or other laws that would render your operation of the Clinic through a single entity (or otherwise) in violation of any medical regulations, you must immediately advise us of such change and of the your proposed corrective action to comply with chiropractic regulations, including (if applicable) entering into a Management Agreement with a PC. Similarly, if we discover any such laws, upon providing you notice of such laws, you agree to make such changes as are necessary to comply with medical regulations, including (if applicable) entering into a Management Agreement with a PC. THE JOINT\u2026THE CHIROPRACTIC PLACE\u2122 FRANCHISE AGREEMENT"
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "BERKELEYLIGHTS,INC_06_26_2020-EX-10.12-COLLABORATION AGREEMENT",
+      "text": "11.4.2 Ginkgo has independently developed all Ginkgo Background IP or otherwise has a valid right to use, and, as applicable, to permit BLI and its permitted sublicensees to use, the Ginkgo Background IP for all permitted purposes under this Agreement; and"
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Benign look-alike",
+      "contract": "PHREESIA,INC_05_28_2019-EX-10.18-STRATEGIC ALLIANCE AGREEMENT",
+      "text": "25.6 Termination for Change of Control. [***]."
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Benign look-alike",
+      "contract": "ConformisInc_20191101_10-Q_EX-10.6_11861402_EX-10.6_Development Agreement",
+      "text": "\"Representatives\" has the meaning set forth in the Asset Purchase Agreement. \"Stryker Background IP\" means any Invention, and all Intellectual Property rights underlying such Invention, that is, as   of the Effective Date owned or licensable by Stryker without causing a breach of, or incurring any obligation to, a third party, in   each case to the extent each such Invention is (a) necessary or reasonably useful to design, develop, manufacture, sell and   otherwise exploit the KIB Product and (b) provided to Conformis by or on behalf of Stryker in connection with Conformis'   activities under this Agreement, and, for the avoidance of doubt, excluding the Transferred IP, Conformis Background IP,   Improved Conformis Background IP and Improved Stryker Background IP. \"Stryker Indemnified Parties\" has the meaning set forth in Article 7.3(a) of this Agreement. \"Stryker-Prosecuted Joint IP Rights\" has the meaning set forth in Article 5.8 of this Agreement. \"Termination Notice\" means a written notice delivered by one Party to the other Party of its election to terminate this   Agreement pursuant to Article VIII. \"Third Party\" has the meaning set forth in the Asset Purchase Agreement."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "PHREESIA,INC_05_28_2019-EX-10.18-STRATEGIC ALLIANCE AGREEMENT",
+      "text": "(a) The Company is solely responsible for the development, update, performance, and maintenance of the Subscription Software Service. The Company covenants to use its best efforts to ensure that the Subscription Software Services are made available to Allscripts and each Sublicensed Customer and that support for Merchant Processing Services are made available to each Sublicensed Customer in accordance with the warranties, terms, and conditions of this Agreement and in accordance with any performance standards specified in this Agreement or in the Documentation. [***]. 15"
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Unclear",
+      "contract": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement",
+      "text": "(b)    such audit must not unreasonably interfere with the day to day operations of IntriCon; and"
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Unclear",
+      "contract": "SEPARATEACCOUNTIIOFAGL_05_02_2011-EX-99.(J)(4)-UNCONDITIONAL CAPITAL MAINTENANCE AGREEMENT",
+      "text": "9. Any policyholder holding a policy issued by the Company prior to the        termination of this Agreement shall have the right to demand that the        Company enforce the Company's rights under paragraphs 1, 4 and 5 of this        Agreement, and, if the Company fails or refuses to take timely action to        enforce such rights or the Company defaults in any claim or other        payment owed to any such policyholder when due, such policyholder may        proceed directly against AIG to enforce the Company's rights under        paragraphs 1, 4 and 5 of this"
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Benign look-alike",
+      "contract": "XYBERNAUTCORP_07_12_2002-EX-4-SPONSORSHIP AGREEMENT",
+      "text": "(c) Rights  Upon An Event of  Default.  In  addition  to the rights of termination  set  forth  in  Sections  11 (a) and  (b),  respectively,  upon the occurrence of an AJR Event of Default or a XC Event of Default,  as the case may be, the other party shall be  entitled to all of its rights and  remedies  under this  Agreement,  applicable  law, in equity or  otherwise  with  respect to the actions or inactions  that gave rise to the AJR Event of Default or the XC Event of Default, as the case may be. In addition, upon the occurrence of an AJR Event of Default any of the Warrants which have not been exercised shall automatically terminate  and be void and all of the  Shares  and any  shares of  Common  Stock issued  in the  exercise  of the  Warrants  shall  be  purchasable  by"
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "VAXCYTE,INC_05_22_2020-EX-10.19-SUPPLY AGREEMENT",
+      "text": "In the event that Sutro makes a Manufacturing Change and is not able to Manufacture and supply Product in conformance with the Required Standards within [***] days of the delivery date identified on the applicable purchase order, Sutro shall Manufacture such Product without such Manufacturing Change. The rights of SutroVax set forth in this paragraph are in addition to any other rights set forth in this Supply Agreement."
+    },
+    {
+      "pred": "Liquidated Damages",
+      "classification": "Unclear",
+      "contract": "VerizonAbsLlc_20200123_8-K_EX-10.4_11952335_EX-10.4_Service Agreement",
+      "text": "\"Servicing Fee\" means, for a Collection Period, the fee payable to the Servicer in an amount equal to the product of:"
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Unclear",
+      "contract": "TRANSMONTAIGNEPARTNERSLLC_03_13_2020-EX-10.9-SERVICES AGREEMENT",
+      "text": "2.8 Further Assurances. In connection with this Agreement and all transactions contemplated by this Agreement, each signatory party hereto agrees to execute and deliver such additional documents and instruments and to perform such additional acts as may be necessary or appropriate to effectuate, carry out and perform all of the terms, provisions and conditions of this Agreement and all such transactions."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Benign look-alike",
+      "contract": "ASPIRITYHOLDINGSLLC_05_07_2012-EX-10.6-OUTSOURCING AGREEMENT",
+      "text": "This Agreement has been duly authorized, executed and delivered by the Contractor and is a valid and binding  agreement on the part of the Contractor, enforceable against the Contractor in accordance with its terms subject to bankruptcy,  insolvency, fraudulent transfer, reorganization, moratorium and similar laws of general applicability relating to or affecting creditors'  rights and to general principles of equity. The performance of this Agreement and the consummation of the transactions herein  contemplated will not result in a breach or violation of any of the terms and provisions of, or constitute a default under:     (i) any Material Agreement to which the Contractor is a party or by which the Company or its properties may  be bound;     (ii) the articles of incorporation or bylaws of the Contractor, or     (iii) any applicable law, order, rule, regulation, writ, injunction, judgment or decree of any court, government or  governmental agency or body, domestic or foreign, having jurisdiction over the Contractor or over its properties. (c) The Contractor has obtained all governmental consents, licenses, approvals and authorizations, registrations and  declarations which are necessary for the execution, delivery, performance, validity and enforceability of the Contractor's obligations  under this Agreement."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Benign look-alike",
+      "contract": "VirtuosoSurgicalInc_20191227_1-A_EX1A-6 MAT CTRCT_11933379_EX1A-6 MAT CTRCT_License Agreement",
+      "text": "3. GRANT 3.1 License Granted: Subject to the terms and conditions of this Agreement and to non-exclusive license agreements executed prior to the EFFECTIVE DATE, JHU hereby grants to the Company a non-exclusive, non-transferable license to make, have made, import, offer for sale and sell the LICENSED PRODUCT(S) and the LICENSED SERVICE(S) in the United States and worldwide under the PATENT RIGHT(S) in the LICENSED FIELD."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "BIOCEPTINC_08_19_2013-EX-10-COLLABORATION AGREEMENT",
+      "text": "5.1 Compliance with Laws. Biocept and Life Technologies and their respective Affiliates each agree to perform their respective obligations under this Agreement in compliance with all applicable Laws, in the Territory, including but not limited to applicable regulations, rules, and policies of third party payers that pay for the Assay."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "PelicanDeliversInc_20200211_S-1_EX-10.3_11975895_EX-10.3_Development Agreement2",
+      "text": "10.2 DEVELOPER Developer shall defend, indemnify and hold harmless Client, its members owners, officers, employees, independent contractors and agents, from and against all losses, claims, liabilities or damages and any related costs and expenses, including attorneys' fees and costs arising out of, or in any way related to any claim or action against Client arising out of or in any way related to: (a) Developer's material breach of his Agreement; (b) Developer's gross negligence or willful misconduct; (c) De eloper's act or omission constituting a violation of applicable federal, state, local law or regulation; or (d) any claim made against Client asserting a violation of any third party intellectual property right pertaining to the Subject Program."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Benign look-alike",
+      "contract": "XpresspaGroupInc_20190401_10-K_EX-10.28_11599457_EX-10.28_Marketing Agreement",
+      "text": "10.04. In the event any claim, action, suit or proceeding (each, a \"Claim\") is brought or made against an indemnified Party for which defense and indemnification by the indemnifying Party may be sought hereunder, the indemnified Party will promptly notify the indemnifying Party of the commencement thereof, and the indemnified Party will be entitled to reasonably participate in (but not assume) the defense thereof. Notwithstanding any other provision of this Agreement, the indemnifying Party shall not enter into any settlement of any Claim without the prior written consent of the indemnified Party, except as provided in this Section 10.04. If a firm offer is made to settle a Claim without leading to liability or the creation of a financial or other obligation on the part of the indemnified Party and provides, in customary form, for the unconditional release of each indemnified Party from all liabilities and obligations in connection with such Claim and the indemnifying Party desires to accept and agree to such offer, the indemnifying Party shall give written notice to that effect to the indemnified Party."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "NakedBrandGroupInc_20150731_POS AM (on S-1)_EX-10.75_9196027_EX-10.75_Endorsement Agreement",
+      "text": "For the avoidance of doubt, that certain logo designed by Athlete prior to the date hereof (the \"Logo\") shall remain the sole property of Wade and Naked shall have license during the Term to use the Logo for the advertising, endorsement, promotion, or sale of the Naked Products (including the Wade Products) in the Territory in accordance with the terms and conditions of the Agreement. During the Sell-off Period, Naked shall have the license to use the Logo solely on packaging and presentation of Wade Products already offered for sale at retail outlets or on-line in accordance with the terms and conditions of the Agreement."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "WARNINGMANAGEMENTSERVICESINC_12_10_1999-EX-10-ENDORSEMENT AGREEMENT",
+      "text": "If, at any time during this Agreement, Pey Dirt or Manning is prevented from or hampered or interrupted or interfered with in any manner whatever in fully performing its/his duties hereunder, by reason of any present or future statute, law, ordinance, regulation, order, judgment or decree, whether legislative, executive or judicial (whether or not valid), act of God, earthquake, fire, flood, epidemic, accident, explosion, casualty, lockout, boycott, strike, labor controversy (including but not limited to threat of lockout, boycott or strike), riot, civil disturbance, war or armed conflict (whether or not there has been an official declaration of war or official statement as to the existence of a state of war), invasion, occupation, intervention of military forces, act of public enemy, embargo, delay of a common carrier, inability without default on Company's part to obtain sufficient material, labor, transportation, power or other essential commodity required in the conduct of its business; or by reason of any cause beyond his reasonable control; or by reason of any other cause of any similar nature (all of the foregoing being herein referred to as an \"event of force majeure\"), then Pey"
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "SLINGERBAGINC_05_27_2020-EX-10.7-CONSULTING AGREEMENT",
+      "text": "3.2 No Stockholder Rights or Liabilities. Except as provided in this Warrant, the Holder will not have any rights as a stockholder of the Company until the exercise of this Warrant. Absent an affirmative action by the Holder to purchase the Shares, the Holder shall not have any liability as a stockholder of the Company."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "NEOMEDIATECHNOLOGIESINC_12_15_2005-EX-16.1-DISTRIBUTOR AGREEMENT",
+      "text": "(c)      maintain knowledge of the market in the Territory and regularly          communicate such knowledge to PPG SHANGHAI;"
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Unclear",
+      "contract": "BERKELEYLIGHTS,INC_06_26_2020-EX-10.12-COLLABORATION AGREEMENT",
+      "text": "10.6 Destruction or Return of Confidential Information. Upon the end of the Term, whether in its entirety or with respect to a specific Workflow Development Plan, Disclosing Party may request in writing to Receiving Party, and Receiving Party will, as requested by Disclosing Party except as and if necessary for such Receiving Party to exercise surviving rights under this Agreement following such expiration or termination, (a) at the Disclosing Party's request, destroy, as soon as reasonably practicable, specific Confidential Information identified by the Disclosing Party in writing to the Receiving Party that are in Receiving Party's possession and confirm such destruction in writing to Disclosing Party or (b) deliver to Disclosing Party, as soon as reasonably practicable, at Disclosing Party's expense, all copies of such Confidential Information in the possession of Receiving Party; provided that the Receiving Party will be permitted to retain one copy of such Confidential Information for the sole purpose of performing any continuing obligations hereunder, as required by Applicable Law or for archival purposes."
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Benign look-alike",
+      "contract": "BABCOCK_WILCOXENTERPRISES,INC_08_04_2015-EX-10.17-INTELLECTUAL PROPERTY AGREEMENT between THE BABCOCK _ WILCOX COMPANY and BABCOCK _ WILCOX ENTERPRISES, INC.",
+      "text": "Section 2.3 Assistance by Employees; Inventor Compensation. Each Party agrees that it shall make available to the other Party the services of its employees and contractors reasonably necessary to assist the other Party with the prosecution of, and other patent or trademark office proceedings (e.g., reissue, reexamination, interference, inter partes review, post-grant review, supplemental examination, and other similar proceedings) regarding the other Party's Patents, Trademarks and other Intellectual Property (collectively, \"IP Proceedings\"). Each Party agrees to reasonably make available to the other Party (i) inventors and other reasonably necessary persons employed by it for the other Party's reasonable needs regarding execution of documents, interviews, declarations and testimony, and (ii) documents, materials and information for the other Party's reasonable good faith needs regarding such IP Proceedings. The Party involved in the IP Proceedings shall be responsible for the actual and reasonable out-of-pocket expenses   5"
+    },
+    {
+      "pred": "Uncapped Liability",
+      "classification": "Unclear",
+      "contract": "MERITLIFEINSURANCECO_06_19_2020-EX-10.(XIV)-MASTER SERVICES AGREEMENT",
+      "text": "15. Force Majeure. Except for payment obligations hereunder, nonperformance by either party shall be excused to the extent that performance is rendered impossible by strike, acts of God, governmental acts or restrictions, failure of suppliers, or any other reason where failure to perform is beyond the control of the nonperforming party."
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Unclear",
+      "contract": "ELFBEAUTY,INC_07_02_2020-EX-10.1-COOPERATION AGREEMENT",
+      "text": "b. between the date of this Agreement and the 2021 Annual Meeting Nomination Window Date, Tarang Amin has not entered into a voting agreement or similar agreement that would subject any Securities of the Company beneficially owned by Mr. Amin to any arrangement or agreement with respect to the voting thereof with any other person that is a holder of any Securities of the Company and that is not affiliated with Mr. Amin or his estate planning, or that would give Mr. Amin the power to vote or direct the voting of any Securities of the Company beneficially owned by any other person that is not affiliated with Mr. Amin or his estate planning,"
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Unclear",
+      "contract": "NEOMEDIATECHNOLOGIESINC_12_15_2005-EX-16.1-DISTRIBUTOR AGREEMENT",
+      "text": "18.3     In the event that there is no written notice issued by either party to          show the intention to renew this Agreement in the said thirty(30) days          before the expiry of the current Term of the Agreement, the Agreement          shall terminate at the end of the said thirty(30) days. In the event          that such a notice of intention to renew is issued, but the parties are          not able to enter into a new agreement within that sixty(60) days from          the expiry of this Agreement, this Agreement shall terminate at the end          of the said sixty(60) days."
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Unclear",
+      "contract": "HALITRON,INC_03_01_2005-EX-10.15-SPONSORSHIP AND DEVELOPMENT AGREEMENT",
+      "text": "being herein referred to as an \"event of force majeure\"), then the applicable party's obligations hereunder shall be suspended as often as any such event of force majeure occurs and during such periods of time as such events of force majeure exist and such non-performance shall not be deemed to be a breach of this Agreement."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "EUROPEANMICROHOLDINGSINC_03_06_1998-EX-10.6-DISTRIBUTOR AGREEMENT",
+      "text": "(d)  furnish WGT with such information relating to the marketing, sale or      distribution of the Product in the Territory as WGT may reasonably request      (including, but not limited to, information as to calls or the status of      any negotiations for the sale of the Product, or any sales or service      records)."
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Benign look-alike",
+      "contract": "AULAMERICANUNITTRUST_04_24_2020-EX-99.8.77-SERVICING AGREEMENT",
+      "text": "Your Program shall include, and Nationwide and the Funds shall rely upon, your policies, procedures and controls to, among other things, (i) verify the identity (due diligence) of your customers, (ii) maintain records of the information used to identify your customers, (iii) determine if your customer appears on lists of known or suspected terrorists or associated with known or suspected terrorist organizations (said customer hereinafter referred to as a \"Prohibited Customer\"), and (iv) to ensure that Prohibited Customers and foreign shell banks do not maintain investments in any Fund. Your Program shall also comply with the Customer Identification Program (\"CIP\") for customers who open accounts on or after October 1, 2003, and as such, shall among other matters provide for the release of customer information to law enforcement agencies, and the filing of Suspicious Activity Reports (\"SARs\"), as and if applicable, and in accordance with the ACT. In addition, your Program also shall include procedures for fulfilling the currency reporting requirements of the ACT and the BSA, as and if applicable. The provisions of this Anti-Money Laundering section shall survive the termination of the Agreement. 5"
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Benign look-alike",
+      "contract": "LOOKSMARTLTD_07_20_2012-EX-99.(D)(I)-SPONSORSHIP AGREEMENT",
+      "text": "17. Governing Law; Consent to Jurisdiction. This Agreement shall be governed by and construed in accordance with, the laws of the  State of New York applicable to contracts executed in and to be performed in that State. All actions arising out of or relating to this Agreement  shall be heard and determined exclusively in any New York state or federal court sitting in the Borough of Manhattan of The City of New York. The  parties hereto hereby (a) submit to the exclusive jurisdiction of any state or federal court sitting in the Borough of Manhattan of The City of New  York for the purpose of any action arising out of or relating to this Agreement brought by any party hereto, and (b) irrevocably waive, and agree  not to assert by way of motion, defense, or otherwise, in any such action, any claim that it is not subject personally to the jurisdiction of the  above-named courts, that its property is exempt or immune from attachment or execution, that the action is brought in an inconvenient forum, that  the venue of the action is improper, or that this Agreement or the transactions contemplated hereby may not be enforced in or by any of the  above-named courts."
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Unclear",
+      "contract": "PHREESIA,INC_05_28_2019-EX-10.18-STRATEGIC ALLIANCE AGREEMENT",
+      "text": "(g) Annually, Allscripts shall have performed, at its costs and expense, a third party privacy and security assessment [***]. Upon request, Allscripts will coordinate with Company to make available to Company via WebEx or similar web-conferencing technology a copy of the report from the privacy and security assessment for Company review, provided that such web-conference will not be earlier than [***]."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT",
+      "text": "3.    Comprehensive general liability insurance and product liability insurance with minimum limits of ONE MILLION Dollars ($1,000,000) combined single limit including the following coverages: contractual liability; personal injury; products/completed operation; and tenant's fire legal liability; insuring against all claims, suits, obligations, liabilities and damages, including attorneys' fees, based upon or arising out of actual or alleged personal injuries or property damage resulting from, or occurring in the course of, or on or about or otherwise relating to the Franchised Restaurant, provided that the required amounts herein may be modified from time to time by us to reflect inflation or future experience with claims."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "8.5   Equitable Remedies: It is understood and agreed that money damages would not be a sufficient remedy for any breach of this  Agreement by [Party] and that [CERES/IGER] is entitled to equitable relief, including injunction and specific performance, as a remedy  for any such breach. Such remedies shall not be deemed to be the exclusive remedies for a breach by [Party] of this Agreement but  shall be in addition to all other remedies available at law or equity to [CERES/IGER]."
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Benign look-alike",
+      "contract": "Monsanto Company - SECOND A_R EXCLUSIVE AGENCY AND MARKETING AGREEMENT ",
+      "text": "Section 10.1 Terms. This Agreement shall commence as of the Effective Date and shall continue unless and until terminated as provided herein."
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Unclear",
+      "contract": "EdietsComInc_20001030_10QSB_EX-10.4_2606646_EX-10.4_Co-Branding Agreement",
+      "text": "Content that are not specifically granted to Women.com herein. Women.com acknowledges that eDiets owns all right, title and interest in and to the eDiets Content, and Women.com shall not now or in the future contest the validity of the eDiets' ownership rights in and to the eDiets Content. eDiets agrees to periodically include mention of Women.com, including a link to the Women.com Site if desired by eDiets, within the eDiets Newsletter (the \"Mention\"). eDiets shall determine in its sole discretion the placement, frequency and timing of such Mention, provided that eDiets submits each Mention to Women.com for approval and secures such approval prior to publication or distribution of such Mention."
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Benign look-alike",
+      "contract": "GpaqAcquisitionHoldingsInc_20200123_S-4A_EX-10.8_11951679_EX-10.8_Service Agreement",
+      "text": "an arrangement, reorganization or readjustment of its indebtedness under the Federal bankruptcy laws or under any law or statute of the United States or any state thereof, or consents to the appointment of a receiver, trustee or liquidator of all or substantially all of its property; (iii) By court order or decree such Party is adjudged bankrupt or an order is made approving a petition filed by any of its creditors or by any of its stockholders or partners seeking its reorganization or the readjustment of its indebtedness under the Federal bankruptcy laws or under any law or statute of the United States or any state thereof; (iv) An involuntary petition under any bankruptcy or insolvency law, or an action under present or future insolvency law or statute, is filed against such Party and is not dismissed or stayed within sixty (60) days after the filing thereof; or (v) Such Party sells, conveys, assigns or otherwise transfers all or substantially all of its assets (other than to one of its affiliates in the case of an HOF Entity) in breach of Section 6.2."
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Benign look-alike",
+      "contract": "ReynoldsConsumerProductsInc_20200121_S-1A_EX-10.22_11948918_EX-10.22_Service Agreement",
+      "text": "Section 6.1 Term of Services. With respect to each of the Services, the term thereof will be for a period commencing as of the date hereof, unless a different date is specified as the commencement date for any applicable Service on Exhibit A or Exhibit B (either, a \"Commencement Date\"), and shall continue until 12 months following the Commencement Date unless (i) such other date as is specified as the termination date for any applicable Service in this Agreement or on Exhibit A or Exhibit B, as applicable (the \"Term\") or (ii) earlier terminated pursuant to this Agreement (a \"Termination Date\")."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Unclear",
+      "contract": "MEETGROUP,INC_06_29_2017-EX-10.1-COOPERATION AGREEMENT",
+      "text": "23. Amendment. This Agreement may be modified, amended or otherwise changed only in a writing signed by all of the parties hereto, or in the case of the Investors, the Investor Group Representative, or their respective successors or assigns."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "TELKOMSALTD_01_30_2003-EX-10-LICENCE AND MAINTENANCE AGREEMENT",
+      "text": "5.  If TELKOM is unable to use the SOFTWARE on a DESIGNATED UNIT because   of conditions beyond its control, TELKOM may temporarily install the   SOFTWARE on other equipment located within the TERRITORY until such   condition is corrected, provided that TELKOM shall ensure that:   3."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT",
+      "text": "B.   ANY ACTION SOUGHT TO BE BROUGHT BY EITHER PARTY OR ANY ACTION BROUGHT BY YOU AGAINST OUR PARENT OR OTHER AFFILIATE, SHALL BE BROUGHT IN THE UNITED STATES DISTRICT COURT OR THE STATE DISTRICT COURT IN THE STATE IN WHICH"
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Unclear",
+      "contract": "TRIZETTOGROUPINC_08_18_1999-EX-10.17-TECHNICAL INFRASTRUCTURE MAINTENANCE AGREEMENT",
+      "text": "to pay a Retainer that provides technical Related Support by qualified           Support Analysts and Field Technicians. This Support Plan covers a 12           Month period, with a Maximum Cap of hours for that period. If the Cap           of Hours is met before the end of the 12 Month period, Customer may           choose to purchase an additional Retainer Support Plan at the same           rates. This Support Plan is to include all necessary labor in a repair           situation, but Customer is to incur the cost of components to replace           broken or faulty equipment. Customer is to incur reasonable cost of           travel time/expenses of MMMW personal. MMMW accepts the responsibility           for payment of shipping and handling costs of the components. Customer           is to incur the cost for any swap equipment. Fee for swap equipment is           a flat-rate, one time fee as follows (not applicable from the central           site): terminal $[*], color terminal $[*], [*] printer $[*], [*]           printer $[*], personal computer $[*]."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "BERKELEYLIGHTS,INC_06_26_2020-EX-10.12-COLLABORATION AGREEMENT",
+      "text": "1.66 \"Ginkgo Background IP\" means any Intellectual Property provided or otherwise disclosed to BLI under this Agreement or otherwise [***] for the performance of any activities allocated to BLI under a Workflow Development Plan that is (a) Controlled by Ginkgo or its Affiliates as of the Effective Date, (b) that comes into the Control of Ginkgo after the Effective Date other than by means of this Agreement or the activities performed hereunder, or (c) developed during the Term by Ginkgo [***]."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "CHERRYHILLMORTGAGEINVESTMENTCORP_09_26_2013-EX-10.1-Strategic Alliance Agreement",
+      "text": "(i) The Parties agree that irreparable damage would occur in the event that the provisions contained in this Agreement were not performed in accordance with its specific terms or were otherwise breached. It is accordingly agreed that the Parties shall be entitled to an injunction or injunctions to prevent breaches of this Agreement and to enforce specifically the terms and provisions hereof in any court of the United States or any state having jurisdiction, this being in addition to any other remedy to which they are entitled at law or in equity."
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Benign look-alike",
+      "contract": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement",
+      "text": "(d)    Audits will be limited to one audit in any calendar year."
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Unclear",
+      "contract": "VirtuosoSurgicalInc_20191227_1-A_EX1A-6 MAT CTRCT_11933379_EX1A-6 MAT CTRCT_License Agreement",
+      "text": "4.4.3 The valuation of any securities or other property shall be determined by reference to the operative transaction agreement for a respective Merger, Stock Sale or Asset Sale, provided that, if no such valuation is readily determinable from such operative transaction agreement, then for securities for which there is an active public market: (a) If traded on a securities exchange or the NASDAQ Stock Market, the value shall be deemed to be the average of the closing prices of the securities on such exchange or market over the thirty day (30) period ending three (3) days prior to the closing of such transaction; or (b) If actively traded over-the-counter, the value shall be deemed to be the average of the closing bid prices over the thirty day (30) period ending three (3) days prior to the closing of such transaction. (c) The method of valuation of securities subject to investment letters or other similar restrictions on free marketability shall take into account an appropriate discount from the market value as determined pursuant to clause (a) or (b) above so as to reflect the approximate fair market value thereof."
+    },
+    {
+      "pred": "Liquidated Damages",
+      "classification": "Unclear",
+      "contract": "ASIANDRAGONGROUPINC_08_11_2005-EX-10.5-Reseller Agreement",
+      "text": "10.4 Inventory Returns Upon termination of this Agreement, Galaxy may, at its sole discretion accept inventory returns of Products. If Galaxy accepts inventory returns, Telnet shall pay a restocking fee of twenty-five percent (25%) of the original billing amount for the returned inventory."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "ScansourceInc_20190822_10-K_EX-10.39_11793959_EX-10.39_Distributor Agreement",
+      "text": "(l) Distributor has not offered to pay, nor has Distributor paid, nor will Distributor pay, any political contributions to any person or entity on behalf of Cisco;"
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "EUROPEANMICROHOLDINGSINC_03_06_1998-EX-10.6-DISTRIBUTOR AGREEMENT",
+      "text": "complaints received by Distributor from any customer, potential customer or      anyone else arising out of or in connection with Distributor's sale of any      Product, or the performance of any services. In handling any complaints,      Distributor will use its best efforts to maintain and promote good public      relations for WGT;"
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "DRKOOPCOMINC_04_21_1999-EX-10.28-SPONSORSHIP AGREEMENT",
+      "text": "3.2.  DATA RELEASE TO SPONSOR. Drkoop.com shall provide to Sponsor any and all User Data for which the Individual User has specifically authorized release to Sponsor. In the event that an Individual User grants rights to Sponsor for use of his User Data, Sponsor shall use its best efforts to keep User Data confidential and shall only use such data in an ethical manner. Sponsor may use User Data for its owns purposes, but User Data may not be disclosed, sold, assigned, leased or otherwise disposed of to third parties by Sponsor."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Benign look-alike",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "Notices under this Agreement sent by overnight courier by one Party to the other Party at its above address shall be deemed to have been given  or made as of the date following the date so mailed."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Real risky clause (Non-Compete)",
+      "contract": "SLINGERBAGINC_05_27_2020-EX-10.7-CONSULTING AGREEMENT",
+      "text": "ARTICLE 3 CONFIDENTIALITY AND NON-COMPETITION 3.1 Maintenance of Confidential Information. (a) The Consultant acknowledges that, in the course of performing his obligations hereunder, the Consultant will, either directly or indirectly, have access to and be entrusted with confidential information (whether oral, written or by inspection) relating to the Company or its respective affiliates, associates or customers (the \"Confidential Information\"). (b) The Consultant acknowledges that the Company's Confidential Information constitutes a proprietary right, which the Company is entitled to protect. Accordingly, the Consultant covenants and agrees that, as long as he works for the Company, the Consultant will keep in strict confidence the Company's Confidential Information and will not, without prior written consent of the Company, disclose, use or otherwise disseminate the Company's Confidential Information, directly or indirectly, to any third party. (c) The Consultant agrees that, upon termination of his services for the Company, he will immediately surrender to the Company all Company Confidential Information then in his possession or under his control."
+    },
+    {
+      "pred": "Liquidated Damages",
+      "classification": "Benign look-alike",
+      "contract": "BERKELEYLIGHTS,INC_06_26_2020-EX-10.12-COLLABORATION AGREEMENT",
+      "text": "13.3.3 Effects of Termination Based Upon an Uncured Ginkgo Breach, Insolvency or Extended Force Majeure Event affecting Ginkgo. In the event that termination is the result of an uncured, material Ginkgo breach of the Agreement under Section 13.2.1 (Material Breach), for Ginkgo's insolvency pursuant to Section 13.2.2 (Bankruptcy) or for an Extended Force Majeure Event with respect to Ginkgo pursuant to Section 14.8 (Force Majeure), then, as of the effective date of termination: (a) any and all existing Headstart Periods shall immediately be deemed to have accelerated to conclusion, (b) the restrictions on BLI set forth in Section 6.2.1 (Restrictions on BLI) shall immediately deemed to have terminated; (c) the licenses granted to BLI from Ginkgo pursuant to Section 9.2 (Grants to BLI) shall survive, (d) the licenses granted to Ginkgo under Sections 9.1.1(c) (Grants to Ginkgo - Commercial License) and 9.1.2 (License Grant to Page 58 of 85"
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Benign look-alike",
+      "contract": "ASIANDRAGONGROUPINC_08_11_2005-EX-10.5-Reseller Agreement",
+      "text": "6.5 Delivery Galaxy shall, subject to availability, use all reasonable effort to deliver the Order within a reasonable time from the date of the Order; Galaxy shall have the right to suspend or stop delivery of an Order, in whole or in part, if Telnet is in breach of any of the terms and conditions of this Agreement, and, if Galaxy elects to stop delivery pursuant to this section, it shall deem such Order to be an inventory return subject to section 6.7."
+    },
+    {
+      "pred": "Audit Rights",
+      "classification": "Unclear",
+      "contract": "PelicanDeliversInc_20200211_S-1_EX-10.3_11975895_EX-10.3_Development Agreement2",
+      "text": "6.4.2 Non-Disclosure. Neither Party shall use or disclose Confidential Information of the other Party to any third party, without the written consent of the Disclosing Party of such Confidential Information. Receiving Party agrees to undertake reasonable measures to maintain and preserve the Confidential Information of the Disclosing Party in confidence, which measures shall be no less than the measures taken by the Receiving Party to protect its own confidential information and in no vent shall be less than reasonable care. Upon expiration or termination of this Agreement, Receiving Party will immediately destroy or erase all copies of documents or materials containing any Confidential Information provided by Disclosing Party and, upon the Disclosing Party's request, promptly confirm destruction of same by signing and returning to the Disclosing Party a certificate of destruction reasonably satisfactory to the Disclosing Party."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Unclear",
+      "contract": "NakedBrandGroupInc_20150731_POS AM (on S-1)_EX-10.75_9196027_EX-10.75_Endorsement Agreement",
+      "text": "(2)  No Conflicts. Neither the  execution and delivery of this Agreement nor the performance or consummation of  the transactions contemplated hereby or thereby by either Wade Enterprises or Athlete will conflict with, result in the breach of, constitute a default under or accelerate the performance required by the terms of: (i) any law, rule or  regulation of any government or governmental or regulatory agency; (ii) any judgment, order, writ, decree, permit or license of any court or governmental or regulatory agency to which such Party may be subject; (iii) any contract,  agreement, commitment or instrument to which Wade Enterprises or Athlete is a  party; or (iv) Wade Enterprises' constituent documents or other governing instruments (or constitute an event which, with the passage of time or action by a third party, would result in any of the foregoing). The execution and delivery  of this Agreement by Wade Enterprises and Athlete and the performance and consummation of the transactions contemplated hereby do not require any registration, filing, qualification, consent or approval under any material law, rule, regulation, judgment, order, writ, decree, permit or license to which such Party is subject."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "EUROPEANMICROHOLDINGSINC_03_06_1998-EX-10.6-DISTRIBUTOR AGREEMENT",
+      "text": "(d)  Distributor will not modify or make copies of the Product or translate or      port the Software into any other computer or human language;"
+    },
+    {
+      "pred": "Termination for Convenience",
+      "classification": "Benign look-alike",
+      "contract": "ASIANDRAGONGROUPINC_08_11_2005-EX-10.5-Reseller Agreement",
+      "text": "7.6 Prices The prices charged by Galaxy to Telnet for each of the Services (the \"Service Prices\") shall be as listed in Schedule \"A\"; Galaxy shall have the right, but not the obligation, to: during the term of this Agreement, adjust any of the Service Prices by an amount that is proportionate with any changes to Galaxy's direct third party costs in providing the related Services; at the time of any renewal of this Agreement, adjust the Service Prices as it, in its absolute discretion, determines provided it has given written notice to Telnet of such price changes a minimum of 60 days in advance of the renewal. Prices for long distance termination shall be as posted on the Partner Portal and Telnet understands and agrees that, other than for those destinations noted in Schedule A as being fixed in price for the term of this Agreement, such prices are variable and subject"
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Unclear",
+      "contract": "PREMIERBIOMEDICALINC_05_14_2020-EX-10.2-INTELLECTUAL PROPERTY AGREEMENT",
+      "text": "Confidential information should further include:   all information (in whatever form and whether or not marked or otherwise identified as confidential), including financial statements, business plans or records, concepts, marketing studies, projections, sales or pricing information, customer or supplier information, agreements with third parties, Intellectual Property (as defined below) or other data provided by or on behalf of the Disclosing Party to the Recipient and (ii) all notes, analyses, compilations, studies, interpretations or other material prepared by the Recipient or its Representatives which contain or reflect or are based upon, in whole or in part, information furnished by the Disclosing Party pursuant to this Agreement. \"Confidential Information\" does not include information which (a) is obtained by the Recipient from a third party who is not known to Recipient to be prohibited from transmitting such information to the Recipient, or (b) was already in the Recipient's possession prior to its entry into this Agreement and which is not subject to any restrictions which would prohibit its disclosure to the Recipient in connection with the parties' evaluation of the Transaction or (c) is or becomes generally available to the public other than as a result of a breach of any confidentiality restrictions to the Recipient."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "2.4   [Party] undertakes only to use the CERES/IGER Plant Material or any part, progeny or seeds thereof for performing the Program  activities to be carried out under the Program and not for any other purpose. Specifically, but without limitation, [Party] shall not use  the Plant Material or any progeny, plants, parts of plants, plant material, seeds or products derived therefrom in any form of reselection,  breeding, sexual crossing, seed production, back crossing, tissue culturing, mutagenesis, genetic transformation or any  biotechnological process, except as specifically approved in this Agreement."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Benign look-alike",
+      "contract": "PHREESIA,INC_05_28_2019-EX-10.18-STRATEGIC ALLIANCE AGREEMENT",
+      "text": "(ii) Except as set forth in Section 11.3, Allscripts' use of the Company Marks will be in accordance with the Company's trademark use guidelines and instructions as set forth in Exhibit I. The Company will give Allscripts written notice of any changes to such specifications or guidelines, and will give Allscripts a reasonable time to modify its use of the Company Marks to comply therewith."
+    },
+    {
+      "pred": "Change of Control",
+      "classification": "Unclear",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "16.4 CERES may after consultation with IGER terminate this Agreement by written notice if in the commercially reasonable opinion of CERES the  markets for the LICENSED VARIETY change or do not develop as anticipated, so as to render the production, promotion and sale of the  LICENSED VARIETY uneconomical or impractical or if CERES decides to cease substantially all activities in MISCANTHUS."
+    },
+    {
+      "pred": "Liquidated Damages",
+      "classification": "Real risky clause (Termination for Convenience)",
+      "contract": "JOINTCORP_09_19_2014-EX-10.15-FRANCHISE AGREEMENT",
+      "text": "In addition, if, in the opinion of our legal counsel, any provision of this Agreement is contrary to law, then you and we agree to negotiate in good faith an amendment that would make this Agreement conform to the applicable legal requirements. If you and we are unable to reach such an agreement, or if fundamental changes to this Agreement are required to make it conform to the legal requirements, then we reserve the right to terminate this Agreement upon notice to you, in which case all of the post-termination obligations set forth in Section 16 shall apply. In the event that we terminate this Agreement under this Section or other applicable provisions of this Agreement, we shall be entitled, in those states in which such termination fees are enforceable, to receive from you a termination fee in the amount equal to one-half (1/2) of our then- current initial franchise fee for new The Joint Corp. Location franchises (the \"Termination Fee\"). The Termination Fee shall be payable by you in addition to any damages payable to us, including loss of future revenues, resulting from your improper or wrongful breach or other termination of this Agreement."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Benign look-alike",
+      "contract": "WORLDWIDESTRATEGIESINC_11_02_2005-EX-10-RESELLER AGREEMENT",
+      "text": "\"License Agreement\" means the license agreement to be provided to each Customer with regard to the use by such Customer of the TouchStar Software, in the form of EXHIBIT B, attached to this Agreement."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Unclear",
+      "contract": "EUROPEANMICROHOLDINGSINC_03_06_1998-EX-10.6-DISTRIBUTOR AGREEMENT",
+      "text": "23.  Nonwaiver. The failure of either party to insist upon or enforce strict      performance of any of the provisions of this Agreement or to exercise any      rights or remedies under this Agreement will not be construed as a waiver      or relinquishment to any extent of such party's right to assert or rely      upon any such provisions, rights or remedies in that or any other instance;      rather, the same will be and remain in full force and effect."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "Where there is no identifiable sale price or when a LICENSED VARIETY is sold to other than bona fide, arms length customers of CERES or any  AFFILIATED COMPANY, CERES or the AFFILIATED COMPANY shall be deemed to have received an amount of NET SALES calculated based  on the final sale of the COMMERCIAL PROPAGULES (wholesale level) to an independent third party, usually referred to as net wholesale price  payable by dealers. If no such current price is available, a hypothetical fair market value price will be determined by the Parties jointly in good faith  for the purpose of calculating NET SALES. Further, TRAIT FEES, if any, shall be added to NET SALES."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Unclear",
+      "contract": "FulucaiProductionsLtd_20131223_10-Q_EX-10.9_8368347_EX-10.9_Content License Agreement",
+      "text": "(a) For the License Term and within the Licensed Territory, Producer hereby grants to ConvergTV a right and license to Distribute the program, file or video listed on the Deal Terms above (the \"Program\") consisting of (check one) \u00a8 episodes (series) or x one-offs, for unlimited runs for the License Term through ConvergTV channels and/or other distribution outlets, in accordance with the License Rights. The terms \"License Term\", \"Licensed Rights\", and \"Licensed Territory\" shall have the meaning specified in the Deal Terms above, which such Deal Terms are part of this Agreement and are hereby incorporated herein by reference."
+    },
+    {
+      "pred": "IP Ownership Assignment",
+      "classification": "Benign look-alike",
+      "contract": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement",
+      "text": "4.1 In partial consideration for the rights granted in this Agreement, CERES shall be responsible for any and all fees and expenses incurred in filing,  examining, certifying and maintaining any INTELLECTUAL PROPERTY RIGHTS for the LICENSED VARIETY, subject to the provisions of Article  3."
+    },
+    {
+      "pred": "Cap on Liability",
+      "classification": "Unclear",
+      "contract": "TELKOMSALTD_01_30_2003-EX-10-LICENCE AND MAINTENANCE AGREEMENT",
+      "text": "5.    Subject to the provisions of clause 8. 1 that expressly provide otherwise, all   modifications and extensions to the SOFTWARE and DOCUMENTATION shall   be considered part of the SOFTWARE and DOCUMENTATION for purposes of   this clause 7."
+    },
+    {
+      "pred": "Exclusivity",
+      "classification": "Benign look-alike",
+      "contract": "TheglobeComInc_19990503_S-1A_EX-10.20_5416126_EX-10.20_Co-Branding Agreement",
+      "text": "theglobe hereby grants to Boxlot a non-exclusive license to use theglobe Marks (including the Domain Name if applicable) on the Co-Branded Pages."
+    },
+    {
+      "pred": "Non-Compete",
+      "classification": "Unclear",
+      "contract": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT",
+      "text": "E.   You will not, without our prior written consent, place in, on or upon the location of the Franchised Restaurant, or in any communication media, any form of advertising, or list with any business, real estate broker, agent, or attorney any information relating to the sale of the Franchised Restaurant or the rights granted hereunder."
+    },
+    {
+      "pred": "Anti-Assignment",
+      "classification": "Benign look-alike",
+      "contract": "ConformisInc_20191101_10-Q_EX-10.6_11861402_EX-10.6_Development Agreement",
+      "text": "10.13 Counterparts and Electronic Transmission. This Agreement may be executed in one or more counterparts, all   of which will be considered one and the same agreement, and will become effective when one or more counterparts have been   signed by each of the Parties and delivered to the other Party. This Agreement may be executed and delivered by facsimile or e-   mail transmission with the same effect as if a manually signed original was personally delivered."
+    }
+  ]
+}

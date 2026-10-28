@@ -1,10 +1,16 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: 3D Interactive Document Risk Analysis Dashboard & Deep Model Evaluation Audit
-- Current phase/step: Multi-Vector Stress Test Suite Complete
+- Current day: ClauseGuard Production Freezing, Operating Point Presets & UI/Schema Unification
+- Current phase/step: Prompt 10 Verification Complete - Schema Parity, Liability Guard, UI Polish, Gate Rules & Live Screenshots
 - File currently being worked on: None
-- Recent updates: Completed multi-vector stress testing across system concurrency, memory stability, adversarial ingestion, Legal-BERT perturbations, and Liquidated Damages rule stress testing across 60,000+ units. All 56 backend pytest tests passing.
+- Recent updates: 
+  - Unified saved vs fresh document schemas in backend (`history.py`) and frontend (`utils/risks.js`), fixing empty Risks panel and adding regression test.
+  - Implemented Liability Guard rule distinguishing uncapped from capped liability; DOC-01 Section 8 flags as Uncapped Liability (High) and standard caps stay Cap on Liability (Low); evaluated on val_natural with 0 false alarms added.
+  - UI refined: removed storage meter, standardized Moderate -> Medium, white-space: nowrap on section & confidence, sticky 3D bar background & padding, preset tooltips updated.
+  - Evaluated Secondary Label ("May also contain") gate rule on val_natural: 1.2895 false chips/contract exceeded 1.0 limit -> gate failed -> disabled per specification.
+  - Evaluated DOC-08 compound contract: 6/6 risky clauses flagged, 0 harmless false alarms, 0 cards meet secondary label threshold.
+  - Full test suite passed (60/60 tests), production build verified, 6 full-resolution screenshots captured.
 
 
 ## Completed
@@ -47,16 +53,28 @@
 - Split: Contract-level 70/15/15 (seed 42, zero contract overlap)
 - Tooling: uv for Python 3.11 venv management; Node.js v20 for Vite build
 - Transformer Training: Micro-batch size 4 with gradient accumulation 4 to fit within M2 memory footprint (~2.5GB peak)
-- API/DB: String(36) for UUIDs across SQLite & PostgreSQL; `/api/v1/static` mount for confusion matrix charts
+- API/DB: String(36) for UUIDs with SQLite; `/api/v1/static` mount for confusion matrix charts
 - Containerization: Self-contained backend Docker context using `backend/app/core/risk_map.py`, CPU PyTorch pre-installation, Docker healthchecks
 
 ## Real metrics (fill ONLY from real runs)
-- Baseline accuracy (test): 0.7516
-- Baseline macro-F1 (test): 0.7301
-- Legal-BERT accuracy (test): 0.7642
-- Legal-BERT macro-F1 (test): 0.7277
-- Legal-BERT macro-precision (test): 0.7250
-- Domain-Adapted Legal-BERT (400 Indian Supreme Court 2023 cases):
+### Final Calibrated Production Metrics (Natural Prevalence Evaluation)
+- **Validation Split (`val_natural.csv`, 76 contracts, 10,861 units, 501 true liabilities, T=0.9270)**:
+  - Strict preset (tau=0.012957, target 3 FA/c): Recall (Flagged) 64.27% (322/501), Recall (Correct) 56.69% (284/501), Precision 58.65%, 2.99 FA/contract (227 FA)
+  - Balanced preset (tau=0.035452, target 8 FA/c): Recall (Flagged) 80.64% (404/501), Recall (Correct) 71.06% (356/501), Precision 39.96%, 7.99 FA/contract (607 FA)
+  - Thorough preset (tau=0.071850, target 12 FA/c): Recall (Flagged) 86.63% (434/501), Recall (Correct) 75.65% (379/501), Precision 32.27%, 11.99 FA/contract (911 FA)
+  - Comparative Baseline (TF-IDF Model B at 8 FA/c): 68.06% recall (341/501), 33.73% precision, 7.99 FA/c
+  - Statistical Significance (8 FA/c): Legal-BERT +12.58 recall points over TF-IDF (95% bootstrap CI: [+5.80%, +18.75%], p < 0.001)
+
+- **Held-Out Test Split (`test_natural.csv`, 77 contracts, 10,480 units, 406 true liabilities, single evaluation)**:
+  - Strict preset (tau=0.012957): Recall (Flagged) 68.97% (280/406), Recall (Correct) 61.58% (250/406), Precision 56.22%, 2.83 FA/contract (218 FA)
+  - Balanced preset (tau=0.035452): Recall (Flagged) 85.22% (346/406), Recall (Correct) 75.86% (308/406), Precision 39.01%, 7.03 FA/contract (541 FA)
+  - Thorough preset (tau=0.071850): Recall (Flagged) 92.36% (375/406), Recall (Correct) 81.03% (329/406), Precision 31.25%, 10.71 FA/contract (825 FA)
+  - High-Risk Test Recall at Balanced (8 FA/c): 78.05% (96/123) flagged; Uncapped Liability: 95.65% (22/23), Non-Compete: 83.87% (26/31), Exclusivity: 70.91% (39/55), Liquidated Damages: 64.29% (9/14)
+
+### Legacy Prototyping Metrics (Gen 1 Downsampled Dataset - Historical Archive)
+- Baseline accuracy (test, downsampled): 0.7516, macro-F1: 0.7301
+- Legal-BERT accuracy (test, downsampled): 0.7642, macro-F1: 0.7277, macro-precision: 0.7250
+- Domain-Adapted Legal-BERT (400 Indian Supreme Court 2023 cases, downsampled):
   - Accuracy (test): 0.7704 (+0.63% over baseline)
   - Macro-F1 (test): 0.7402 (+1.25% over baseline)
   - Macro-Precision (test): 0.7201 (-0.49%)
@@ -275,6 +293,27 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Regression Suite: All 56 backend pytest tests passing (100% pass in 65.27s).
   - Heuristic Stress Test: Stress-tested 4 Liquidated Damages pattern variants across 10,861 val units and 49,992 train units; broader pattern adds +1 TP on val but incurs 10x false alarm penalty (+0.132 FA/c).
   - Adversarial Model Perturbations: Legal-BERT tested against casing, OCR typos, syntactic negation, liability boundary confusion, and passive voice phrasing.
+- [2026-10-28 13:45] Prompt 10 Engineering Updates & Refinements DONE:
+  - 1. Saved vs Fresh Document Parity:
+    - Root cause of empty Risks panel: `GET /documents/{id}` constructed `ClauseResponse` without `flagged`, `risk_tier`, `calibrated_probability`, `char_start`, `char_end`, defaulting `flagged` to `False`. Frontend `RiskPanel` filtered on `flagged`, yielding 0 clauses.
+    - Fix: Unified `ClauseResponse` schema in `history.py` to persist and return calibrated predictions; extracted single truth helper `getRiskyClauses` in `frontend/src/utils/risks.js`. Reset risk filter and expansion when active document switches. Added automated parity test `test_saved_vs_fresh_document_parity` in `backend/tests/test_api.py`.
+  - 2. Liability Guard Rule:
+    - Implemented `apply_liability_guard(pred_label, text)` overriding `Cap on Liability` to `Uncapped Liability` (High) when text contains express uncapped/unlimited liability statements.
+    - Evaluated on `val_natural.csv` (10,861 units across 76 contracts): 0 overrides triggered on validation contracts (0 false alarms added, 0 regressions). Uncapped Liability Precision 61.29%, Recall 65.52%, F1 63.33%; Cap on Liability Precision 48.28%, Recall 54.55%, F1 51.22%.
+    - Verified DOC-01 Section 8 flags as Uncapped Liability (High); standard cap ("shall not exceed fees paid") stays Cap on Liability (Low). Regression tests added to `backend/tests/test_rules.py`.
+  - 3. UI Polish & Compliance:
+    - Removed STORAGE meter from LeftPanel.
+    - Standardized risk tier terminology from "Moderate" to "Medium" across all components, styling, and charts.
+    - Applied `white-space: nowrap` to section numbers and confidence badges.
+    - Added opaque `#1e222b` background, z-index 25, and padding to sticky 3D/zoom toolbar.
+    - Updated preset tooltips: "N false alarms per contract (measured on 77 held-out CUAD contracts)".
+  - 4. Secondary Label "May also contain" Gate Rule & DOC-08 Evaluation:
+    - Evaluated on `val_natural.csv`: 1,012 flagged units; 131 had second-best prob >= 0.20 (12.94%). True chips: 33, False chips: 98 -> 1.2895 false chips per contract.
+    - Gate Decision: 1.2895 > 1.0 false chip/contract budget -> FAILED GATE -> Feature kept DISABLED in production.
+    - DOC-08 Compound Contract Analysis: 6/6 risky clauses flagged, 0 false alarms on harmless sections. Top-2 prob check showed 0 cards with second prob >= 0.20.
+  - 5. Verification & Screenshots:
+    - Full test suite passed (60/60 tests). Frontend compiled with `npm run build` in 4.71s.
+    - Captured 6 screenshots via Playwright + Arc in `docs/screenshots/`: `doc01_saved_strict.png`, `doc01_saved_balanced.png`, `doc01_saved_thorough.png`, `doc08_strict.png`, `doc08_balanced.png`, `doc08_thorough.png`.
 
 
 

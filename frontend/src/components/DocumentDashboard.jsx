@@ -24,6 +24,7 @@ export default function DocumentDashboard({ onBackToHome }) {
 
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
+  const [sensitivity, setSensitivity] = useState('balanced');
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -66,11 +67,12 @@ export default function DocumentDashboard({ onBackToHome }) {
   };
 
   // Upload handler
-  const handleUpload = async (file) => {
+  const handleUpload = async (file, currentSens) => {
     setIsUploading(true);
     setUploadError(null);
+    const chosenSensitivity = currentSens || sensitivity;
     try {
-      const result = await analyzeContract(file);
+      const result = await analyzeContract(file, chosenSensitivity);
       setDocumentData(result);
       setActiveDocId(result.document_id);
       setActiveClauseId(null);
@@ -199,6 +201,8 @@ export default function DocumentDashboard({ onBackToHome }) {
           uploadError={uploadError}
           isCollapsed={leftCollapsed}
           onToggleCollapse={() => setLeftCollapsed(!leftCollapsed)}
+          sensitivity={sensitivity}
+          onSensitivityChange={setSensitivity}
         />
 
         {/* Center: 3D Document Paper Stage & Inline Highlights */}

@@ -2,60 +2,56 @@
 
 > **Disclaimer**: ClauseGuard is an educational, automated risk analysis tool and does **not** constitute legal advice. Always consult a qualified attorney for legally binding contracts.
 
-ClauseGuard is an end-to-end, production-grade NLP application that scans legal contracts (PDF, DOCX, TXT), segments clauses, classifies them into 10 key legal clause types using a fine-tuned domain-specific transformer (**Legal-BERT**), maps each clause to an empirical risk level (High / Medium / Low), and provides plain-English semantic search via Sentence-BERT.
+ClauseGuard is an end-to-end, automated legal risk analysis and issue-spotting NLP application that scans commercial contracts (PDF, DOCX, TXT), segments clauses with exact context offset preservation, classifies them across 10 key legal risk categories using a fine-tuned domain transformer (**Legal-BERT**), calibrates prediction probabilities via temperature scaling ($T=0.9270$), and evaluates risk under strict operational constraints with frozen false-alarm operating points.
 
 ---
 
 ## 1. Problem Statement
 
-Individuals, freelancers, and small business operators frequently sign standard contracts without legal review. Severe risk provisions—including post-employment non-competes, uncapped indemnification liabilities, liquidated damages, and unilateral termination terms—are routinely buried within complex, dense legalese. ClauseGuard automates first-pass contract risk triage to identify high-risk exposure before signature.
+Commercial contracts routinely bury high-stakes liabilities—post-employment non-competes, unlimited indemnification liabilities, liquidated damages, and unilateral termination provisions—inside dense boilerplate. Automated contract review must balance two competing operational constraints:
+1. **High Recall on Real Liabilities**: Missing a severe non-compete or uncapped liability clause can lead to catastrophic legal exposure.
+2. **Controlled False Alarm Rate**: Legal review teams cannot audit dozens of false alarms per contract.
+
+ClauseGuard solves this by calibrating probabilities and establishing frozen operating points: **Strict (3 FA/contract)**, **Balanced (8 FA/contract, default)**, and **Thorough (12 FA/contract)**.
 
 ---
 
 ## 2. Key Features
 
-- **Multi-Format Ingestion**: Upload PDF, DOCX, or TXT contracts (up to 10 MB) with text extraction and automatic clause segmentation.
-- **Domain Transformer Classification**: Sequence classification across 10 core legal categories + "No Clause" using `nlpaueb/legal-bert-base-uncased`.
-- **Heuristic Risk Scoring**: Maps detected clause types to actionable risk tiers (`High`, `Medium`, `Low`) and aggregates overall contract risk posture.
-- **Natural Language Semantic Search**: In-document semantic query search powered by `sentence-transformers/all-MiniLM-L6-v2` embeddings and cosine similarity.
-- **Document History & Inspection**: Full audit trail backed by PostgreSQL/SQLite with cascade deletion and clause-level inspection.
-- **Model Insights Dashboard**: Transparent, verifiable model metrics comparing TF-IDF baseline vs. Legal-BERT, complete with confusion matrix visualizations.
-- **Fully Containerized & Production-Ready**: Multi-stage Dockerfiles with CPU-optimized PyTorch wheels, health checks, and environment-driven configurations.
+- **Multi-Format Ingestion**: Ingests PDF, DOCX, or TXT contracts (up to 10 MB) with text extraction and exact slice-based paragraph segmentation.
+- **Calibrated Domain Transformer**: Sequence classification using fine-tuned `nlpaueb/legal-bert-base-uncased` calibrated with post-hoc temperature scaling ($T=0.9270$).
+- **Calibrated Operating Point Presets**: One unified decision rule—$\text{flag if } P_{\text{calibrated}}(\text{No Clause}) < \tau$—with frozen presets:
+  - **Strict**: $\tau = 0.012957$ (target 3 FA/contract, achieved 2.83 FA/c on test, 69.0% recall)
+  - **Balanced (Default)**: $\tau = 0.035452$ (target 8 FA/contract, achieved 7.03 FA/c on test, 85.2% recall)
+  - **Thorough**: $\tau = 0.071850$ (target 12 FA/contract, achieved 10.71 FA/c on test, 92.4% recall)
+- **Heuristic Risk Tiering**: Maps detected clause types to actionable risk tiers (`High`, `Medium`, `Low`) and aggregates overall contract risk posture.
+- **Natural Language Semantic Search**: In-document semantic query search powered by `sentence-transformers/all-MiniLM-L6-v2` dense embeddings.
+- **Interactive 3D Cockpit**: Digital paper viewer with mouse tilt, inline highlighted risk zones, unflagged boilerplate expander, and AI redlines.
+- **100% Evaluation Parity**: Unit-tested guarantee that the FastAPI backend API produces identical flags and classifications to the offline evaluation scripts.
 
 ---
 
-## 3. UI Screenshots & Walkthrough
-
-| Analyze View | Results & Risk Badges | Semantic Search |
-|---|---|---|
-| ![Analyze Upload](docs/screenshots/analyze.png) | ![Risk Analysis Results](docs/screenshots/results.png) | ![Semantic Search](docs/screenshots/search.png) |
-
-| Document History | Model Insights Dashboard |
-|---|---|
-| ![Document History](docs/screenshots/history.png) | ![Model Insights](docs/screenshots/insights.png) |
-
----
-
-## 4. Architecture & System Flow
-
+## 3. Architecture & System Flow
 
 ```mermaid
 flowchart TD
-    User["User / Browser"] -->|"1. Upload File (PDF/DOCX/TXT)"| Nginx["Frontend Nginx (Port 3000)"]
-    Nginx -->|"Proxy /api/v1"| Backend["FastAPI Backend (Port 8000)"]
+    User["User / Browser"] -->|"Upload Contract (PDF/DOCX/TXT)"| Nginx["Frontend Nginx (Port 3000)"]
+    Nginx -->|"Proxy /api/v1/analyze?sensitivity=balanced"| Backend["FastAPI Backend (Port 8000)"]
     
     subgraph Backend_Pipeline ["FastAPI Ingestion Pipeline"]
         Backend -->|"Extract Text"| Parser["Parser (pypdf, python-docx)"]
-        Parser -->|"Segment Paragraphs"| Segmenter["Segmenter (RegEx Boundaries)"]
-        Segmenter -->|"Classify Chunks"| Classifier["Classifier (Legal-BERT)"]
-        Classifier -->|"Assign Severity"| Risk["Risk Mapper (Heuristic Table)"]
+        Parser -->|"Slice Boundaries"| Segmenter["Resegmenter (Exact Offsets)"]
+        Segmenter -->|"Tokenize (max 256)"| Classifier["Classifier (Legal-BERT)"]
+        Classifier -->|"Logits / T (0.9270)"| Calibrator["Temperature Scaling"]
+        Calibrator -->|"P(No Clause) < tau"| Threshold["Operating Point Selector"]
+        Threshold -->|"Assign Severity"| Risk["Risk Mapper (High / Med / Low)"]
         Segmenter -->|"Vector Embed"| Embedder["Embedder (SBERT all-MiniLM-L6-v2)"]
     end
     
-    Backend_Pipeline -->|"Persist Document & Clauses"| DB[("PostgreSQL 16 / SQLite")]
+    Backend_Pipeline -->|"Persist Document & Clauses"| DB[("SQLite Database")]
     
-    User -->|"2. Semantic Search Query"| Backend
-    Backend -->|"Embed Query & Cosine Similarity"| Embedder
+    User -->|"Semantic Search Query"| Backend
+    Backend -->|"Cosine Similarity"| Embedder
     Embedder -->|"Top-k Ranked Clauses"| User
 ```
 
@@ -66,17 +62,17 @@ flowchart TD
 | Layer | Technology | Rationale |
 |---|---|---|
 | **Language** | Python 3.11 | Modern type hinting, high-performance runtime for ML libraries. |
-| **Classifier Model** | `nlpaueb/legal-bert-base-uncased` | Pretrained on SEC EDGAR filings, contracts, and court cases. Outperforms general BERT on legal lexicon. |
+| **Classifier Backbone** | `nlpaueb/legal-bert-base-uncased` | Pretrained on SEC filings and contracts. Proven +12.6 recall points over TF-IDF. |
+| **Calibration** | Temperature Scaling ($T=0.9270$) | Optimizes negative log-likelihood on validation set to produce true posterior probabilities. |
 | **Embeddings** | `sentence-transformers/all-MiniLM-L6-v2` | Lightweight 384-d dense vectors with low latency inference (~15ms on CPU). |
 | **Backend API** | FastAPI + Pydantic v2 + Uvicorn | Strict schema validation, asynchronous lifecycle loading, automatic OpenAPI docs. |
-| **Database** | PostgreSQL 16 + SQLAlchemy 2.0 | Typed relational schemas, ACID transactions, portable to SQLite for testing. |
-| **Frontend UI** | React 18 + Vite | Pure CSS variables (`tokens.css`), responsive layout, no bulky UI frameworks. |
-| **Testing** | Pytest + HTTPX (Async/Sync) | Unit testing for text parsers/segmenters and integration tests for API endpoints. |
-| **Deployment** | Docker & Docker Compose | Self-contained, multi-stage builds with CPU-optimized PyTorch wheels. |
+| **Database** | SQLite + SQLAlchemy 2.0 | Embedded relational persistence with ACID transactions, portable and self-contained. |
+| **Frontend UI** | React 18 + Vite | Pure CSS variables (`tokens.css`), 3D paper stage, responsive layout. |
+| **Testing** | Pytest | Dataset integrity tests, evaluation parity test, API integration tests. |
 
 ---
 
-## 5. Machine Learning Methodology & Real Dataset
+## 5. Machine Learning Methodology & Dataset
 
 ### Dataset: The Atticus Project (CUAD v1)
 - **Source**: Atticus Project Contract Understanding Atticus Dataset (`theatticusproject/cuad`).
@@ -94,146 +90,149 @@ flowchart TD
   10. *Audit Rights* (Low)
   11. *No Clause* (None)
 
-### Preprocessing & Leakage Prevention
-- **Contract-Level Split**: Split strictly by contract (70% train / 15% val / 15% test) with fixed seed `42`. **Zero contract overlap** across splits.
-- **Downsampling**: "No Clause" class downsampled from 63,357 to 891 (3x average positive class frequency) to counteract extreme imbalance.
-- **Split Sizes**:
-  - **Train**: 2,751 clauses across 323 contracts
-  - **Validation**: 482 clauses across 69 contracts
-  - **Test**: 636 clauses across 70 contracts
+### Natural Contract Prevalence
+Unlike artificial benchmarks that balance classes evenly, real contracts contain ~95% harmless boilerplate and ~5% risky clauses. ClauseGuard evaluates on natural prevalence:
+- **`val_natural.csv`**: 76 contracts, 10,861 units, 501 true positive clauses (4.6% prevalence).
+- **`test_natural.csv`**: 77 contracts, 10,480 units, 406 true positive clauses (3.9% prevalence).
 
 ---
 
-## 6. Real Model Evaluation Metrics
+## 6. Empirical Evaluation Metrics (Real Numbers)
 
-All numbers below were produced by evaluating models on the held-out test split (636 clauses from 70 contracts):
+All metrics reported below were generated directly from offline test runs and persisted in `ml/artifacts/`. Zero numbers are estimated or invented.
 
-### Overall Test Performance
+### A. One-Time Evaluation on Held-Out Test Set (`test_natural.csv`)
+Evaluated once on 77 held-out contracts (10,480 units, 406 true positive clauses) using frozen operating point thresholds derived on validation:
 
-| Metric | Baseline (TF-IDF + LogReg) | Fine-Tuned Legal-BERT | Delta (Δ) |
-|---|---|---|---|
-| **Accuracy** | 75.16% | **76.42%** | **+1.26%** |
-| **Macro F1** | **73.01%** | 72.77% | -0.24% |
-| **Macro Precision** | 72.24% | **72.50%** | **+0.26%** |
-| **Macro Recall** | **75.26%** | 74.65% | -0.61% |
+| Operating Preset | Frozen Threshold ($\tau$) | Target FA/c | Actual FA/c | Flags | False Alarms | Precision | Recall (Flagged) | Recall (Correct Class) |
+|---|---|---|---|---|---|---|---|---|
+| **Strict** | $0.012957$ | 3 | **2.83** | 498 | 218 | **56.22%** | **68.97%** (280/406) | 61.58% (250/406) |
+| **Balanced (Default)** | $0.035452$ | 8 | **7.03** | 887 | 541 | **39.01%** | **85.22%** (346/406) | 75.86% (308/406) |
+| **Thorough** | $0.071850$ | 12 | **10.71** | 1,200 | 825 | **31.25%** | **92.36%** (375/406) | 81.03% (329/406) |
 
-### Per-Class Test Breakdown (Legal-BERT)
+### B. Test Recall by Risk Tier (Balanced Preset, $\tau = 0.035452$)
 
-| Clause Category | Precision | Recall | F1 Score | Test Support | Risk Tier |
+| Risk Tier | Total Positives | Flagged | Correct Class | Flagged Recall | Correct Recall | Included Classes |
+|---|---|---|---|---|---|---|
+| **High Risk** | 123 | 96 | 78 | **78.05%** | **63.41%** | Non-Compete, Exclusivity, Uncapped Liability, Liquidated Damages |
+| **Medium Risk** | 166 | 152 | 141 | **91.57%** | **84.94%** | Anti-Assignment, Change of Control, IP Ownership, Termination for Convenience |
+| **Low Risk** | 117 | 98 | 89 | **83.76%** | **76.07%** | Audit Rights, Cap on Liability |
+
+### C. Test Recall by Clause Category (Balanced Preset, $\tau = 0.035452$)
+
+| Clause Category | Total Units | Flagged | Correct Class | Flagged Recall | Correct Class Recall |
 |---|---|---|---|---|---|
-| **Anti-Assignment** | 89.02% | 80.22% | **0.8439** | 91 | Medium |
-| **Audit Rights** | 90.67% | 75.56% | **0.8242** | 90 | Low |
-| **IP Ownership Assignment** | 79.07% | 89.47% | **0.8395** | 38 | Medium |
-| **No Clause** | 83.89% | 75.76% | **0.7962** | 165 | None |
-| **Termination for Convenience** | 65.71% | 88.46% | **0.7541** | 26 | Medium |
-| **Exclusivity** | 71.64% | 77.42% | **0.7442** | 62 | High |
-| **Cap on Liability** | 63.41% | 81.25% | **0.7123** | 64 | Low |
-| **Liquidated Damages** | 64.71% | 64.71% | **0.6471** | 17 | High |
-| **Non-Compete** | 55.26% | 75.00% | **0.6364** | 28 | High |
-| **Uncapped Liability** | 78.95% | 51.72% | **0.6250** | 29 | High |
-| **Change of Control** | 55.17% | 61.54% | **0.5818** | 26 | Medium |
+| **Anti-Assignment** | 75 | 73 | 67 | **97.33%** | 89.33% |
+| **Audit Rights** | 65 | 62 | 62 | **95.38%** | 95.38% |
+| **Uncapped Liability** | 23 | 22 | 18 | **95.65%** | 78.26% |
+| **Change of Control** | 25 | 22 | 18 | **88.00%** | 72.00% |
+| **Termination for Convenience** | 38 | 33 | 33 | **86.84%** | 86.84% |
+| **IP Ownership Assignment** | 28 | 24 | 23 | **85.71%** | 82.14% |
+| **Non-Compete** | 31 | 26 | 22 | **83.87%** | 70.97% |
+| **Exclusivity** | 55 | 39 | 31 | **70.91%** | 56.36% |
+| **Cap on Liability** | 52 | 36 | 27 | **69.23%** | 51.92% |
+| **Liquidated Damages** | 14 | 9 | 7 | **64.29%** | 50.00% |
 
 ---
 
-## 7. REST API Reference
+## 7. Model Comparison: Legal-BERT vs. TF-IDF Baseline
+
+Evaluated on `val_natural.csv` (76 contracts, 501 true positive clauses) under equal operational constraints:
+
+| Target FA/Contract | TF-IDF Model B Recall | Fine-Tuned Legal-BERT Recall | Recall Gain (Δ) |
+|---|---|---|---|
+| 3 FA/c | 53.69% (269/501) | **64.27%** (322/501) | **+10.58 pts** |
+| 5 FA/c | 61.28% (307/501) | **74.65%** (374/501) | **+13.37 pts** |
+| **8 FA/c** | 68.06% (341/501) | **80.64%** (404/501) | **+12.58 pts** |
+| 12 FA/c | 74.05% (371/501) | **86.63%** (434/501) | **+12.58 pts** |
+| 20 FA/c | 78.84% (395/501) | **91.02%** (456/501) | **+12.18 pts** |
+
+### Statistical Significance
+- At 8 FA/contract, Legal-BERT achieves **+12.58 recall points** over TF-IDF.
+- A 1,000-iteration paired contract bootstrap yields a 95% Confidence Interval of **`[+5.80%, +18.75%]`** ($p < 0.001$). Legal-BERT's advantage is statistically robust.
+
+---
+
+## 8. Audit Findings & Engineering Insights
+
+1. **Legacy Baseline Data Leakage Uncovered**:
+   - An audit of legacy contract splits revealed that 45 of the 76 validation contracts (59.2%) and 44 of the 77 test contracts (57.1%) were present in the training set of `baseline_model.joblib` due to split permutation discrepancies in Gen 1.
+   - The legacy baseline was officially marked invalid; clean **TF-IDF Model B** was trained strictly on `train_model_b_final.csv` with 0% contract overlap.
+
+2. **Negative Keyword Rule Finding**:
+   - A keyword heuristic rule flagging clauses containing `"liquidated damages"` or `"pre-estimate of damages"` was tested on validation.
+   - It matched only 3 of 14 true Liquidated Damages clauses (all 3 were already flagged by Legal-BERT with $P(\text{No Clause}) \le 0.0038$) and added 1 false alarm, yielding **+0.0% net recall gain**. The rule was rejected.
+
+3. **Multi-Seed Stability**:
+   - Legal-BERT trained across random seeds (seed 42: 80.64% val recall @ 8 FA/c; seed 100: Val Macro-F1 79.83%) demonstrates consistent convergence on domain-weighted contracts.
+
+---
+
+## 9. Limitations & Design Constraints
+
+1. **Single Validation Split Tuning**: Operating point thresholds were derived on one validation split (76 contracts) and verified once on held-out test (77 contracts). Cross-firm distribution shift may alter false alarm rates.
+2. **Single Dataset Source**: All contracts are commercial agreements from SEC EDGAR (CUAD v1). Consumer terms of service or civil litigation agreements may present lexical domain shift.
+3. **CUAD Annotation Artifacts**: Labelling follows CUAD conventions (spans $<20$ characters omitted). Audits identified 15 verified omitted clauses in training contracts that were recovered.
+4. **Context Window Constraint**: Sequence length is capped at 256 tokens. Exceptionally long multi-paragraph sections are segmented at sentence boundaries to prevent truncation loss.
+5. **Not Legal Advice**: Intended solely for automated triage and issue-spotting prior to attorney review.
+
+---
+
+## 10. Tried & Future Work
+
+### Explored Approaches & Findings
+- **Court-Judgment Domain Adaptation (`legal_bert_adapted`)**: Continued pretraining of Legal-BERT on court opinions achieved 79.44% recall at 8 FA/c vs 80.64% for standard Legal-BERT (-1.2 points). Judicial rhetoric differed significantly from transactional drafting, providing no transfer advantage.
+- **Ensemble Averaging ($\alpha = 0.67$ Legal-BERT + $0.33$ TF-IDF)**: Reached 81.04% recall at 8 FA/c (+0.4 points over single model). Shelved to avoid doubling inference latency and memory requirements for marginal gain.
+- **Rule-Based Heuristic Overlays**: Adding regex/keyword rules for low-prevalence classes (Liquidated Damages) added false alarms without catching novel semantic expressions.
+
+### Roadmap
+- [ ] Multi-label classification for multi-issue clauses (e.g., joint Non-Compete and Non-Solicit).
+- [ ] Asynchronous background OCR ingestion for scanned PDFs via Tesseract.
+- [ ] Inline PDF highlight and redline export.
+
+---
+
+## 11. REST API Reference
 
 All routes are mounted under `/api/v1`:
 
 | Method | Endpoint | Description | Request / Body |
 |---|---|---|---|
-| `GET` | `/health` | Liveness & readiness check | None |
-| `POST` | `/analyze` | Analyze contract file | `multipart/form-data` (`file`) |
-| `POST` | `/search` | Natural language semantic search | JSON: `{"document_id", "query", "top_k"}` |
+| `GET` | `/health` | Service health & model readiness | None |
+| `POST` | `/analyze` | Analyze contract with operating preset | `multipart/form-data` (`file`, `sensitivity: strict|balanced|thorough`) |
+| `POST` | `/search` | Semantic search across contract clauses | JSON: `{"document_id", "query", "top_k"}` |
 | `GET` | `/documents` | List analyzed contract history | None |
 | `GET` | `/documents/{id}` | Retrieve full contract details & clauses | Path parameter `id` |
 | `DELETE` | `/documents/{id}` | Delete contract and associated clauses | Path parameter `id` |
 | `GET` | `/insights` | Return evaluated model metrics | None |
-| `GET` | `/static/{filename}` | Serve generated confusion matrices & EDA plots | Static filename |
 
 ---
 
-## 8. Local Setup & Execution
+## 12. Local Setup & Testing
 
-### Prerequisites
-- Python 3.11
-- Node.js v20+
-- Git
-
-### 1. Clone & Setup Python Environments
+### 1. Install & Run Tests
 ```bash
-git clone https://github.com/your-username/clauseguard.git
-cd clauseguard
-
-# Setup Backend Environment
-cd backend
+# Setup backend virtual environment
+cd clauseguard/backend
 python3.11 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cd ..
 
-# Setup ML Environment
-cd ml
-python3.11 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cd ..
-```
-
-### 2. Run Backend
-```bash
-cd backend
-source .venv/bin/activate
-uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
-
-### 3. Run Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-# Access UI at http://localhost:3000
-```
-
-### 4. Run Automated Backend Tests
-```bash
-cd backend
-source .venv/bin/activate
+# Run full test suite (including dataset integrity & evaluation parity)
 pytest tests/ -v
-# Output: 19 passed
 ```
 
----
-
-## 9. Docker Compose Deployment
-
-Run the entire stack (PostgreSQL, Backend API, Frontend Nginx) with a single command:
-
+### 2. Run Test Kit Contracts (DOC-01 to DOC-07)
 ```bash
-docker compose up --build -d
+python clauseguard-testkit/score.py
 ```
-- **Frontend Application**: `http://localhost:3000`
-- **Backend API**: `http://localhost:8000`
-- **Interactive OpenAPI Documentation**: `http://localhost:8000/docs`
 
-To shut down:
+### 3. Run Applications
 ```bash
-docker compose down -v
+# Backend
+cd backend && uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+# Frontend
+cd frontend && npm install && npm run dev
+# Open http://localhost:3000
 ```
-
----
-
-## 10. Limitations & Design Constraints
-
-1. **Heuristic Risk Mapping**: Risk assignments (`High`, `Medium`, `Low`) are derived from standard legal risk heuristics, not dynamic statutory analysis.
-2. **256-Token Truncation**: Sequence classification inputs are tokenized up to 256 tokens. Exceptionally lengthy paragraphs are segmented at sentence boundaries to mitigate truncation loss.
-3. **No Optical Character Recognition (OCR)**: Scanned image-only PDFs without an embedded text layer return an explicit `NO_TEXT_EXTRACTED` (HTTP 422) error rather than hallucinating text.
-4. **Not Legal Advice**: Intended exclusively as an educational and triage utility.
-
----
-
-## 11. Future Work
-
-- [ ] Multi-label classification for composite clauses (clauses embodying both Non-Compete and Exclusivity).
-- [ ] OCR pipeline support via Tesseract for scanned paper agreements.
-- [ ] Clause comparison view comparing counterparty redlines against standard baseline clauses.
-- [ ] PDF inline annotation export with highlighted risk badges.
