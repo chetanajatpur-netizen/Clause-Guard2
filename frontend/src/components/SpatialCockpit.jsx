@@ -411,7 +411,7 @@ export default function SpatialCockpit({ liveResult: initialLiveResult }) {
                   borderRadius: '8px',
                 }}
               >
-                ClauseGuard
+                ClauseWise
                 <span
                   style={{
                     color: '#4cd7f6',

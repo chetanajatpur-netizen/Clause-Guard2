@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan: load models on startup."""
     setup_logging()
-    logger.info("Starting ClauseGuard backend...")
+    logger.info("Starting ClauseWise backend...")
     
     # Create database tables
     create_tables()
@@ -43,15 +43,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     except Exception as e:
         logger.error("Failed to load embedder: %s", e)
     
-    logger.info("ClauseGuard backend ready.")
+    logger.info("ClauseWise backend ready.")
     yield
-    logger.info("Shutting down ClauseGuard backend.")
+    logger.info("Shutting down ClauseWise backend.")
 
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     app = FastAPI(
-        title="ClauseGuard API",
+        title="ClauseWise API",
         description="AI-powered contract risk analyzer. Not legal advice.",
         version="1.0.0",
         lifespan=lifespan,

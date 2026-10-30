@@ -1,1 +1,1 @@
-"""ClauseGuard backend application."""
+"""ClauseWise backend application."""

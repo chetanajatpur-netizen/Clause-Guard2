@@ -1,16 +1,15 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: ClauseGuard Production Freezing, Operating Point Presets & UI/Schema Unification
-- Current phase/step: Prompt 10 Verification Complete - Schema Parity, Liability Guard, UI Polish, Gate Rules & Live Screenshots
+- Current day: ClauseWise Product Branding & Refinement
+- Current phase/step: Name change to ClauseWise completed across UI, backend, and documentation
 - File currently being worked on: None
 - Recent updates: 
-  - Unified saved vs fresh document schemas in backend (`history.py`) and frontend (`utils/risks.js`), fixing empty Risks panel and adding regression test.
-  - Implemented Liability Guard rule distinguishing uncapped from capped liability; DOC-01 Section 8 flags as Uncapped Liability (High) and standard caps stay Cap on Liability (Low); evaluated on val_natural with 0 false alarms added.
-  - UI refined: removed storage meter, standardized Moderate -> Medium, white-space: nowrap on section & confidence, sticky 3D bar background & padding, preset tooltips updated.
-  - Evaluated Secondary Label ("May also contain") gate rule on val_natural: 1.2895 false chips/contract exceeded 1.0 limit -> gate failed -> disabled per specification.
-  - Evaluated DOC-08 compound contract: 6/6 risky clauses flagged, 0 harmless false alarms, 0 cards meet secondary label threshold.
-  - Full test suite passed (60/60 tests), production build verified, 6 full-resolution screenshots captured.
+  - Updated application branding and title from ClauseGuard to ClauseWise across frontend components (`FrontPage.jsx`, `DocumentDashboard.jsx`, `DocumentViewer3D.jsx`, `SpatialCockpit.jsx`, `index.html`, `package.json`).
+  - Updated backend API title and startup logging to ClauseWise in `main.py` and `__init__.py`, preserving exception backward-compatibility via `ClauseWiseError = ClauseGuardError`.
+  - Updated `README.md` and `RESUME_DRAFT.md` headers, disclaimers, and project summaries to ClauseWise.
+  - Verified frontend production build with `npm run build` (compiled cleanly in 4.75s).
+  - Validated test suite passing (60/60 tests).
 
 
 ## Completed
@@ -314,6 +313,12 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - 5. Verification & Screenshots:
     - Full test suite passed (60/60 tests). Frontend compiled with `npm run build` in 4.71s.
     - Captured 6 screenshots via Playwright + Arc in `docs/screenshots/`: `doc01_saved_strict.png`, `doc01_saved_balanced.png`, `doc01_saved_thorough.png`, `doc08_strict.png`, `doc08_balanced.png`, `doc08_thorough.png`.
+- [2026-10-30 10:41] Product Rebranding to ClauseWise DONE:
+  - Frontend: Renamed application title to "ClauseWise - Contract Risk Analyzer" in `frontend/index.html` and package name to `clausewise-frontend` in `package.json`.
+  - UI Branding: Updated brand text, logos, headers, toolbars, and footers to "ClauseWise", "CLAUSEWISE 3D", and "ClauseWise AI" across `FrontPage.jsx`, `DocumentDashboard.jsx`, `DocumentViewer3D.jsx`, and `SpatialCockpit.jsx`.
+  - Backend: Updated FastAPI application title to "ClauseWise API" in `backend/app/main.py`, startup/shutdown logging, and docstring in `__init__.py`. Added backward-compatible exception alias `ClauseWiseError = ClauseGuardError`.
+  - Documentation: Updated `README.md` and `RESUME_DRAFT.md` to reference ClauseWise.
+  - Verification: `npm run build` compiled in 4.75s with zero errors; full backend test suite re-verified.
 
 
 

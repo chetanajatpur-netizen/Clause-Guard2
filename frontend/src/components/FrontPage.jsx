@@ -3,7 +3,7 @@ import '../styles/front-page.css';
 
 /**
  * FrontPage: Minimalist Editorial Landing Page matching the user's reference design
- * Summarizes what ClauseGuard does in a short, sweet, and elegant presentation.
+ * Summarizes what ClauseWise does in a short, sweet, and elegant presentation.
  */
 export default function FrontPage({ onLaunchCockpit }) {
   const scrollToSection = (id) => {
@@ -27,8 +27,8 @@ export default function FrontPage({ onLaunchCockpit }) {
           <span>100% On-Device & Private • Zero Cloud LLM Leakage</span>
         </div>
 
-        <a href="mailto:contact@clauseguard.ai" className="fp-top-contact">
-          support@clauseguard.ai
+        <a href="mailto:contact@clausewise.ai" className="fp-top-contact">
+          support@clausewise.ai
         </a>
       </div>
 
@@ -41,7 +41,7 @@ export default function FrontPage({ onLaunchCockpit }) {
             </svg>
           </div>
           <div className="fp-logo-text">
-            ClauseGuard <span>AI</span>
+            ClauseWise <span>AI</span>
           </div>
         </div>
 
@@ -83,7 +83,7 @@ export default function FrontPage({ onLaunchCockpit }) {
           </h1>
 
           <p className="fp-hero-description">
-            ClauseGuard instantly spots hidden liabilities, non-competes, and predatory terms
+            ClauseWise instantly spots hidden liabilities, non-competes, and predatory terms
             across PDF, DOCX, and TXT agreements. Inspected directly on an interactive 3D digital
             paper canvas with plain-English breakdowns and balanced AI redlines.
           </p>
@@ -117,7 +117,7 @@ export default function FrontPage({ onLaunchCockpit }) {
       {/* 4. WHAT DOES OUR SITE DO SECTION (Short & Sweet & Minimalist) */}
       <section className="fp-summary-section" id="what-we-do">
         <div className="fp-section-header">
-          <div className="fp-section-kicker">WHAT DOES CLAUSEGUARD DO?</div>
+          <div className="fp-section-kicker">WHAT DOES CLAUSEWISE DO?</div>
           <h2 className="fp-section-title">Everything you need to sign safely</h2>
           <p className="fp-section-sub">
             Protect your business from predatory legal traps in three seamless steps.
@@ -129,7 +129,7 @@ export default function FrontPage({ onLaunchCockpit }) {
             <div className="fp-card-step">STEP 01</div>
             <h3 className="fp-card-title">Ingest Any Contract</h3>
             <p className="fp-card-text">
-              Drop any PDF, DOCX, or TXT document (up to 10MB). ClauseGuard parses and segments complex legal language into discrete, verifiable clauses in seconds.
+              Drop any PDF, DOCX, or TXT document (up to 10MB). ClauseWise parses and segments complex legal language into discrete, verifiable clauses in seconds.
             </p>
             <div className="fp-card-pill">PDF • DOCX • TXT</div>
           </div>
@@ -222,7 +222,7 @@ export default function FrontPage({ onLaunchCockpit }) {
 
       {/* 7. MINIMAL FOOTER */}
       <footer className="fp-footer">
-        <div>© 2026 ClauseGuard AI • AI Contract Risk Analyzer. Not legal advice.</div>
+        <div>© 2026 ClauseWise AI • AI Contract Risk Analyzer. Not legal advice.</div>
         <div className="fp-footer-links">
           <span className="fp-footer-link" onClick={onLaunchCockpit} style={{ cursor: 'pointer' }}>
             3D Cockpit

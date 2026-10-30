@@ -1,8 +1,8 @@
-# ClauseGuard: AI Contract Risk Analyzer
+# ClauseWise: AI Contract Risk Analyzer
 
-> **Disclaimer**: ClauseGuard is an educational, automated risk analysis tool and does **not** constitute legal advice. Always consult a qualified attorney for legally binding contracts.
+> **Disclaimer**: ClauseWise is an educational, automated risk analysis tool and does **not** constitute legal advice. Always consult a qualified attorney for legally binding contracts.
 
-ClauseGuard is an end-to-end, automated legal risk analysis and issue-spotting NLP application that scans commercial contracts (PDF, DOCX, TXT), segments clauses with exact context offset preservation, classifies them across 10 key legal risk categories using a fine-tuned domain transformer (**Legal-BERT**), calibrates prediction probabilities via temperature scaling ($T=0.9270$), and evaluates risk under strict operational constraints with frozen false-alarm operating points.
+ClauseWise is an end-to-end, automated legal risk analysis and issue-spotting NLP application that scans commercial contracts (PDF, DOCX, TXT), segments clauses with exact context offset preservation, classifies them across 10 key legal risk categories using a fine-tuned domain transformer (**Legal-BERT**), calibrates prediction probabilities via temperature scaling ($T=0.9270$), and evaluates risk under strict operational constraints with frozen false-alarm operating points.
 
 ---
 
@@ -12,7 +12,7 @@ Commercial contracts routinely bury high-stakes liabilities—post-employment no
 1. **High Recall on Real Liabilities**: Missing a severe non-compete or uncapped liability clause can lead to catastrophic legal exposure.
 2. **Controlled False Alarm Rate**: Legal review teams cannot audit dozens of false alarms per contract.
 
-ClauseGuard solves this by calibrating probabilities and establishing frozen operating points: **Strict (3 FA/contract)**, **Balanced (8 FA/contract, default)**, and **Thorough (12 FA/contract)**.
+ClauseWise solves this by calibrating probabilities and establishing frozen operating points: **Strict (3 FA/contract)**, **Balanced (8 FA/contract, default)**, and **Thorough (12 FA/contract)**.
 
 ---
 
@@ -91,7 +91,7 @@ flowchart TD
   11. *No Clause* (None)
 
 ### Natural Contract Prevalence
-Unlike artificial benchmarks that balance classes evenly, real contracts contain ~95% harmless boilerplate and ~5% risky clauses. ClauseGuard evaluates on natural prevalence:
+Unlike artificial benchmarks that balance classes evenly, real contracts contain ~95% harmless boilerplate and ~5% risky clauses. ClauseWise evaluates on natural prevalence:
 - **`val_natural.csv`**: 76 contracts, 10,861 units, 501 true positive clauses (4.6% prevalence).
 - **`test_natural.csv`**: 77 contracts, 10,480 units, 406 true positive clauses (3.9% prevalence).
 

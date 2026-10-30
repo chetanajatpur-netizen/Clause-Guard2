@@ -460,7 +460,7 @@ export default function DocumentViewer3D({
 
             {/* Paper Footer with Page numbering */}
             <div className="dd-paper-footer">
-              <span>ClauseGuard AI • Document Risk Inspection</span>
+              <span>ClauseWise AI • Document Risk Inspection</span>
               <span>
                 Page {currentPage} of {totalPages}
               </span>

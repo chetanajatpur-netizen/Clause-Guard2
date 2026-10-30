@@ -1,6 +1,6 @@
 # Resume Draft & Project Pitch
 
-## ClauseGuard: AI Contract Risk Analyzer & Semantic Search Engine
+## ClauseWise: AI Contract Risk Analyzer & Semantic Search Engine
 *Machine Learning & Full-Stack NLP System*
 
 ---
@@ -25,7 +25,7 @@
 
 ### 60-Second Interview Pitch
 
-> "I built ClauseGuard to solve a common, expensive problem: people and small businesses signing dense legal agreements without understanding the hidden liabilities. I developed an end-to-end system that takes raw PDFs, DOCXs, or text files, splits them into clauses, and classifies them across 10 critical legal categories using a fine-tuned Legal-BERT model.
+> "I built ClauseWise to solve a common, expensive problem: people and small businesses signing dense legal agreements without understanding the hidden liabilities. I developed an end-to-end system that takes raw PDFs, DOCXs, or text files, splits them into clauses, and classifies them across 10 critical legal categories using a fine-tuned Legal-BERT model.
 >
 > On the ML side, I trained on 510 commercial contracts from the CUAD dataset. I was careful to enforce a strict contract-level split to prevent data leakage, and evaluated on natural contract prevalence where 96% of sections are harmless boilerplate. By calibrating prediction probabilities via temperature scaling ($T=0.9270$) and setting frozen operating-point presets, the system achieves 85.22% recall at 7.03 false alarms per contract on 77 held-out test contracts, outperforming a clean TF-IDF baseline by +12.58 recall points (95% CI: [+5.80%, +18.75%]).
 >
