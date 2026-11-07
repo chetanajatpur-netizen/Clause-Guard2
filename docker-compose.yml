@@ -30,7 +30,7 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: ${DATABASE_URL:-postgresql://clauseguard:clauseguard@db:5432/clauseguard}
-      MODEL_PATH: /app/model_artifacts/legal_bert
+      MODEL_PATH: /app/model_artifacts/legal_bert_final
       LABEL_MAP_PATH: /app/model_artifacts/label_map.json
       METRICS_PATH: /app/model_artifacts/metrics.json
       OPERATING_POINTS_PATH: /app/model_artifacts/operating_points.json

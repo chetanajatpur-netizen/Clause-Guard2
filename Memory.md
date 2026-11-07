@@ -17,6 +17,7 @@
     - Automated API regression tests added for `DOC-03`, `DOC-04`, `DOC-07`, and `DOC-05`.
   - Model Governance Decisions: Retained single-model Legal-BERT (Seed 42); did not adopt seed average, tier thresholds, or secondary chips.
   - Documentation: Updated `README.md` with dedicated section `Experiments That Did Not Help`.
+  - ML Directory Optimization: Audited `ml/` footprint (originally 4.16 GB). Deleted 8 obsolete experimental transformer checkpoints (3.33 GB), outdated `ml/data/processed_old/` (33 MB), temporary cross-validation embeddings and CSVs (57 MB), and 8 unused graph PNG files (1.2 MB). Reduced `ml/` size from 4.16 GB down to 529 MB (87% reduction). Preserved production Legal-BERT (`legal_bert_final`), centroid, config, metrics, and canonical datasets. Full test suite re-verified (66/66 passed).
 
 
 ## Completed
