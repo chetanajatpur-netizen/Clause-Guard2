@@ -30,3 +30,6 @@ class DocumentDetailResponse(BaseModel):
     created_at: datetime
     risk_summary: RiskSummary
     clauses: list[ClauseResponse]
+    warnings: list[str] = []
+    doc_avg_top_prob: float | None = None
+    doc_sbert_dist: float | None = None

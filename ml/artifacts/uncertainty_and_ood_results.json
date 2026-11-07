@@ -1,0 +1,423 @@
+{
+  "validation_stats": {
+    "chosen_cutoff": 0.65,
+    "needs_review_count": 96,
+    "needs_review_share": 9.486166007905137,
+    "needs_review_precision_flagged": 39.58333333333333,
+    "needs_review_precision_correct": 21.875,
+    "high_conf_precision_flagged": 39.956331877729255,
+    "high_conf_precision_correct": 36.572052401746724,
+    "threshold_top_prob": 0.7,
+    "threshold_sbert_dist": 0.3757,
+    "mean_top_prob": 0.7810434699058533,
+    "std_top_prob": 0.040523819625377655,
+    "mean_sbert_dist": 0.23622345179319382,
+    "std_sbert_dist": 0.06972350912650532
+  },
+  "documents": {
+    "DOC-01_freelance_agreement.txt": {
+      "doc_name": "DOC-01_freelance_agreement.txt",
+      "total_units": 15,
+      "doc_avg_top_prob": 0.8799,
+      "doc_sbert_dist": 0.246,
+      "total_flagged": 8,
+      "needs_review_count": 0,
+      "warnings": [],
+      "flagged_clauses": [
+        {
+          "unit_idx": 4,
+          "text_snippet": "4. Exclusive Engagement. During the Term, Contractor shall work exclusively for Client and shall not",
+          "label": "Exclusivity",
+          "confidence": 0.8684324026107788,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 5,
+          "text_snippet": "5. Non-Competition. For a period of twenty-four (24) months after the termination of this Agreement,",
+          "label": "Non-Compete",
+          "confidence": 0.9489701986312866,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Ownership of Work Product. All work product, inventions, code and materials created by Contractor",
+          "label": "IP Ownership Assignment",
+          "confidence": 0.9719584584236145,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 7,
+          "text_snippet": "7. Termination. Client may terminate this Agreement at any time, for any reason or for no reason, by",
+          "label": "Termination for Convenience",
+          "confidence": 0.9685580730438232,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 8,
+          "text_snippet": "8. Liability. Contractor shall be liable for, and shall indemnify Client against, all losses, damage",
+          "label": "Cap on Liability",
+          "confidence": 0.8882646560668945,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 9,
+          "text_snippet": "9. Delay Damages. If Contractor fails to deliver any milestone by its due date, Contractor shall pay",
+          "label": "Liquidated Damages",
+          "confidence": 0.9752316474914551,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 10,
+          "text_snippet": "10. Assignment. Contractor shall not assign, transfer, delegate or subcontract any of its rights or ",
+          "label": "Anti-Assignment",
+          "confidence": 0.967119038105011,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 11,
+          "text_snippet": "11. Inspection of Records. Client and its representatives may, upon reasonable notice and at any tim",
+          "label": "Audit Rights",
+          "confidence": 0.9795472025871277,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-02_mutual_nda.txt": {
+      "doc_name": "DOC-02_mutual_nda.txt",
+      "total_units": 13,
+      "doc_avg_top_prob": 0.8481,
+      "doc_sbert_dist": 0.2025,
+      "total_flagged": 5,
+      "needs_review_count": 0,
+      "warnings": [],
+      "flagged_clauses": [
+        {
+          "unit_idx": 5,
+          "text_snippet": "5. Non-Solicitation. During the Term and for twelve months afterwards, neither Party shall solicit f",
+          "label": "Non-Compete",
+          "confidence": 0.866150975227356,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Term and Termination. This Agreement continues for three years. Either Party may terminate this A",
+          "label": "Termination for Convenience",
+          "confidence": 0.9680721759796143,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 7,
+          "text_snippet": "7. Assignment. Neither Party may assign or transfer this Agreement or any rights under it, whether b",
+          "label": "Anti-Assignment",
+          "confidence": 0.9668871164321899,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 8,
+          "text_snippet": "8. Remedies for Breach. The Parties agree that damage from unauthorized disclosure is difficult to m",
+          "label": "Liquidated Damages",
+          "confidence": 0.9659311771392822,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 9,
+          "text_snippet": "9. Liability for Disclosure. The receiving Party shall be fully liable for all direct, indirect and ",
+          "label": "Cap on Liability",
+          "confidence": 0.8561344146728516,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-03_residential_lease.txt": {
+      "doc_name": "DOC-03_residential_lease.txt",
+      "total_units": 14,
+      "doc_avg_top_prob": 0.8904,
+      "doc_sbert_dist": 0.5435,
+      "total_flagged": 5,
+      "needs_review_count": 0,
+      "warnings": [
+        "HIGH_DOMAIN_DISTANCE: SBERT distance to commercial training agreements (0.5435) is unusually high (expected <= 0.3757). Out-of-distribution agreement structure suspected."
+      ],
+      "flagged_clauses": [
+        {
+          "unit_idx": 5,
+          "text_snippet": "5. Late Payment Charge. If rent is not received by the tenth day of the month, Tenant shall pay Land",
+          "label": "Liquidated Damages",
+          "confidence": 0.9714006185531616,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Early Vacating. If Tenant vacates the Premises before the end of the term for any reason, Tenant ",
+          "label": "Liquidated Damages",
+          "confidence": 0.9580219388008118,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 7,
+          "text_snippet": "7. Subletting and Assignment. Tenant shall not sublet the Premises or any part of it, nor assign thi",
+          "label": "Anti-Assignment",
+          "confidence": 0.9628717303276062,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 8,
+          "text_snippet": "8. Landlord's Right to End Lease. Landlord may terminate this lease at any time, without giving any ",
+          "label": "Termination for Convenience",
+          "confidence": 0.9662967920303345,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 10,
+          "text_snippet": "10. Landlord Inspection. Landlord may enter the Premises on forty-eight hours' notice to inspect its",
+          "label": "Audit Rights",
+          "confidence": 0.9764619469642639,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-04_employment_offer.txt": {
+      "doc_name": "DOC-04_employment_offer.txt",
+      "total_units": 14,
+      "doc_avg_top_prob": 0.8614,
+      "doc_sbert_dist": 0.4082,
+      "total_flagged": 7,
+      "needs_review_count": 0,
+      "warnings": [
+        "HIGH_DOMAIN_DISTANCE: SBERT distance to commercial training agreements (0.4082) is unusually high (expected <= 0.3757). Out-of-distribution agreement structure suspected."
+      ],
+      "flagged_clauses": [
+        {
+          "unit_idx": 4,
+          "text_snippet": "4. Full-Time Dedication. Employee shall devote her entire working time to the Company and shall not,",
+          "label": "Non-Compete",
+          "confidence": 0.8591260313987732,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 5,
+          "text_snippet": "5. Post-Employment Restriction. For twelve (12) months after leaving the Company, Employee shall not",
+          "label": "Non-Compete",
+          "confidence": 0.951257586479187,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Inventions. Employee assigns to the Company all inventions, models, software and works she concei",
+          "label": "IP Ownership Assignment",
+          "confidence": 0.937670111656189,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 7,
+          "text_snippet": "7. Termination by Company. The Company may terminate Employee's employment at any time, with or with",
+          "label": "Termination for Convenience",
+          "confidence": 0.9624151587486267,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 8,
+          "text_snippet": "8. Training Bond. If Employee resigns or is dismissed for misconduct within eighteen (18) months of ",
+          "label": "Liquidated Damages",
+          "confidence": 0.9588030576705933,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 9,
+          "text_snippet": "9. Resignation Notice. Employee may resign by giving ninety (90) days' written notice, during which ",
+          "label": "Termination for Convenience",
+          "confidence": 0.9143350720405579,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 10,
+          "text_snippet": "10. Non-Solicitation. For twelve months after leaving, Employee shall not solicit any Company employ",
+          "label": "Non-Compete",
+          "confidence": 0.8664098381996155,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-05_saas_msa.txt": {
+      "doc_name": "DOC-05_saas_msa.txt",
+      "total_units": 17,
+      "doc_avg_top_prob": 0.8298,
+      "doc_sbert_dist": 0.1725,
+      "total_flagged": 9,
+      "needs_review_count": 1,
+      "warnings": [],
+      "flagged_clauses": [
+        {
+          "unit_idx": 5,
+          "text_snippet": "5. Limitation of Liability. Except as stated in Section 12, each party's total aggregate liability a",
+          "label": "Uncapped Liability",
+          "confidence": 0.5544986724853516,
+          "needs_review": true
+        },
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Usage Audit. Provider may, on ten (10) days' notice and not more than once per year, audit Custom",
+          "label": "Audit Rights",
+          "confidence": 0.9811127185821533,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 7,
+          "text_snippet": "7. Change of Control. If Customer undergoes a change of control, whether by merger, sale of all or s",
+          "label": "Change of Control",
+          "confidence": 0.9630126953125,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 8,
+          "text_snippet": "8. Assignment. Customer may not assign or transfer this Agreement or any rights hereunder without Pr",
+          "label": "Anti-Assignment",
+          "confidence": 0.8633986711502075,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 9,
+          "text_snippet": "9. Termination for Convenience. Provider may terminate this Agreement for convenience upon sixty (60",
+          "label": "Termination for Convenience",
+          "confidence": 0.9655841588973999,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 10,
+          "text_snippet": "10. Early Termination Fee. If Customer terminates this Agreement before the end of the initial term ",
+          "label": "Liquidated Damages",
+          "confidence": 0.9646324515342712,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 11,
+          "text_snippet": "11. Feedback and Improvements. Customer hereby assigns to Provider all right, title and interest in ",
+          "label": "IP Ownership Assignment",
+          "confidence": 0.970787763595581,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 12,
+          "text_snippet": "12. Exceptions to Limitation. The limitation in Section 5 shall not apply to Customer's breach of it",
+          "label": "Uncapped Liability",
+          "confidence": 0.8129560351371765,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 13,
+          "text_snippet": "13. Exclusive Purchasing. During the term, Customer shall purchase all of its inventory analytics an",
+          "label": "Exclusivity",
+          "confidence": 0.9125415086746216,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-06_consulting_traps.txt": {
+      "doc_name": "DOC-06_consulting_traps.txt",
+      "total_units": 14,
+      "doc_avg_top_prob": 0.8256,
+      "doc_sbert_dist": 0.1874,
+      "total_flagged": 3,
+      "needs_review_count": 0,
+      "warnings": [],
+      "flagged_clauses": [
+        {
+          "unit_idx": 4,
+          "text_snippet": "4. Financial Statements. Each party shall have its own annual financial statements audited by indepe",
+          "label": "Audit Rights",
+          "confidence": 0.9681425094604492,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 9,
+          "text_snippet": "9. Competition Law. Each party shall comply with all applicable competition and anti-trust laws in c",
+          "label": "Non-Compete",
+          "confidence": 0.8979532122612,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 12,
+          "text_snippet": "12. Limitation of Liability. Lumen's total liability to the Client under this Agreement, whether in ",
+          "label": "Cap on Liability",
+          "confidence": 0.7991113066673279,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-07_not_a_contract.txt": {
+      "doc_name": "DOC-07_not_a_contract.txt",
+      "total_units": 7,
+      "doc_avg_top_prob": 0.9,
+      "doc_sbert_dist": 0.8076,
+      "total_flagged": 1,
+      "needs_review_count": 0,
+      "warnings": [
+        "HIGH_DOMAIN_DISTANCE: SBERT distance to commercial training agreements (0.8076) is unusually high (expected <= 0.3757). Out-of-distribution agreement structure suspected."
+      ],
+      "flagged_clauses": [
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Sports Note. The home team will not compete in the regional cup after a narrow defeat last weeken",
+          "label": "Non-Compete",
+          "confidence": 0.9269276261329651,
+          "needs_review": false
+        }
+      ]
+    },
+    "DOC-08_partnership_compound.txt": {
+      "doc_name": "DOC-08_partnership_compound.txt",
+      "total_units": 10,
+      "doc_avg_top_prob": 0.884,
+      "doc_sbert_dist": 0.4171,
+      "total_flagged": 6,
+      "needs_review_count": 0,
+      "warnings": [
+        "HIGH_DOMAIN_DISTANCE: SBERT distance to commercial training agreements (0.4171) is unusually high (expected <= 0.3757). Out-of-distribution agreement structure suspected."
+      ],
+      "flagged_clauses": [
+        {
+          "unit_idx": 2,
+          "text_snippet": "2. Term and Exit. Zenith may terminate this Agreement at any time on seven days' notice without caus",
+          "label": "Termination for Convenience",
+          "confidence": 0.7568734884262085,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 3,
+          "text_snippet": "3. Platform Commitment. During the term Kora shall create content solely for Zenith's platform, and ",
+          "label": "Non-Compete",
+          "confidence": 0.9473535418510437,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 4,
+          "text_snippet": "4. Content Ownership. All content produced under this Agreement, including characters, formats and d",
+          "label": "IP Ownership Assignment",
+          "confidence": 0.9450095891952515,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 5,
+          "text_snippet": "5. Liability and Accounts. Zenith's liability to Kora shall not exceed the fees paid in the precedin",
+          "label": "Audit Rights",
+          "confidence": 0.9804937243461609,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 6,
+          "text_snippet": "6. Ownership Changes. Any merger, acquisition or transfer of control of Kora requires Zenith's prior",
+          "label": "Change of Control",
+          "confidence": 0.9630166888237,
+          "needs_review": false
+        },
+        {
+          "unit_idx": 7,
+          "text_snippet": "7. Late Delivery. If Kora delivers an episode late, Kora shall pay Zenith USD 10,000 per day of dela",
+          "label": "Liquidated Damages",
+          "confidence": 0.9737494587898254,
+          "needs_review": false
+        }
+      ]
+    }
+  }
+}

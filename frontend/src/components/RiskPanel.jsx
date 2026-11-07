@@ -219,6 +219,25 @@ export default function RiskPanel({
                     <span className={`risk-score-badge ${clause.risk_level?.toLowerCase()} ${riskClass}`} style={{ whiteSpace: 'nowrap' }}>
                       {clause.risk_tier || clause.risk_level}
                     </span>
+                    {clause.type_uncertain && (
+                      <span
+                        className="dd-badge-type-uncertain"
+                        title="The clause type may be wrong"
+                        style={{
+                          backgroundColor: '#fef3c7',
+                          color: '#92400e',
+                          border: '1px solid #fcd34d',
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          fontSize: '10px',
+                          fontWeight: '600',
+                          whiteSpace: 'nowrap',
+                          cursor: 'help',
+                        }}
+                      >
+                        Type uncertain
+                      </span>
+                    )}
                     <span style={{ fontSize: '10px', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.06)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
                       Conf: {Math.round((clause.calibrated_probability || clause.confidence || 0) * 100)}%
                     </span>

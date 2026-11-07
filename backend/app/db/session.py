@@ -1,6 +1,6 @@
 """Database session and engine setup."""
 import logging
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 from app.config import settings
 
@@ -30,5 +30,23 @@ def create_tables() -> None:
     import app.db.models  # noqa: F401
     logger.info("Creating database tables...")
     Base.metadata.create_all(bind=engine)
+    if settings.database_url.startswith("sqlite"):
+        try:
+            with engine.connect() as conn:
+                res = conn.execute(text("PRAGMA table_info(documents);")).fetchall()
+                doc_cols = {row[1] for row in res}
+                if "warnings" not in doc_cols:
+                    conn.execute(text("ALTER TABLE documents ADD COLUMN warnings TEXT;"))
+                if "doc_avg_top_prob" not in doc_cols:
+                    conn.execute(text("ALTER TABLE documents ADD COLUMN doc_avg_top_prob FLOAT;"))
+                if "doc_sbert_dist" not in doc_cols:
+                    conn.execute(text("ALTER TABLE documents ADD COLUMN doc_sbert_dist FLOAT;"))
+                res_c = conn.execute(text("PRAGMA table_info(clauses);")).fetchall()
+                clause_cols = {row[1] for row in res_c}
+                if "type_uncertain" not in clause_cols:
+                    conn.execute(text("ALTER TABLE clauses ADD COLUMN type_uncertain BOOLEAN DEFAULT 0;"))
+                conn.commit()
+        except Exception as e:
+            logger.warning("Could not auto-migrate SQLite tables: %s", e)
     logger.info("Database tables created.")
 

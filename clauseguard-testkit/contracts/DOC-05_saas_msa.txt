@@ -1,0 +1,33 @@
+SAAS MASTER SUBSCRIPTION AGREEMENT
+
+1. Parties and Definitions. This Master Subscription Agreement is made on 10 May 2026 between CloudNimbus Technologies Ltd. (“Provider”) and Brightway Foods Pvt. Ltd. (“Customer”) for access to Provider's inventory analytics platform (the “Service”).
+
+2. Service Levels. Provider shall make the Service available at least 99.5% of the time each calendar month, excluding scheduled maintenance, and shall provide support during business hours.
+
+3. Fees. Customer shall pay annual subscription fees of INR 2,400,000 in advance. Fees are non-refundable except as expressly stated in this Agreement.
+
+4. Customer Data. Customer retains all rights in the data it submits to the Service. Provider shall process such data only to provide the Service and shall maintain reasonable security safeguards.
+
+5. Limitation of Liability. Except as stated in Section 12, each party's total aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer to Provider in the twelve (12) months preceding the event giving rise to the claim.
+
+6. Usage Audit. Provider may, on ten (10) days' notice and not more than once per year, audit Customer's records and systems to verify compliance with the licensed user limits, and Customer shall bear the cost of the audit if it reveals underpayment of more than five percent.
+
+7. Change of Control. If Customer undergoes a change of control, whether by merger, sale of all or substantially all of its assets, or acquisition of more than fifty percent of its voting shares, Customer shall notify Provider within ten days and Provider may terminate this Agreement on thirty days' notice.
+
+8. Assignment. Customer may not assign or transfer this Agreement or any rights hereunder without Provider's prior written consent. Provider may assign this Agreement freely in connection with a merger or sale of its business.
+
+9. Termination for Convenience. Provider may terminate this Agreement for convenience upon sixty (60) days' written notice to Customer, in which case Provider shall refund prepaid fees for the unused portion of the term.
+
+10. Early Termination Fee. If Customer terminates this Agreement before the end of the initial term for any reason other than Provider's uncured material breach, Customer shall pay Provider an amount equal to one hundred fifty percent (150%) of the remaining fees as liquidated damages.
+
+11. Feedback and Improvements. Customer hereby assigns to Provider all right, title and interest in any suggestions, feedback, enhancements and derivative works relating to the Service that Customer creates or proposes, and Provider may use them without restriction or compensation.
+
+12. Exceptions to Limitation. The limitation in Section 5 shall not apply to Customer's breach of its confidentiality obligations or its indemnification obligations, for which Customer's liability shall be unlimited.
+
+13. Exclusive Purchasing. During the term, Customer shall purchase all of its inventory analytics and forecasting software and services exclusively from Provider and shall not engage any other vendor for such services.
+
+14. Warranty Disclaimer. Except as expressly stated herein, the Service is provided “as is” and Provider disclaims all implied warranties, including merchantability and fitness for a particular purpose.
+
+15. Force Majeure. Neither party shall be liable for delay or failure to perform caused by events beyond its reasonable control, including natural disasters, war, labour disputes or failures of public utilities.
+
+16. Governing Law. This Agreement shall be governed by the laws of India and the courts of Mumbai shall have jurisdiction over any dispute.

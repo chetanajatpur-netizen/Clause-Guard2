@@ -1,4 +1,5 @@
 """Document history endpoints."""
+import json
 import logging
 
 from fastapi import APIRouter, Depends
@@ -100,6 +101,7 @@ async def get_document(
                 calibrated_probability=c.calibrated_probability if c.calibrated_probability is not None else c.confidence,
                 char_start=c.char_start,
                 char_end=c.char_end,
+                type_uncertain=bool(c.type_uncertain),
                 risk_score=enhanced["risk_score"],
                 risk_score_normalized=enhanced["risk_score_normalized"],
                 uncertainty=enhanced["uncertainty"],
@@ -107,6 +109,13 @@ async def get_document(
             )
         )
     
+    doc_warnings = []
+    if doc.warnings:
+        try:
+            doc_warnings = json.loads(doc.warnings)
+        except Exception:
+            doc_warnings = [doc.warnings]
+
     return DocumentDetailResponse(
         id=str(doc.id),
         filename=doc.filename,
@@ -116,6 +125,9 @@ async def get_document(
         created_at=doc.created_at,
         risk_summary=RiskSummary(**risk_data),
         clauses=clause_responses,
+        warnings=doc_warnings,
+        doc_avg_top_prob=doc.doc_avg_top_prob,
+        doc_sbert_dist=doc.doc_sbert_dist,
     )
 
 

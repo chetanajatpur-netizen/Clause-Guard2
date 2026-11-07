@@ -180,10 +180,23 @@ Evaluated on `val_natural.csv` (76 contracts, 501 true positive clauses) under e
 
 ## 10. Tried & Future Work
 
-### Explored Approaches & Findings
-- **Court-Judgment Domain Adaptation (`legal_bert_adapted`)**: Continued pretraining of Legal-BERT on court opinions achieved 79.44% recall at 8 FA/c vs 80.64% for standard Legal-BERT (-1.2 points). Judicial rhetoric differed significantly from transactional drafting, providing no transfer advantage.
-- **Ensemble Averaging ($\alpha = 0.67$ Legal-BERT + $0.33$ TF-IDF)**: Reached 81.04% recall at 8 FA/c (+0.4 points over single model). Shelved to avoid doubling inference latency and memory requirements for marginal gain.
-- **Rule-Based Heuristic Overlays**: Adding regex/keyword rules for low-prevalence classes (Liquidated Damages) added false alarms without catching novel semantic expressions.
+### Experiments That Did Not Help
+1. **Seed Average (+2.4 points gain vs 2x latency overhead)**:
+   - Averaging calibrated probabilities from Seed 42 and Seed 100 on `val_natural.csv` increased flagged recall at 8 FA/c from 80.64% to 83.03% (+2.40 points, 95% bootstrap CI: `[+0.66%, +4.24%]`).
+   - However, ensembling two transformers doubles inference runtime and memory footprint on CPU deployments. Retained single-model Legal-BERT (Seed 42) for operational simplicity.
+2. **Tier Thresholds (Infeasible under False Alarm Budget)**:
+   - Attempted separate thresholding for High, Medium, and Low risk tiers to push High-tier recall $\ge 90\%$ under a total false alarm budget of $\le 10$ FA/contract.
+   - Proved mathematically infeasible on `val_natural.csv`: High recall tops out at 88.19%. Aggressive High-tier sensitivity forces Medium/Low thresholds up, causing overall flagged recall to degrade by **-4.16 points** (95% CI: `[-7.34%, -1.01%]`, $p = 0.004$). The unified single-threshold Balanced preset was retained.
+3. **Naive Liability Rule (Damaged 11 True Caps)**:
+   - Naive keyword matching (`"not limited"`, `"without limit"`) to promote `Cap on Liability` to `Uncapped Liability` matched 11 units in `val_natural.csv`.
+   - All 11 were standard boilerplate cap phrasing (`"including but not limited to"`, `"without limiting"`). Relabeling produced 0 new true positives, broke 11 true Cap units, and added 11 false alarms. Replaced with sentence-scoped proximity matching requiring `liability`/`liable` within 150 characters of express unlimited terms with explicit boilerplate exclusions.
+4. **Secondary "May Also Contain" Chips at 0.20 Cutoff (Exceeded False Alarm Budget)**:
+   - Setting a second-best class probability cutoff at $\ge 0.20$ triggered on 131 flagged units (1.72 per contract), producing 33 true secondary labels and 98 false chips (**1.2895 false chips/contract**), failing the $\le 1.0$ false chip/contract budget.
+   - Sweeping cutoffs (0.25: 0.9211 false chips/c; 0.30: 0.7237 false chips/c) met the numerical limit, but the feature was kept disabled to maintain zero UI noise.
+5. **Court-Judgment Domain Adaptation (`legal_bert_adapted`)**:
+   - Continued pretraining of Legal-BERT on Indian Supreme Court opinions achieved 79.44% recall at 8 FA/c vs 80.64% for standard Legal-BERT (-1.2 points). Judicial rhetoric differed substantially from transactional contract drafting, offering no domain transfer advantage.
+6. **Ensemble Averaging ($\alpha = 0.67$ Legal-BERT + $0.33$ TF-IDF)**:
+   - Yielded 81.04% recall at 8 FA/c (+0.40 points over single model). Shelved to avoid doubling inference latency for marginal gain.
 
 ### Roadmap
 - [ ] Multi-label classification for multi-issue clauses (e.g., joint Non-Compete and Non-Solicit).

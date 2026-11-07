@@ -15,6 +15,7 @@ class ClauseResponse(BaseModel):
     calibrated_probability: float | None = None
     char_start: int | None = None
     char_end: int | None = None
+    type_uncertain: bool = False
     # Enhanced risk scoring fields (optional for backward compatibility)
     risk_score: int | None = None
     risk_score_normalized: float | None = None
@@ -39,3 +40,6 @@ class AnalysisResponse(BaseModel):
     char_count: int
     risk_summary: RiskSummary
     clauses: list[ClauseResponse]
+    warnings: list[str] = []
+    doc_avg_top_prob: float | None = None
+    doc_sbert_dist: float | None = None

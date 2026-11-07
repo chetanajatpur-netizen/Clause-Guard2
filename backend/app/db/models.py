@@ -27,6 +27,9 @@ class Document(Base):
     char_count = Column(Integer, nullable=False)
     overall_risk = Column(String(10), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    warnings = Column(Text, nullable=True)
+    doc_avg_top_prob = Column(Float, nullable=True)
+    doc_sbert_dist = Column(Float, nullable=True)
 
     clauses = relationship("Clause", back_populates="document", cascade="all, delete-orphan")
     search_queries = relationship("SearchQuery", back_populates="document", cascade="all, delete-orphan")
@@ -49,6 +52,7 @@ class Clause(Base):
     risk_tier = Column(String(20), nullable=True)
     char_start = Column(Integer, nullable=True)
     char_end = Column(Integer, nullable=True)
+    type_uncertain = Column(Boolean, default=False, nullable=True)
     embedding = Column(LargeBinary, nullable=True)
 
     document = relationship("Document", back_populates="clauses")

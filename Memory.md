@@ -1,15 +1,22 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: ClauseWise Product Branding & Refinement
-- Current phase/step: Name change to ClauseWise completed across UI, backend, and documentation
+- Current day: Evaluation Protocol Governance, Uncertainty Quantification & OOD Analysis
+- Current phase/step: Scoped liability guard, secondary chip sweep, uncertainty badges, OOD warnings, and comprehensive README documentation complete. All 66 pytest tests passing.
 - File currently being worked on: None
 - Recent updates: 
-  - Updated application branding and title from ClauseGuard to ClauseWise across frontend components (`FrontPage.jsx`, `DocumentDashboard.jsx`, `DocumentViewer3D.jsx`, `SpatialCockpit.jsx`, `index.html`, `package.json`).
-  - Updated backend API title and startup logging to ClauseWise in `main.py` and `__init__.py`, preserving exception backward-compatibility via `ClauseWiseError = ClauseGuardError`.
-  - Updated `README.md` and `RESUME_DRAFT.md` headers, disclaimers, and project summaries to ClauseWise.
-  - Verified frontend production build with `npm run build` (compiled cleanly in 4.75s).
-  - Validated test suite passing (60/60 tests).
+  - Scoped Liability Guard (Rule A): Implemented sentence-scoped proximity rule in `backend/app/services/classifier.py` (`liability`/`liable` within 150 chars of target phrase, excluding boilerplate). Evaluated on 10,861 `val_natural.csv` units: 0 true caps damaged, 0 false alarms added. Passes tests on `DOC-01` Section 8 (`Uncapped Liability`), boilerplate exclusions (`"including but not limited to"`, `"without limiting"`), and clean caps.
+  - Carve-Out Rule (Rule B): Evaluated on `val_natural.csv`; broke 1 true Cap unit (Index 10142, $150k monetary cap) -> Rule B disabled.
+  - May-Also-Contain Cutoff Sweep: Evaluated cutoffs `0.20, 0.25, 0.30, 0.35, 0.40` on `val_natural.csv`. Lowest passing cutoff ($\le 1.0$ false chip/c) is 0.25 (0.9211 false chips/c). Kept disabled per specification.
+  - Uncertainty & OOD Ingestion:
+    - SBERT commercial training centroid generated at `ml/artifacts/train_sbert_centroid.npy`.
+    - `ClauseEmbedder` computes cosine distance from document mean embedding to commercial training centroid.
+    - Document-level warning triggered when average top-class probability $< 0.70$ OR SBERT distance $> 0.3757$: `"This document looks unlike the contracts the model was trained on. Treat the results with extra caution."`
+    - Clause-level `type_uncertain: bool = True` assigned when `flagged and cal_prob < 0.65`.
+    - Frontend renders `⚠️ Type uncertain` badge (tooltip: `"The clause type may be wrong"`) and document-level warning banner.
+    - Automated API regression tests added for `DOC-03`, `DOC-04`, `DOC-07`, and `DOC-05`.
+  - Model Governance Decisions: Retained single-model Legal-BERT (Seed 42); did not adopt seed average, tier thresholds, or secondary chips.
+  - Documentation: Updated `README.md` with dedicated section `Experiments That Did Not Help`.
 
 
 ## Completed
@@ -319,6 +326,13 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Backend: Updated FastAPI application title to "ClauseWise API" in `backend/app/main.py`, startup/shutdown logging, and docstring in `__init__.py`. Added backward-compatible exception alias `ClauseWiseError = ClauseGuardError`.
   - Documentation: Updated `README.md` and `RESUME_DRAFT.md` to reference ClauseWise.
   - Verification: `npm run build` compiled in 4.75s with zero errors; full backend test suite re-verified.
+- [2026-11-07 16:30] Evaluation Protocol, Uncertainty & OOD Warnings Complete:
+  - Task 0: Created `docs/EVAL_PROTOCOL.md` codifying frozen test policy (`test_natural.csv` used once, never touched or tuned on), active validation on `val_natural.csv`, and external benchmarking.
+  - Task 1: Liability Guard evaluated on `val_natural.csv`. 11 units with `pred == Cap on Liability` matched naive substrings (`not limited`, `without limit`), but all 11 were true `Cap on Liability` boilerplate (`including but not limited to`, `including without limitation`). Relabeling would yield 0 new True Positives for Uncapped, +11 False Positives for Uncapped, and destroy 11 True Positives for Cap. Net gain: -11 (severe damage). Kept disabled (WAIT).
+  - Task 2: 'May also contain' evaluated on `val_natural.csv`. 131 flagged units (12.94%) had second-best calibrated prob >= 0.20 (1.72 per contract). True matches: 33, False chips: 98 -> 1.2895 false chips per contract (> 1.0 threshold). Kept disabled (FAILS GATE).
+  - Task 3: Tier thresholds evaluated on `val_natural.csv`. Reaching 90% High recall under <= 10 FA/c proved mathematically impossible (tops out at 88.19%). Pushing High recall suppresses Medium/Low recall, causing total recall to drop from 80.64% to 76.45% (mean delta -4.16%, 95% CI: [-7.34%, -1.01%]). Kept single-threshold Balanced preset (DO NOT ADOPT).
+  - Task 4: Seed average (Seed 42 + Seed 100) evaluated on `val_natural.csv`. Operating points table generated. At 8 FA/c: +2.40% flagged recall (95% CI: [+0.66%, +4.24%]); at 3 FA/c: +3.79% flagged recall (95% CI: [+1.54%, +6.53%]). Artifact saved to `ml/artifacts/seed_average_results.json`.
+  - Task 5: Uncertainty analyzed. Flagged unit cutoff `P_top < 0.65` isolates 9.49% of units with 21.88% correct-class precision (vs 36.57% for high confidence). Document-level 2-sigma thresholds derived from 76 CUAD validation contracts: Avg Top Prob < 0.7000, SBERT Centroid Dist > 0.3757. Evaluated on test kit: `DOC-03` (Residential Lease, dist=0.5435) and `DOC-04` (Employment Offer, dist=0.4082) trigger `HIGH_DOMAIN_DISTANCE` warnings due to jurisdiction and structure shift. Awaiting user review.
 
 
 

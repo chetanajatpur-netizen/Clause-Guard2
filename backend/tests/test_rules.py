@@ -1,7 +1,8 @@
 """Unit tests for rule-based heuristics:
-1. Carve-out detection -> Uncapped Liability
-2. Change of control in assignment -> Change of Control
-3. Invariance for unrelated clauses (zero false positives on clean text)
+1. Scoped Liability Guard -> Uncapped Liability on explicit waivers
+2. Boilerplate exclusions ('including but not limited to', 'without limiting') do not relabel
+3. Change of control in assignment -> Change of Control
+4. Invariance for unrelated clauses (zero false positives on clean text)
 """
 import sys
 from pathlib import Path
@@ -11,7 +12,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 import pytest
-from app.services.classifier import LIABILITY_GUARD_PATTERN, apply_liability_guard
+from app.services.classifier import apply_liability_guard, SCOPED_UNLIMITED_PHRASES
 from ml.src.audit_advanced_eval import apply_rules, CARVEOUT_PATTERN, COC_IN_ASSIGN_PATTERN
 
 
@@ -22,20 +23,37 @@ def test_doc01_section8_liability_guard():
         "expenses of any kind arising out of the Services, and Contractor's liability under this Agreement shall not be subject "
         "to any limit or cap."
     )
-    assert LIABILITY_GUARD_PATTERN.search(text) is not None
     result = apply_liability_guard("Cap on Liability", text)
     assert result == "Uncapped Liability"
+
+
+def test_including_but_not_limited_to_does_not_relabel():
+    """Boilerplate 'including but not limited to' within a Cap on Liability clause must NOT relabel."""
+    text = (
+        "10. Limitation of Liability. The liability of Contractor shall be limited to $50,000 for all claims, "
+        "including but not limited to claims of negligence, breach of contract, or statutory violation."
+    )
+    result = apply_liability_guard("Cap on Liability", text)
+    assert result == "Cap on Liability"
+
+
+def test_without_limiting_does_not_relabel():
+    """Boilerplate 'without limiting' within a Cap on Liability clause must NOT relabel."""
+    text = (
+        "12. Liability Cap. Without limiting the generality of the foregoing, each party's aggregate liability "
+        "under this Agreement shall not exceed the fees paid in the previous 12 months."
+    )
+    result = apply_liability_guard("Cap on Liability", text)
+    assert result == "Cap on Liability"
 
 
 def test_normal_cap_stays_cap_on_liability():
     """Standard liability cap without carveout ('shall not exceed the fees paid') remains Cap on Liability."""
     normal_cap = "Contractor's total liability under this Agreement shall not exceed the fees paid by Client in the preceding twelve (12) months."
-    assert LIABILITY_GUARD_PATTERN.search(normal_cap) is None
     result = apply_liability_guard("Cap on Liability", normal_cap)
     assert result == "Cap on Liability"
 
     normal_cap_2 = "In no event shall either party's aggregate liability exceed the total amounts paid hereunder."
-    assert LIABILITY_GUARD_PATTERN.search(normal_cap_2) is None
     assert apply_liability_guard("Cap on Liability", normal_cap_2) == "Cap on Liability"
 
 

@@ -1,0 +1,52 @@
+{
+  "0.2": {
+    "cutoff": 0.2,
+    "total_chips": 131,
+    "chips_per_contract": 1.7237,
+    "true_secondary_matches": 14,
+    "correct_class_recoveries": 19,
+    "false_chips": 98,
+    "false_chips_per_contract": 1.2895,
+    "gate_passed": false
+  },
+  "0.25": {
+    "cutoff": 0.25,
+    "total_chips": 95,
+    "chips_per_contract": 1.25,
+    "true_secondary_matches": 7,
+    "correct_class_recoveries": 18,
+    "false_chips": 70,
+    "false_chips_per_contract": 0.9211,
+    "gate_passed": true
+  },
+  "0.3": {
+    "cutoff": 0.3,
+    "total_chips": 75,
+    "chips_per_contract": 0.9868,
+    "true_secondary_matches": 5,
+    "correct_class_recoveries": 15,
+    "false_chips": 55,
+    "false_chips_per_contract": 0.7237,
+    "gate_passed": true
+  },
+  "0.35": {
+    "cutoff": 0.35,
+    "total_chips": 57,
+    "chips_per_contract": 0.75,
+    "true_secondary_matches": 5,
+    "correct_class_recoveries": 10,
+    "false_chips": 42,
+    "false_chips_per_contract": 0.5526,
+    "gate_passed": true
+  },
+  "0.4": {
+    "cutoff": 0.4,
+    "total_chips": 34,
+    "chips_per_contract": 0.4474,
+    "true_secondary_matches": 4,
+    "correct_class_recoveries": 7,
+    "false_chips": 23,
+    "false_chips_per_contract": 0.3026,
+    "gate_passed": true
+  }
+}

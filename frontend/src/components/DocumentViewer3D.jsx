@@ -335,6 +335,33 @@ export default function DocumentViewer3D({
                 <span>{documentData?.char_count?.toLocaleString() || 0} characters</span>
                 {filterRisk && <span>• Filtered by {filterRisk} risk</span>}
               </div>
+              {documentData?.warnings && documentData.warnings.length > 0 && (
+                <div
+                  className="dd-document-warning-banner"
+                  style={{
+                    marginTop: '12px',
+                    marginBottom: '6px',
+                    padding: '10px 14px',
+                    backgroundColor: '#fffbeb',
+                    border: '1px solid #fcd34d',
+                    borderRadius: '6px',
+                    color: '#92400e',
+                    fontSize: '13px',
+                    lineHeight: '1.4',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '10px',
+                    textAlign: 'left',
+                  }}
+                >
+                  <span style={{ fontSize: '16px', lineHeight: '1.2' }}>⚠️</span>
+                  <div>
+                    {documentData.warnings.map((w, idx) => (
+                      <div key={idx}><strong>Notice:</strong> {w}</div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <hr className="dd-paper-rule" />
             </div>
 
@@ -379,6 +406,25 @@ export default function DocumentViewer3D({
                         {(clause.risk_level || clause.risk_tier) && (
                           <span className={`dd-risk-indicator ${riskClass}`} style={{ whiteSpace: 'nowrap' }}>
                             {(clause.risk_tier || clause.risk_level)} Risk • Model Conf: {Math.round((clause.calibrated_probability || clause.confidence || 0) * 100)}%
+                          </span>
+                        )}
+                        {clause.type_uncertain && (
+                          <span
+                            className="dd-badge-type-uncertain"
+                            title="The clause type may be wrong"
+                            style={{
+                              backgroundColor: '#fef3c7',
+                              color: '#92400e',
+                              border: '1px solid #fcd34d',
+                              padding: '2px 6px',
+                              borderRadius: '4px',
+                              fontSize: '11px',
+                              fontWeight: '600',
+                              whiteSpace: 'nowrap',
+                              cursor: 'help',
+                            }}
+                          >
+                            ⚠️ Type uncertain
                           </span>
                         )}
                         {searchMatch && (

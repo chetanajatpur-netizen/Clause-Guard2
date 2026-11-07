@@ -1,7 +1,9 @@
 """Contract analysis endpoint."""
+import json
 import logging
 from typing import Optional
 
+import numpy as np
 from fastapi import APIRouter, Depends, File, Query, UploadFile
 from sqlalchemy.orm import Session
 
@@ -96,15 +98,31 @@ async def analyze_contract(
         "total_clauses": len(units),
     }
     
-    # Generate embeddings
+    # Generate embeddings and compute document-level domain metrics
     embeddings = embedder.encode(chunk_texts)
-    
+    doc_sbert_dist = round(embedder.compute_document_distance(embeddings), 4)
+
+    # Average top-class calibrated probability across clauses
+    top_probs = [float(p.get("calibrated_probability", p.get("confidence", 0.0))) for p in predictions]
+    doc_avg_top_prob = round(float(np.mean(top_probs)), 4) if top_probs else 1.0
+
+    # Document-level warning condition:
+    # Average top-class probability below 0.70 OR SBERT distance exceeds 0.3757
+    doc_warnings: list[str] = []
+    if doc_avg_top_prob < 0.70 or doc_sbert_dist > 0.3757:
+        doc_warnings.append(
+            "This document looks unlike the contracts the model was trained on. Treat the results with extra caution."
+        )
+
     # Save to database
     doc = Document(
         filename=filename,
         file_type=suffix.lstrip("."),
         char_count=len(text),
         overall_risk=overall_doc_risk,
+        warnings=json.dumps(doc_warnings) if doc_warnings else None,
+        doc_avg_top_prob=doc_avg_top_prob,
+        doc_sbert_dist=doc_sbert_dist,
     )
     db.add(doc)
     db.flush()
@@ -117,6 +135,7 @@ async def analyze_contract(
         flagged = bool(pred.get("flagged", pred_label != "No Clause"))
         risk_tier = pred.get("risk_tier", "None")
         risk = risk_tier if risk_tier != "None" else None
+        type_uncertain = bool(pred.get("type_uncertain", (flagged and cal_prob < 0.65)))
 
         enhanced_risk = compute_enhanced_clause_risk(
             label=pred_label,
@@ -137,6 +156,7 @@ async def analyze_contract(
             risk_tier=risk_tier,
             char_start=unit.get("char_start"),
             char_end=unit.get("char_end"),
+            type_uncertain=type_uncertain,
             embedding=emb_bytes,
         )
         db.add(clause)
@@ -154,6 +174,7 @@ async def analyze_contract(
             calibrated_probability=cal_prob,
             char_start=unit.get("char_start"),
             char_end=unit.get("char_end"),
+            type_uncertain=type_uncertain,
             risk_score=enhanced_risk["risk_score"],
             risk_score_normalized=enhanced_risk["risk_score_normalized"],
             uncertainty=enhanced_risk["uncertainty"],
@@ -161,7 +182,7 @@ async def analyze_contract(
         ))
     
     db.commit()
-    logger.info("Analysis saved: doc_id=%s, %d clauses (%d flagged)", doc.id, len(units), len(flagged_tiers))
+    logger.info("Analysis saved: doc_id=%s, %d clauses (%d flagged, %d uncertain)", doc.id, len(units), len(flagged_tiers), sum(1 for c in clause_responses if c.type_uncertain))
     
     return AnalysisResponse(
         document_id=str(doc.id),
@@ -169,4 +190,7 @@ async def analyze_contract(
         char_count=len(text),
         risk_summary=RiskSummary(**risk_summary_data),
         clauses=clause_responses,
+        warnings=doc_warnings,
+        doc_avg_top_prob=doc_avg_top_prob,
+        doc_sbert_dist=doc_sbert_dist,
     )

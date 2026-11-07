@@ -1,24 +1,28 @@
 """Semantic search using SBERT embeddings."""
 import logging
+from pathlib import Path
 from typing import Any
 
 import numpy as np
 
 logger = logging.getLogger(__name__)
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
 
 class ClauseEmbedder:
-    """Sentence-BERT embedder for semantic search.
+    """Sentence-BERT embedder for semantic search and document-level domain distance.
     
     Loaded once at app startup via FastAPI lifespan.
     """
 
     def __init__(self) -> None:
         self.model: Any = None
+        self.train_centroid: np.ndarray | None = None
         self._loaded = False
 
     def load(self, model_name: str) -> None:
-        """Load the SBERT model.
+        """Load the SBERT model and training centroid.
         
         Args:
             model_name: HuggingFace model name or path.
@@ -32,6 +36,26 @@ class ClauseEmbedder:
         
         logger.info("Loading SBERT model: %s on device=%s", model_name, device)
         self.model = SentenceTransformer(model_name, device=device)
+        
+        # Load training corpus centroid if available
+        candidate_paths = [
+            Path("/app/model_artifacts/train_sbert_centroid.npy"),
+            Path(__file__).resolve().parent.parent.parent.parent / "ml" / "artifacts" / "train_sbert_centroid.npy",
+            Path(__file__).resolve().parent.parent.parent / "ml" / "artifacts" / "train_sbert_centroid.npy",
+            Path("ml/artifacts/train_sbert_centroid.npy"),
+        ]
+        centroid_path = next((p for p in candidate_paths if p.exists()), None)
+        if centroid_path:
+            try:
+                self.train_centroid = np.load(centroid_path)
+                logger.info("Loaded training SBERT centroid from %s (shape: %s)", centroid_path, self.train_centroid.shape)
+            except Exception as e:
+                logger.warning("Could not load train_sbert_centroid: %s", e)
+                self.train_centroid = None
+        else:
+            logger.warning("train_sbert_centroid.npy not found in candidate paths: %s", candidate_paths)
+            self.train_centroid = None
+
         self._loaded = True
         logger.info("SBERT model loaded successfully")
 
@@ -55,6 +79,28 @@ class ClauseEmbedder:
         embeddings = self.model.encode(texts, convert_to_numpy=True, show_progress_bar=False)
         logger.info("Encoded %d texts -> shape %s", len(texts), embeddings.shape)
         return embeddings
+
+    def compute_document_distance(self, clause_embeddings: np.ndarray) -> float:
+        """Compute cosine distance from document mean embedding to commercial training centroid.
+        
+        Args:
+            clause_embeddings: Array of clause embeddings (n_clauses, embedding_dim).
+            
+        Returns:
+            Cosine distance in [0, 2].
+        """
+        if self.train_centroid is None or len(clause_embeddings) == 0:
+            return 0.0
+        doc_emb = clause_embeddings.mean(axis=0)
+        norm = np.linalg.norm(doc_emb)
+        if norm > 0:
+            doc_emb = doc_emb / norm
+        c = self.train_centroid
+        c_norm = np.linalg.norm(c)
+        if c_norm > 0:
+            c = c / c_norm
+        dist = float(1.0 - np.dot(doc_emb, c))
+        return max(0.0, dist)
 
     def search(
         self,

@@ -24,6 +24,7 @@ ml/artifacts/*.bin
 ml/artifacts/*.safetensors
 ml/artifacts/*.joblib
 ml/artifacts/*.npy
+!ml/artifacts/train_sbert_centroid.npy
 ml/artifacts/*.npz
 ml/artifacts/*.csv
 ml/artifacts/legal_bert/

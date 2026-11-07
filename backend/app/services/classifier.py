@@ -12,24 +12,39 @@ from app.core.risk_map import RISK_MAP
 
 logger = logging.getLogger(__name__)
 
-# Liability Guard: matches carve-outs, express waivers, or explicit uncapped liability statements
-LIABILITY_GUARD_PATTERN = re.compile(
-    r"(?i)\b(?:"
-    r"except\s+(?:with\s+respect\s+to|for)\s+(?:claims\s+under\s+section\s+\d+|indemnif\w+|breach\w+\s+of\s+confidential\w+)|"
-    r"expressly\s+waives\s+any\s+and\s+all\s+limitations\s+or\s+liability\s+caps|"
-    r"limitation\s+(?:shall\s+not\s+apply|does\s+not\s+apply)\s+to\s+(?:either\s+party['’]s\s+liability\s+for|indemnif\w+)|"
-    r"(?:shall\s+not\s+be|is\s+not|not)\s+subject\s+to\s+any\s+(?:limit|limitation|cap)|"
-    r"unlimited\s+(?:and\s+subject\s+to\s+no\s+cap|liability)|"
-    r"(?:subject\s+to\s+)?no\s+(?:cap|limit)\s+(?:whatsoever)?|"
-    r"without\s+limit(?:ation)?\s+as\s+to\s+amount"
-    r")\b"
-)
+# Scoped Liability Guard Rule:
+# Within one sentence, the word 'liability' (or 'liable') within 150 characters of any of:
+# 'not be subject to any limit', 'no limit', 'unlimited', 'without limitation as to amount', 'shall not be limited'.
+# Excludes 'including but not limited to' and 'without limiting'.
+SCOPED_UNLIMITED_PHRASES = [
+    "not be subject to any limit",
+    "no limit",
+    "unlimited",
+    "without limitation as to amount",
+    "shall not be limited",
+]
 
 
 def apply_liability_guard(pred_label: str, text: str) -> str:
-    """If predicted as Cap on Liability but text explicitly waives or carves out limits, override to Uncapped Liability."""
-    if pred_label == "Cap on Liability" and LIABILITY_GUARD_PATTERN.search(text):
-        return "Uncapped Liability"
+    """If predicted as Cap on Liability, check for explicit waivers of liability limits."""
+    if pred_label != "Cap on Liability":
+        return pred_label
+
+    sentences = re.split(r"(?<=[.!?])\s+", str(text))
+    for sent in sentences:
+        # Exclude boilerplate non-limiting clauses
+        cleaned = re.sub(r"(?i)\bincluding\s*,?\s*but\s+not\s+limited\s+to\b", " ", sent)
+        cleaned = re.sub(r"(?i)\bwithout\s+limiting\b", " ", cleaned)
+
+        liab_matches = list(re.finditer(r"(?i)\b(liability|liable)\b", cleaned))
+        if not liab_matches:
+            continue
+
+        for phrase in SCOPED_UNLIMITED_PHRASES:
+            for p_match in re.finditer(re.escape(phrase), cleaned, re.IGNORECASE):
+                for l_match in liab_matches:
+                    if abs(l_match.start() - p_match.start()) <= 150:
+                        return "Uncapped Liability"
     return pred_label
 
 
@@ -232,6 +247,7 @@ class ClauseClassifier:
                 "risk_tier": risk_tier,
                 "calibrated_probability": round(conf, 4),
                 "confidence": round(conf, 4),
+                "type_uncertain": bool(flagged and conf < 0.65),
             })
         logger.info("Classified %d clauses with baseline", len(results))
         return results
@@ -285,6 +301,7 @@ class ClauseClassifier:
                     "risk_tier": risk_tier,
                     "calibrated_probability": round(cal_prob, 4),
                     "confidence": round(cal_prob, 4),
+                    "type_uncertain": bool(flagged and cal_prob < 0.65),
                 })
         
         logger.info("Classified %d clauses with legal_bert (tau=%.6f)", len(results), tau)
