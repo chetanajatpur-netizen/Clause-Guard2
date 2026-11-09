@@ -424,7 +424,7 @@ export default function DocumentViewer3D({
                               cursor: 'help',
                             }}
                           >
-                            ⚠️ Type uncertain
+                            Type uncertain
                           </span>
                         )}
                         {searchMatch && (
