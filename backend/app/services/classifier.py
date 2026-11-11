@@ -14,20 +14,29 @@ logger = logging.getLogger(__name__)
 
 # Scoped Liability Guard Rule:
 # Within one sentence, the word 'liability' (or 'liable') within 150 characters of any of:
-# 'not be subject to any limit', 'no limit', 'unlimited', 'without limitation as to amount', 'shall not be limited'.
+# 'not be subject to any limit', 'without limitation as to amount', 'unlimited liability'.
 # Excludes 'including but not limited to' and 'without limiting'.
 SCOPED_UNLIMITED_PHRASES = [
     "not be subject to any limit",
-    "no limit",
-    "unlimited",
     "without limitation as to amount",
-    "shall not be limited",
+    "unlimited liability",
 ]
+RESTRICTED_LIABILITY_PHRASES = SCOPED_UNLIMITED_PHRASES
 
 
-def apply_liability_guard(pred_label: str, text: str) -> str:
+def apply_liability_guard(
+    pred_label: str, text: str, enabled: Optional[bool] = None
+) -> str:
     """If predicted as Cap on Liability, check for explicit waivers of liability limits."""
-    if pred_label != "Cap on Liability":
+    if enabled is None:
+        try:
+            from app.config import settings
+
+            enabled = getattr(settings, "enable_liability_guard", True)
+        except Exception:
+            enabled = True
+
+    if not enabled or pred_label != "Cap on Liability":
         return pred_label
 
     sentences = re.split(r"(?<=[.!?])\s+", str(text))

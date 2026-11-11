@@ -18,19 +18,9 @@ PROBS_PATH = REPO_ROOT / "ml" / "artifacts" / "legal_bert_val_natural_probs.npy"
 LABEL_MAP_PATH = REPO_ROOT / "ml" / "artifacts" / "label_map.json"
 OP_PATH = REPO_ROOT / "ml" / "artifacts" / "operating_points.json"
 
-# Liability Guard Pattern
-# Matches carve-outs and explicit waivers/uncapped liability statements
-LIABILITY_GUARD_PATTERN = re.compile(
-    r"(?i)\b(?:"
-    r"except\s+(?:with\s+respect\s+to|for)\s+(?:claims\s+under\s+section\s+\d+|indemnif\w+|breach\w+\s+of\s+confidential\w+)|"
-    r"expressly\s+waives\s+any\s+and\s+all\s+limitations\s+or\s+liability\s+caps|"
-    r"limitation\s+(?:shall\s+not\s+apply|does\s+not\s+apply)\s+to\s+(?:either\s+party['’]s\s+liability\s+for|indemnif\w+)|"
-    r"(?:shall\s+not\s+be|is\s+not|not)\s+subject\s+to\s+any\s+(?:limit|limitation|cap)|"
-    r"unlimited\s+(?:and\s+subject\s+to\s+no\s+cap|liability)|"
-    r"(?:subject\s+to\s+)?no\s+(?:cap|limit)\s+(?:whatsoever)?|"
-    r"without\s+limit(?:ation)?\s+as\s+to\s+amount"
-    r")\b"
-)
+import sys
+sys.path.insert(0, str(REPO_ROOT / "backend"))
+from app.services.classifier import apply_liability_guard, SCOPED_UNLIMITED_PHRASES
 
 
 def run_evaluation():
@@ -104,10 +94,14 @@ def run_evaluation():
 
     texts = val_df["text"].tolist()
     for i, (pred, flag, text) in enumerate(zip(pred_labels_base, flagged_base, texts)):
-        if flag and pred == "Cap on Liability" and LIABILITY_GUARD_PATTERN.search(str(text)):
-            pred_labels_guard.append("Uncapped Liability")
-            overridden_count += 1
-            overridden_indices.append(i)
+        if flag and pred == "Cap on Liability":
+            new_pred = apply_liability_guard(pred, str(text))
+            if new_pred != pred:
+                pred_labels_guard.append(new_pred)
+                overridden_count += 1
+                overridden_indices.append(i)
+            else:
+                pred_labels_guard.append(pred)
         else:
             pred_labels_guard.append(pred)
 

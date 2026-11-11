@@ -327,20 +327,22 @@ Model is mildly under-converged (training loss and val loss still declining stea
   - Backend: Updated FastAPI application title to "ClauseWise API" in `backend/app/main.py`, startup/shutdown logging, and docstring in `__init__.py`. Added backward-compatible exception alias `ClauseWiseError = ClauseGuardError`.
   - Documentation: Updated `README.md` and `RESUME_DRAFT.md` to reference ClauseWise.
   - Verification: `npm run build` compiled in 4.75s with zero errors; full backend test suite re-verified.
-- [2026-11-09 07:35] Uncertainty Badges, OOD Warnings, Tests, and Documentation Shipped:
-  - 1. Uncertainty & OOD Integration:
-    - 'Type uncertain' badge added to clause finding cards in `RiskPanel.jsx` and `DocumentViewer3D.jsx` when top-class calibrated probability < 0.65 (tooltip: "The clause type may be wrong").
-    - Document-level warning added when average top-class probability < 0.70 OR SBERT centroid distance > 0.3757: "This document looks unlike the contracts the model was trained on. Treat the results with extra caution."
-    - Endpoints `/api/v1/analyze` and `/api/v1/documents/{id}` return `warnings`, `doc_avg_top_prob`, `doc_sbert_dist`, and per-clause `type_uncertain`.
-    - Automated API test suite expanded with 4 regression tests in `test_api.py` covering `DOC-03` (Residential Lease, dist=0.5435 > 0.3757), `DOC-04` (Employment Offer, dist=0.4082 > 0.3757), `DOC-07` (Non-Contract, dist=0.8076 > 0.3757), and `DOC-05` (In-distribution SaaS, dist=0.1725, section 5 P=0.5545 < 0.65 -> type_uncertain=True).
-  - 2. README 'Experiments That Did Not Help' Updated:
-    - Seed averaging (+2.4 points at 8 false alarms per contract, not adopted due to 2x latency overhead).
-    - Tier-specific thresholds (90% High recall needs about 15 false alarms per contract; forcing under 10 FA/c degrades total recall by -4.16 points).
-    - The naive liability rule (broke 11 correct Cap units due to boilerplate match, replaced by scoped proximity rule).
-    - 'May also contain' at cutoff 0.20 (produced 1.29 false chips per contract, exceeding 1.0 limit; kept disabled).
-  - 3. Verification:
-    - Full backend test suite passing: `pytest -q` -> 66 passed in 109.68s.
-    - Frontend production build passing: `npm run build` -> built in 4.58s with zero errors.
+- [2026-11-10 12:03] Restricted Liability Guard, README Corrections, and Naming Audit DONE:
+  - 1. Liability Guard Refinement & Edge-Case Hardening:
+    - Tested naive/loose phrases against edge cases: `"no limitation"` of remedies and `"unlimited license"` caused false overrides of true Cap on Liability clauses.
+    - Restricted phrases strictly to: `'not be subject to any limit'`, `'without limitation as to amount'`, `'unlimited liability'`.
+    - Edge-case verification: DOC-01 Section 8 waives caps -> `Uncapped Liability`; `"including but not limited to"` -> `Cap on Liability`; `"no limitation"` (of remedies) -> `Cap on Liability`; `"unlimited license"` -> `Cap on Liability`.
+    - Evaluated on `val_natural.csv` (10,861 units across 76 contracts): 0 units changed, 0 true Cap units broken, 0 true Uncapped units gained.
+    - Added `enable_liability_guard: bool = True` configuration setting in `backend/app/config.py` and `.env.example`.
+    - Unit tests expanded in `backend/tests/test_rules.py` (all 13 passed). Full pytest suite: 69 passed in 106.50s.
+  - 2. README Statistical Metrics Alignment:
+    - Updated Section 10 (*Experiments That Did Not Help*) with exact empirical metrics from `final_evaluation_results.json` and `metrics.json`:
+      - Court-Adapted Legal-BERT: 81.24% recall at 8 FA/c vs 80.64% for standard Legal-BERT (+0.6 points, 95% interval -2.5 to +3.4, p=0.71).
+      - Ensemble Averaging (alpha=0.75): 81.84% recall at 8 FA/c (+1.2 points over single model, 95% interval -1.5 to +3.8, p=0.45).
+    - Added comparative Liability Guard evaluation table to README Section 10.
+  - 3. Brand Naming Inventory (ClauseGuard vs ClauseWise):
+    - Audited every occurrence across README, UI headers, tab titles, configs, and documentation. No names changed per instruction.
+
 
 
 

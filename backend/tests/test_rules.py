@@ -57,6 +57,29 @@ def test_normal_cap_stays_cap_on_liability():
     assert apply_liability_guard("Cap on Liability", normal_cap_2) == "Cap on Liability"
 
 
+def test_no_limitation_sentence_stays_cap():
+    """Sentence containing 'no limitation' on remedies or other scope must NOT break Cap on Liability."""
+    text = "There shall be no limitation of remedies, but aggregate liability shall not exceed $10,000."
+    assert apply_liability_guard("Cap on Liability", text) == "Cap on Liability"
+
+
+def test_unlimited_license_sentence_stays_cap():
+    """Sentence granting an 'unlimited license' alongside a liability cap must NOT break Cap on Liability."""
+    text = "Licensor grants an unlimited license to Licensee, but in no event shall Licensor aggregate liability exceed the fees paid under this Agreement."
+    assert apply_liability_guard("Cap on Liability", text) == "Cap on Liability"
+
+
+def test_enable_liability_guard_toggle():
+    """ENABLE_LIABILITY_GUARD config switch enables or disables rule overrides."""
+    text = (
+        "8. Liability. Contractor shall be liable for, and shall indemnify Client against, all losses, damages, costs and "
+        "expenses of any kind arising out of the Services, and Contractor's liability under this Agreement shall not be subject "
+        "to any limit or cap."
+    )
+    assert apply_liability_guard("Cap on Liability", text, enabled=True) == "Uncapped Liability"
+    assert apply_liability_guard("Cap on Liability", text, enabled=False) == "Cap on Liability"
+
+
 def test_carveout_rule_triggers():
     """Carve-outs inside limitation of liability clauses should override to Uncapped Liability."""
     text = (

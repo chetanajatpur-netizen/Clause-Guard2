@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     label_map_path: str = "ml/artifacts/label_map.json"
     cors_origins: str = "*"
     device: str = "cpu"
+    enable_liability_guard: bool = True
 
     model_config = {
         "env_file": ".env",

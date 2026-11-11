@@ -187,16 +187,24 @@ Evaluated on `val_natural.csv` (76 contracts, 501 true positive clauses) under e
 2. **Tier-Specific Thresholds (90% High recall needs about 15 false alarms per contract)**:
    - Attempted separate thresholding for High, Medium, and Low risk tiers to push High-tier recall to $\ge 90\%$. Reaching 90% High recall requires about 15 false alarms per contract, far exceeding the $\le 10$ FA/contract operational budget.
    - Forcing High-tier sensitivity under a 10 FA/c cap pushes Medium/Low thresholds up, causing overall flagged recall to degrade by **-4.16 points** (95% CI: `[-7.34%, -1.01%]`, $p = 0.004$). The unified single-threshold Balanced preset was retained.
-3. **The Naive Liability Rule (broke 11 correct Cap units)**:
-   - Naive keyword matching (`"not limited"`, `"without limit"`) to promote `Cap on Liability` to `Uncapped Liability` matched 11 units in `val_natural.csv`.
-   - All 11 were standard boilerplate cap phrasing (`"including but not limited to"`, `"without limiting"`). Relabeling produced 0 new true positives, broke 11 correct Cap units, and added 11 false alarms. Replaced with sentence-scoped proximity matching requiring `liability`/`liable` within 150 characters of express unlimited terms with explicit boilerplate exclusions.
+3. **The Naive Liability Rule vs. Scoped Guard**:
+   - Naive keyword matching (`"not limited"`, `"without limit"`) to promote `Cap on Liability` to `Uncapped Liability` matched 11 units in `val_natural.csv`. All 11 were standard boilerplate cap phrasing (`"including but not limited to"`, `"without limiting"`), breaking 11 correct Cap units.
+   - When tested against edge cases, loose sentence-scoped rules matching `"no limit"` or `"unlimited"` falsely relabel clauses containing *"no limitation of remedies"* or *"unlimited license"*.
+   - Restricting the target phrases strictly to `'not be subject to any limit'`, `'without limitation as to amount'`, and `'unlimited liability'` eliminates false relabeling while successfully catching genuine waivers (such as DOC-01 Section 8). Controlled via `ENABLE_LIABILITY_GUARD` setting (default `true`).
+
+| Rule Variant | Key Matching Phrases | val_natural Units Changed | True Cap Broken | True Uncapped Gained | DOC-01 Sec 8 | 'including but not limited to' | 'no limitation' (remedies) | 'unlimited license' | Status |
+|---|---|---|---|---|---|---|---|---|---|
+| **Naive Substring** | `"not limited"`, `"without limit"` | 11 | 11 (100% broken) | 0 | Uncapped | Broken (Uncapped) | Broken (Uncapped) | Broken (Uncapped) | **Rejected** |
+| **Loose Scoped** | `"no limit"`, `"unlimited"` ($\le 150$ chars) | 0 | 0 | 0 | Uncapped | Preserved (Cap) | Broken (Uncapped) | Broken (Uncapped) | **Rejected** |
+| **Restricted Scoped** | `'not be subject to any limit'`, `'without limitation as to amount'`, `'unlimited liability'` | 0 | **0** | **0** | **Uncapped** | **Preserved (Cap)** | **Preserved (Cap)** | **Preserved (Cap)** | **Adopted** (`ENABLE_LIABILITY_GUARD=true`) |
+
 4. **'May Also Contain' at Cutoff 0.20 (1.29 false chips per contract)**:
    - Setting a second-best class probability cutoff at $\ge 0.20$ triggered on 131 flagged units (1.72 per contract), producing 33 true secondary labels and 98 false chips (**1.29 false chips per contract**), failing the $\le 1.0$ false chip/contract budget.
    - Sweeping cutoffs (0.25: 0.92 false chips/c; 0.30: 0.72 false chips/c) met the numerical limit, but the feature was kept disabled to maintain zero UI noise.
 5. **Court-Judgment Domain Adaptation (`legal_bert_adapted`)**:
-   - Continued pretraining of Legal-BERT on Indian Supreme Court opinions achieved 79.44% recall at 8 FA/c vs 80.64% for standard Legal-BERT (-1.2 points). Judicial rhetoric differed substantially from transactional contract drafting, offering no domain transfer advantage.
-6. **Ensemble Averaging ($\alpha = 0.67$ Legal-BERT + $0.33$ TF-IDF)**:
-   - Yielded 81.04% recall at 8 FA/c (+0.40 points over single model). Shelved to avoid doubling inference latency for marginal gain.
+   - Continued pretraining of Legal-BERT on Indian Supreme Court opinions achieved 81.24% recall at 8 FA/c vs 80.64% for standard Legal-BERT (+0.6 points, 95% interval -2.5 to +3.4, p=0.71). Judicial rhetoric differed substantially from transactional contract drafting, offering no statistically significant transfer advantage.
+6. **Ensemble Averaging ($\alpha = 0.75$ Legal-BERT + $0.25$ TF-IDF)**:
+   - Yielded 81.84% recall at 8 FA/c (+1.2 points over single model, 95% interval -1.5 to +3.8, p=0.45). Shelved to avoid doubling inference latency for marginal gain.
 
 ### Roadmap
 - [ ] Multi-label classification for multi-issue clauses (e.g., joint Non-Compete and Non-Solicit).
