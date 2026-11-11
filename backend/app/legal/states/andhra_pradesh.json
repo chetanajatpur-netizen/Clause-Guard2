@@ -1,0 +1,79 @@
+{
+  "state": "Andhra Pradesh",
+  "language_codes": [
+    "en",
+    "te"
+  ],
+  "last_reviewed": null,
+  "reviewed_by": null,
+  "verify_status": "empty",
+  "rental": {
+    "governing_acts": [],
+    "registration_requirement": {
+      "summary": null,
+      "citation_url": null
+    },
+    "stamp_duty": {
+      "summary": null,
+      "citation_url": null,
+      "as_of": null
+    },
+    "security_deposit_rule": {
+      "summary": null,
+      "citation_url": null
+    },
+    "notice_and_eviction": {
+      "summary": null,
+      "citation_url": null
+    },
+    "rent_authority_or_tribunal": {
+      "summary": null,
+      "citation_url": null
+    }
+  },
+  "detection_keywords": {
+    "states": [
+      "Andhra Pradesh",
+      "State of Andhra Pradesh",
+      "ఆంధ్ర ప్రదేశ్",
+      "ఆంధ్రప్రదేశ్",
+      "ఆంధ్ర ప్రదేశ్ రాష్ట్రం"
+    ],
+    "districts": [
+      "Visakhapatnam",
+      "Vizag",
+      "Vijayawada",
+      "Guntur",
+      "Nellore",
+      "Kurnool",
+      "Tirupati",
+      "Kadapa",
+      "Kakinada",
+      "Rajahmundry",
+      "Anantapur",
+      "Eluru",
+      "Ongole",
+      "Srikakulam",
+      "Vizianagaram",
+      "Chittoor",
+      "విశాఖపట్నం",
+      "విజయవాడ",
+      "గుంటూరు",
+      "నెల్లూరు",
+      "కర్నూలు",
+      "తిరుపతి",
+      "కడప",
+      "కాకినాడ",
+      "రాజమండ్రి",
+      "అనంతపురం"
+    ],
+    "courts": [
+      "High Court of Andhra Pradesh",
+      "Andhra Pradesh High Court",
+      "Principal District Court Visakhapatnam",
+      "Principal District Court Vijayawada",
+      "ఆంధ్రప్రదేశ్ హైకోర్టు"
+    ]
+  },
+  "notes_for_user": []
+}

@@ -1,0 +1,75 @@
+{
+  "state": "Telangana",
+  "language_codes": [
+    "en",
+    "te"
+  ],
+  "last_reviewed": null,
+  "reviewed_by": null,
+  "verify_status": "empty",
+  "rental": {
+    "governing_acts": [],
+    "registration_requirement": {
+      "summary": null,
+      "citation_url": null
+    },
+    "stamp_duty": {
+      "summary": null,
+      "citation_url": null,
+      "as_of": null
+    },
+    "security_deposit_rule": {
+      "summary": null,
+      "citation_url": null
+    },
+    "notice_and_eviction": {
+      "summary": null,
+      "citation_url": null
+    },
+    "rent_authority_or_tribunal": {
+      "summary": null,
+      "citation_url": null
+    }
+  },
+  "detection_keywords": {
+    "states": [
+      "Telangana",
+      "State of Telangana",
+      "తెలంగాణ",
+      "తెలంగాణ రాష్ట్రం"
+    ],
+    "districts": [
+      "Hyderabad",
+      "Secunderabad",
+      "Warangal",
+      "Nizamabad",
+      "Karimnagar",
+      "Khammam",
+      "Rangareddy",
+      "Ranga Reddy",
+      "Medchal-Malkajgiri",
+      "Medchal",
+      "Sangareddy",
+      "Nalgonda",
+      "Mahbubnagar",
+      "Siddipet",
+      "হায়দ্রাবাদ",
+      "హైదరాబాద్",
+      "సికింద్రాబాద్",
+      "వరంగల్",
+      "నిజామాబాద్",
+      "కరీంనగర్",
+      "ఖమ్మం",
+      "రంగారెడ్డి"
+    ],
+    "courts": [
+      "High Court for the State of Telangana",
+      "Telangana High Court",
+      "High Court of Judicature at Hyderabad",
+      "City Civil Court Hyderabad",
+      "Metropolitan Sessions Court Hyderabad",
+      "తెలంగాణ హైకోర్టు"
+    ]
+  },
+  "notes_for_user": []
+}

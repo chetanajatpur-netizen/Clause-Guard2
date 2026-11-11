@@ -1,0 +1,43 @@
+{
+  "state": null,
+  "language_codes": [],
+  "last_reviewed": null,
+  "reviewed_by": null,
+  "verify_status": "empty",
+  "rental": {
+    "governing_acts": [
+      {
+        "name": null,
+        "year": null,
+        "citation_url": null
+      }
+    ],
+    "registration_requirement": {
+      "summary": null,
+      "citation_url": null
+    },
+    "stamp_duty": {
+      "summary": null,
+      "citation_url": null,
+      "as_of": null
+    },
+    "security_deposit_rule": {
+      "summary": null,
+      "citation_url": null
+    },
+    "notice_and_eviction": {
+      "summary": null,
+      "citation_url": null
+    },
+    "rent_authority_or_tribunal": {
+      "summary": null,
+      "citation_url": null
+    }
+  },
+  "detection_keywords": {
+    "states": [],
+    "districts": [],
+    "courts": []
+  },
+  "notes_for_user": []
+}

@@ -1,0 +1,89 @@
+{
+  "state": "Karnataka",
+  "language_codes": [
+    "en",
+    "kn"
+  ],
+  "last_reviewed": null,
+  "reviewed_by": null,
+  "verify_status": "empty",
+  "rental": {
+    "governing_acts": [],
+    "registration_requirement": {
+      "summary": null,
+      "citation_url": null
+    },
+    "stamp_duty": {
+      "summary": null,
+      "citation_url": null,
+      "as_of": null
+    },
+    "security_deposit_rule": {
+      "summary": null,
+      "citation_url": null
+    },
+    "notice_and_eviction": {
+      "summary": null,
+      "citation_url": null
+    },
+    "rent_authority_or_tribunal": {
+      "summary": null,
+      "citation_url": null
+    }
+  },
+  "detection_keywords": {
+    "states": [
+      "Karnataka",
+      "State of Karnataka",
+      "ಕರ್ನಾಟಕ",
+      "ಕರ್ನಾಟಕ ರಾಜ್ಯ"
+    ],
+    "districts": [
+      "Bengaluru",
+      "Bangalore",
+      "Bengaluru Urban",
+      "Bengaluru Rural",
+      "Mysuru",
+      "Mysore",
+      "Hubballi",
+      "Hubli",
+      "Dharwad",
+      "Mangaluru",
+      "Mangalore",
+      "Belagavi",
+      "Belgaum",
+      "Kalaburagi",
+      "Gulbarga",
+      "Ballari",
+      "Bellary",
+      "Udupi",
+      "Shivamogga",
+      "Shimoga",
+      "Tumakuru",
+      "Tumkur",
+      "Davanagere",
+      "Dakshina Kannada",
+      "Uttara Kannada",
+      "Hassan",
+      "Mandya",
+      "ಬೆಂಗಳೂರು",
+      "ಮೈಸೂರು",
+      "ಹುಬ್ಬಳ್ಳಿ",
+      "ಧಾರವಾಡ",
+      "ಮಂಗಳೂರು",
+      "ಬೆಳಗಾವಿ",
+      "ಕಲಬುರಗಿ",
+      "ಉಡುಪಿ",
+      "ಶಿವಮೊಗ್ಗ",
+      "ತುಮಕೂರು"
+    ],
+    "courts": [
+      "High Court of Karnataka",
+      "Karnataka High Court",
+      "City Civil Court Bengaluru",
+      "Principal District and Sessions Judge Bengaluru",
+      "ಕರ್ನಾಟಕ ಉಚ್ಚ ನ್ಯಾಯಾಲಯ"
+    ]
+  },
+  "notes_for_user": []
+}

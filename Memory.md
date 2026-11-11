@@ -340,8 +340,21 @@ Model is mildly under-converged (training loss and val loss still declining stea
       - Court-Adapted Legal-BERT: 81.24% recall at 8 FA/c vs 80.64% for standard Legal-BERT (+0.6 points, 95% interval -2.5 to +3.4, p=0.71).
       - Ensemble Averaging (alpha=0.75): 81.84% recall at 8 FA/c (+1.2 points over single model, 95% interval -1.5 to +3.8, p=0.45).
     - Added comparative Liability Guard evaluation table to README Section 10.
-  - 3. Brand Naming Inventory (ClauseGuard vs ClauseWise):
-    - Audited every occurrence across README, UI headers, tab titles, configs, and documentation. No names changed per instruction.
+- [2026-11-11 17:54] State-Law Module Framework Scaffolded & Verified DONE:
+  - 1. Template & State Data Modules:
+    - Created `backend/app/legal/states/TEMPLATE.json` with required schema (`state`, `language_codes`, `last_reviewed`, `reviewed_by`, `verify_status`, `rental`, `detection_keywords`, `notes_for_user`).
+    - Created 5 empty state modules (`karnataka.json`, `andhra_pradesh.json`, `telangana.json`, `uttar_pradesh.json`, `delhi.json`) with `verify_status: "empty"`, all legal rule fields (`summary`, `citation_url`, `as_of`) strictly `null` (zero invented legal facts), and bilingual detection keywords (English + regional script: Kannada, Telugu, Devanagari).
+  - 2. State Loader & Detection Engine (`backend/app/legal/state_loader.py`):
+    - Implemented `detect_state(text)` scoring occurrences of state names, districts, and high courts across Latin and Indic scripts. Returns canonical state name or `None`.
+    - Implemented `load_state_module(state, sanitize=True)` applying the strict privacy rule: any legal field with `citation_url: null` is completely hidden and omitted from presentation.
+    - Attached review warning `review_warning = "Not reviewed by a lawyer"` and `is_reviewed = False` for modules with status `"empty"` or `"seed_unreviewed"`.
+    - Implemented `generate_state_notes(state_module)` formatting notes strictly as `"May differ under <Act name> (<state>). Check with a local lawyer."` with citation link and review date, never issuing a verdict.
+  - 3. Unit Tests (`backend/tests/test_state_law.py`):
+    - Added 6 dedicated unit tests: unknown state returns `None`, empty module returns 0 notes, uncited fields are hidden, detection across English and Indic scripts (Kannada, Telugu, Hindi), unreviewed status flags lawyer warning, and note format compliance. All 6 passed in 2.34s.
+  - 4. Research Documentation (`docs/STATE_LAW_RESEARCH.md`):
+    - Codified the cardinal rule: *"Copy the section number and link; summarise in your own words; add the date"*.
+    - Provided official source registries (India Code, State Gazettes, Registration/Stamps Depts) and verification lifecycle standards (`empty` -> `seed_unreviewed` -> `reviewed`).
+
 
 
 

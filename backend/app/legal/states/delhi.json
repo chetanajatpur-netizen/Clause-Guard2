@@ -1,0 +1,81 @@
+{
+  "state": "Delhi",
+  "language_codes": [
+    "en",
+    "hi"
+  ],
+  "last_reviewed": null,
+  "reviewed_by": null,
+  "verify_status": "empty",
+  "rental": {
+    "governing_acts": [],
+    "registration_requirement": {
+      "summary": null,
+      "citation_url": null
+    },
+    "stamp_duty": {
+      "summary": null,
+      "citation_url": null,
+      "as_of": null
+    },
+    "security_deposit_rule": {
+      "summary": null,
+      "citation_url": null
+    },
+    "notice_and_eviction": {
+      "summary": null,
+      "citation_url": null
+    },
+    "rent_authority_or_tribunal": {
+      "summary": null,
+      "citation_url": null
+    }
+  },
+  "detection_keywords": {
+    "states": [
+      "Delhi",
+      "NCT of Delhi",
+      "National Capital Territory of Delhi",
+      "New Delhi",
+      "दिल्ली",
+      "राष्ट्रीय राजधानी क्षेत्र दिल्ली",
+      "नई दिल्ली"
+    ],
+    "districts": [
+      "New Delhi",
+      "North Delhi",
+      "South Delhi",
+      "East Delhi",
+      "West Delhi",
+      "Central Delhi",
+      "South West Delhi",
+      "North West Delhi",
+      "South East Delhi",
+      "North East Delhi",
+      "Shahdara",
+      "Connaught Place",
+      "Saket",
+      "Dwarka",
+      "Rohini",
+      "Tis Hazari",
+      "Patiala House",
+      "नई दिल्ली",
+      "साकेत",
+      "द्वारका",
+      "रोहिणी"
+    ],
+    "courts": [
+      "Delhi High Court",
+      "High Court of Delhi",
+      "Tis Hazari Courts",
+      "Patiala House Courts",
+      "Karkardooma Courts",
+      "Rohini Courts",
+      "Dwarka Courts",
+      "Saket Courts",
+      "Rouse Avenue Courts",
+      "दिल्ली उच्च न्यायालय"
+    ]
+  },
+  "notes_for_user": []
+}

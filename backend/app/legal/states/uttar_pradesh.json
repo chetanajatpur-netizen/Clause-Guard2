@@ -1,0 +1,86 @@
+{
+  "state": "Uttar Pradesh",
+  "language_codes": [
+    "en",
+    "hi"
+  ],
+  "last_reviewed": null,
+  "reviewed_by": null,
+  "verify_status": "empty",
+  "rental": {
+    "governing_acts": [],
+    "registration_requirement": {
+      "summary": null,
+      "citation_url": null
+    },
+    "stamp_duty": {
+      "summary": null,
+      "citation_url": null,
+      "as_of": null
+    },
+    "security_deposit_rule": {
+      "summary": null,
+      "citation_url": null
+    },
+    "notice_and_eviction": {
+      "summary": null,
+      "citation_url": null
+    },
+    "rent_authority_or_tribunal": {
+      "summary": null,
+      "citation_url": null
+    }
+  },
+  "detection_keywords": {
+    "states": [
+      "Uttar Pradesh",
+      "State of Uttar Pradesh",
+      "U.P.",
+      "UP",
+      "उत्तर प्रदेश",
+      "उत्तर प्रदेश राज्य"
+    ],
+    "districts": [
+      "Lucknow",
+      "Kanpur",
+      "Kanpur Nagar",
+      "Varanasi",
+      "Noida",
+      "Greater Noida",
+      "Gautam Buddha Nagar",
+      "Ghaziabad",
+      "Agra",
+      "Prayagraj",
+      "Allahabad",
+      "Meerut",
+      "Bareilly",
+      "Aligarh",
+      "Moradabad",
+      "Gorakhpur",
+      "Mathura",
+      "Ayodhya",
+      "Faizabad",
+      "Jhansi",
+      "लखनऊ",
+      "कानपुर",
+      "वाराणसी",
+      "नोएडा",
+      "ग्रेटर नोएडा",
+      "गाजियाबाद",
+      "आगरा",
+      "प्रयागराज",
+      "इलाहाबाद",
+      "मेरठ",
+      "गोरखपुर"
+    ],
+    "courts": [
+      "Allahabad High Court",
+      "High Court of Judicature at Allahabad",
+      "Lucknow Bench of Allahabad High Court",
+      "District Court Lucknow",
+      "District Court Gautam Buddha Nagar",
+      "इलाहाबाद उच्च न्यायालय"
+    ]
+  },
+  "notes_for_user": []
+}
