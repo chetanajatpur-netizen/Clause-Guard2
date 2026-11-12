@@ -343,12 +343,13 @@ Model is mildly under-converged (training loss and val loss still declining stea
 - [2026-11-12 17:39] Multilingual Data Audit Infrastructure & Privacy Configuration:
   - 1. Privacy Safeguards:
     - Updated `.gitignore` to explicitly ignore `ml/multilingual/data/`, `ml/multilingual/outputs/`, `ml/multilingual/artifacts/`, CSVs, JSONLs, NumPy files, Parquet, archives, and generic `data/`. No raw data or samples will ever be committed.
-  - 2. Audit Tooling (`ml/multilingual/audit_data.py`):
-    - Implemented automated multi-format ingestion (PDF, TXT, CSV, JSON, DOCX) and archive unpacking (`.zip`, `.tar.gz`) directly to a git-ignored directory (`ml/multilingual/data/unpacked/`).
-    - Implemented Unicode script detection for Indic languages (Devanagari/Hindi, Kannada, Telugu, Tamil, Malayalam, Bengali) and English.
-    - Implemented automated detection of scanned documents (text layer absence in PDFs), garbled/mojibake extraction, document type taxonomy (rental, property, court orders, employment), and tabular clause-level column headers.
-    - Implemented PII masking regex for Indian phone numbers, PAN cards, Aadhaar IDs, bank accounts, and person/address honorifics (`[NAME]`, `[PHONE]`, `[ADDRESS]`, `[ID]`).
-    - Awaiting user input of real data path to run audit and output empirical statistics.
+- [2026-11-12 17:56] External Dataset Audit Completed (`/Users/chetanajatpur/Desktop/supreme_court_judgments`):
+  - 1. Dataset Scale & Format: 25,488 PDF files spanning 73 annual directories (1950 to 2022); total size 6.4 GB (6,419.6 MB).
+  - 2. Linguistic Composition: 100% English (Basic Latin script). Zero Hindi (Devanagari), Kannada, Telugu, or other Indic-script documents found.
+  - 3. Quality & Extraction: 0.0% scanned (digital text layer intact across all audited samples); 0.0% garbled non-Unicode text. Average length: 37,458 characters (~7,492 words, 12.1 pages/doc).
+  - 4. Document Taxonomy & Labels: 100% Court Orders / Judgments (Supreme Court of India appellate decisions); 0 rental agreements, leases, or property sale deeds. No clause-level labels or annotations exist.
+  - 5. Privacy: Data remained in external path, zero files copied or committed to repo. Stopped for user review.
+
 
 
 
