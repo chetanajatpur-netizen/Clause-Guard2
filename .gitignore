@@ -31,6 +31,18 @@ ml/artifacts/legal_bert/
 ml/artifacts/legal_bert_*/
 ml/artifacts/sbert/
 
+# Multilingual Data & Outputs (Privacy: never commit data, raw text, or samples)
+ml/multilingual/data/
+ml/multilingual/outputs/
+ml/multilingual/artifacts/
+ml/multilingual/*.csv
+ml/multilingual/*.jsonl
+ml/multilingual/*.npy
+ml/multilingual/*.parquet
+ml/multilingual/*.tar.gz
+ml/multilingual/*.zip
+data/
+
 # Environment
 .env
 *.env.local
