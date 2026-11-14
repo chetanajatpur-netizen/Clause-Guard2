@@ -1,24 +1,21 @@
 # Memory.md - project state (update after EVERY task)
 
 ## Current status
-- Current day: Evaluation Protocol Governance, Uncertainty Quantification & OOD Analysis
-- Current phase/step: Scoped liability guard, secondary chip sweep, uncertainty badges, OOD warnings, and comprehensive README documentation complete. All 66 pytest tests passing.
+- Current day: Multilingual Legal Processing (Kannada & Hindi) & Indic Segmenter Integration
+- Current phase/step: Trained multilingual legal segment classifier on regional Kannada Gazette notifications, national Hindi Delhi High Court judgments, and English CUAD contracts. Achieved 99.33% test accuracy on unseen held-out documents. Implemented language service and Indic sentence segmenter with 10 real sentences tested per language. Full regression suite (91/91 tests) passing.
 - File currently being worked on: None
 - Recent updates: 
-  - Scoped Liability Guard (Rule A): Implemented sentence-scoped proximity rule in `backend/app/services/classifier.py` (`liability`/`liable` within 150 chars of target phrase, excluding boilerplate). Evaluated on 10,861 `val_natural.csv` units: 0 true caps damaged, 0 false alarms added. Passes tests on `DOC-01` Section 8 (`Uncapped Liability`), boilerplate exclusions (`"including but not limited to"`, `"without limiting"`), and clean caps.
-  - Carve-Out Rule (Rule B): Evaluated on `val_natural.csv`; broke 1 true Cap unit (Index 10142, $150k monetary cap) -> Rule B disabled.
-  - May-Also-Contain Cutoff Sweep: Evaluated cutoffs `0.20, 0.25, 0.30, 0.35, 0.40` on `val_natural.csv`. Lowest passing cutoff ($\le 1.0$ false chip/c) is 0.25 (0.9211 false chips/c). Kept disabled per specification.
-  - Uncertainty & OOD Ingestion:
-    - SBERT commercial training centroid generated at `ml/artifacts/train_sbert_centroid.npy`.
-    - `ClauseEmbedder` computes cosine distance from document mean embedding to commercial training centroid.
-    - Document-level warning triggered when average top-class probability $< 0.70$ OR SBERT distance $> 0.3757$: `"This document looks unlike the contracts the model was trained on. Treat the results with extra caution."`
-    - Clause-level `type_uncertain: bool = True` assigned when `flagged and cal_prob < 0.65`.
-    - Frontend renders `⚠️ Type uncertain` badge (tooltip: `"The clause type may be wrong"`) and document-level warning banner.
-    - Automated API regression tests added for `DOC-03`, `DOC-04`, `DOC-07`, and `DOC-05`.
-  - Model Governance Decisions: Retained single-model Legal-BERT (Seed 42); did not adopt seed average, tier thresholds, or secondary chips.
-  - Documentation: Updated `README.md` with dedicated section `Experiments That Did Not Help`.
-  - ML Directory Optimization: Audited `ml/` footprint (originally 4.16 GB). Deleted 8 obsolete experimental transformer checkpoints (3.33 GB), outdated `ml/data/processed_old/` (33 MB), temporary cross-validation embeddings and CSVs (57 MB), and 8 unused graph PNG files (1.2 MB). Reduced `ml/` size from 4.16 GB down to 529 MB (87% reduction). Preserved production Legal-BERT (`legal_bert_final`), centroid, config, metrics, and canonical datasets. Full test suite re-verified (66/66 passed).
-
+  - Multilingual Legal Corpus Ingestion: Audited external Kannada dataset (12 gazette PDFs, 186k chars) and Hindi dataset (21 unique High Court PDFs, 649k chars). Extracted 1,292 clause-sized legal segments across Kannada, Hindi, and English.
+  - Document-Level Stratified Partition: 70% Train (928 segments), 15% Val (215 segments), 15% Test (149 segments) with seed 42. Strict document-level isolation ensuring zero document leakage across splits.
+  - Multilingual Segment Classifier: Trained char (2-5) + word (1-2) TF-IDF with Platt-Calibrated LinearSVC (`CalibratedClassifierCV`).
+    - Empirical Test Accuracy: **99.33%** (148/149 correct).
+    - Test Macro-F1: **98.95%** (English F1: 100.0%, Hindi F1: 99.42%, Kannada F1: 97.44%).
+    - Mean Latency: **2.48 ms/segment**, Throughput: **403.4 queries/sec**.
+  - Backend Services:
+    - `backend/app/services/language.py`: Script detection (Devanagari, Kannada, Telugu, Latin), mixed-script analysis (`is_mixed`), and calibrated model integration.
+    - `backend/app/services/indic_segmenter.py`: Sentence splitting on Danda (`।`), Double Danda (`॥`), period, protecting dates (`12.11.2026`), decimals, abbreviations (`D.H.C.`, `R.C.`, `RDPR`, `सं.`, `No.`), and Indic enumerations.
+  - Verification & Parity: 16 new unit tests added (`test_language.py`, `test_indic_segmenter.py`) with 10 real sentences per language. Full test suite passing (91/91 passed). Frontend build verified (`npm run build` succeeds).
+  - Documentation: Created `docs/MULTILINGUAL_PLAN.md` with complete stage roadmap, evaluation protocol, confusion matrix, and empirical metrics.
 
 ## Completed
 - Initial project scaffolding (ml/, backend/, frontend/, docker-compose.yml, tests/)
@@ -34,8 +31,8 @@
 ## Files that exist (keep this list accurate - agent must read before creating anything)
 - PRD.md, architecture.md, rules.md, phases.md, design.md, Memory.md, hallucination.txt, antigravity_prompts.md, OVERNIGHT_LOG.md, DEPLOY.md, README.md, RESUME_DRAFT.md, MORNING_REPORT.md
 - ml/requirements.txt, ml/notebooks/train_colab.ipynb, ml/src/__init__.py, ml/src/risk_map.py, ml/src/data_prep.py, ml/src/baseline.py, ml/src/train_transformer.py, ml/src/evaluate.py, ml/src/significance.py
-- docs/screenshots/ (analyze.png, results.png, search.png, history.png, insights.png)
-
+- docs/screenshots/ (analyze.png, results.png, search.png, history.png, insights.png), docs/STATE_LAW_RESEARCH.md, docs/MULTILINGUAL_PLAN.md
+- ml/multilingual/audit_data.py, ml/multilingual/prepare_dataset.py, ml/multilingual/train_language_classifier.py
 - ml/artifacts/class_distribution.png, ml/artifacts/text_length_histogram.png, ml/artifacts/dataset_stats.json
 - ml/artifacts/confusion_matrix_baseline.png, ml/artifacts/confusion_matrix_legal_bert.png, ml/artifacts/metrics.json, ml/artifacts/label_map.json, ml/artifacts/training_history.json, ml/artifacts/training_curves.png, ml/artifacts/significance_results.json, ml/artifacts/test_predictions.json
 - ml/artifacts/legal_bert/ (model.safetensors, config.json, tokenizer.json, tokenizer_config.json)
@@ -44,8 +41,8 @@
 - backend/app/core/__init__.py, backend/app/core/exceptions.py, backend/app/core/risk_map.py, backend/app/db/__init__.py, backend/app/db/session.py, backend/app/db/models.py
 - backend/app/schemas/__init__.py, backend/app/schemas/analysis.py, backend/app/schemas/documents.py, backend/app/schemas/insights.py, backend/app/schemas/search.py
 - backend/app/routers/__init__.py, backend/app/routers/health.py, backend/app/routers/analyze.py, backend/app/routers/search.py, backend/app/routers/history.py, backend/app/routers/insights.py
-- backend/app/services/__init__.py, backend/app/services/parser.py, backend/app/services/segmenter.py, backend/app/services/classifier.py, backend/app/services/embedder.py, backend/app/services/risk.py
-- backend/tests/__init__.py, backend/tests/conftest.py, backend/tests/test_services.py, backend/tests/test_api.py, backend/tests/fixtures/
+- backend/app/services/__init__.py, backend/app/services/parser.py, backend/app/services/segmenter.py, backend/app/services/classifier.py, backend/app/services/embedder.py, backend/app/services/risk.py, backend/app/services/language.py, backend/app/services/indic_segmenter.py
+- backend/tests/__init__.py, backend/tests/conftest.py, backend/tests/test_services.py, backend/tests/test_api.py, backend/tests/test_state_law.py, backend/tests/test_language.py, backend/tests/test_indic_segmenter.py, backend/tests/fixtures/
 - frontend/package.json, frontend/vite.config.js, frontend/index.html, frontend/Dockerfile, frontend/nginx.conf, frontend/vercel.json
 - frontend/src/main.jsx, frontend/src/App.jsx, frontend/src/api/client.js
 - frontend/src/components/UploadBox.jsx, frontend/src/components/ClauseCard.jsx, frontend/src/components/ClauseExplanation.jsx, frontend/src/components/RiskBadge.jsx, frontend/src/components/SearchBar.jsx, frontend/src/components/Loader.jsx, frontend/src/components/ErrorBanner.jsx
